@@ -118,10 +118,10 @@ Untuk memastikan antislop aktif, tanyakan hal yang hanya ada di dalam aturan ant
 
 ### 2. Direktori Skills (skills.sh)
 
-[skills.sh](https://skills.sh/miqdadbadjuber/anti-slop) adalah direktori terbuka skill agen coding. Jalur ini menggunakan kakas direktori tersebut untuk menyalin folder skill tanpa mengajukan pertanyaan:
+[skills.sh](https://skills.sh/yanuar1997/anti-slop-ai) adalah direktori terbuka skill agen coding. Jalur ini menggunakan kakas direktori tersebut untuk menyalin folder skill tanpa mengajukan pertanyaan:
 
 ```bash
-npx skills add miqdadbadjuber/anti-slop
+npx skills add yanuar1997/anti-slop-ai
 ```
 
 Gunakan bendera `--all` untuk memasang semua skill, `-g` untuk instalasi global, atau `--skill <nama>` untuk satu skill spesifik. Jalankan `--list` terlebih dahulu untuk melihat daftar skill yang tersedia.
@@ -139,8 +139,8 @@ Plugin adalah fitur langsung dari agen, bukan bawaan antislop. Anda mengarahkan 
 Di dalam sesi Claude Code, jalankan dua baris ini:
 
 ```text
-/plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
-/plugin install antislop@anti-slop
+/plugin marketplace add https://github.com/yanuar1997/anti-slop-ai
+/plugin install antislop@anti-slop-ai
 ```
 
 #### Antigravity
@@ -148,7 +148,7 @@ Di dalam sesi Claude Code, jalankan dua baris ini:
 Jalankan perintah Antigravity CLI:
 
 ```bash
-agy plugin install https://github.com/miqdadbadjuber/anti-slop
+agy plugin install https://github.com/yanuar1997/anti-slop-ai
 ```
 
 Komponen `rules/` miliknya secara otomatis memuat antislop pada setiap sesi, jadi tidak ada berkas penunjuk tambahan yang perlu ditulis.
@@ -156,8 +156,8 @@ Komponen `rules/` miliknya secara otomatis memuat antislop pada setiap sesi, jad
 #### Codex
 
 ```bash
-codex plugin marketplace add miqdadbadjuber/anti-slop
-codex plugin add antislop@anti-slop
+codex plugin marketplace add yanuar1997/anti-slop-ai
+codex plugin add antislop@anti-slop-ai
 ```
 
 #### Cursor
@@ -165,7 +165,7 @@ codex plugin add antislop@anti-slop
 Tambahkan repositori sebagai marketplace plugin dengan Cursor Agent CLI:
 
 ```bash
-agent plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
+agent plugin marketplace add https://github.com/yanuar1997/anti-slop-ai
 ```
 
 Lalu, di dalam Cursor, buka menu **Customize** di bilah sisi (*sidebar*), cari **antislop**, dan klik **Install** (pilih cakupan proyek atau pengguna).
@@ -175,7 +175,7 @@ Lalu, di dalam Cursor, buka menu **Customize** di bilah sisi (*sidebar*), cari *
 Di dalam sesi Kimi Code:
 
 ```text
-/plugins install https://github.com/miqdadbadjuber/anti-slop
+/plugins install https://github.com/yanuar1997/anti-slop-ai
 ```
 
 Setelah instalasi selesai, jalankan `/reload` atau `/new`. Kimi Code memasang plugin per pengguna, sehingga satu instalasi langsung mencakup semua proyek.
@@ -185,7 +185,7 @@ Setelah instalasi selesai, jalankan `/reload` atau `/new`. Kimi Code memasang pl
 Plugin Cline dipasang melalui CLI:
 
 ```bash
-cline plugin install https://github.com/miqdadbadjuber/anti-slop.git
+cline plugin install https://github.com/yanuar1997/anti-slop-ai.git
 ```
 
 *Perhatian:* Dokumentasi resmi Cline saat ini membatasi plugin hanya untuk SDK, CLI, dan Kanban, dan menyatakan bahwa fitur plugin belum berlaku untuk ekstensi VS Code dan JetBrains. Jika Anda menggunakan Cline di dalam ekstensi editor kode, gunakan metode 1 (Pemasang CLI `npx antislop-ai`).
@@ -197,10 +197,10 @@ cline plugin install https://github.com/miqdadbadjuber/anti-slop.git
 Gunakan metode ini jika Anda tidak memiliki terminal atau jika AI Anda hanya berupa antarmuka obrolan web/aplikasi di mana Anda tidak dapat menjalankan perintah terminal.
 
 **1. Unduh berkas `antislop.md` sekali.**
-- Lewat browser: buka halaman repositori [di sini](https://github.com/miqdadbadjuber/anti-slop), buka `antislop.md`, lalu klik tombol Download.
+- Lewat browser: buka halaman repositori [di sini](https://github.com/yanuar1997/anti-slop-ai), buka `antislop.md`, lalu klik tombol Download.
 - Lewat terminal (jika tersedia):
   ```bash
-  curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/antislop.md
+  curl -o antislop.md https://raw.githubusercontent.com/yanuar1997/anti-slop-ai/main/antislop.md
   ```
 
 **2. Berikan berkas tersebut kepada AI Anda, lalu sampaikan kebutuhan Anda.**
@@ -230,7 +230,7 @@ Pemasang CLI, direktori skills, dan pintu plugin semuanya memerlukan terminal, s
 Pembaruan antislop tidak berjalan otomatis di latar belakang. Setiap jalur diperbarui dengan menjalankan perintah jalurnya masing-masing, atau dengan menimpa salinan yang sudah ada.
 
 **Bagaimana mengetahui ada versi baru?**
-Dua tempat selalu memuat versi terkini: [halaman rilis GitHub](https://github.com/miqdadbadjuber/anti-slop/releases) dan lencana versi di bagian atas berkas [README.md](README.md).
+Dua tempat selalu memuat versi terkini: [halaman rilis GitHub](https://github.com/yanuar1997/anti-slop-ai/releases) dan lencana versi di bagian atas berkas [README.md](README.md).
 
 **Versi berapa yang sedang terpasang di komputer Anda?**
 Folder `antislop` yang terpasang memuat file `VERSION`. Anda dapat membukanya langsung, atau bertanya pada agen Anda: *"Versi antislop berapa yang sedang terpasang?"*.
@@ -249,12 +249,12 @@ Perintah ini akan mencari di proyek saat ini dan folder home pengguna, memperbar
 
 | Platform Agen | Perintah Pembaruan |
 |---------------|--------------------|
-| **Claude Code** | `claude plugin update antislop@anti-slop` (lalu buka ulang atau jalankan `/reload-plugins`) |
-| **Antigravity** | Jalankan ulang: `agy plugin install https://github.com/miqdadbadjuber/anti-slop` |
-| **Codex** | `codex plugin marketplace upgrade anti-slop` |
-| **Cursor** | `agent plugin marketplace update https://github.com/miqdadbadjuber/anti-slop` (atau via panel Customize) |
-| **Kimi Code** | Jalankan ulang: `/plugins install https://github.com/miqdadbadjuber/anti-slop` lalu `/reload` |
-| **Cline** | `cline plugin install https://github.com/miqdadbadjuber/anti-slop.git --force` |
+| **Claude Code** | `claude plugin update antislop@anti-slop-ai` (lalu buka ulang atau jalankan `/reload-plugins`) |
+| **Antigravity** | Jalankan ulang: `agy plugin install https://github.com/yanuar1997/anti-slop-ai` |
+| **Codex** | `codex plugin marketplace upgrade anti-slop-ai` |
+| **Cursor** | `agent plugin marketplace update https://github.com/yanuar1997/anti-slop-ai` (atau via panel Customize) |
+| **Kimi Code** | Jalankan ulang: `/plugins install https://github.com/yanuar1997/anti-slop-ai` lalu `/reload` |
+| **Cline** | `cline plugin install https://github.com/yanuar1997/anti-slop-ai.git --force` |
 | **Berkas Tunggal** | Unduh ulang berkas `antislop.md` terbaru dan gantikan file yang lama |
 
 ---

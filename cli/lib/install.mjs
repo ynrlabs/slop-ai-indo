@@ -150,13 +150,13 @@ export const PLUGIN_DOORS = [
   {
     id: 'antigravity',
     label: 'Antigravity',
-    update: 'agy plugin install https://github.com/miqdadbadjuber/anti-slop',
+    update: 'agy plugin install https://github.com/yanuar1997/anti-slop-ai',
     find: () => findClone(path.join(os.homedir(), '.gemini', 'config', 'plugins', CORE)),
   },
   {
     id: 'codex',
     label: 'Codex',
-    update: 'codex plugin marketplace upgrade anti-slop',
+    update: 'codex plugin marketplace upgrade anti-slop-ai',
     find() {
       const cache = path.join(os.homedir(), '.codex', 'plugins', 'cache', 'anti-slop', CORE)
       const versions = listDirs(cache).sort()
@@ -166,7 +166,7 @@ export const PLUGIN_DOORS = [
   {
     id: 'cursor',
     label: 'Cursor',
-    update: 'agent plugin marketplace update https://github.com/miqdadbadjuber/anti-slop',
+    update: 'agent plugin marketplace update https://github.com/yanuar1997/anti-slop-ai',
     find: () => findClone(path.join(os.homedir(), '.cursor', 'plugins', 'local', 'anti-slop')),
   },
 ]

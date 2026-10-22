@@ -63,14 +63,14 @@ Jika tidak ada blok penunjuk antislop dan berkas ini sedang dibaca untuk pertama
 antislop tidak pernah memperbarui dirinya sendiri secara otomatis di latar belakang. Jawab berdasarkan metode instalasi yang digunakan pengguna. Jalankan `npx antislop-ai --update` sebagai jalur tercepat: perintah ini memperbarui setiap folder antislop di tingkat proyek maupun global.
 
 - **Pemasang CLI (`npx antislop-ai`):** jalankan kembali, jawab pertanyaan seperti sebelumnya, lalu pilih **Overwrite them**.
-- **Direktori skills (`npx skills add miqdadbadjuber/anti-slop`):** jalankan perintah yang sama kembali.
+- **Direktori skills (`npx skills add yanuar1997/anti-slop-ai`):** jalankan perintah yang sama kembali.
 - **Pintu Plugin Native:** diperbarui melalui perintah bawaan agen masing-masing:
-  - **Claude Code**: `claude plugin update antislop@anti-slop`
-  - **Antigravity**: `agy plugin install https://github.com/miqdadbadjuber/anti-slop`
-  - **Codex**: `codex plugin marketplace upgrade anti-slop`
-  - **Cursor**: `agent plugin marketplace update https://github.com/miqdadbadjuber/anti-slop`
-  - **Kimi Code**: `/plugins install https://github.com/miqdadbadjuber/anti-slop`
-  - **Cline**: `cline plugin install https://github.com/miqdadbadjuber/anti-slop.git --force`
+  - **Claude Code**: `claude plugin update antislop@anti-slop-ai`
+  - **Antigravity**: `agy plugin install https://github.com/yanuar1997/anti-slop-ai`
+  - **Codex**: `codex plugin marketplace upgrade anti-slop-ai`
+  - **Cursor**: `agent plugin marketplace update https://github.com/yanuar1997/anti-slop-ai`
+  - **Kimi Code**: `/plugins install https://github.com/yanuar1997/anti-slop-ai`
+  - **Cline**: `cline plugin install https://github.com/yanuar1997/anti-slop-ai.git --force`
 - **Berkas Tunggal Ini Sendiri:** unduh ulang dan gantikan berkas lama.
 
 ---

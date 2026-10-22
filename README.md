@@ -4,11 +4,11 @@
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f" alt="Lisensi: MIT"></a>
-  <a href="https://github.com/miqdadbadjuber/anti-slop/releases"><img src="https://img.shields.io/github/v/release/miqdadbadjuber/anti-slop?label=version&color=1f6feb" alt="Versi"></a>
+  <a href="https://github.com/yanuar1997/anti-slop-ai/releases"><img src="https://img.shields.io/github/v/release/yanuar1997/anti-slop-ai?label=version&color=1f6feb" alt="Versi"></a>
 </p>
 
 <p align="center">
-  <a href="https://skills.sh/miqdadbadjuber/anti-slop"><img src="https://skills.sh/b/miqdadbadjuber/anti-slop" alt="skills.sh"></a>
+  <a href="https://skills.sh/yanuar1997/anti-slop-ai"><img src="https://skills.sh/b/yanuar1997/anti-slop-ai" alt="skills.sh"></a>
 </p>
 
 # antislop
@@ -98,10 +98,10 @@ Untuk memperbarui di kemudian hari, jalankan perintah yang sama dan pilih opsi *
 
 ### 3. Direktori Skills (skills.sh)
 
-antislop terdaftar di [skills.sh](https://skills.sh/miqdadbadjuber/anti-slop), direktori terbuka untuk skill agen:
+antislop terdaftar di [skills.sh](https://skills.sh/yanuar1997/anti-slop-ai), direktori terbuka untuk skill agen:
 
 ```bash
-npx skills add miqdadbadjuber/anti-slop
+npx skills add yanuar1997/anti-slop-ai
 ```
 
 Cara ini menyalin folder yang sama seperti metode 1 tanpa menulis blok penunjuk, sehingga antislop dimuat hanya berdasarkan deskripsi skill. [GUIDE.md](GUIDE.md) menjelaskan cara menambahkan blok penunjuk setelahnya.
@@ -111,8 +111,8 @@ Cara ini menyalin folder yang sama seperti metode 1 tanpa menulis blok penunjuk,
 Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 
 ```text
-/plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
-/plugin install antislop@anti-slop
+/plugin marketplace add https://github.com/yanuar1997/anti-slop-ai
+/plugin install antislop@anti-slop-ai
 ```
 
 ### 5. Plugin (Antigravity)
@@ -120,7 +120,7 @@ Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 Repositori ini juga merupakan plugin native untuk Antigravity. Pasang menggunakan Antigravity CLI:
 
 ```bash
-agy plugin install https://github.com/miqdadbadjuber/anti-slop
+agy plugin install https://github.com/yanuar1997/anti-slop-ai
 ```
 
 ### 6. Plugin (Codex)
@@ -128,8 +128,8 @@ agy plugin install https://github.com/miqdadbadjuber/anti-slop
 Repositori ini berfungsi sebagai plugin dan marketplace Codex. Tambahkan marketplace sekali, lalu pasang pluginnya:
 
 ```bash
-codex plugin marketplace add miqdadbadjuber/anti-slop
-codex plugin add antislop@anti-slop
+codex plugin marketplace add yanuar1997/anti-slop-ai
+codex plugin add antislop@anti-slop-ai
 ```
 
 ### 7. Plugin (Cursor)
@@ -137,7 +137,7 @@ codex plugin add antislop@anti-slop
 Repositori ini adalah plugin Cursor. Tambahkan sebagai marketplace plugin menggunakan Cursor Agent CLI:
 
 ```bash
-agent plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
+agent plugin marketplace add https://github.com/yanuar1997/anti-slop-ai
 ```
 
 Kemudian buka menu **Customize** di Cursor, cari **antislop**, dan pilih **Install** (pilih cakupan proyek atau user).
@@ -147,7 +147,7 @@ Kemudian buka menu **Customize** di Cursor, cari **antislop**, dan pilih **Insta
 Pasang langsung di sesi Kimi Code, lalu buka sesi baru:
 
 ```text
-/plugins install https://github.com/miqdadbadjuber/anti-slop
+/plugins install https://github.com/yanuar1997/anti-slop-ai
 ```
 
 ### 9. Plugin (Cline)
@@ -155,7 +155,7 @@ Pasang langsung di sesi Kimi Code, lalu buka sesi baru:
 Pasang menggunakan Cline CLI:
 
 ```bash
-cline plugin install https://github.com/miqdadbadjuber/anti-slop.git
+cline plugin install https://github.com/yanuar1997/anti-slop-ai.git
 ```
 
 *Catatan:* Dokumentasi resmi Cline saat ini membatasi plugin untuk lingkungan CLI/SDK/Kanban, dan belum berlaku untuk ekstensi editor VS Code/JetBrains. Untuk pengguna ekstensi editor, gunakan metode 2 (Pemasang CLI).
@@ -185,7 +185,7 @@ Antigravity, Copilot, Kimi Code, dan Amp berbagi satu folder (`.agents/skills/`)
 Berkas inti `antislop.md` adalah filter lengkap yang dapat Anda salin langsung ke jendela obrolan AI apa pun. Unduh dan minta agen Anda untuk membacanya; panduan wizard di dalamnya akan memandu instalasi skill secara manual:
 
 ```bash
-curl -o antislop.md https://raw.githubusercontent.com/miqdadbadjuber/anti-slop/main/antislop.md
+curl -o antislop.md https://raw.githubusercontent.com/yanuar1997/anti-slop-ai/main/antislop.md
 ```
 
 ## Pembaruan (Update)
@@ -201,13 +201,13 @@ Perintah ini akan mencetak versi yang digantikan di samping versi terbaru yang d
 | Metode | Perintah Pembaruan |
 |--------|--------------------|
 | Pemasang CLI | `npx antislop-ai`, lalu pilih **Overwrite them**. |
-| Direktori skills.sh | `npx skills add miqdadbadjuber/anti-slop` |
-| Plugin Claude Code | `claude plugin update antislop@anti-slop` |
-| Plugin Antigravity | `agy plugin install https://github.com/miqdadbadjuber/anti-slop` |
-| Plugin Codex | `codex plugin marketplace upgrade anti-slop` |
-| Plugin Cursor | `agent plugin marketplace update https://github.com/miqdadbadjuber/anti-slop` |
-| Plugin Kimi Code | `/plugins install https://github.com/miqdadbadjuber/anti-slop` |
-| Plugin Cline | `cline plugin install https://github.com/miqdadbadjuber/anti-slop.git --force` |
+| Direktori skills.sh | `npx skills add yanuar1997/anti-slop-ai` |
+| Plugin Claude Code | `claude plugin update antislop@anti-slop-ai` |
+| Plugin Antigravity | `agy plugin install https://github.com/yanuar1997/anti-slop-ai` |
+| Plugin Codex | `codex plugin marketplace upgrade anti-slop-ai` |
+| Plugin Cursor | `agent plugin marketplace update https://github.com/yanuar1997/anti-slop-ai` |
+| Plugin Kimi Code | `/plugins install https://github.com/yanuar1997/anti-slop-ai` |
+| Plugin Cline | `cline plugin install https://github.com/yanuar1997/anti-slop-ai.git --force` |
 | Manual | Unduh ulang berkas `antislop.md` |
 
 Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pembaruan.
@@ -263,17 +263,17 @@ Semua agen AI coding modern, melalui metode berikut:
 ### Apa yang dimaksud dengan "Skill"?
 Folder modul yang mendalami satu topik spesifik (UI, penulisan teks, aksesibilitas, dll.), yang memuat berkas `SKILL.md` berisi aturan khususnya. Modul ini merujuk pada aturan inti berdasarkan nomor dan tidak pernah menduplikasi isi aturan inti.
 
-## Kontributor
+## Pengembang & Kontributor
 
-Terima kasih kepada semua pihak yang telah berkontribusi membuat antislop menjadi lebih baik.
+Dikembangkan dan dirawat oleh [Yanuar (yanuar1997)](https://github.com/yanuar1997). Terima kasih kepada semua pihak yang telah berkontribusi membuat antislop menjadi lebih baik.
 
 <p align="center">
-  <a href="https://github.com/miqdadbadjuber/anti-slop/graphs/contributors">
-    <img src="https://contrib.rocks/image?repo=miqdadbadjuber/anti-slop" alt="kontributor antislop" />
+  <a href="https://github.com/yanuar1997/anti-slop-ai/graphs/contributors">
+    <img src="https://contrib.rocks/image?repo=yanuar1997/anti-slop-ai" alt="kontributor antislop" />
   </a>
 </p>
 
-Menemukan pola slop AI yang baru, aturan yang kurang mencakup kasus tertentu, atau bug pada installer? Silakan buka [issue](https://github.com/miqdadbadjuber/anti-slop/issues). Pull Request (PR) sangat disambut untuk penambahan pola baru, klarifikasi aturan, atau perbaikan checklist.
+Menemukan pola slop AI yang baru, aturan yang kurang mencakup kasus tertentu, atau bug pada installer? Silakan buka [issue](https://github.com/yanuar1997/anti-slop-ai/issues). Pull Request (PR) sangat disambut untuk penambahan pola baru, klarifikasi aturan, atau perbaikan checklist.
 
 ---
 

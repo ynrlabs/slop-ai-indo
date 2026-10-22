@@ -7,11 +7,11 @@
     "antislop-ai": "index.mjs"
   },
   "license": "MIT",
-  "author": "antislop",
-  "homepage": "https://github.com/miqdadbadjuber/anti-slop",
+  "author": "Yanuar (yanuar1997)",
+  "homepage": "https://github.com/yanuar1997/anti-slop-ai",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/miqdadbadjuber/anti-slop.git"
+    "url": "git+https://github.com/yanuar1997/anti-slop-ai.git"
   },
   "keywords": [
     "ai-slop",
