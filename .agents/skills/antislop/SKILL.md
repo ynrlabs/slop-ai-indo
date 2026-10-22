@@ -324,7 +324,7 @@ Teknik-teknik di bawah ini diizinkan selama memiliki tujuan hierarki/identitas y
 - Terapkan mode gelap hanya jika sesuai dengan kebutuhan pengguna/produk (misalnya editor kode atau dashboard teknis). Jika ada fitur switch, pastikan kedua mode berfungsi sempurna.
 
 #### R-29 — Batasan Palet Warna
-- Batasi palet aktif maksimal 2-3 warna inti + 1 aksen fungsional.
+- Batasi palet aktif maksimal 2-3 warna inti + 1 warna aksen fungsional.
 
 #### R-30 — Jangan Menjiplak Produk Populer Secara Buta
 - Jangan meniru tampilan Linear, Vercel, atau Stripe secara mentah kecuali pengguna memintanya secara eksplisit.

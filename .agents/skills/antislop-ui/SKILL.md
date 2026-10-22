@@ -13,7 +13,6 @@ allowed-tools: Read Write Edit Glob Grep
 
 - Muat bersama `antislop.md` setiap kali tugas menyangkut pembuatan atau pengubahan UI. Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang panduan teknis visual secara mendalam.
 - Setiap pola memiliki format: **Ciri (Tell)**, **Alasan (Why)**, dan **Solusi (Fix)**, dengan aturan inti yang dirujuk sebagai R-XX.
-- Delivery Gate di dalam berkas inti tetap menjadi gerbang utama. "Checklist Skill UI" di akhir file ini adalah suplemen khusus untuk dievaluasi bersamaan.
 
 ## Visual & Warna
 
@@ -157,19 +156,10 @@ allowed-tools: Read Write Edit Glob Grep
 - **Alasan:** Gerak tanpa henti menciptakan kebisingan visual dan mengganggu konsentrasi pengguna.
 - **Solusi:** Animasi harus memiliki tujuan UX tertulis dan berhenti dengan sopan (R-19).
 
-## Checklist Skill UI
+### Efek Shimmer atau Skeleton Memuat Tanpa Akhir (Endless Shimmer / Skeleton)
 
-Jalankan evaluasi ini bersamaan dengan Delivery Gate inti. Semua jawaban wajib **YA**:
-- [ ] Apakah palet warna berasal dari `DESIGN.md` atau identitas merek tertulis, bukan gradien default? (R-01, R-29)
-- [ ] Apakah warna aksen digunakan secara hemat hanya pada momen kunci interaksi? (Part 3)
-- [ ] Apakah teks antarmuka bersih dari taburan emoji dekoratif? (R-04)
-- [ ] Apakah komposisi seksi bervariasi sesuai dial RHYTHM yang dideklarasikan? (R-05)
-- [ ] Apakah layout bebas dari pola klise AI (bento grid dipaksakan, terminal palsu, tiga kolom harga kaku)? (R-05, R-01)
-- [ ] Apakah area di atas H1 bersih dari badge kapsul yang hanya mengulang judul? (R-09)
-- [ ] Apakah setiap elemen navigasi dan tombol memiliki tindakan nyata atau label jujur "Segera Hadir"? (R-24, R-26)
-- [ ] Apakah animasi mematuhi dial MOTION dan memiliki tujuan UX yang jelas? (R-19)
-- [ ] Apakah efek glassmorphism, glow, shadow, dan radius dibatasi secara terukur? (R-10, R-11, R-12, R-13)
-- [ ] Pada layar aplikasi/dashboard, apakah tata letak dibangun berdasarkan alur kerja pengguna, bukan template stat-card default? (C-3, R-20)
-- [ ] Apakah seluruh angka, statistik, dan baris data bersumber dari data nyata atau placeholder yang jujur? (R-17, R-18, R-38)
-- [ ] Apakah status antarmuka (empty, loading, error) menjelaskan penyebab dan aksi berikutnya? (R-27)
-- [ ] Apakah antarmuka kokoh di semua breakpoint, tema, dan dapat dioperasikan penuh dengan keyboard? (R-03, R-34, C-4)
+- **Ciri:** Efek gelombang kilap (shimmer wave) atau placeholder skeleton berdenyut tanpa henti pada kartu/komponen yang sebenarnya tidak sedang menunggu data jaringan.
+- **Alasan:** Shimmer adalah indikator status memuat (loading state) asinkron, bukan dekorasi latar belakang. Membiarkannya berjalan terus-menerus membingungkan pengguna seolah antarmuka belum selesai memuat.
+- **Solusi:** Tampilkan konten langsung jika data sudah tersedia. Terapkan skeleton shimmer hanya selama proses permintaan data asinkron riil berlangsung, lalu ganti seketika dengan konten asli (R-19, R-27).
+
+

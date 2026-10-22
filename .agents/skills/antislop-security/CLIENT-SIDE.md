@@ -1,83 +1,83 @@
-# Client-Side and Browser Hunting
+# Perburuan Celah Keamanan Sisi Klien dan Peramban (Client-Side & Browser)
 
-#### When to use this file
+#### Kapan menggunakan berkas ini
 
-Reach for this file when meaningful trust decisions or untrusted rendering happen in a browser: single-page apps, browser extensions, embedded webviews, service workers, offline applications, and code that renders attacker-influenceable content into the DOM, receives cross-window messages, or uses browser storage. These paths include sources the server never sees, such as URL fragments, `window.name`, `postMessage`, and previously cached content.
+Gunakan berkas ini saat keputusan kepercayaan penting atau perenderan data tak tepercaya terjadi di dalam peramban (browser): aplikasi satu halaman (SPA), ekstensi peramban, webview tersemat, service worker, aplikasi offline, serta kode yang merender konten yang dapat dipengaruhi penyerang ke dalam DOM, menerima pesan lintas-jendela (cross-window), atau memakai penyimpanan peramban. Jalur-jalur ini mencakup sumber yang tidak pernah dilihat oleh server, seperti fragmen URL (#), `window.name`, `postMessage`, dan konten cache sebelumnya.
 
-Use alongside `ATTACK-CLASSES.md`. This file covers browser sources and sinks, origin boundaries, browser persistence, and cross-site state oracles. Use `DESKTOP-MOBILE-AND-LOCAL-IPC.md` for the native side of a webview bridge, and `WEB-PROTOCOL-AND-AUTH.md` for server-side CSRF, sessions, and auth callbacks.
+Gunakan bersama `ATTACK-CLASSES.md`. Berkas ini mencakup sumber dan sink peramban, batasan origin, persistensi peramban, dan oracle status lintas-situs. Gunakan `DESKTOP-MOBILE-AND-LOCAL-IPC.md` untuk sisi native dari bridge webview, dan `WEB-PROTOCOL-AND-AUTH.md` untuk CSRF sisi server, sesi, dan callback autentikasi.
 
-## Core discipline (include in every agent prompt for this domain)
+## Disiplin Inti (sertakan dalam setiap prompt agen untuk domain ini)
 
 ```
-- A client-side candidate needs a controllable source and an executing or disclosing sink. Name both and show attacker-influenced data reaching the sink.
-- The impact must reach a victim's session, another origin, or shared persistence. Self-injection and disclosure of the attacker's own data are not findings.
-- Framework escaping, browser same-origin policy, CSP, COOP/CORP, service-worker scope, and modern noopener defaults are real controls. Verify them before assigning impact.
-- Browser storage and caches are shared by origin and may outlive login state. Identify who writes, who reads, and which account, tenant, or worker lifecycle clears each record.
-- Use `confirmed` only for complete source evidence plus bounded local browser tests. Use `needs_validation` when renderer, extension permission, deployed header, or browser-policy behavior is required but unavailable.
+- Kandidat celah sisi klien membutuhkan sumber yang dapat dikontrol (source) dan sink yang mengeksekusi atau membocorkan data. Sebutkan keduanya dan buktikan data yang dipengaruhi penyerang sampai ke sink.
+- Dampak harus mencapai sesi korban, origin lain, atau persistensi bersama. Self-injection dan pengungkapan data milik penyerang sendiri bukanlah temuan keamanan.
+- Pelesapan karakter framework (escaping), Same-Origin Policy (SOP), CSP, COOP/CORP, cakupan service worker, dan default noopener modern adalah kontrol nyata. Verifikasi mekanisme tersebut sebelum menetapkan dampak.
+- Penyimpanan dan cache peramban dibagi per origin dan dapat bertahan melampaui siklus login. Identifikasi siapa yang menulis, siapa yang membaca, serta siklus akun, tenant, atau worker mana yang membersihkan tiap data.
+- Gunakan status "confirmed" hanya jika ada bukti source lengkap ditambah pengujian peramban lokal terisolasi. Gunakan "needs_validation" jika perilaku renderer, izin ekstensi, header produksi, atau kebijakan peramban tertentu diperlukan namun belum dapat diuji.
 ```
 
-## DOM and object-state attack classes (subagent_type: `general`)
+## Kelas Serangan DOM dan Status Objek (subagent_type: `general`)
 
 **DOM-based XSS**
-Trace `location` fields, `document.referrer`, `window.name`, message data, storage, and browser-controlled document state into `innerHTML`, `outerHTML`, `document.write`, string-evaluating APIs, executable URLs, jQuery HTML APIs, or framework escape hatches. Interpolation escaped by the framework is not a finding.
+Telusuri kolom `location`, `document.referrer`, `window.name`, data pesan, storage, dan status dokumen yang dikontrol peramban menuju ke `innerHTML`, `outerHTML`, `document.write`, API evaluasi string, URL yang dapat dieksekusi, API HTML jQuery, atau celah pelolosan framework (escape hatches). Interpolasi yang sudah lolos sanitasi bawaan framework bukanlah temuan.
 
-**DOM clobbering**
-Attacker-injected `id` or `name` attributes shadow a global, form property, configuration object, or initialization flag later trusted by code. Require both a markup path that preserves the attribute and a security-relevant use of the clobbered value.
+**DOM Clobbering**
+Atribut `id` atau `name` yang disuntikkan penyerang membayangi (shadowing) variabel global, properti formulir, objek konfigurasi, atau flag inisialisasi yang dipercayai oleh kode. Tunjukkan jalur markup yang mempertahankan atribut tersebut sekaligus penggunaan nilai yang telah ter-clobber untuk aksi keamanan penting.
 
-**Prototype pollution and gadget chain**
-An attacker-controlled key reaches a recursive write such as deep merge or path assignment and modifies prototype state. Then a reachable gadget consumes the polluted property to change authorization, execution, navigation, or rendering. `JSON.parse`, a shallow copy, or pollution without a gadget is not enough.
+**Prototype Pollution dan Rantai Gadget (Gadget Chain)**
+Kunci yang dikontrol penyerang mencapai penulisan rekursif seperti deep merge atau penugasan path objek dan memodifikasi prototype (`Object.prototype`). Kemudian gadget yang dapat dijangkau mengonsumsi properti terpolusi tersebut untuk mengubah otorisasi, eksekusi, navigasi, atau perenderan. `JSON.parse` biasa, shallow copy, atau polusi tanpa adanya gadget yang mengeksekusi bukanlah temuan yang valid.
 
-## Cross-origin messaging and network attack classes (subagent_type: `general`)
+## Kelas Serangan Komunikasi Lintas-Origin dan Jaringan (subagent_type: `general`)
 
-**`postMessage` origin and source trust**
-A handler performs a sensitive action with `event.data` without an exact origin allowlist and, where multiple frames share an origin, the expected `event.source`. On the send side, sensitive data sent to `*` reaches an unintended embedder. Weak substring, prefix, suffix, or unanchored-regex origin matching is not an origin check.
+**Kepercayaan Origin dan Sumber pada `postMessage`**
+Handler menjalankan aksi sensitif dengan `event.data` tanpa memeriksa whitelist origin secara persis atau tanpa memeriksa `event.source` yang diharapkan ketika banyak frame berbagi origin. Pada sisi pengirim, data sensitif yang dikirim ke target `*` mencapai frame tak tepercaya yang menyematkannya. Pencocokan substring yang lemah, awalan, akhiran, atau regex tanpa anchor bukanlah validasi origin yang aman.
 
-**Cross-site WebSocket request use**
-A WebSocket upgrade accepts ambient cookies from an untrusted origin without an `Origin` check or channel-specific token, allowing the victim's session to read or mutate data. Confirm both the upgrade behavior and a security-relevant message handler.
+**Penyalahgunaan Permintaan WebSocket Lintas-Situs (CSWSH)**
+Handshake pembaruan WebSocket menerima cookie ambient dari origin tak tepercaya tanpa pemeriksaan `Origin` atau token spesifik saluran, memungkinkan sesi korban membaca atau memanipulasi data. Konfirmasikan perilaku upgrade handshake dan handler pesan yang relevan secara keamanan.
 
-**Credentialed CORS trust**
-The server reflects or weakly matches `Origin` while allowing credentials and returns sensitive responses. A bare wildcard with credentials is rejected by browsers; report only the actual reflected/allowed origin path and cross-origin data or mutation.
+**Kepercayaan CORS dengan Kredensial (Credentialed CORS)**
+Server merefleksikan atau mencocokkan header `Origin` secara longgar sambil mengizinkan kredensial (`Access-Control-Allow-Credentials: true`) dan mengembalikan data sensitif. Karakter wildcard mentah `*` bersama kredensial ditolak oleh spesifikasi peramban; laporkan hanya jika server benar-benar merefleksikan origin penyerang dan membocorkan data privat atau memicu mutasi status.
 
-## Service-worker and browser-storage attack classes (subagent_type: `general`)
+## Kelas Serangan Service Worker dan Penyimpanan Peramban (subagent_type: `general`)
 
-**Service-worker registration and scope takeover**
-Attacker-influenceable content can become the registered worker script, control a path that receives an over-broad `Service-Worker-Allowed` scope, or alter update imports without integrity control. Verify the final script URL, response MIME type, origin, scope, and who controls every imported script. A normal same-origin worker with intended scope is not a defect.
+**Pendaftaran Service Worker dan Pengambilalihan Cakupan (Scope Takeover)**
+Konten yang dapat dipengaruhi penyerang menjadi skrip worker yang terdaftar, mengontrol jalur yang menerima cakupan `Service-Worker-Allowed` yang terlalu luas, atau mengubah skrip impor tanpa kontrol integritas. Verifikasi URL skrip akhir, MIME type respons, origin, scope, dan siapa yang mengontrol setiap skrip yang diimpor. Worker normal pada origin yang sama dengan scope yang tepat bukanlah cacat keamanan.
 
-**Service-worker cache and identity confusion**
-The worker caches personalized responses without including account, tenant, authorization state, or request mode in its policy, then serves them after account switch or logout. Review fetch-event routing, cache names and keys, navigation fallbacks, cache cleanup, and whether error/offline paths return another user's prior response.
+**Kebingungan Cache dan Identitas pada Service Worker**
+Worker menyimpan cache respons terpersonalisasi tanpa menyertakan status akun, tenant, otorisasi, atau mode permintaan dalam kebijakannya, lalu menyajikannya setelah pengguna berganti akun atau logout. Tinjau perutean fetch event, penamaan kunci cache, fallback navigasi, pembersihan cache, dan apakah jalur offline/error mengembalikan respons pengguna lain sebelumnya.
 
-**Browser-storage disclosure and stale authorization**
-Tokens, private responses, draft data, or authorization decisions remain in `localStorage`, `sessionStorage`, IndexedDB, Cache Storage, extension storage, or client state and become readable by another account or less-trusted same-origin component. Storage of a token alone is not a finding; require a realistic reader with less authority, or continued use after revocation/logout.
+**Kebocoran Penyimpanan Peramban dan Otorisasi Usang (Stale Authorization)**
+Token, respons privat, draf data, atau keputusan otorisasi tertinggal di `localStorage`, `sessionStorage`, IndexedDB, Cache Storage, storage ekstensi, atau state klien dan dapat dibaca oleh akun lain atau komponen dengan hak lebih rendah pada origin yang sama. Menyimpan token saja bukanlah temuan; harus ada skenario pembaca realistis dengan hak lebih rendah, atau token tetap dapat digunakan setelah sesi dicabut/logout.
 
-**Cross-context storage and broadcast confusion**
-`storage` events, `BroadcastChannel`, shared workers, or origin-wide caches carry identity or commands between tabs without binding them to the current session. Check account switching, private/public windows, tenant changes, and stale tabs that can overwrite newer auth state.
+**Kebingungan Broadcast dan Penyimpanan Lintas-Konteks**
+Event `storage`, `BroadcastChannel`, shared worker, atau cache seluruh origin membawa identitas atau perintah antar tab tanpa mengikatnya ke sesi aktif saat ini. Periksa alur pergantian akun, jendela privat vs publik, pergantian tenant, dan tab usang yang dapat menimpa status autentikasi yang lebih baru.
 
-## Cross-site information leak classes (subagent_type: `general`)
+## Kelas Serangan Kebocoran Informasi Lintas-Situs (subagent_type: `general`)
 
-**XS-Leaks and cross-origin state oracles**
-An attacker page can distinguish protected cross-origin state through resource load/error events, frame or window state, redirect behavior, timing, cache state, or response size while the browser attaches victim credentials. Require one concrete secret-bearing predicate such as whether a private object, role, or account exists. Generic timing variance or public-resource availability is not a finding.
+**XS-Leaks dan Oracle Status Lintas-Origin**
+Halaman penyerang dapat membedakan status terlindungi lintas-origin melalui event muat/gagal sumber daya, status frame/window, perilaku pengalihan (redirect), timing respons, status cache, atau ukuran respons saat peramban menyertakan kredensial korban. Tunjukkan satu predikat pembawa rahasia konkret, seperti apakah objek privat, peran, atau akun tertentu ada. Variasi timing acak atau ketersediaan sumber daya publik bukanlah temuan valid.
 
-**Window and opener state disclosure**
-A cross-origin window's permitted metadata or navigation result reveals protected state, or a retained opener/named-window relationship lets an attacker-controlled page influence a privileged navigation. Check COOP, frame protections, `noopener`, exact origin, and whether the observable state is confidential.
+**Kebocoran Status Window dan Opener**
+Metadata atau hasil navigasi jendela lintas-origin membocorkan status terlindungi, atau relasi opener/named-window yang dipertahankan memungkinkan halaman penyerang memengaruhi navigasi jendela yang memiliki hak istimewa. Periksa COOP, proteksi frame, atribut `noopener`, origin eksak, dan apakah status yang teramati bersifat rahasia.
 
-## UI-redress and navigation attack classes (subagent_type: `general`)
+## Kelas Serangan Rekayasa UI dan Navigasi (subagent_type: `general`)
 
 **Clickjacking**
-A framed, state-changing action lacks effective `frame-ancestors`, `X-Frame-Options`, or equivalent UI isolation. Require the sensitive action and confirm it can complete in the framed state; missing headers on read-only content are hardening notes.
+Aksi pengubah status yang dapat disematkan dalam iframe tidak memiliki header `Content-Security-Policy: frame-ancestors`, `X-Frame-Options`, atau isolasi UI yang memadai. Tunjukkan aksi sensitif yang dapat diselesaikan sepenuhnya dalam kondisi ter-frame; ketiadaan header pada halaman yang hanya bersifat membaca data (read-only) hanyalah catatan pengerasan (hardening), bukan temuan kerentanan langsung.
 
-**Client-side navigation confusion**
-A client source controls redirect or navigation without scheme and destination policy, including executable `javascript:` or `data:` destinations. Reverse tabnabbing applies only where code explicitly keeps `window.opener`, uses `window.open` without isolation, or supports a browser without implicit `noopener`.
+**Manipulasi Navigasi Sisi Klien (Open Redirect / Script Navigation)**
+Sumber masukan klien mengontrol pengalihan atau navigasi tanpa validasi skema dan tujuan yang ketat, termasuk tujuan berbahaya berskema `javascript:` atau `data:`. Reverse tabnabbing hanya berlaku jika kode secara eksplisit mempertahankan `window.opener`, menggunakan `window.open` tanpa isolasi, atau menargetkan lingkungan tanpa `noopener` implisit.
 
-## Universal moves (apply across the above)
+## Langkah Kerja Universal
 
-- Start from DOM, navigation, worker, message, and storage sinks, then trace backward to browser-only and server-controlled sources. Record the browser policy that should stop the path.
-- Test account switch, logout, worker update, offline fallback, and stale-tab state with a local test origin and dummy accounts. Do not use production users, origins, or shared services.
-- For XS-Leaks, list only predicates proved by source and local browser behavior. Then identify the response headers or rendering choice that would remove the oracle.
+- Mulailah dari sink DOM, navigasi, worker, pesan, dan storage, lalu telusuri mundur ke sumber data sisi klien maupun kontrol server. Catat kebijakan keamanan peramban yang seharusnya menghentikan aliran tersebut.
+- Uji pergantian akun, logout, pembaruan worker, fallback offline, dan status tab lama menggunakan origin pengujian lokal dan akun uji coba. Jangan gunakan data pengguna produksi, origin publik, atau layanan bersama.
+- Untuk XS-Leaks, cantumkan hanya predikat yang terbukti melalui kode sumber dan perilaku peramban lokal. Kemudian identifikasi header respons atau perubahan cara perenderan yang dapat menutup celah oracle tersebut.
 
-## Validation rules (apply before reporting ANY finding here)
+## Aturan Validasi (terapkan sebelum melaporkan temuan apa pun di domain ini)
 
-1. Cite the source, sink, browser policy, affected origin/session, and observable mutation or disclosure.
-2. For prototype pollution, prove the recursive write and a security-relevant gadget. For DOM clobbering, prove the markup survives and the shadowed value is used.
-3. For service workers and storage, prove lifecycle reachability: an attacker-controlled write or cache entry must reach a different account, tenant, or later authorization state.
-4. For messaging, CORS, WebSocket, and XS-Leaks, show exact origin/source validation and the protected state or action exposed. Confirm that CSP, COOP/CORP, cookies, and SameSite policy do not already block it.
-5. Return `confirmed` findings only with a complete client path and bounded local evidence. Return `needs_validation` with the precise deployed header, extension permission, browser version, or renderer behavior an owner must verify.
+1. Sebutkan sumber data (source), titik eksekusi/eksposur (sink), kebijakan peramban yang berlaku, origin/sesi yang terdampak, serta mutasi atau pembocoran data yang dapat diamati.
+2. Untuk prototype pollution, buktikan penulisan rekursif dan gadget yang relevan secara keamanan. Untuk DOM clobbering, buktikan markup bertahan dari sanitasi dan nilai yang ter-clobber benar-benar dipakai oleh logika program.
+3. Untuk service worker dan storage, buktikan jangkauan siklus hidup (lifecycle): penulisan data atau entri cache yang dikontrol penyerang harus terbukti dapat menjangkau akun berbeda, tenant lain, atau status otorisasi berikutnya.
+4. Untuk pengiriman pesan, CORS, WebSocket, dan XS-Leaks, tunjukkan validasi origin/source yang lemah serta data terlindungi atau aksi yang terekspos. Pastikan bahwa CSP, COOP/CORP, atribut cookie, dan kebijakan SameSite tidak memblokirnya terlebih dahulu.
+5. Berikan status `confirmed` hanya jika terdapat alur klien yang lengkap beserta bukti lokal terisolasi. Berikan status `needs_validation` disertai rincian header produksi, izin ekstensi, versi peramban, atau perilaku renderer yang harus diverifikasi oleh pemilik sistem.

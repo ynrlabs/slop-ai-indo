@@ -1,89 +1,89 @@
-# Desktop, Mobile, and Local IPC Hunting
+# Perburuan Celah Keamanan Desktop, Mobile, dan IPC Lokal (Desktop, Mobile & Local IPC)
 
-#### When to use this file
+#### Kapan menggunakan berkas ini
 
-Reach for this file when the target is a desktop or mobile app, privileged helper, updater, local daemon, webview host, deep-link handler, browser native-messaging host, or local IPC client/server. Relevant untrusted actors may be a downloaded document, remote web content, another local app, another OS user, a sandboxed process, or a lower-privilege account. State that starting capability instead of treating all local users as equivalent.
+Gunakan berkas ini saat target audit adalah aplikasi desktop atau mobile, helper dengan hak istimewa (privileged helper), auto-updater, daemon lokal, host webview (Electron/Tauri/WKWebView), penangan deep link (custom URL scheme), host browser native-messaging, atau klien/server IPC lokal. Aktor penyerang tak tepercaya yang realistis dapat berupa dokumen yang diunduh, konten web remote, aplikasi lokal lain, pengguna OS lain, proses di dalam sandbox, atau akun pengguna dengan hak lebih rendah. Nyatakan kapabilitas awal penyerang alih-alih menganggap semua pengguna lokal memiliki wewenang yang sama.
 
-Use `CLIENT-SIDE.md` for browser-side webview behavior, `MEMORY-SAFETY-AND-BINARY.md` for native memory and loader safety, and `SUPPLY-CHAIN-AND-RELEASE.md` for update authenticity.
+Gunakan `CLIENT-SIDE.md` untuk perilaku webview dari sisi peramban, `MEMORY-SAFETY-AND-BINARY.md` untuk keamanan memori native dan pemuat biner (loader), serta `SUPPLY-CHAIN-AND-RELEASE.md` untuk autentisitas paket pembaruan.
 
-## Core discipline (include in every agent prompt for this domain)
+## Disiplin Inti (sertakan dalam setiap prompt agen untuk domain ini)
 
 ```
-- Establish the realistic local or remote-content attacker: another app, another OS user, a sandboxed child, an untrusted document, or a remote origin. Self-harm within the same account and authority is not a boundary violation.
-- Paths, process names, bundle/package IDs, and claimed sender fields are not peer authentication. Use OS peer credentials, code identity, capability handles, or protected channel state.
-- The native bridge or helper must authorize each operation and final resource after parsing. A trusted UI or broker does not make attacker-influenceable arguments trusted.
-- OS sandbox, signing, entitlements, permissions, keychain ACLs, exported-component policy, and prompt behavior are real controls when pinned and visible.
-- Use `confirmed` for source evidence plus bounded local/emulator tests. Use `needs_validation` when signing, manifest merge, OS version, device policy, installer ACL, or packaging is required but not observable.
+- Tentukan pelaku penyerang lokal atau konten remote yang realistis: aplikasi lain, pengguna OS berbeda, proses anak ter-sandbox, dokumen tak tepercaya, atau origin web remote. Aksi merusak diri sendiri (self-harm) di bawah akun dan wewenang yang sama bukanlah pelanggaran batasan keamanan.
+- Path berkas, nama proses, bundle/package ID, dan field pengirim yang diklaim klien bukanlah mekanisme autentikasi peer yang aman. Gunakan kredensial peer level OS (SO_PEERCRED, getpeereid), identitas tanda tangan kode, handle kapabilitas, atau status saluran terlindungi.
+- Bridge native atau helper harus mengotorisasi setiap operasi dan sumber daya akhir setelah parsing. UI atau broker terpercaya tidak otomatis membuat argumen yang dipengaruhi penyerang menjadi aman.
+- Sandbox OS, tanda tangan kode (code signing), entitlements, izin aplikasi, ACL keychain, kebijakan exported-component, dan dialog persetujuan pengguna adalah kontrol nyata jika dikonfigurasi dan terlihat jelas.
+- Gunakan status "confirmed" untuk bukti kode sumber ditambah pengujian lokal/emulator terisolasi. Gunakan "needs_validation" saat penandatanganan aplikasi, penggabungan manifes (manifest merge), versi OS, kebijakan perangkat, ACL installer, atau packaging akhir belum dapat diobservasi langsung.
 ```
 
-## Deep-link, callback, and navigation attack classes (subagent_type: `general`)
+## Kelas Serangan Deep-Link, Callback, dan Navigasi (subagent_type: `general`)
 
-**Custom-scheme and deep-link ambiguity**
-Another app or page can invoke a route that mutates state, imports data, completes authentication, or selects an account without a current-session and one-time callback binding. Review URI normalization, duplicate query fields, scheme/host/path matching, exported activity/handler policy, and stale/replayed links.
+**Ambiguitas Skema Kustom dan Deep-Link**
+Aplikasi lain atau halaman web dapat memicu rute deep-link yang memutasi status, mengimpor data, menyelesaikan autentikasi, atau memilih akun tanpa ikatan sesi aktif dan token callback sekali pakai (one-time token). Tinjau normalisasi URI, parameter kueri duplikat, pencocokan skema/host/path, kebijakan exported activity/intent-filter, dan link usang yang dapat di-replay.
 
-**App and account handoff confusion**
-OAuth, SSO, magic-link, invite, device pairing, passwordless, or payment callbacks return to the wrong installed app, profile, tenant, or pending transaction. Bind state to the initiating app identity, current session, account, provider, operation, and expiry.
+**Kebingungan Handoff Aplikasi dan Akun**
+Callback OAuth, SSO, magic link, undangan, pairing perangkat, autentikasi tanpa sandi, atau alur pembayaran kembali ke aplikasi yang salah terpasang, profil keliru, tenant lain, atau transaksi tertunda yang berbeda. Ikat status callback ke identitas aplikasi pemrakarsa, sesi saat ini, akun, penyedia identitas, operasi, dan batas waktu kedaluwarsa.
 
-**File-open and intent authority confusion**
-An associated file, share intent, drag/drop item, pasteboard/clipboard record, notification action, or open-file event triggers a privileged operation without confirming content type, sender trust where applicable, current user intent, and final target.
+**Kebingungan Wewenang Intent dan Pembukaan Berkas**
+Asosiasi ekstensi berkas, share intent, item drag-and-drop, isi clipboard/pasteboard, aksi notifikasi, atau event open-file memicu operasi berhak tinggi tanpa mengonfirmasi tipe konten, kepercayaan pengirim (jika berlaku), niat pengguna aktif, dan target akhir berkas.
 
-## Webview and native-bridge attack classes (subagent_type: `general`)
+## Kelas Serangan Webview dan Bridge Native (subagent_type: `general`)
 
-**Navigation-origin to bridge confusion**
-Remote or attacker-controlled frames can reach a JavaScript/native bridge intended only for packaged content. Validate origin at call time and after every navigation, redirect, subframe creation, popup, and error/fallback page. URL-prefix checks and initial-load checks are insufficient.
+**Kebingungan Antara Origin Navigasi dan Bridge Native**
+Frame remote atau frame yang dikontrol penyerang dapat mengakses bridge JavaScript-ke-Native yang seharusnya hanya disediakan untuk konten terpaket lokal. Validasi origin pada saat pemanggilan dan setelah setiap navigasi, redirect, pembuatan subframe iframe, jendela popup, dan halaman error/fallback. Pemeriksaan awalan URL sederhana dan pemeriksaan pada pemuatan awal saja sangat tidak memadai.
 
-**Over-broad native bridge capabilities**
-Web content can select arbitrary files, commands, IPC methods, credentials, or system actions through a generic bridge. Check method allowlists, normalized arguments, user/tenant authority, gesture/confirmation requirements, and return-value disclosure.
+**Kapabilitas Bridge Native yang Terlalu Luas (Over-Broad Bridge)**
+Konten web dapat memilih sembarang berkas, mengeksekusi perintah shell, memanggil method IPC, membaca kredensial, atau melakukan aksi sistem melalui bridge generik. Periksa whitelist method, normalisasi argumen, wewenang tenant/user, keharusan adanya gestur/konfirmasi pengguna, dan data sensitif yang dikembalikan pada return value.
 
-**Webview file and universal access**
-Remote content can read app-local files, privileged custom schemes, or internal origins because file access, universal access, mixed content, debug interfaces, or custom protocol handlers join origins unexpectedly. Missing a restrictive setting without reachable protected content is hardening.
+**Akses Universal dan Akses Berkas Lokal pada Webview**
+Konten web remote dapat membaca berkas lokal aplikasi, skema kustom istimewa, atau origin internal karena izin akses berkas (`allowFileAccessFromFileURLs`, `allowUniversalAccessFromFileURLs`), mixed content, interface debugging, atau protokol kustom menggabungkan origin secara tidak terduga. Ketiadaan pengaturan ketat tanpa adanya konten privat yang dapat dijangkau hanyalah catatan pengerasan.
 
-## Local IPC and exported-component attack classes (subagent_type: `general`)
+## Kelas Serangan IPC Lokal dan Komponen Terekspor (subagent_type: `general`)
 
-**IPC peer-authentication gaps**
-Unix sockets, named pipes, XPC, Binder, D-Bus, native messaging, RPC, shared memory, or loopback listeners accept a lower-trust peer without checking OS credentials, code identity, sandbox token, or channel ownership. Require a meaningful method or disclosure behind the channel.
+**Celah Autentikasi Peer pada IPC**
+Unix socket, named pipe, Apple XPC, Android Binder, D-Bus, native messaging ekstensi browser, RPC lokal, shared memory, atau listener loopback menerima koneksi dari peer berhak rendah tanpa memeriksa kredensial OS, tanda tangan kode, token sandbox, atau kepemilikan saluran. Tunjukkan method atau pengungkapan data berharga di balik saluran tersebut.
 
-**Claimed principal versus channel identity**
-The authenticated process/channel belongs to one app or user, but request fields select another user, tenant, profile, or capability. Bind each method and resource to the peer credential rather than a caller-declared identifier.
+**Ketidakcocokan Antara Prinsipal yang Diklaim vs Identitas Saluran**
+Proses/saluran yang terautentikasi adalah milik aplikasi atau pengguna A, tetapi field payload permintaan menentukan pengguna B, tenant lain, profil lain, atau kapabilitas lain. Ikat setiap method dan sumber daya ke kredensial peer OS yang sebenarnya, bukan ke pengenal yang dideklarasikan oleh pemanggil.
 
-**Exported service, activity, receiver, or provider overreach**
-A mobile component or local automation endpoint is externally invokable and performs an operation intended for the app itself. Review final merged manifests, intent filters, permission/signature level, path grants, and alternate aliases. Manifest status unknown after packaging requires `needs_validation`.
+**Penyalahgunaan Layanan, Activity, Receiver, atau Provider Terekspor**
+Komponen aplikasi mobile (`exported=true`) atau endpoint otomasi lokal dapat dipanggil dari luar dan menjalankan operasi yang seharusnya hanya untuk internal aplikasi itu sendiri. Tinjau manifes akhir (merged AndroidManifest.xml), intent filter, tingkat izin tanda tangan (signature permission), pembatasan path URI, dan alias tersembunyi. Jika status manifes pasca-packaging tidak diketahui, gunakan status `needs_validation`.
 
-**IPC lifecycle and correlation confusion**
-Predictable request IDs, reused handles, stale channels, inherited descriptors, world-writable socket paths, or restart behavior lets one peer answer, cancel, or reuse another peer's operation. Review creation permissions and cleanup of socket files, locks, ports, and shared mappings.
+**Kebingungan Siklus Hidup dan Korelasi IPC**
+ID permintaan yang dapat ditebak, handle yang digunakan ulang, saluran usang, file descriptor yang terwarisi, path socket yang dapat ditulis oleh siapa saja (world-writable), atau perilaku restart proses memungkinkan suatu peer menjawab, membatalkan, atau membajak operasi peer lain. Tinjau izin pembuatan dan pembersihan berkas socket, lock file, port, dan memory mapping.
 
-## Privileged-helper and local-file attack classes (subagent_type: `general`)
+## Kelas Serangan Privileged-Helper dan Berkas Lokal (subagent_type: `general`)
 
-**Privileged helper as confused deputy**
-A low-privilege caller can select a privileged command, file, service, user, or system setting without per-operation authorization. Review sudo/polkit/UAC/XPC helper rules and ensure the helper independently validates normalized arguments.
+**Privileged Helper Sebagai Confused Deputy**
+Pemanggil berhak rendah dapat meminta helper berhak tinggi (root/administrator) untuk mengeksekusi perintah tertentu, memodifikasi berkas, menjalankan service, mengubah konfigurasi pengguna, atau pengaturan sistem tanpa otorisasi per-operasi. Tinjau aturan helper sudo/polkit/UAC/XPC dan pastikan helper memvalidasi argumen yang telah dinormalisasi secara independen.
 
-**Install, update, and repair path trust**
-A privileged installer/helper reads manifests, scripts, packages, symlinks, working directories, or repair state writable by a lower-trust actor after authorization. Bind authorization to immutable content and safe destination paths.
+**Kepercayaan Path Instalasi, Pembaruan, dan Perbaikan (Repair Path)**
+Installer atau service perbaikan berhak tinggi membaca manifes, skrip, paket aplikasi, symlink, direktori kerja, atau status perbaikan yang dapat ditulis oleh aktor berhak rendah setelah otorisasi diberikan. Ikat otorisasi ke konten berkas yang tidak dapat diubah (immutable digest) dan path tujuan yang terlindungi.
 
-**Local file ownership and TOCTOU**
-The app checks a file/path then follows replacement, symlink, mount, or case/normalization changes during a privileged read/write. Use descriptor-relative operations and verify final ownership. Focus `MEMORY-SAFETY-AND-BINARY.md` on parsing after the file is opened.
+**Kepemilikan Berkas Lokal dan TOCTOU (Time-of-Check to Time-of-Use)**
+Aplikasi memeriksa suatu berkas/path, lalu rentan terhadap penggantian berkas, manipulasi symlink, mount point, atau normalisasi huruf besar-kecil selama operasi baca/tulis istimewa berlangsung. Gunakan operasi berbasis descriptor (seperti `openat`, `fstat`) dan verifikasi kepemilikan akhir. Fokuskan `MEMORY-SAFETY-AND-BINARY.md` pada pemrosesan parsing setelah berkas berhasil dibuka.
 
-**Credential-store and local-secret boundary mismatch**
-A keychain/keystore item, token file, backup, log, clipboard, notification preview, or local config is readable by another app/profile/user with less authority. Plaintext readable only by the same intended OS account is not automatically a vulnerability; state the lower-trust reader and credential power.
+**Ketidakcocokan Batasan Brankas Kredensial dan Rahasia Lokal**
+Item di iOS Keychain, Android Keystore, berkas token, backup lokal, log aplikasi, clipboard, preview notifikasi, atau konfigurasi lokal dapat dibaca oleh aplikasi lain, profil lain, atau pengguna lain dengan wewenang lebih rendah. Teks polos yang hanya dapat dibaca oleh akun OS pemilik yang sama bukanlah kerentanan otomatis; tunjukkan pembaca berhak rendah dan kekuatan kredensial yang bocor.
 
-## Application-state and device-lifecycle attack classes (subagent_type: `general`)
+## Kelas Serangan Status Aplikasi dan Siklus Hidup Perangkat (subagent_type: `general`)
 
-**Account switch, logout, and device restore leakage**
-Cached data, background tasks, widgets, notifications, local databases, webview storage, or biometric approvals survive logout/account change and appear under a later account. Review backup/restore and multi-profile behavior.
+**Kebocoran Saat Ganti Akun, Logout, dan Pemulihan Perangkat**
+Data cache, background worker, widget, notifikasi, database SQLite lokal, storage webview, atau persetujuan biometrik tetap bertahan setelah pengguna logout atau berganti akun dan muncul di bawah akun pengguna berikutnya. Tinjau perilaku backup/restore dan dukungan multi-profil.
 
-**Pending-action and user-presence confusion**
-Notification, widget, shortcut, share sheet, biometric prompt, or deferred operation authorizes a different action than displayed, executes after expiry, or uses another profile's pending state. Bind confirmation to normalized action, resource, account, and current foreground state.
+**Kebingungan Aksi Tertunda dan Kehadiran Pengguna (User Presence)**
+Notifikasi interaktif, widget, jalan pintas (shortcut), share sheet, prompt biometrik, atau operasi tertunda (deferred action) mengotorisasi tindakan yang berbeda dari yang ditampilkan kepada pengguna, mengeksekusi setelah kedaluwarsa, atau memakai status tertunda milik profil lain. Ikat konfirmasi ke aksi yang dinormalisasi, sumber daya terkait, akun aktif, dan status aplikasi yang sedang berada di layar depan (foreground).
 
-## Universal moves (apply across the above)
+## Langkah Kerja Universal
 
-- Enumerate every process, app component, local endpoint, URI scheme, file association, webview origin, and helper. Record OS identity, runtime privilege, caller, and callable operation.
-- Read final packaging inputs: merged manifest, entitlements, installer rules, native-messaging registration, protocol handlers, and ACL creation. Source declarations can be overwritten downstream.
-- Validate with dummy profiles and non-sensitive local fixtures on an isolated machine/emulator. Do not interact with other users' apps, credentials, or production services.
+- Buat daftar lengkap setiap proses, komponen aplikasi, endpoint lokal, skema URI kustom, asosiasi ekstensi berkas, origin webview, dan helper istimewa. Catat identitas OS, hak runtime, pemanggil yang diizinkan, dan operasi yang dapat dipanggil.
+- Baca artefak packaging akhir: manifes gabungan, entitlements, aturan installer, registrasi native messaging, protokol kustom, dan pembentukan ACL. Deklarasi di kode sumber mentah sering kali ditimpa saat proses build.
+- Lakukan validasi menggunakan profil tiruan dan berkas uji coba non-sensitif pada mesin pengujian atau emulator terisolasi. Jangan pernah berinteraksi dengan aplikasi pengguna lain, kredensial pribadi, atau layanan cloud produksi.
 
-## Validation rules (apply before reporting ANY finding here)
+## Aturan Validasi (terapkan sebelum melaporkan temuan apa pun di domain ini)
 
-1. Name the attacker starting capability, OS/app principal crossed, entry channel, accepted argument or state, and unauthorized operation or disclosure.
-2. Confirm OS sandbox, peer credential, signing, entitlement, permission, user-consent, and installer controls that apply. Unknown packaging/runtime facts require `needs_validation`.
-3. For webview bridges, cite both navigation/origin control and privileged native sink. For IPC, cite peer authentication and per-resource authorization. For helpers, verify final normalized destination.
-4. Keep local tests bounded and use dummy content/accounts. Stop after proving the boundary result; do not extend proof into persistence or broader system modification.
-5. Return `confirmed` only with a complete source and local evidence chain. Return `needs_validation` with the exact OS, manifest, signing, ACL, or device-lifecycle fact required.
+1. Sebutkan kapabilitas awal penyerang, batasan prinsipal OS/aplikasi yang dilompati, saluran masuk yang digunakan, argumen atau status yang diterima, serta operasi atau pengungkapan data yang tidak sah.
+2. Konfirmasikan kontrol sandbox OS, kredensial peer, code signing, entitlements, izin aplikasi, dialog persetujuan pengguna, dan kontrol installer yang berlaku. Jika fakta packaging akhir tidak diketahui, gunakan status `needs_validation`.
+3. Untuk bridge webview, buktikan kontrol navigasi/origin sekaligus sink native istimewa. Untuk IPC, buktikan autentikasi peer dan otorisasi per-sumber daya. Untuk helper istimewa, verifikasi path tujuan akhir yang telah dinormalisasi.
+4. Pastikan pengujian lokal tetap terisolasi dan menggunakan data tiruan. Hentikan pengujian begitu batasan keamanan terbukti dilanggar; jangan memperluas pengujian ke arah persistensi atau modifikasi sistem yang lebih luas.
+5. Berikan status `confirmed` hanya jika rantai bukti kode sumber dan pengujian lokal lengkap. Berikan status `needs_validation` jika ada fakta OS, manifes build, tanda tangan digital, ACL, atau siklus hidup perangkat yang memerlukan konfirmasi pemilik sistem.

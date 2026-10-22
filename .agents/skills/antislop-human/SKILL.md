@@ -13,7 +13,7 @@ allowed-tools: Bash(python *) Bash(python3 *) Read Write Edit Glob Grep
 
 - Muat bersama `antislop.md` setiap kali tugas melibatkan pembuatan atau pengubahan antarmuka pengguna (UI). Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang kedalaman aspek manusia: bagian-bagian UI yang mengecualikan orang dengan penglihatan, tangan, atau pengaturan perangkat yang berbeda.
 - Setiap pola memiliki format teratur: **Ciri (Tell)**, **Alasan (Why)** (siapa yang dirugikan/dikecualikan, dan mengapa ini menandakan pekerjaan belum selesai), dan **Solusi (Fix)**, dengan aturan inti yang dirujuk sebagai R-XX.
-- Aksesibilitas bukanlah sekadar daftar periksa tambahan yang ditempelkan di bagian akhir. Ini adalah bagian dari janji inti bahwa "antarmuka harus kokoh dan dapat diandalkan" (C-4). Delivery Gate di dalam berkas inti tetap menjadi gerbang penentu utama; "Checklist Skill Aspek Manusia" di akhir file ini adalah suplemen khusus untuk dijalankan bersamaan.
+- Aksesibilitas bukanlah sekadar daftar periksa tambahan yang ditempelkan di bagian akhir. Ini adalah bagian dari janji inti bahwa "antarmuka harus kokoh dan dapat diandalkan" (C-4).
 - Alat pemeriksa kontras (formula + tabel referensi + skrip) ada di dalam skill ini. Gunakan untuk setiap pasangan warna yang tidak dapat diverifikasi secara pasti hanya dengan mata telanjang.
 - Skill ini hanya menyimpan detail mobile yang mengecualikan manusia secara langsung: pembesaran tampilan (zoom), dan papan ketik virtual di layar ponsel.
 
@@ -135,13 +135,3 @@ Mekanisme tata letak teknis tampilan mobile (breakpoint layar, skala, sistem gri
 - **Alasan:** Formulir yang tidak dapat dilihat atau dijangkau oleh pengguna adalah formulir yang tidak bisa diselesaikan. Ini adalah bentuk pengabaian pengalaman pengguna mobile yang nyata (R-03).
 - **Solusi:** Saat kolom input mendapatkan fokus keyboard, gulirkan otomatis ke area pandang yang nyaman di atas papan ketik virtual, dengan ruang padding bawah yang memadai sehingga input tidak pernah tertutup. Uji menggunakan perangkat ponsel sungguhan atau emulator keyboard mobile.
 
-## Checklist Skill Aspek Manusia
-
-Jalankan checklist ini bersamaan dengan Delivery Gate inti setiap kali mengerjakan tampilan antarmuka (UI). Semua jawaban wajib bernilai **YA**:
-
-- [ ] Apakah setiap pasangan warna teks dan latar belakang sudah diverifikasi melalui alat pemeriksa kontras (formula, tabel, atau skrip), termasuk teks di atas foto dan gradien? (R-25)
-- [ ] Apakah setiap batas komponen interaktif dan indikator status memenuhi rasio kontras minimal 3:1 terhadap latar belakang sekitarnya? (kontras non-teks)
-- [ ] Apakah indikator fokus terlihat tegas, berkontras tinggi, dan muncul pada setiap elemen interaktif di semua tema warna (terang maupun gelap)? (R-32, R-34)
-- [ ] Apakah setiap elemen interaktif dapat dijangkau dan dioperasikan sepenuhnya menggunakan keyboard, dengan modal yang dapat ditutup tombol Escape dan tanpa aturan `outline: none` tanpa pengganti? (R-32, R-26)
-- [ ] Apakah status kosong, memuat, dan error pada setiap tampilan data tersedia dengan teks penjelasan yang jelas, bukan sekadar perubahan warna? (R-27, C-4)
-- [ ] Apakah teks dapat diperbesar hingga 200% tanpa terpotong, dan papan ketik virtual di ponsel tidak menutupi kolom input yang sedang aktif? (R-35)

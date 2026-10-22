@@ -10,7 +10,7 @@ const cliSkills = path.join(__dirname, '..', 'skills')
 const CORE_FRONTMATTER = [
   '---',
   'name: antislop',
-  'description: "Anti Slop: Rules for AI Coding Agents. The core filter. Load always to stop generic AI slop."',
+  'description: "Anti Slop: Aturan untuk AI Coding Agent. Penyaring inti. Selalu aktif untuk menghentikan slop AI generik."',
   'allowed-tools: Read Write Edit Glob Grep',
   '---',
   '',
@@ -39,4 +39,14 @@ fs.cpSync(repoSkills, cliSkills, {
   recursive: true,
   filter: (src) => path.basename(src) !== '__pycache__',
 })
-console.log(`Regenerated skills/antislop/SKILL.md and VERSION (${version}) and synced to cli/skills/`)
+
+const agentsSkills = path.join(repoRoot, '.agents', 'skills')
+if (fs.existsSync(agentsSkills)) {
+  fs.cpSync(repoSkills, agentsSkills, {
+    recursive: true,
+    filter: (src) => path.basename(src) !== '__pycache__',
+  })
+}
+
+console.log(`Regenerated skills/antislop/SKILL.md and VERSION (${version}) and synced to cli/skills/ & .agents/skills/`)
+

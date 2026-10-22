@@ -14,7 +14,6 @@ allowed-tools: Read Write Edit Glob Grep
 - Muat bersama `antislop.md` setiap kali tugas menyentuh komentar kode. Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang panduan mendalam seputar komentar.
 - Setiap pola memiliki format: **Ciri (Tell)**, **Alasan (Why)**, dan **Solusi (Fix)**, dengan aturan inti yang dirujuk sebagai R-XX.
 - **Batasan Ruang Lingkup (Scope Guardrail):** Skill ini HANYA memodifikasi komentar. JANGAN PERNAH mengubah kode program yang dapat dieksekusi, nama variabel/fungsi, import, indentasi logika, atau alur kontrol. Jika ragu, biarkan kodenya tidak tersentuh.
-- Checklist komentar di akhir file ini adalah pelengkap khusus untuk dijalankan bersama Delivery Gate inti.
 
 ## Komentar yang Tidak Menambah Nilai
 
@@ -95,15 +94,3 @@ Contoh komentar berkualitas yang wajib dipertahankan:
 // Abaikan event duplikat menggunakan event ID.
 ```
 
-## Checklist Komentar Kode
-
-Jalankan evaluasi ini bersamaan dengan Delivery Gate inti. Semua jawaban wajib **YA**:
-- [ ] Apakah setiap komentar menambahkan informasi yang belum terlihat dari kodenya? (R-31)
-- [ ] Apakah komentar bebas dari pemisah banner dekoratif dan huruf kapital berteriak?
-- [ ] Apakah komentar bebas dari pengulangan nama fungsi, deklarasi variabel, atau signature?
-- [ ] Apakah komentar bebas dari narasi workflow langkah demi langkah?
-- [ ] Apakah komentar bebas dari label kosong dan TODO samar?
-- [ ] Apakah komentar bebas dari emoji dekoratif dan penanda kurung tutup?
-- [ ] Apakah kepadatan komentar satu per blok logika, bukan satu per baris?
-- [ ] Apakah setiap komentar ringkas (1-2 baris padat)?
-- [ ] Apakah batasan terjaga: hanya komentar yang dirapikan, logika kode tidak tersentuh sama sekali?

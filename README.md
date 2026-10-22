@@ -1,15 +1,3 @@
-<p align="center">
-  <img src="./assets/antislop-banner.png" alt="antislop" width="100%" />
-</p>
-
-<p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-2ea44f" alt="Lisensi: MIT"></a>
-  <a href="https://github.com/yanuar1997/anti-slop-ai/releases"><img src="https://img.shields.io/github/v/release/yanuar1997/anti-slop-ai?label=version&color=1f6feb" alt="Versi"></a>
-</p>
-
-<p align="center">
-  <a href="https://skills.sh/yanuar1997/anti-slop-ai"><img src="https://skills.sh/b/yanuar1997/anti-slop-ai" alt="skills.sh"></a>
-</p>
 
 # antislop
 
@@ -244,10 +232,6 @@ antislop digunakan dalam salah satu dari dua mode, yang ditentukan di awal sesi:
 ## Peta Jalan (Roadmap)
 
 **v3.3.0** adalah rilis saat ini. Riwayat setiap rilis sebelumnya dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
-
-## Demo Bergerak (In Motion)
-
-![Perbandingan instruksi yang sama, sebelum dan sesudah filter](assets/compare/antislop-compare.gif)
 
 ## FAQ (Pertanyaan yang Sering Diajukan)
 

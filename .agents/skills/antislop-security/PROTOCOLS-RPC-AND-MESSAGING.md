@@ -1,81 +1,81 @@
-# Protocols, RPC, and Messaging Hunting
+# Perburuan Celah Keamanan Protokol, RPC, dan Messaging (Protocols, RPC & Messaging)
 
-#### When to use this file
+#### Kapan menggunakan berkas ini
 
-Reach for this file when the target uses gRPC, GraphQL transports, Cap'n Proto, Thrift, Protobuf, custom binary protocols, streaming RPC, webhooks, brokers, queues, pub/sub, or event buses. It covers peer identity, logical message interpretation, routing, replay, ordering, and delivery semantics. Use `MEMORY-SAFETY-AND-BINARY.md` for parser memory safety, `WEB-PROTOCOL-AND-AUTH.md` for HTTP framing, and `RESOURCE-EXHAUSTION-AND-AVAILABILITY.md` for availability impact.
+Gunakan berkas ini saat sistem menggunakan gRPC, transport GraphQL, Cap'n Proto, Apache Thrift, Protocol Buffers (Protobuf), protokol biner kustom, streaming RPC, webhook, broker pesan, message queue (RabbitMQ, SQS), sistem Pub/Sub, atau event bus (Kafka, NATS). Berkas ini mencakup identitas peer, interpretasi pesan logis, perutean (routing), replay pesan, urutan pesan (ordering), dan semantik pengiriman pesan. Gunakan `MEMORY-SAFETY-AND-BINARY.md` untuk keamanan memori parser, `WEB-PROTOCOL-AND-AUTH.md` untuk HTTP framing, dan `RESOURCE-EXHAUSTION-AND-AVAILABILITY.md` untuk dampak penolakan layanan (DoS/availability).
 
-Split large systems by producer/consumer pair, external/internal peer role, synchronous RPC, streaming, and asynchronous message path.
+Bagi sistem besar berdasarkan pasangan produsen/konsumen (producer/consumer), peran peer eksternal vs internal, RPC sinkron, streaming, dan jalur pesan asinkron.
 
-## Core discipline (include in every agent prompt for this domain)
+## Disiplin Inti (sertakan dalam setiap prompt agen untuk domain ini)
 
 ```
-- "Internal" is not authentication. Name the peer identity at every hop and show how it becomes the application principal used for authorization.
-- Schema validation proves message shape, not provenance, resource authority, ordering, or safe values. Follow decoded fields to policy and side effects.
-- Broker guarantees and application guarantees differ. Write down retry, ordering, acknowledgement, deduplication, and transaction behavior before evaluating state changes.
-- Parser disagreement requires two concrete consumers, schema versions, or wire representations and one security-relevant divergent value.
-- Use `confirmed` for source-complete paths plus bounded local producer/consumer tests. Use `needs_validation` for broker ACL, service-mesh identity, topic attachment, or compatibility behavior outside the repository.
+- Jaringan "Internal" bukanlah bentuk autentikasi otomatis. Sebutkan identitas peer pada setiap lompatan jaringan (hop) dan tunjukkan bagaimana identitas tersebut dipetakan menjadi prinsipal aplikasi yang digunakan untuk otorisasi.
+- Validasi skema membuktikan bentuk pesan (shape), bukan membuktikan asal-usul pesan, wewenang sumber daya, urutan pemrosesan, atau keamanan nilai di dalamnya. Telusuri field yang telah di-decode menuju kebijakan dan efek samping nyata.
+- Jaminan broker pesan berbeda dengan jaminan aplikasi. Catat mekanisme retry, urutan pesan (ordering), acknowledgement (ACK), deduplikasi, dan perilaku transaksi sebelum mengevaluasi perubahan status data.
+- Ketidakcocokan parser memerlukan dua konsumen nyata, versi skema berbeda, atau representasi wire protocol yang menghasilkan nilai divergen yang relevan secara keamanan.
+- Gunakan status "confirmed" untuk jalur kode sumber yang lengkap ditambah pengujian produsen/konsumen lokal terisolasi. Gunakan status "needs_validation" untuk ACL broker, identitas service mesh, langganan topik, atau perilaku kompatibilitas di luar repositori.
 ```
 
-## Framing, schema, and interpretation attack classes (subagent_type: `general`)
+## Kelas Serangan Framing, Skema, dan Interpretasi Pesan (subagent_type: `general`)
 
-**Message boundary and canonicalization disagreement**
-Components disagree on length, compression, duplicate fields, unknown fields, encoding, numeric width, normalization, or envelope/body precedence. Compare generated and custom parsers, gateways, language bindings, and version converters. Confirm which principal, resource, or operation differs after decoding.
+**Ketidakcocokan Batasan Pesan dan Kanonikalisasi**
+Komponen sistem tidak sepakat mengenai panjang pesan, kompresi, field duplikat, field tidak dikenal, encoding karakter, lebar numerik, normalisasi, atau preseden antara header/envelope versus body. Bandingkan parser otomatis versus parser manual, gateway, binding bahasa, dan pengonversi versi. Konfirmasikan prinsipal, sumber daya, atau operasi mana yang dievaluasi secara berbeda setelah proses decoding.
 
-**Union, enum, and default confusion**
-Unknown variants, missing discriminators, zero values, default privileges, or compatibility mappings reach code that assumes a validated case. Review exhaustive dispatch, default branches, and how old consumers interpret newly added fields.
+**Kebingungan Union, Enum, dan Nilai Bawaan (Default Values)**
+Varian yang tidak dikenal, diskriminator yang hilang, nilai nol (zero value), hak akses default, atau pemetaan kompatibilitas mencapai logika bisnis yang berasumsi bahwa semua kasus telah tervalidasi. Tinjau alur dispatch lengkap, cabang default, dan bagaimana konsumen lama menginterpretasikan field baru yang baru ditambahkan.
 
-**Envelope and payload identity mismatch**
-Authorization uses trusted-looking routing or envelope metadata while the handler acts on a conflicting tenant, account, subject, object, or sender in the body. Identify which source is authoritative and ensure clients cannot override it.
+**Ketidakcocokan Identitas Amplop (Envelope) vs Payload**
+Otorisasi menggunakan metadata perutean atau amplop yang tampak terpercaya, sementara handler memproses tenant, akun, subjek, objek, atau pengirim yang bertentangan di dalam body payload. Identifikasi sumber data mana yang otoritatif dan pastikan klien tidak dapat menimpanya.
 
-## RPC identity and authorization attack classes (subagent_type: `general`)
+## Kelas Serangan Identitas RPC dan Otorisasi (subagent_type: `general`)
 
-**Interceptor and method-path inconsistency**
-An authn/authz interceptor applies to unary methods but not streams, reflection, health, gateway-transcoded paths, compatibility services, or individual stream messages. Compare every registration and route to the same operation.
+**Ketidakkonsistenan Interceptor dan Jalur Method RPC**
+Interceptor autentikasi/otorisasi diterapkan pada unary method tetapi terlewatkan pada RPC streaming, layanan refleksi gRPC, health check, jalur transkoding gateway (misal: grpc-gateway REST-to-gRPC), layanan kompatibilitas, atau pesan individual di dalam stream panjang. Bandingkan setiap registrasi method dan rute ke operasi yang sama.
 
-**Peer identity to application-principal confusion**
-mTLS, workload identity, bearer metadata, forwarded identity, or broker credentials authenticate a channel, but a caller-controlled field selects the user or tenant. The channel identity and claimed principal must be bound by deterministic policy.
+**Kebingungan Identitas Peer Terhadap Prinsipal Aplikasi**
+Koneksi mTLS, workload identity, metadata bearer token, header identitas terusan, atau kredensial broker mengautentikasi saluran koneksi, namun field yang dikontrol pemanggil menentukan akun atau tenant pengguna akhir. Identitas saluran dan prinsipal yang diklaim harus diikat oleh kebijakan deterministik.
 
-**Per-item and streaming authorization gaps**
-A stream, subscription, batch, or bulk message is authorized once, then later items name different resources or continue after role, membership, or token revocation. Re-check where scope can change and bind subscriptions to their original principal.
+**Celah Otorisasi Streaming dan Pesan Batch**
+Aliran stream gRPC, langganan event, pesan batch, atau permintaan bulk diotorisasi hanya satu kali di awal, kemudian pesan-pesan berikutnya menamai sumber daya yang berbeda atau tetap berjalan setelah peran pengguna, keanggotaan, atau token dicabut. Periksa titik di mana cakupan dapat berubah dan ikat langganan ke prinsipal awalnya.
 
-**Callback and reply-correlation confusion**
-Predictable, reused, or cross-tenant correlation IDs let a response, webhook, cancellation, or acknowledgment satisfy another caller's pending operation. Bind each outstanding request to authenticated peer, tenant, operation, and lifecycle.
+**Kebingungan Korelasi Balasan dan Callback**
+ID korelasi yang dapat ditebak, digunakan ulang, atau bocor lintas-tenant memungkinkan suatu respons, webhook, pembatalan, atau acknowledgment memuaskan operasi tertunda milik pemanggil lain. Ikat setiap permintaan yang belum selesai ke peer terautentikasi, tenant, jenis operasi, dan siklus hidupnya.
 
-## Broker and queue isolation attack classes (subagent_type: `general`)
+## Kelas Serangan Isolasi Broker dan Antrean Pesan (subagent_type: `general`)
 
-**Topic, routing-key, and subscription scope gaps**
-A publisher or subscriber can select another tenant's topic, wildcard, consumer group, partition, reply queue, or dead-letter route. Check broker-enforced ACLs where visible and application-side namespace construction. Tenant text inside a payload is not isolation.
+**Celah Cakupan Topik, Routing Key, dan Langganan**
+Penerbit (publisher) atau pelanggan (subscriber) dapat memilih topik, pola wildcard, consumer group, partisi, antrean balasan (reply queue), atau rute dead-letter milik tenant lain. Periksa ACL yang ditegakkan broker (jika terlihat di konfigurasi) dan pembentukan namespace di sisi aplikasi. Teks tenant di dalam payload pesan bukanlah bentuk isolasi.
 
-**Dead-letter, retry, and diagnostic disclosure**
-Messages routed to dead-letter queues, error topics, tracing, or operator views contain secrets or cross-tenant payloads accessible to a lower-trust consumer. Review policy and redaction at the failure path, not just normal delivery.
+**Pengungkapan Data Melalui Antrean Gagal (Dead-Letter) dan Diagnostik**
+Pesan yang dialihkan ke dead-letter queue (DLQ), topik error, sistem tracing, atau dasbor operator memuat rahasia atau payload lintas-tenant yang dapat diakses oleh konsumen dengan hak lebih rendah. Tinjau kebijakan dan redaksi data pada jalur penanganan kegagalan, bukan hanya pada pengiriman normal.
 
-**Untrusted producer treated as control plane**
-A message body can declare itself an admin event, provider callback, replication record, or migration instruction without an independently authenticated producer and event type. Verify signatures and source/account/audience binding before privileged handling.
+**Produsen Tak Tepercaya Diperlakukan Sebagai Control Plane**
+Body pesan dapat menyatakan dirinya sebagai event admin, callback penyedia pihak ketiga, catatan replikasi, atau instruksi migrasi data tanpa produsen dan jenis event yang diautentikasi secara independen. Verifikasi tanda tangan digital serta pengikatan sumber/akun/audience sebelum menjalankan aksi istimewa.
 
-## Replay, ordering, and transaction attack classes (subagent_type: `general`)
+## Kelas Serangan Replay, Urutan, dan Transaksi (subagent_type: `general`)
 
-**Duplicate delivery and idempotency gaps**
-Retries or redelivery repeat a side effect because deduplication is absent, occurs after mutation, or uses a key that collides across tenants or operations. Confirm the broker's delivery model and the side effect that is not naturally idempotent.
+**Pengiriman Duplikat dan Celah Idempotensi**
+Upaya pengiriman ulang (retry/redelivery) mengulang efek samping bisnis karena deduplikasi tidak ada, terjadi setelah mutasi data selesai, atau menggunakan kunci deduplikasi yang bertabrakan antar-tenant. Konfirmasikan model pengiriman broker (at-least-once) dan efek samping yang tidak bersifat idempoten secara alami.
 
-**Out-of-order and stale message acceptance**
-Older state, revoked membership, canceled work, or pre-step-up authorization arrives after newer state and overwrites it. Review sequence/version checks, tombstones, partition changes, and restore/replay workflows.
+**Penerimaan Pesan Usang dan Tidak Berurutan (Out-of-Order Messages)**
+Status data lama, keanggotaan yang telah dicabut, pekerjaan yang telah dibatalkan, atau status otorisasi sebelum peningkatan hak tiba setelah status yang lebih baru dan menimpanya. Tinjau pemeriksaan nomor urut/versi, status tombstone, perubahan partisi pesan, dan alur replay data.
 
-**Acknowledgment/commit ordering defects**
-Acknowledgment occurs before durable commit and loses security-relevant work, or commit happens before an unreliable acknowledgment and duplicates a mutation. Evaluate transactional outbox/inbox behavior and failure recovery.
+**Cacat Urutan Acknowledgment dan Komit Database**
+Pengiriman sinyal acknowledgment (ACK) terjadi sebelum transaksi database tersimpan secara permanen (commit), sehingga berisiko menghilangkan pekerjaan penting saat crash. Sebaliknya, komit database terjadi sebelum ACK yang tidak andal, sehingga memicu mutasi duplikat saat retry. Evaluasi pola transactional outbox/inbox dan pemulihan kegagalan.
 
-**Partial multi-consumer transitions**
-Several consumers jointly implement one authorization or business transition, but retries and partial failure leave only a subset committed. Identify invariants that must become durable atomically or compensate with current authorization.
+**Transisi Parsial pada Konsumen Majemuk (Multi-Consumer Inconsistency)**
+Beberapa worker secara bersama-sama mengimplementasikan satu transisi otorisasi atau transaksi bisnis, tetapi kegagalan parsial pada salah satu worker menyebabkan hanya sebagian data yang terkomit. Identifikasi invarian data yang harus menjadi permanen secara atomik atau sediakan mekanisme kompensasi (saga rollback).
 
-## Universal moves (apply across the above)
+## Langkah Kerja Universal
 
-- Draw producer → broker/transport → gateway → consumer → storage for each message family. At each hop record authenticated peer, authoritative tenant/resource fields, validation, and side effect.
-- Feed the same small fixture to every in-repo schema version or language binding. Test duplicate, missing, unknown, boundary, replayed, and reordered messages without producing load.
-- Compare normal, retry, dead-letter, replay, migration, reflection, stream, and gateway-transcoded routes. Security policy must survive transport changes.
+- Gambarkan diagram alir produsen → broker/transport → gateway → konsumen → database untuk setiap jenis pesan. Pada setiap titik, catat peer terautentikasi, field tenant/sumber daya otoritatif, validasi skema, dan efek samping data.
+- Kirimkan fixture kecil yang sama ke setiap versi skema dan binding bahasa yang ada di repositori. Uji pesan duplikat, field hilang, field tak dikenal, nilai batas, pesan ter-replay, dan pesan acak tanpa membebani sistem.
+- Bandingkan rute normal, retry, dead-letter, replay, migrasi, refleksi, streaming, dan rute transkoding gateway. Kebijakan keamanan harus tetap tegak melintasi perubahan protokol transport.
 
-## Validation rules (apply before reporting ANY finding here)
+## Aturan Validasi (terapkan sebelum melaporkan temuan apa pun di domain ini)
 
-1. Name the realistic producer or peer, accepted message, authenticated channel identity, affected principal/resource, and unauthorized mutation or disclosure.
-2. For disagreement claims, cite both parsers/consumers and the divergent decoded value. Safe rejection by either side prevents confirmation.
-3. For replay/order claims, establish actual delivery guarantees and reproduce the invariant failure with a bounded local/in-memory transport.
-4. For authorization and isolation, verify all interceptor, broker ACL, gateway, and consumer layers visible in source. External attachments make the candidate `needs_validation`.
-5. Return `confirmed` only with the complete message lifecycle and observed meaningful result. Return `needs_validation` with the exact broker, service identity, route, or delivery fact required.
+1. Sebutkan produsen atau peer yang realistis, pesan yang diterima, identitas saluran terautentikasi, prinsipal/sumber daya yang terdampak, serta mutasi data atau pengungkapan rahasia yang tidak sah.
+2. Untuk klaim ketidakcocokan parser, sebutkan kedua parser/konsumen dan nilai hasil decode yang berbeda. Penolakan yang aman oleh salah satu sisi menggugurkan status konfirmasi temuan.
+3. Untuk klaim urutan/replay pesan, tentukan jaminan pengiriman broker yang sebenarnya dan reproduksi kegagalan invarian menggunakan transport memori/lokal yang terisolasi.
+4. Untuk otorisasi dan isolasi, verifikasi seluruh interceptor, ACL broker, gateway, dan lapisan konsumen yang terlihat di kode sumber. Ketergantungan pada konfigurasi eksternal yang tidak terlihat menjadikan temuan berstatus `needs_validation`.
+5. Berikan status `confirmed` hanya jika siklus hidup pesan terbukti lengkap beserta efek samping nyata yang teramati. Berikan status `needs_validation` jika ada fakta konfigurasi broker, identitas service mesh, rute antrean, atau perilaku pengiriman yang belum dapat dipastikan.

@@ -14,7 +14,6 @@ allowed-tools: Read Write Edit Glob Grep
 - Muat bersama `antislop.md` setiap kali tugas berhubungan dengan tata letak mobile atau desain responsif. Dokumen inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang rincian teknis tata letak mobile secara mendalam.
 - Setiap entri memiliki format seragam: **Ciri (Tell)**, **Alasan (Why)** (mengapa pola tersebut dianggap sebagai slop berkualitas rendah), dan **Solusi (Fix)** (tindakan yang benar), dengan aturan inti yang dirujuk sebagai R-XX.
 - Prinsip utama di balik skill ini: **tata letak mobile adalah desain yang berbeda secara fundamental, bukan sekadar tampilan desktop yang diperkecil.** Tata letak mobile harus mengalir ulang: menumpuk kembali, menyesuaikan skala, dan mengatur ulang urutan dengan tujuan yang jelas. Setiap pola di bawah ini adalah contoh kegagalan tata letak dalam mengalir ulang secara benar.
-- Delivery Gate di dalam berkas inti tetap menjadi gerbang utama. "Checklist Skill Tata Letak Mobile" di akhir file ini adalah suplemen khusus untuk dievaluasi bersamaan.
 
 ## Breakpoint Layar
 
@@ -88,6 +87,12 @@ allowed-tools: Read Write Edit Glob Grep
 - **Alasan:** Sistem 12-kolom diciptakan untuk kanvas lebar desktop dengan banyak variasi susunan. Memaksakannya di layar ponsel membuat setiap elemen menjadi pecahan pecahan kecil yang rumit tanpa alasan nyata (R-03).
 - **Solusi:** Biarkan jumlah kolom mengikuti kebutuhan alami konten. Di layar ponsel, konten hampir selalu membutuhkan satu kolom tunggal, atau maksimal dua kolom untuk item kecil; sistem 12-kolom hanya relevan di layar lebar.
 
+### Pengabaian Container Queries untuk Komponen Modular (Ignoring Container Queries)
+
+- **Ciri:** Hanya mengandalkan media query viewport global (`@media (max-width: ...)`) untuk kartu atau widget di dalam sidebar, modal, atau grid multi-kolom, sehingga kartu di dalam kolom sempit tetap mempertahankan tata letak desktop yang sesak.
+- **Alasan:** Komponen modular sejati harus menyesuaikan diri dengan ruang wadah pembungkusnya (container), bukan sekadar lebar layar perangkat secara keseluruhan (R-03).
+- **Solusi:** Gunakan CSS Container Queries (`container-type: inline-size` pada wadah dan `@container (max-width: ...)` pada komponen) agar kartu, formulir, atau widget dapat beralih ke tata letak tumpuk secara otomatis di mana pun komponen tersebut disematkan.
+
 ## Luapan Konten (Overflow)
 
 ### Kebocoran Geser Horizontal (Horizontal Scroll Leak)
@@ -154,17 +159,3 @@ allowed-tools: Read Write Edit Glob Grep
 - **Alasan:** Di layar ponsel yang kecil, setiap pixel ruang navigasi yang kaku adalah kehilangan ruang untuk membaca konten. Header melayang yang terlalu tinggi membuat area baca konten menjadi sangat sempit seperti celah sempit (R-03).
 - **Solusi:** Rancang bilah navigasi yang ringkas dan padat: cukup kecil agar konten tetap menjadi fokus utama, serta pertimbangkan untuk mengecilkan atau menyembunyikan header secara halus saat layar digulir ke bawah, lalu memunculkannya kembali saat digulir ke atas.
 
-## Checklist Skill Tata Letak Mobile
-
-Jalankan checklist ini bersamaan dengan Delivery Gate inti setiap kali mengerjakan tampilan antarmuka responsif atau mobile. Semua jawaban wajib bernilai **YA**:
-
-- [ ] Apakah tata letak mengalir ulang ke status mobile yang dirancang secara matang, bukan sekadar tampilan desktop yang diperkecil? (R-03)
-- [ ] Apakah ada status tata letak yang jelas di seluruh rentang lebar layar (termasuk tablet dan laptop kecil), sehingga tidak menjadi tumpukan yang terlalu melebar atau grid yang terjepit? (R-03, R-35)
-- [ ] Apakah skala ukuran (tipografi, padding bagian, gap jarak) disesuaikan khusus untuk ponsel dan bukan ukuran desktop yang dibiarkan? (R-03, R-05)
-- [ ] Apakah grid multi-kolom runtuh dan menumpuk ke bawah dengan rapi alih-alih saling bertabrakan? (R-03)
-- [ ] Apakah tidak ada pengguliran horizontal yang tidak disengaja dan tidak ada konten penting yang terpotong? (R-03)
-- [ ] Apakah setiap target sentuhan interaktif memiliki ukuran minimal 44 x 44 pixel dengan jarak pemisah yang cukup antar elemen? (R-03)
-- [ ] Apakah interaksi yang mengandalkan hover mouse memiliki padanan sentuhan dengan umpan balik visual yang jelas? (R-03)
-- [ ] Apakah navigasi mengalir ulang ke pola mobile yang ergonomis (bottom nav atau menu yang jelas) alih-alih jajaran link desktop yang sesak? (R-03)
-- [ ] Apakah navigasi tetap (seperti sticky header atau bottom nav) tidak pernah menutupi konten penting dan menghormati batas aman perangkat? (R-03)
-- [ ] Apakah tata letak sudah diuji dan diverifikasi secara langsung pada breakpoint layar ponsel sempit? (R-35)

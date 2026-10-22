@@ -1,86 +1,86 @@
-# Cloud and Deployment Hunting
+# Perburuan Celah Keamanan Cloud dan Penerapan (Cloud & Deployment)
 
-#### When to use this file
+#### Kapan menggunakan berkas ini
 
-Reach for this file when the repository defines cloud identity, infrastructure, containers, Kubernetes, service mesh, serverless functions, edge workers, ingress, object storage, managed services, or environment-specific configuration. This domain asks whether deployed components receive the intended identity, isolation, network reachability, secrets, and policy. Source often expresses intent rather than live fact, so separate source-confirmed defects from deployment validation needs.
+Gunakan berkas ini saat repositori mendefinisikan identitas cloud, infrastruktur sebagai kode (IaC), kontainer, Kubernetes, service mesh, fungsi serverless, edge worker, ingress, penyimpanan objek (S3/GCS), layanan terkelola, atau konfigurasi khusus lingkungan (environment). Domain ini berfokus pada apakah komponen yang di-deploy menerima identitas, isolasi, keterjangkauan jaringan, rahasia/kredensial, dan kebijakan yang semestinya. Berkas kode sumber sering kali hanya mencerminkan niat awal daripada fakta lingkungan hidup, sehingga pisahkan cacat yang terbukti dari kode sumber versus hal yang membutuhkan validasi penerapan langsung.
 
-Use `SUPPLY-CHAIN-AND-RELEASE.md` for build and promotion trust, `WEB-PROTOCOL-AND-AUTH.md` for HTTP proxy semantics, and `DATA-ISOLATION-AND-LIFECYCLE.md` for data-store tenant scope.
+Gunakan `SUPPLY-CHAIN-AND-RELEASE.md` untuk kepercayaan alur build dan promosi rilis, `WEB-PROTOCOL-AND-AUTH.md` untuk semantik proxy HTTP, dan `DATA-ISOLATION-AND-LIFECYCLE.md` untuk batasan tenant penyimpanan data.
 
-## Core discipline (include in every agent prompt for this domain)
+## Disiplin Inti (sertakan dalam setiap prompt agen untuk domain ini)
 
 ```
-- Do not infer a live exposure from a manifest alone. Establish which environment consumes it, what defaults or overlays modify it, and whether the source path is active.
-- Map each workload's identity to specific operations and resources. Broad policy is a finding only when lower-trust input can reach an unauthorized action.
-- Ingress, proxies, service mesh, metadata services, and admission policy are real boundaries, but only count a control when its configuration and attachment are visible.
-- Secret references are not secret disclosure. Require a lower-trust reader, output, artifact, log path, or unsafe fallback.
-- Use `confirmed` for active in-repo configurations and local rendering/policy validation. Use `needs_validation` for account policy, network attachment, runtime admission, hosted metadata, or drift that needs owner observation.
+- Jangan menyimpulkan adanya celah eksposur publik hanya dari berkas manifes semata. Tentukan lingkungan mana yang menggunakannya, overlay atau nilai bawaan apa yang memodifikasinya, dan apakah jalur kode tersebut benar-benar aktif.
+- Petakan identitas setiap beban kerja (workload) ke operasi dan sumber daya spesifik. Kebijakan yang terlalu luas hanyalah temuan jika input berhak rendah dapat memicu aksi tanpa otorisasi.
+- Ingress, proxy, service mesh, layanan metadata, dan admission controller adalah batas pertahanan nyata; perhitungkan kontrol tersebut saat konfigurasi dan kaitannya terlihat jelas.
+- Referensi ke nama rahasia bukanlah kebocoran rahasia. Tunjukkan pembaca berhak rendah, luaran publik, artefak build, jalur log, atau fallback yang tidak aman.
+- Gunakan status "confirmed" untuk konfigurasi in-repo yang aktif dan validasi kebijakan/rendering lokal. Gunakan "needs_validation" untuk kebijakan akun cloud, konfigurasi jaringan live, admission controller runtime, metadata cloud hosting, atau konfigurasi drift yang memerlukan konfirmasi pemilik sistem.
 ```
 
-## Workload identity and IAM attack classes (subagent_type: `general`)
+## Kelas Serangan Identitas Beban Kerja dan IAM (subagent_type: `general`)
 
-**Workload identity overreach**
-A workload, pod, function, edge worker, or node identity can act on tenants, accounts, resources, or APIs beyond its role, and untrusted request or job input selects that target. Review cloud policy conditions, resource patterns, service-account attachment, namespace mapping, and fallback credentials.
+**Penyalahgunaan Izin Identitas Beban Kerja (Workload Identity Overreach)**
+Identitas workload, pod, fungsi, edge worker, atau node dapat bertindak terhadap tenant, akun, sumber daya, atau API di luar peran semestinya, dan input permintaan atau pekerjaan tak tepercaya dapat memilih target tersebut. Tinjau kondisi kebijakan cloud, pola ARN/resource, asosiasi service account, pemetaan namespace, dan kredensial fallback.
 
-**Cross-account or cross-tenant role confusion**
-Role assumption, external IDs, token exchange, workload federation, or resource policies accept identity claims not bound to the intended source account, audience, repository, namespace, or workload. Establish both trust policy and caller-controlled claim.
+**Kebingungan Peran Lintas-Akun atau Lintas-Tenant**
+Asumsi peran (role assumption), external ID, pertukaran token, federasi workload, atau kebijakan sumber daya menerima klaim identitas yang tidak terikat secara ketat pada akun asal, audience, repositori, namespace, atau workload yang valid. Buktikan baik kebijakan trust maupun klaim yang dikontrol pemanggil.
 
-**Application authorization delegated to cloud metadata**
-An app trusts caller-supplied identity headers, tags, labels, account IDs, or resource metadata without verifying they came from the cloud control plane or a trusted proxy. Cloud IAM and application authorization are separate checks.
+**Otorisasi Aplikasi Didelegasikan ke Metadata Cloud Tanpa Verifikasi**
+Aplikasi mempercayai header identitas, tag, label, account ID, atau metadata sumber daya yang disuplai pemanggil tanpa memverifikasi bahwa data tersebut berasal dari control plane cloud atau proxy terpercaya. IAM cloud dan otorisasi logika aplikasi adalah dua lapisan pemeriksaan yang terpisah.
 
-## Ingress, network, and control-plane attack classes (subagent_type: `general`)
+## Kelas Serangan Ingress, Jaringan, dan Control-Plane (subagent_type: `general`)
 
-**Unexpected service or management-plane reachability**
-An ingress, service, listener, security group, load-balancer annotation, port mapping, or server bind exposes an admin, debug, metrics, node, control-plane, or internal API to a lower-trust network. Missing network controls alone are `needs_validation`; a repository-controlled public route to a sensitive handler can be `confirmed`.
+**Keterjangkauan Layanan atau Manajemen Tak Terduga**
+Ingress, service listener, security group, anotasi load balancer, pemetaan port, atau binding server mengekspos endpoint admin, debug, metrik, node, control plane, atau API internal ke jaringan dengan tingkat kepercayaan lebih rendah. Ketiadaan kontrol firewall jaringan saja berstatus `needs_validation`; namun rute publik dalam kode yang mengarah langsung ke handler sensitif dapat berstatus `confirmed`.
 
-**Trusted-proxy and mesh identity bypass**
-A backend accepts forwarded identity, mTLS subject, or authorization metadata from peers outside the intended ingress/sidecar, or an alternate port and health/legacy path bypasses the mesh. Verify header stripping, peer reachability, and fail-open behavior when the proxy is absent.
+**Bypass Identitas Proxy Terpercaya dan Service Mesh**
+Backend menerima identitas terusan (forwarded identity), subjek mTLS, atau metadata otorisasi dari pihak di luar ingress/sidecar yang semestinya, atau port alternatif/jalur health check lama membypass isolasi service mesh. Verifikasi pembersihan header (header stripping), keterjangkauan langsung antar-peer, dan perilaku fail-open saat proxy tidak tersedia.
 
-**Metadata and internal-service reachability**
-An untrusted URL, destination, or protocol selection reaches instance/container metadata, control-plane sockets, or internal APIs with workload credentials. Trace URL parsing and redirect handling under `ATTACK-CLASSES.md`; here establish deployed network, metadata-version, and identity boundaries.
+**Keterjangkauan Layanan Metadata dan Internal (SSRF ke Metadata)**
+URL, tujuan jaringan, atau pemilihan protokol tak tepercaya mencapai layanan metadata instans/kontainer (misal: 169.254.169.254), soket control plane, atau API internal menggunakan kredensial workload. Telusuri penguraian URL dan penanganan redirect di bawah `ATTACK-CLASSES.md`; di sini fokuskan pada batasan jaringan yang diterapkan, versi metadata (IMDSv2 vs IMDSv1), dan batasan identitas.
 
-## Container and orchestration attack classes (subagent_type: `general`)
+## Kelas Serangan Kontainer dan Orkestrasi (subagent_type: `general`)
 
-**Host or control-plane capability exposure**
-A lower-trust workload can select privileged mode, capabilities, host namespaces, host paths, device mounts, container runtime sockets, or service-account tokens that cross into node/control-plane authority. Bare absence of seccomp or read-only filesystem is hardening unless a reachable operation crosses that boundary.
+**Eksposur Kapabilitas Host atau Control-Plane**
+Workload berhak rendah dapat memilih mode privileged, kapabilitas Linux (misal: `CAP_SYS_ADMIN`), namespace host, host path mount, soket runtime kontainer (`docker.sock`, `containerd.sock`), atau token service account yang melompat ke wewenang node/control plane. Ketiadaan profil seccomp atau filesystem read-only hanyalah catatan pengerasan, kecuali jika ada operasi yang dapat dieksekusi melintasi batasan tersebut.
 
-**Admission and policy path inconsistency**
-One deployment route enforces image identity, namespace, resource, secret, or privilege policy while another controller, job, upgrade, restore, or compatibility path does not. Confirm the alternate route and resulting deployed object.
+**Ketidakkonsistenan Jalur Kebijakan dan Admission Controller**
+Satu rute deployment menegakkan identitas image, namespace, kuota sumber daya, rahasia, atau kebijakan hak istimewa, sementara controller lain, job batch, alur upgrade, restore cadangan, atau jalur kompatibilitas mengabaikannya. Konfirmasikan rute alternatif dan objek yang akhirnya diterapkan.
 
-**Namespace and label trust confusion**
-Network, admission, secret, or workload-identity policy relies on labels, annotations, names, or namespaces that a less-trusted principal can set. Compare who controls selectors with what authority matching grants.
+**Kebingungan Kepercayaan Namespace dan Label**
+Kebijakan jaringan (NetworkPolicy), admission, rahasia, atau identitas workload bergantung pada label, anotasi, nama, atau namespace yang dapat diatur oleh pihak berhak rendah. Bandingkan siapa yang mengontrol selector dengan wewenang apa yang diberikan oleh kecocokan label tersebut.
 
-## Configuration and secret lifecycle attack classes (subagent_type: `general`)
+## Kelas Serangan Konfigurasi dan Siklus Hidup Rahasia (subagent_type: `general`)
 
-**Security-control precedence drift**
-Development values, chart defaults, environment variables, command-line flags, feature gates, sidecar injection, or per-region overlays disable authentication, transport security, tenant scoping, or audit policy in a deployed environment. Render the final configuration for each maintained deployment, not just the base file.
+**Pergeseran Preseden Kontrol Keamanan (Precedence Drift)**
+Nilai pengembangan (development values), default helm chart, variabel lingkungan, argumen baris perintah, feature flags, injeksi sidecar, atau overlay per-region menonaktifkan autentikasi, enkripsi transport (TLS), batasan tenant, atau pencatatan audit di lingkungan produksi. Render konfigurasi final untuk setiap lingkungan yang dirawat, bukan hanya berkas dasarnya.
 
-**Secret exposure across workload boundaries**
-Secrets enter logs, crash reports, process arguments, shared environment, broad volumes, build outputs, service discovery, or read APIs accessible to another workload or tenant. Check secret type and authority; a public endpoint or key ID is not a credential.
+**Eksposur Rahasia Melintasi Batasan Beban Kerja**
+Rahasia dan kredensial bocor ke log, laporan crash, argumen proses (process table), variabel lingkungan bersama, volume yang terpasang luas, luaran build, service discovery, atau API baca yang dapat diakses oleh workload atau tenant lain. Periksa jenis rahasia dan tingkat wewenangnya; endpoint publik atau Key ID biasa bukanlah kredensial rahasia.
 
-**Credential renewal and outage fallback**
-Failure to mount, refresh, rotate, or revoke a workload credential causes stale credentials to remain active or an app to accept a less trusted identity mode. Review startup, readiness, reconnect, and cached-client behavior.
+**Pembaruan Kredensial dan Fallback Saat Gangguan**
+Kegagalan me-mount, memperbarui, merotasi, atau mencabut kredensial workload menyebabkan kredensial usang tetap aktif atau menyebabkan aplikasi beralih menerima mode identitas yang kurang aman. Tinjau inisialisasi aplikasi, pemeriksaan kesiapan (readiness probe), rekoneksi, dan perilaku cache klien.
 
-## Managed storage, events, and edge attack classes (subagent_type: `general`)
+## Kelas Serangan Penyimpanan Terkelola, Event, dan Edge (subagent_type: `general`)
 
-**Object and signed-URL policy confusion**
-Bucket/container policy, object keys, CDN origins, or signed URLs fail to bind principal, operation, object namespace, audience, or expiry. Review list/version operations and write paths as well as reads.
+**Kebingungan Kebijakan Objek dan URL Bertanda Tangan (Signed URLs)**
+Kebijakan bucket/kontainer penyimpanan, prefix objek, origin CDN, atau signed URL gagal mengikat prinsipal, operasi yang diizinkan, namespace objek, audience, atau batas kedaluwarsa. Tinjau operasi listing/versi dan jalur penulisan data di samping jalur pembacaan.
 
-**Event-source identity confusion**
-A function or worker trusts event body fields as source identity without validating provider-signed envelope, subscription/topic, account, region, and replay state. Compare push, pull, retry, and dead-letter paths.
+**Kebingungan Identitas Sumber Event**
+Fungsi serverless atau worker mempercayai field di dalam body event sebagai identitas sumber tanpa memvalidasi amplop bertanda tangan penyedia, langganan topik, akun, region, dan status replay. Bandingkan jalur push, pull, retry, dan antrean pesan gagal (dead-letter queue).
 
-**Edge/runtime boundary mismatch**
-An edge or serverless runtime assumes a secret, API, filesystem, isolation, or tenant policy that differs from the origin runtime, and fallback to origin changes authority or cache behavior. Confirm which configuration selects each path.
+**Ketidakcocokan Batasan Runtime Edge vs Asal**
+Runtime edge atau serverless mengasumsikan rahasia, API, filesystem, isolasi, atau kebijakan tenant yang berbeda dari server asal, dan fallback ke origin mengubah wewenang atau perilaku caching. Konfirmasikan konfigurasi mana yang memilih setiap jalur eksekusi.
 
-## Universal moves (apply across the above)
+## Langkah Kerja Universal
 
-- Render every maintained environment and make a matrix of external port, workload identity, network peers, mounted secrets, and cloud resources. Differences require an owner or policy explanation.
-- Follow a lower-trust request, object, label, or event into cloud policy. Show which workload credential performs the final operation and what condition should scope it.
-- Diff normal deploy, migration, restore, node maintenance, failover, and local/emulator paths. Review behavior when mesh, admission, identity, secret, or policy service is unavailable.
+- Render setiap konfigurasi lingkungan yang dipelihara dan buat matriks port eksternal, identitas workload, peer jaringan, rahasia yang di-mount, dan sumber daya cloud. Perbedaan antar-lingkungan memerlukan penjelasan pemilik atau kebijakan sistem.
+- Telusuri permintaan, objek, label, atau event berhak rendah menuju kebijakan cloud. Tunjukkan kredensial workload mana yang melakukan operasi akhir dan kondisi apa yang seharusnya membatasinya.
+- Bandingkan jalur deployment normal, migrasi, restore, pemeliharaan node, failover, dan emulator lokal. Tinjau perilaku sistem ketika service mesh, admission controller, layanan identitas, atau layanan rahasia mengalami gangguan.
 
-## Validation rules (apply before reporting ANY finding here)
+## Aturan Validasi (terapkan sebelum melaporkan temuan apa pun di domain ini)
 
-1. Establish the active source path and effective deployment object; otherwise use `needs_validation` and state which rendered manifest or owner-observed attachment is missing.
-2. Name the lower-trust caller/workload, cloud or application identity, controllable selector, affected resource, and unauthorized operation or disclosure.
-3. Verify provider and orchestrator defaults at the pinned version. Do not assume a public IP, reachable metadata service, permissive firewall, or absent admission attachment.
-4. Local validation may render templates, evaluate policy, inspect container/user namespaces in an isolated fixture, or run an emulator with dummy identities. Do not probe live endpoints or alter shared cloud resources.
-5. Return `confirmed` only with a complete active source trace and concrete boundary result. Return `needs_validation` with the exact deployed policy, identity attachment, overlay, network, or drift observation needed.
+1. Tentukan jalur kode sumber yang aktif dan objek konfigurasi efektif yang diterapkan; jika tidak dapat dipastikan, gunakan status `needs_validation` dan sebutkan manifes renderan atau konfigurasi live apa yang belum terkonfirmasi.
+2. Sebutkan pemanggil/workload berhak rendah, identitas cloud atau aplikasi, selector yang dapat dikontrol, sumber daya yang terdampak, serta operasi atau pengungkapan data yang tidak sah.
+3. Verifikasi konfigurasi bawaan (default) penyedia cloud dan orkestrator pada versi tepat yang digunakan. Jangan berasumsi adanya IP publik, metadata yang terbuka, firewall longgar, atau ketiadaan admission controller tanpa bukti konfigurasi.
+4. Validasi lokal dapat berupa rendering template, evaluasi kebijakan rego/IAM, inspeksi namespace kontainer/user pada lingkungan terisolasi, atau emulator lokal dengan identitas tiruan. Jangan pernah memindai endpoint produksi live atau mengubah sumber daya cloud bersama.
+5. Berikan status `confirmed` hanya jika terdapat alur kode aktif yang lengkap dan pelanggaran batasan keamanan yang konkret. Berikan status `needs_validation` disertai rincian kebijakan cloud, attachment identitas, overlay lingkungan, topologi jaringan, atau bukti drift yang harus diamati oleh pemilik sistem.

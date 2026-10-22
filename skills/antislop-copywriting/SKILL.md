@@ -16,13 +16,12 @@ allowed-tools: Read Write Edit Glob Grep
 - Dua aturan wajib berlaku untuk semua hal di bawah ini:
   - **Jangan pernah mengarang fakta** (R-17, R-36, R-38). Penulisan ulang tidak boleh menambahkan fakta, nama, angka, tanggal, kutipan, atau rujukan yang tidak ada dalam teks sumber atau tidak diberikan oleh pengguna. Rincian spesifik harus berasal dari sumber atau pengguna, bukan dari karangan sendiri. Jika suatu kalimat membutuhkan detail nyata agar berfungsi, tanyakan detailnya kepada pengguna atau tulis versi sederhana tanpa mengarang.
   - **Jangan membuat teks terlalu steril dan hambar.** Menghindari pola AI hanyalah separuh pekerjaan. Teks tanpa karakter suara sama jelasnya terlihat seperti buatan mesin dibanding teks yang penuh klise AI (R-37). Jika pengguna menyediakan gaya atau karakter suara tertentu, pertahankan karakter tersebut.
-- Delivery Gate di dalam berkas inti tetap menjadi gerbang penentu utama. "Checklist Skill Teks & Copywriting" di akhir file ini adalah suplemen khusus untuk dijalankan bersamaan.
 
 ## Nada & Suara Bicara (Tone & Voice)
 
 ### Kosakata AI Hampa (Empty AI Vocabulary)
 
-- **Pola:** Menumpuk kata kerja dan kata benda abstrak agar terdengar megah tanpa mengatakan substansi nyata: *unlock (buka potensi), elevate (tingkatkan), empower (berdayakan), delve (selami), showcase (tampilkan), testament (bukti nyata), landscape (lanskap abstrak), journey (perjalanan), robust (tangguh), game-changer, next-level, seamless (mulus), cutting-edge (mutakhir), revolutionary (revolusioner)*.
+- **Pola:** Menumpuk kata kerja dan kata benda abstrak agar terdengar megah tanpa mengatakan substansi nyata: *unlock (buka potensi), elevate (tingkatkan), empower (berdayakan), delve (selami), showcase (tampilkan), testament (bukti nyata), landscape (lanskap abstrak), journey (perjalanan), robust (tangguh), game-changer, next-level, seamless (mulus), cutting-edge (mutakhir), revolutionary (revolusioner), harness the power of (manfaatkan kekuatan), foster (pupuk secara klise), paramount (sangat penting), beacon (mercusuar harapan), bespoke (solusi khusus klise), seamlessly integrate (terintegrasi dengan mulus), realm (ranah abstrak), tapestry (rajutan abstrak), navigate the complexities of (menavigasi kompleksitas)*.
 - **Mengapa terbaca khas AI:** Kata-kata ini muncul dengan frekuensi sangat tinggi dalam data pelatihan model AI. Kata-kata tersebut mencerminkan niat untuk memukau alih-alih memberi informasi, dan merupakan cara tercepat mencap suatu halaman sebagai buatan AI sekilas pandang.
 - **Sebelum:**
   > Buka potensi kolaborasi tanpa batas untuk meningkatkan perjalanan tim Anda ke tingkat berikutnya.
@@ -352,17 +351,3 @@ Jalankan alur kerja ini sebelum menyerahkan hasil penulisan:
 2. **Audit:** Ajukan dua pertanyaan kritis dan jawab secara singkat: "Apa hal yang paling membuat tulisan ini tampak seperti buatan AI?" dan "Apakah tulisan ini menyebutkan fakta, nama, angka, tanggal, atau kutipan yang tidak ada di sumber aslinya?" Karangan fiktif adalah cacat fatal meskipun terdengar meyakinkan.
 3. **Final:** Perbaiki teks berdasarkan hasil audit. Periksa kembali apakah ada karakter em dash yang terselip (R-02). Jika masih ada em dash di teks keluaran biasa, draf belum boleh diserahkan.
 
-## Checklist Skill Teks & Copywriting
-
-Jalankan daftar periksa ini bersamaan dengan Delivery Gate inti setiap kali mengerjakan tugas penulisan atau penyuntingan teks. Semua poin wajib terpenuhi:
-
-- [ ] Tidak ada angka statistik rekaan, testimoni karangan, nama orang palsu, tanggal fiktif, atau klaim kosong; semuanya bersumber nyata atau diberi label placeholder yang jelas (R-17, R-18, R-36, R-38)
-- [ ] Kata-kata klise dari daftar Kosakata AI Hampa dan R-16 telah diganti dengan bahasa yang konkret, lugas, dan memiliki bukti nyata
-- [ ] Tidak ada karakter em dash pada teks hasil akhir (R-02); jika sampel suara asli pengguna menggunakannya, hal tersebut telah dikonfirmasikan sesuai protokol R-37
-- [ ] Tidak ada penggunaan tanda petik berlebihan: tanda kutip hanya digunakan pada dialog nyata, sitasi resmi, atau judul karya (R-36)
-- [ ] Tidak ada klausa penekanan berupa HURUF BESAR SEMUA di tengah paragraf: bobot kalimat dibangun melalui susunan kata yang baik (R-36)
-- [ ] Setiap kalimat menyebutkan pelaku tindakannya secara jelas: tidak ada kalimat pasif yang menyembunyikan pelaku tanpa alasan kuat (R-02, R-16)
-- [ ] Tombol CTA (ajakan bertindak) spesifik terhadap tindakan nyata pengguna, bukan kata-kata generik hampa (R-15)
-- [ ] Bebas dari ritme khas AI: tidak ada hukum tiga kata yang dipaksakan, tidak ada paralelisme negatif, tidak ada drama kalimat pendek buatan, tidak ada pepatah klise, dan tidak ada rentang palsu (R-36)
-- [ ] Karakter suara hadir nyata: teks memiliki kepribadian yang jelas (mengikuti gaya pengguna atau nada yang terarah), tidak steril dan tidak hambar (R-37)
-- [ ] Uji baca suara keras: teks terdengar seperti ditulis oleh manusia sungguhan, bukan hasil padding kalimat dari mesin AI
