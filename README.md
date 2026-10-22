@@ -72,7 +72,21 @@ Setiap gambar di bagian ini dapat diklik untuk membuka ukuran penuh.
 
 antislop didistribusikan sebagai kumpulan **skill agen terstandar** (satu folder per skill, memuat berkas `SKILL.md`). Filter inti selalu dimuat; skill lainnya hanya dimuat saat tugas membutuhkannya. Bagian ini adalah referensi lengkap: semua perintah instalasi di satu tempat. [GUIDE.md](GUIDE.md) memandu langkahnya dari awal, dan bagian Pembaruan (*Update*) serta Penghapusan (*Remove*) mencakup setiap metode dengan cara yang sama.
 
-### 1. Pemasang Interaktif CLI (Sangat Direkomendasikan)
+### 1. Pemasang Instan Lokal Windows (`slop.bat`)
+
+Jika Anda bekerja secara lokal di Windows dan ingin memasang antislop langsung ke folder proyek baru tanpa perlu mengetik banyak perintah atau membutuhkan koneksi internet, gunakan skrip batch bawaan:
+
+```cmd
+slop.bat D:\path\ke\folder_proyek_baru
+```
+
+Skrip ini secara instan menyalin:
+- `DESIGN.md`: Standar estetika human-crafted (siku presisi 4px - 6px, kanvas terang ala n8n).
+- `AGENTS.md`: Aturan otomatis AI agent saat membuka proyek terkait.
+- `antislop.md`: Mesin filter inti (38 aturan wajib).
+- `.agents/`: Folder konfigurasi lengkap dengan 7 modul skill terstandar (termasuk modul audit keamanan `antislop-security`).
+
+### 2. Pemasang Interaktif CLI (Lintas Platform)
 
 Cukup satu perintah, lalu jawab pertanyaan yang muncul di terminal. Pemasang akan menanyakan skill tambahan apa yang Anda inginkan, lokasi instalasi (di proyek ini saja atau global di seluruh komputer), dan agen apa saja yang Anda gunakan, lalu menyalin folder yang relevan. Ini juga satu-satunya cara yang secara otomatis menuliskan blok penunjuk agar antislop selalu aktif setiap sesi di level proyek; instalasi global mengandalkan skill yang memuat dirinya sendiri melalui deskripsi metadata.
 
@@ -82,7 +96,7 @@ npx antislop-ai
 
 Untuk memperbarui di kemudian hari, jalankan perintah yang sama dan pilih opsi **Overwrite them** saat menemukan folder yang sudah ada. Lihat [Pembaruan](#pembaruan).
 
-### 2. Direktori Skills (skills.sh)
+### 3. Direktori Skills (skills.sh)
 
 antislop terdaftar di [skills.sh](https://skills.sh/miqdadbadjuber/anti-slop), direktori terbuka untuk skill agen:
 
@@ -92,7 +106,7 @@ npx skills add miqdadbadjuber/anti-slop
 
 Cara ini menyalin folder yang sama seperti metode 1 tanpa menulis blok penunjuk, sehingga antislop dimuat hanya berdasarkan deskripsi skill. [GUIDE.md](GUIDE.md) menjelaskan cara menambahkan blok penunjuk setelahnya.
 
-### 3. Plugin (Claude Code)
+### 4. Plugin (Claude Code)
 
 Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 
@@ -101,7 +115,7 @@ Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 /plugin install antislop@anti-slop
 ```
 
-### 4. Plugin (Antigravity)
+### 5. Plugin (Antigravity)
 
 Repositori ini juga merupakan plugin native untuk Antigravity. Pasang menggunakan Antigravity CLI:
 
@@ -109,7 +123,7 @@ Repositori ini juga merupakan plugin native untuk Antigravity. Pasang menggunaka
 agy plugin install https://github.com/miqdadbadjuber/anti-slop
 ```
 
-### 5. Plugin (Codex)
+### 6. Plugin (Codex)
 
 Repositori ini berfungsi sebagai plugin dan marketplace Codex. Tambahkan marketplace sekali, lalu pasang pluginnya:
 
@@ -118,7 +132,7 @@ codex plugin marketplace add miqdadbadjuber/anti-slop
 codex plugin add antislop@anti-slop
 ```
 
-### 6. Plugin (Cursor)
+### 7. Plugin (Cursor)
 
 Repositori ini adalah plugin Cursor. Tambahkan sebagai marketplace plugin menggunakan Cursor Agent CLI:
 
@@ -128,7 +142,7 @@ agent plugin marketplace add https://github.com/miqdadbadjuber/anti-slop
 
 Kemudian buka menu **Customize** di Cursor, cari **antislop**, dan pilih **Install** (pilih cakupan proyek atau user).
 
-### 7. Plugin (Kimi Code)
+### 8. Plugin (Kimi Code)
 
 Pasang langsung di sesi Kimi Code, lalu buka sesi baru:
 
@@ -136,7 +150,7 @@ Pasang langsung di sesi Kimi Code, lalu buka sesi baru:
 /plugins install https://github.com/miqdadbadjuber/anti-slop
 ```
 
-### 8. Plugin (Cline)
+### 9. Plugin (Cline)
 
 Pasang menggunakan Cline CLI:
 
@@ -144,7 +158,7 @@ Pasang menggunakan Cline CLI:
 cline plugin install https://github.com/miqdadbadjuber/anti-slop.git
 ```
 
-*Catatan:* Dokumentasi resmi Cline saat ini membatasi plugin untuk lingkungan CLI/SDK/Kanban, dan belum berlaku untuk ekstensi editor VS Code/JetBrains. Untuk pengguna ekstensi editor, gunakan metode 1 (Pemasang CLI).
+*Catatan:* Dokumentasi resmi Cline saat ini membatasi plugin untuk lingkungan CLI/SDK/Kanban, dan belum berlaku untuk ekstensi editor VS Code/JetBrains. Untuk pengguna ekstensi editor, gunakan metode 2 (Pemasang CLI).
 
 ### Di Mana Lokasi Skill Disimpan
 
@@ -229,7 +243,7 @@ antislop digunakan dalam salah satu dari dua mode, yang ditentukan di awal sesi:
 
 ## Peta Jalan (Roadmap)
 
-**v3.2.16** adalah rilis saat ini. Riwayat setiap rilis sebelumnya dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
+**v3.3.0** adalah rilis saat ini. Riwayat setiap rilis sebelumnya dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
 
 ## Demo Bergerak (In Motion)
 

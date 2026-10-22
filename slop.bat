@@ -1,7 +1,7 @@
 @echo off
 if "%~1"=="" (
     echo [ERROR] Masukkan folder tujuan proyek.
-    echo Contoh: pasang-ke-project.bat D:\project_yanuar\laravel_bengkel
+    echo Contoh: slop.bat D:\project_yanuar\laravel_bengkel
     exit /b 1
 )
 
