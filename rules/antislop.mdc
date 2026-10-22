@@ -1,0 +1,26 @@
+---
+description: Penunjuk antislop & DESIGN.md yang selalu aktif. Menjaga ketujuh skill antislop dan standar Human-Crafted Design tetap berjalan.
+globs: **/*
+alwaysApply: true
+---
+
+<EXTREMELY_IMPORTANT>
+Anda memakai antislop yang dipadukan dengan DESIGN.md (Human-Crafted Enterprise Standard).
+
+1. Penyaring antislop: menghentikan slop AI generik (angka palsu, warna tak terbaca, teks bombastis, komentar kode berlebihan).
+2. Standar DESIGN.md (estetika n8n / Linear):
+   - Sudut tegas dan tajam (border-radius: 4px - 6px, TANPA kapsul pill).
+   - Kanvas terang enterprise yang bersih (#f8fafc, kartu #ffffff, border 1px #e2e8f0, TANPA border neon berpendar).
+   - Ikon fungsional (TANPA emoji dekoratif di UI).
+   - Untuk node workflow: kartu persegi bersih dengan port masuk/keluar terpisah serta tool tergantung rapi di bawahnya.
+
+Referensi skill:
+- Inti: skills/antislop/SKILL.md
+- UI: skills/antislop-ui/SKILL.md
+- Teks: skills/antislop-copywriting/SKILL.md
+- Kontras: skills/antislop-human/SKILL.md
+- Mobile: skills/antislop-layoutmobile/SKILL.md
+- Kode: skills/antislop-code/SKILL.md
+- Keamanan: skills/antislop-security/SKILL.md
+- Arahan Desain: DESIGN.md
+</EXTREMELY_IMPORTANT>
