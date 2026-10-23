@@ -57,19 +57,17 @@ Skrip ini secara instan menyalin:
 - `antislop.md`: Mesin filter inti (38 aturan wajib).
 - `.agents/`: Folder konfigurasi lengkap dengan 7 modul skill terstandar (termasuk modul audit keamanan `antislop-security`).
 
-Untuk memperbarui di kemudian hari, jalankan perintah yang sama dan pilih opsi **Overwrite them** saat menemukan folder yang sudah ada. Lihat [Pembaruan](#pembaruan).
+### 2. Direktori Skills (skills.sh & GitHub)
 
-### 3. Direktori Skills (skills.sh)
-
-antislop terdaftar di [skills.sh](https://skills.sh/yanuar1997/anti-slop-ai), direktori terbuka untuk skill agen:
+antislop terdaftar di [skills.sh](https://skills.sh/yanuar1997/anti-slop-ai) dan dapat dipasang langsung dari repositori GitHub:
 
 ```bash
 npx skills add yanuar1997/anti-slop-ai
 ```
 
-Cara ini menyalin folder yang sama seperti metode 1 tanpa menulis blok penunjuk, sehingga antislop dimuat hanya berdasarkan deskripsi skill. [GUIDE.md](GUIDE.md) menjelaskan cara menambahkan blok penunjuk setelahnya.
+Cara ini menarik skill resmi berbahasa Indonesia langsung dari repositori GitHub tanpa memerlukan paket tambahan. [GUIDE.md](GUIDE.md) menjelaskan detail opsi konfigurasi lanjutan.
 
-### 4. Plugin (Claude Code)
+### 3. Plugin (Claude Code)
 
 Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 
@@ -78,7 +76,7 @@ Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 /plugin install antislop@anti-slop-ai
 ```
 
-### 5. Plugin (Antigravity)
+### 4. Plugin (Antigravity)
 
 Repositori ini juga merupakan plugin native untuk Antigravity. Pasang menggunakan Antigravity CLI:
 
@@ -86,7 +84,7 @@ Repositori ini juga merupakan plugin native untuk Antigravity. Pasang menggunaka
 agy plugin install https://github.com/yanuar1997/anti-slop-ai
 ```
 
-### 6. Plugin (Codex)
+### 5. Plugin (Codex)
 
 Repositori ini berfungsi sebagai plugin dan marketplace Codex. Tambahkan marketplace sekali, lalu pasang pluginnya:
 
@@ -95,7 +93,7 @@ codex plugin marketplace add yanuar1997/anti-slop-ai
 codex plugin add antislop@anti-slop-ai
 ```
 
-### 7. Plugin (Cursor)
+### 6. Plugin (Cursor)
 
 Repositori ini adalah plugin Cursor. Tambahkan sebagai marketplace plugin menggunakan Cursor Agent CLI:
 
@@ -105,7 +103,7 @@ agent plugin marketplace add https://github.com/yanuar1997/anti-slop-ai
 
 Kemudian buka menu **Customize** di Cursor, cari **antislop**, dan pilih **Install** (pilih cakupan proyek atau user).
 
-### 8. Plugin (Kimi Code)
+### 7. Plugin (Kimi Code)
 
 Pasang langsung di sesi Kimi Code, lalu buka sesi baru:
 
@@ -113,7 +111,7 @@ Pasang langsung di sesi Kimi Code, lalu buka sesi baru:
 /plugins install https://github.com/yanuar1997/anti-slop-ai
 ```
 
-### 9. Plugin (Cline)
+### 8. Plugin (Cline)
 
 Pasang menggunakan Cline CLI:
 
@@ -121,7 +119,7 @@ Pasang menggunakan Cline CLI:
 cline plugin install https://github.com/yanuar1997/anti-slop-ai.git
 ```
 
-*Catatan:* Dokumentasi resmi Cline saat ini membatasi plugin untuk lingkungan CLI/SDK/Kanban, dan belum berlaku untuk ekstensi editor VS Code/JetBrains. Untuk pengguna ekstensi editor, gunakan metode 2 (Pemasang CLI).
+*Catatan:* Dokumentasi resmi Cline saat ini membatasi plugin untuk lingkungan CLI/SDK/Kanban, dan belum berlaku untuk ekstensi editor VS Code/JetBrains. Untuk pengguna ekstensi editor, gunakan metode 1 (`slop.bat`) atau metode 2 (Direktori Skills GitHub).
 
 ### Di Mana Lokasi Skill Disimpan
 
@@ -153,18 +151,16 @@ curl -o antislop.md https://raw.githubusercontent.com/yanuar1997/anti-slop-ai/ma
 
 ## Pembaruan (Update)
 
-antislop tidak memperbarui dirinya sendiri secara otomatis di latar belakang. Jika Anda memasang lewat CLI atau direktori skill, cukup jalankan satu perintah untuk memperbarui seluruh folder lokal proyek dan global:
+antislop tidak memperbarui dirinya sendiri secara otomatis di latar belakang. Untuk memperbarui skill ke versi terbaru dari GitHub, jalankan perintah berikut di proyek Anda:
 
 ```bash
-npx antislop-ai --update
+npx skills add yanuar1997/anti-slop-ai
 ```
-
-Perintah ini akan mencetak versi yang digantikan di samping versi terbaru yang ditulis.
 
 | Metode | Perintah Pembaruan |
 |--------|--------------------|
-| Pemasang CLI | `npx antislop-ai`, lalu pilih **Overwrite them**. |
-| Direktori skills.sh | `npx skills add yanuar1997/anti-slop-ai` |
+| Direktori skills.sh & GitHub | `npx skills add yanuar1997/anti-slop-ai` |
+| Skrip Lokal Windows | Jalankan kembali `slop.bat D:\path\ke\folder_proyek` |
 | Plugin Claude Code | `claude plugin update antislop@anti-slop-ai` |
 | Plugin Antigravity | `agy plugin install https://github.com/yanuar1997/anti-slop-ai` |
 | Plugin Codex | `codex plugin marketplace upgrade anti-slop-ai` |
@@ -215,7 +211,7 @@ Bukan, melainkan sebuah **penyaring (filter)**. antislop tidak mendikte palet wa
 
 ### Agen AI apa saja yang didukung?
 Semua agen AI coding modern, melalui metode berikut:
-- **Pemasang CLI dan direktori skills:** Mendukung Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, dan Kimi Code.
+- **Direktori skills (GitHub) dan skrip lokal:** Mendukung Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, dan Kimi Code.
 - **Plugin native:** Tersedia untuk Claude Code, Antigravity, Codex, Cursor, Kimi Code, dan Cline dari repositori ini.
 - **Berkas tunggal (`antislop.md`):** Berfungsi pada agen AI apa pun yang dapat membaca teks Markdown polos, termasuk jendela chat browser atau aplikasi ponsel.
 
