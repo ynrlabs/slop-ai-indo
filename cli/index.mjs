@@ -81,7 +81,7 @@ async function main() {
   // Without a terminal the prompts read EOF at once: the run printed the banner, installed
   // nothing, and still exited 0, so a script around it saw success. Fail loudly instead.
   if (!process.stdin.isTTY) {
-    console.error('antislop: this installer needs a terminal. Run `npx antislop-ai` in an interactive shell.')
+    console.error('antislop: this installer needs a terminal. Run it in an interactive shell.')
     process.exit(1)
   }
 

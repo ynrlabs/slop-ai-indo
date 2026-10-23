@@ -46,7 +46,7 @@ Jika tidak ada blok penunjuk antislop dan berkas ini sedang dibaca untuk pertama
    - Komentar kode: `skills/antislop-code/SKILL.md`
    - Audit keamanan: `skills/antislop-security/SKILL.md`
    Sebelum mulai, tanyakan pengguna kapan antislop diterapkan: selama pengerjaan, atau setelah selesai.
-   Untuk memperbarui antislop nanti: unduh ulang `antislop.md`, atau jalankan `npx antislop-ai --update` jika terpasang sebagai folder skill.
+   Untuk memperbarui antislop nanti: unduh ulang `antislop.md`, jalankan `slop.bat`, atau jalankan `npx skills add yanuar1997/anti-slop-ai`.
    <!-- antislop:end -->
    ```
 6. **Tanyakan pertanyaan mode penggunaan** (lihat "Dua Mode Penggunaan"), lalu lanjutkan pekerjaan.
@@ -55,9 +55,9 @@ Jika tidak ada blok penunjuk antislop dan berkas ini sedang dibaca untuk pertama
 
 ### Jika Sudah Terpasang, dan Pengguna Bertanya Cara Memperbarui
 
-antislop tidak pernah memperbarui dirinya sendiri secara otomatis di latar belakang. Jawab berdasarkan metode instalasi yang digunakan pengguna. Jalankan `npx antislop-ai --update` sebagai jalur tercepat: perintah ini memperbarui setiap folder antislop di tingkat proyek maupun global.
+antislop tidak pernah memperbarui dirinya sendiri secara otomatis di latar belakang. Jawab berdasarkan metode instalasi yang digunakan pengguna. Jalankan `npx skills add yanuar1997/anti-slop-ai` atau jalankan kembali `slop.bat` sebagai jalur tercepat: perintah ini memperbarui setiap folder antislop di tingkat proyek.
 
-- **Pemasang CLI (`npx antislop-ai`):** jalankan kembali, jawab pertanyaan seperti sebelumnya, lalu pilih **Overwrite them**.
+- **Pemasang Skrip Lokal Windows (`slop.bat` / `slop.ps1`):** jalankan kembali di folder proyek Anda.
 - **Direktori skills (`npx skills add yanuar1997/anti-slop-ai`):** jalankan perintah yang sama kembali.
 - **Pintu Plugin Native:** diperbarui melalui perintah bawaan agen masing-masing:
   - **Claude Code**: `claude plugin update antislop@anti-slop-ai`

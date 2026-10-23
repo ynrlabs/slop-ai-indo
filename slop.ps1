@@ -1,12 +1,10 @@
-﻿param (
+param (
     [Parameter(Mandatory=$false)]
-    [string]$TargetFolder
+    [string]$TargetFolder = "."
 )
 
-if (-not $TargetFolder) {
-    Write-Host "[ERROR] Masukkan folder tujuan proyek." -ForegroundColor Red
-    Write-Host "Contoh: .\pasang-ke-project.ps1 D:\project_yanuar\laravel_bengkel" -ForegroundColor Yellow
-    exit 1
+if ($TargetFolder -eq ".") {
+    $TargetFolder = (Get-Location).Path
 }
 
 if (-not (Test-Path $TargetFolder)) {

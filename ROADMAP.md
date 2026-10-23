@@ -10,7 +10,7 @@ Rilis terbaru saat ini adalah **v3.2.16**. antislop adalah **sistem terpaket**: 
 
 - **Filter Inti: 38 Aturan** terbagi dalam tiga tingkatan (*Hard Gate*, *Purpose-Gate*, *Quality Locks*), sebuah *Liveliness Toolkit*, *Delivery Gate* mandatori, dan dua mode penggunaan (*During / After*). Jumlah aturan ini dipertahankan sejak v2.2 dan tingkatannya tidak digeser, namun rincian aturan terus diasah dan disempurnakan seiring waktu. Berkas tunggal `antislop.md` tetap menjadi filter lengkap yang dapat Anda salin langsung ke jendela chat apa pun; wizard instalasi di dalamnya berfungsi sebagai jalur pemasangan manual.
 - **Tujuh Skill Terstandar:** `antislop` (inti), ditambah `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, `antislop-code`, dan `antislop-security`. Setiap skill hanya dimuat saat tugas memerlukannya.
-- **Distribusi Multi-Pintu:** Tujuh jalur instalasi dari satu repositori tunggal, dan alat pemeriksa kontras juga disediakan sebagai kakas MCP di dalam plugin. Jalur-jalur tersebut meliputi pemasang CLI interaktif (`npx antislop-ai`), direktori skills.sh, dan plugin native untuk Claude Code, Antigravity, Codex, Cursor, dan Kimi Code.
+- **Distribusi Multi-Pintu:** Tujuh jalur instalasi dari satu repositori tunggal, dan alat pemeriksa kontras juga disediakan sebagai kakas MCP di dalam plugin. Jalur-jalur tersebut meliputi skrip pemasang lokal (`slop.bat` / `slop.ps1`), direktori skills.sh, dan plugin native untuk Claude Code, Antigravity, Codex, Cursor, dan Kimi Code.
 - **Folder Bersama (.agents/skills/):** Antigravity membacanya secara default, Hermes memperlakukannya sebagai tier proyek di samping `.hermes/skills/`, dan Copilot, OpenCode, Codex, serta Kimi Code membacanya sebagai salah satu root pencarian. Pemasang menuliskan jalur resmi yang terdokumentasi untuk setiap agen sehingga instalasi selalu konsisten.
 
 ---
@@ -31,7 +31,7 @@ Penomoran versi hingga v3.0.0 mengikuti satu prinsip sederhana agar setiap fokus
 | **v2.4.1** | Penambahan `GUIDE.md`: panduan bahasa lugas bagi pengguna baru antislop. |
 | **v2.4.2** | Perbaikan polaritas checklist skill (#9) dan pembersihan dokumentasi. |
 | **v2.5.0** | Penambahan `antislop-layoutmobile` (tata letak responsif HP ke desktop). |
-| **v3.0.0** | Pemaketan sistem skill/plugin: folder `skills/`, dua pintu distribusi, CLI installer (`npx antislop-ai`), pemeriksa kontras sebagai tool MCP, lisensi MIT. |
+| **v3.0.0** | Pemaketan sistem skill/plugin: folder `skills/`, dua pintu distribusi, skrip installer lokal (`slop.bat`), pemeriksa kontras sebagai tool MCP, lisensi MIT. |
 | **v3.0.1** | Perbaikan Snyk W012 (tanpa curl di runtime pada modul terpaket), kejelasan dokumentasi. |
 | **v3.0.2** | Penyesuaian launcher python adaptif (`python3` di macOS/Linux, `python` di Windows). |
 | **v3.1.0** | Penambahan `antislop-code` (pembersihan komentar kode klise AI); pola Data Pengisi dan Emoji Dekoratif. |
@@ -54,7 +54,7 @@ Penomoran versi hingga v3.0.0 mengikuti satu prinsip sederhana agar setiap fokus
 | **v3.2.13** | Penamaan versi otomatis pada disk (`skills/antislop/VERSION`) sehingga agen dan CLI dapat membaca versi yang terpasang secara pasti. Perbaikan parser pemisah markdown code-fence. |
 | **v3.2.14** | Pintu integrasi Cline: konfigurasi root `package.json` untuk `cline plugin install`. |
 | **v3.2.15** | Integrasi Amp: pembacaan direktori `.agents/skills/` level proyek dan `~/.config/agents/skills/` level pengguna. |
-| **v3.2.16** | Fitur `npx antislop-ai --update` otomatis untuk seluruh instalasi lokal dan global. Deteksi status plugin lokal (Claude, Codex, Antigravity, Cursor) dengan petunjuk perintah pembaruan presisi. |
+| **v3.2.16** | Fitur pembaruan otomatis untuk seluruh instalasi lokal dan global. Deteksi status plugin lokal (Claude, Codex, Antigravity, Cursor) dengan petunjuk perintah pembaruan presisi. |
 | **v3.3.0** | **Rilis Saat Ini.** Integrasi modul skill `antislop-security` (audit keamanan menyeluruh, source-first hunting, verifikasi sandbox aman, skema ledger & temuan). |
 
 ---

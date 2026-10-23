@@ -16,7 +16,7 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Anti-Slop**, alur integr
 |                          LAYER 1: ENTRY & DISCOVERY                             |
 |  - Pointer Blocks: AGENTS.md, CLAUDE.md, GEMINI.md, .mdc rules                  |
 |  - Plugin Doors: Antigravity, Cursor, Claude Code, Cline, Codex, Kimi           |
-|  - Interactive CLI: npx antislop-ai (--update / install)                        |
+|  - Installer Scripts: slop.bat, slop.ps1, install.ps1, npx skills               |
 +---------------------------------------------------------------------------------+
                                          |
                                          v

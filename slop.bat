@@ -1,11 +1,7 @@
 @echo off
-if "%~1"=="" (
-    echo [ERROR] Masukkan folder tujuan proyek.
-    echo Contoh: slop.bat D:\project_yanuar\laravel_bengkel
-    exit /b 1
-)
-
-set TARGET=%~1
+set "TARGET=%~1"
+if "%TARGET%"=="" set "TARGET=%CD%"
+if "%TARGET%"=="." set "TARGET=%CD%"
 
 if not exist "%TARGET%" (
     echo [ERROR] Folder "%TARGET%" tidak ditemukan.

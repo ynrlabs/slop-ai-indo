@@ -38,8 +38,8 @@ Ada empat jalur pemasangan, dan perbedaan di antara keduanya lebih penting darip
 
 | Jalur | Apa yang Dilakukannya | Agen yang Didukung |
 |-------|-----------------------|--------------------|
-| **Pemasang CLI (The installer)** | Menyalin folder skill ke dalam proyek Anda atau folder home pengguna | Sebelas agen, tanpa setup rumit selain terminal |
-| **Direktori skills.sh** | Menyalin folder yang sama menggunakan alat skills.sh | Agen yang didukung oleh direktori tersebut |
+| **Pemasang Instan Lokal (`slop.bat`)** | Menyalin 1 paket lengkap (AGENTS.md, DESIGN.md, antislop.md, dan skill) | Seluruh agen yang mendukung standar .agents/skills |
+| **Direktori skills.sh & GitHub** | Menyalin folder skill langsung dari GitHub | Agen yang didukung oleh direktori tersebut |
 | **Plugin Native (Plugin doors)** | Memuat antislop langsung dari repositori ini tanpa menyalin berkas ke proyek | Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline |
 | **Berkas Tunggal (The single file)** | Satu berkas Markdown yang Anda berikan ke AI apa pun | Apa pun yang dapat membaca teks, termasuk jendela chat HP |
 
@@ -47,8 +47,8 @@ Pilihlah salah satu. Semuanya memuat aturan yang sama persis, sehingga menambahk
 
 ### Jalur Mana yang Harus Saya Pilih?
 
-- **Pemasang CLI:** Pilih ini jika Anda ingin antislop di satu proyek atau global di seluruh komputer, dan Anda menggunakan salah satu dari 11 agen coding. Ini adalah satu-satunya jalur yang mencakup OpenCode, Cline, Amp, Gemini CLI, Hermes, dan GitHub Copilot, serta satu-satunya yang mendeteksi agen Anda secara otomatis.
-- **Direktori skills.sh:** Pilih ini jika Anda sudah terbiasa menggunakan alat `skills.sh` dan menginginkan folder skill tanpa melalui pertanyaan-pertanyaan interaktif pemasang.
+- **Pemasang Instan Lokal (`slop.bat` / `slop.ps1`):** Pilihan paling cepat dan lengkap jika Anda bekerja di Windows secara lokal. Secara otomatis menyalin file aturan inti, desain, dan seluruh modul skill tanpa butuh koneksi internet.
+- **Direktori skills.sh & GitHub:** Pilih ini jika Anda ingin menarik modul skill langsung dari repositori GitHub menggunakan `npx skills add yanuar1997/anti-slop-ai`.
 - **Plugin Native:** Pilih ini jika Anda menggunakan Claude Code, Antigravity, Codex, Cursor, Kimi Code, atau Cline dan lebih suka tidak menyimpan salinan berkas di dalam proyek Anda. Anda memperbaruinya langsung melalui perintah pembaruan plugin milik agen terkait.
 - **Berkas Tunggal:** Pilih ini jika Anda tidak memiliki akses terminal, atau ingin menggunakan antislop di jendela chat browser (ChatGPT web, Claude web) atau di ponsel.
 
@@ -71,42 +71,31 @@ Jika Anda melihat keluaran seperti `v22.11.0`, komputer Anda sudah siap. Jika mu
 
 ---
 
-### 1. Pemasang CLI (The Installer)
+### 1. Pemasang Instan Lokal (`slop.bat` / `slop.ps1`)
 
-Menyalin folder skill ke folder yang Anda pilih. Pada instalasi level proyek, pemasang ini juga secara otomatis menuliskan blok penunjuk (*pointer*) yang memuat ulang antislop di setiap sesi baru.
+Menyalin 1 paket lengkap: `AGENTS.md`, `DESIGN.md`, `antislop.md`, dan folder `.agents/skills` langsung ke folder proyek Anda.
 
 **Langkah 1. Masuk ke folder proyek Anda.**
-Terminal biasanya dimulai di folder home Anda, jadi arahkan ke lokasi proyek Anda:
+Buka terminal dan arahkan ke lokasi proyek yang ingin Anda pasangi antislop:
 
 ```bash
-cd ~/projects/my-site
+cd D:\project_yanuar\nama_proyek_baru
 ```
 
-Gunakan jalur nyata Anda. Di Windows, contohnya seperti `cd C:\Users\NamaAnda\projects\my-site`. Jika tidak ingin mengetik manual, ketik `cd ` (beri spasi), lalu seret (*drag and drop*) folder proyek Anda dari File Explorer ke jendela terminal.
+**Langkah 2. Jalankan skrip pemasang.**
 
-Ketik `ls` (macOS/Linux) atau `dir` (Windows) untuk memastikan Anda sudah berada di dalam folder proyek yang benar.
-
-**Langkah 2. Jalankan pemasang.**
-
-```bash
-npx antislop-ai
+```cmd
+D:\project_yanuar\anti-slop\slop.bat
 ```
 
-Eksekusi pertama kali akan mengunduh antislop sementara, beri waktu beberapa detik.
+*(Atau jika menggunakan PowerShell: `powershell -File D:\project_yanuar\anti-slop\slop.ps1`)*
 
-**Langkah 3. Jawab empat pertanyaan interaktif.**
-Gunakan tombol panah untuk berpindah opsi, Spasi untuk memilih, dan Enter untuk mengonfirmasi:
-- **Extra skills to install (Skill tambahan yang ingin dipasang):** Filter inti selalu terpasang otomatis. Pilih skill tambahan yang sesuai dengan kebutuhan Anda, atau lewati jika hanya butuh inti.
-- **Install location (Lokasi instalasi):** *This project* memasang ke folder proyek yang sedang dibuka dan menambahkan blok penunjuk ke file inisialisasi agen. *Everywhere* memasang secara global ke folder home pengguna tanpa blok penunjuk. Untuk pertama kali, pilih *This project*.
-- **Which agent(s) (Agen mana yang Anda pakai):** Pemasang akan otomatis menandai agen yang terdeteksi di proyek Anda. Pastikan agen Anda terpilih.
-- **Install N skill(s) now?** Pilih Yes.
-
-**Langkah 4. Periksa ringkasan yang dicetak.**
+**Langkah 3. Periksa ringkasan yang dicetak.**
 
 ```
-◇ Installed 2 skill(s) into 1 agent folder(s).
-│ Pointer written to AGENTS.md
-antislop is ready. The next agent session loads it.
+Memasang Anti-Slop + DESIGN.md (Human-Crafted Standard) ke: D:\project_yanuar\nama_proyek_baru
+[SUKSES] Anti-Slop & DESIGN.md berhasil dipasang!
+AI agent kini otomatis menggunakan standar Human-Crafted.
 ```
 
 **Langkah 5. Mulai sesi agen yang baru.**
@@ -126,7 +115,7 @@ npx skills add yanuar1997/anti-slop-ai
 
 Gunakan bendera `--all` untuk memasang semua skill, `-g` untuk instalasi global, atau `--skill <nama>` untuk satu skill spesifik. Jalankan `--list` terlebih dahulu untuk melihat daftar skill yang tersedia.
 
-Metode ini tidak menuliskan blok penunjuk ke file inisialisasi agen. Jika Anda ingin menambahkan blok penunjuk setelahnya, jalankan `npx antislop-ai`, pilih skill dan agen yang sama, lalu pilih opsi **Keep what is there** saat sistem mendeteksi folder sudah ada.
+Metode ini menyalin modul skill langsung dari GitHub ke `.agents/skills/`. Jika Anda ingin paket lengkap dengan `AGENTS.md` dan `DESIGN.md`, jalankan `slop.bat` di folder proyek Anda.
 
 ---
 
@@ -188,7 +177,7 @@ Plugin Cline dipasang melalui CLI:
 cline plugin install https://github.com/yanuar1997/anti-slop-ai.git
 ```
 
-*Perhatian:* Dokumentasi resmi Cline saat ini membatasi plugin hanya untuk SDK, CLI, dan Kanban, dan menyatakan bahwa fitur plugin belum berlaku untuk ekstensi VS Code dan JetBrains. Jika Anda menggunakan Cline di dalam ekstensi editor kode, gunakan metode 1 (Pemasang CLI `npx antislop-ai`).
+*Perhatian:* Dokumentasi resmi Cline saat ini membatasi plugin hanya untuk SDK, CLI, dan Kanban, dan menyatakan bahwa fitur plugin belum berlaku untuk ekstensi VS Code dan JetBrains. Jika Anda menggunakan Cline di dalam ekstensi editor kode, gunakan metode 1 (`slop.bat`) atau metode 2 (Direktori Skills).
 
 ---
 
@@ -235,13 +224,15 @@ Dua tempat selalu memuat versi terkini: [halaman rilis GitHub](https://github.co
 **Versi berapa yang sedang terpasang di komputer Anda?**
 Folder `antislop` yang terpasang memuat file `VERSION`. Anda dapat membukanya langsung, atau bertanya pada agen Anda: *"Versi antislop berapa yang sedang terpasang?"*.
 
-### Satu Perintah untuk Kedua Rute Berkas
+### Perintah Pembaruan Cepat
 
-Pemasang CLI dan direktori skills.sh menulis file yang sama ke folder yang sama. Perintah berikut memperbarui keduanya secara otomatis tanpa perlu menjawab pertanyaan:
+Untuk memperbarui skill ke versi terbaru dari GitHub, jalankan perintah berikut di folder proyek Anda:
 
 ```bash
-npx antislop-ai --update
+npx skills add yanuar1997/anti-slop-ai
 ```
+
+Atau jika menggunakan installer lokal Windows, jalankan kembali `slop.bat` di folder proyek Anda.
 
 Perintah ini akan mencari di proyek saat ini dan folder home pengguna, memperbarui setiap folder antislop yang ditemukan, mempertahankan pilihan skill yang sebelumnya sudah dipasang, dan mencetak nomor versi yang diperbarui.
 

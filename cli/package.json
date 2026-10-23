@@ -1,10 +1,10 @@
 {
-  "name": "antislop-ai",
-  "version": "3.2.16",
-  "description": "Interactive installer for the antislop skills. Anti Slop: Rules for AI Coding Agents.",
+  "name": "slop-ai-indo",
+  "version": "1.0.0",
+  "description": "Interactive installer for antislop skills and design standards (Bahasa Indonesia).",
   "type": "module",
   "bin": {
-    "antislop-ai": "index.mjs"
+    "slop-ai-indo": "index.mjs"
   },
   "license": "MIT",
   "author": "Yanuar (yanuar1997)",
@@ -15,10 +15,12 @@
   },
   "keywords": [
     "ai-slop",
+    "anti-slop",
     "design-rules",
     "copy-rules",
     "agent-skills",
     "ui",
+    "indonesia",
     "accessibility"
   ],
   "engines": {
@@ -27,7 +29,9 @@
   "files": [
     "index.mjs",
     "lib/",
-    "skills/"
+    "skills/",
+    "DESIGN.md",
+    "antislop.md"
   ],
   "scripts": {
     "test": "node scripts/smoke-test.mjs",

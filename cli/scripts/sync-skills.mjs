@@ -48,5 +48,9 @@ if (fs.existsSync(agentsSkills)) {
   })
 }
 
+// Copy DESIGN.md and antislop.md into cli/ for npm package distribution
+fs.copyFileSync(path.join(repoRoot, 'DESIGN.md'), path.join(__dirname, '..', 'DESIGN.md'))
+fs.copyFileSync(path.join(repoRoot, 'antislop.md'), path.join(__dirname, '..', 'antislop.md'))
+
 console.log(`Regenerated skills/antislop/SKILL.md and VERSION (${version}) and synced to cli/skills/ & .agents/skills/`)
 

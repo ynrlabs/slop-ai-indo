@@ -252,7 +252,7 @@ function pointerBlock(skills) {
     'For UI, copy, people, mobile layout, or code comments work, load the antislop skill for the task:',
     ...skills.filter((s) => SKILL_LINES[s]).map((s) => `- ${SKILL_LINES[s]}`),
     'Before starting, ask the user when antislop applies: during the work, or after it is done.',
-    'To update antislop later: `npx antislop-ai --update`, or run `npx antislop-ai` and pick Overwrite them.',
+    'To update antislop later: run `npx skills add yanuar1997/anti-slop-ai` or `slop.bat`.',
     POINTER_END,
   ]
 }
@@ -331,6 +331,16 @@ export function updatePointers({ targets, skills }) {
   const entries = new Set()
   for (const t of targets) {
     if (fs.existsSync(path.join(t.path, CORE))) for (const a of t.agents) entries.add(a.entry)
+  }
+
+  // Copy DESIGN.md and antislop.md into current project if bundled
+  const bundledDesign = path.join(__dirname, '..', 'DESIGN.md')
+  if (fs.existsSync(bundledDesign)) {
+    fs.copyFileSync(bundledDesign, path.join(process.cwd(), 'DESIGN.md'))
+  }
+  const bundledAntislop = path.join(__dirname, '..', 'antislop.md')
+  if (fs.existsSync(bundledAntislop)) {
+    fs.copyFileSync(bundledAntislop, path.join(process.cwd(), 'antislop.md'))
   }
 
   const block = pointerBlock(skills)
