@@ -18,23 +18,6 @@ Filter inti mencegah kode murahan (*slop*) tetapi tidak menciptakan arah gaya. `
 
 Instruksi yang sama, halaman yang sama, digenerasi empat kali. antislop memfilter; `DESIGN.md` memberikan arah visual. Keduanya adalah dua tugas yang berbeda, dan ini adalah empat hasilnya. Bagian teks dan kode disajikan sebagai pasangan sebelum-dan-sesudah, karena tidak memerlukan arahan gaya visual tambahan.
 
-### UI
-
-Tiga dari empat hasil generasi. Yang pertama tanpa kedua alat sama sekali, yang kedua hanya dengan antislop, yang ketiga hanya dengan `DESIGN.md`.
-
-| **Tanpa Alat Sama Sekali** | **Hanya antislop** | **Hanya `DESIGN.md`** |
-|:--|:--|:--|
-| <a href="assets/compare/ui/without.webp"><img src="assets/compare/ui/without.webp" alt="Landing page generik: logo bintang berkilau, badge NEXT-GEN AI 2.0 lonjong di atas judul, dan terminal palsu dengan latensi 0.0001ms" width="100%"></a> | <a href="assets/compare/ui/w-antislop.webp"><img src="assets/compare/ui/w-antislop.webp" alt="Halaman yang sama dengan antislop: teks jujur pada tata letak gelap tertata rapi dengan satu warna aksen" width="100%"></a> | <a href="assets/compare/ui/w-design.webp"><img src="assets/compare/ui/w-design.webp" alt="Halaman yang sama hanya dengan DESIGN.md: hero fotografis, tetapi kartu statistik masih menampilkan 10,000% ROI Synergy Multiplier dan rating 5.0 dari 500,000 pendiri" width="100%"></a> |
-| Tempat awal kebanyakan output AI: logo bintang berkilau, badge kapsul beta, dan jendela terminal rekaan. | Jujur, karena filter membuang angka-angka buatan. Sederhana, karena mempercantik bukan tugas filter. | Arah desain tercapai, tetapi slop tetap ada, karena `DESIGN.md` mengarahkan gaya dan tidak memfilter. |
-
-Hasil keempat menggunakan keduanya, dan merupakan satu-satunya dari keempatnya yang bersih sekaligus terarah secara bersamaan:
-
-| **antislop + `DESIGN.md`** |
-|:--|
-| <a href="assets/compare/ui/w-all.webp"><img src="assets/compare/ui/w-all.webp" alt="Halaman yang sama dengan antislop dan DESIGN.md: hero ilustrasi penuh dengan judul yang jujur dan navigasi spesifik proyek" width="100%"></a> |
-| Angka yang jujur dan arah visual nyata dalam satu hasil pengerjaan. Filter membuang apa yang seharusnya tidak ada; `DESIGN.md` mengisi ruang yang ditinggalkan, sesuatu yang tidak dapat dilakukan oleh salah satunya sendirian. |
-
----
 
 ### Teks & Tulisan (*Copy*)
 
@@ -256,17 +239,3 @@ Dikembangkan dan dirawat oleh [Yanuar (yanuar1997)](https://github.com/yanuar199
     <img src="https://contrib.rocks/image?repo=yanuar1997/anti-slop-ai" alt="kontributor antislop" />
   </a>
 </p>
-
-Menemukan pola slop AI yang baru, aturan yang kurang mencakup kasus tertentu, atau bug pada installer? Silakan buka [issue](https://github.com/yanuar1997/anti-slop-ai/issues). Pull Request (PR) sangat disambut untuk penambahan pola baru, klarifikasi aturan, atau perbaikan checklist.
-
----
-
-<p align="center"><em>“antislop adalah filter, bukan keajaiban instan.<br>
-Ia membersihkan kode murahan dari UI, teks, dan kode Anda.<br>
-UI yang indah dan berkelas adalah tugas <code>DESIGN.md</code>, dan tugas Anda.”</em></p>
-
----
-
-## Lisensi
-
-Didistribusikan di bawah lisensi MIT: [LICENSE](LICENSE)
