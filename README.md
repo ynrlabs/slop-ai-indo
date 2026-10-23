@@ -57,14 +57,6 @@ Skrip ini secara instan menyalin:
 - `antislop.md`: Mesin filter inti (38 aturan wajib).
 - `.agents/`: Folder konfigurasi lengkap dengan 7 modul skill terstandar (termasuk modul audit keamanan `antislop-security`).
 
-### 2. Pemasang Interaktif CLI (Lintas Platform)
-
-Cukup satu perintah, lalu jawab pertanyaan yang muncul di terminal. Pemasang akan menanyakan skill tambahan apa yang Anda inginkan, lokasi instalasi (di proyek ini saja atau global di seluruh komputer), dan agen apa saja yang Anda gunakan, lalu menyalin folder yang relevan. Ini juga satu-satunya cara yang secara otomatis menuliskan blok penunjuk agar antislop selalu aktif setiap sesi di level proyek; instalasi global mengandalkan skill yang memuat dirinya sendiri melalui deskripsi metadata.
-
-```bash
-npx antislop-ai
-```
-
 Untuk memperbarui di kemudian hari, jalankan perintah yang sama dan pilih opsi **Overwrite them** saat menemukan folder yang sudah ada. Lihat [Pembaruan](#pembaruan).
 
 ### 3. Direktori Skills (skills.sh)
