@@ -1,9 +1,9 @@
 {
-  "name": "antislop",
-  "version": "3.2.16",
+  "name": "slop-ai-indo",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Anti Slop: Rules for AI Coding Agents.",
+  "description": "Slop AI Indo: Aturan Anti-Slop & Standar Human-Crafted untuk AI Coding Agents.",
   "license": "MIT",
   "cline": {
     "plugins": [

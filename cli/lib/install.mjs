@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-export const CORE = 'antislop'
+export const CORE = 'slop-ai-indo'
 
 export const VERSION = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')).version
 
@@ -141,24 +141,27 @@ export const PLUGIN_DOORS = [
   {
     id: 'claude',
     label: 'Claude Code',
-    update: 'claude plugin update antislop@anti-slop',
+    update: 'claude plugin update antislop@slop-ai-indo',
     find() {
-      const entry = readJSON(claudePlugins())?.plugins?.['antislop@anti-slop']?.[0]
+      const plugins = readJSON(claudePlugins())?.plugins
+      const entry = plugins?.['antislop@slop-ai-indo']?.[0] ?? plugins?.['antislop@anti-slop']?.[0]
       return entry ? { path: entry.installPath ?? claudePlugins(), version: entry.version ?? null } : null
     },
   },
   {
     id: 'antigravity',
     label: 'Antigravity',
-    update: 'agy plugin install https://github.com/yanuar1997/anti-slop-ai',
+    update: 'agy plugin install https://github.com/yanuar1997/slop-ai-indo',
     find: () => findClone(path.join(os.homedir(), '.gemini', 'config', 'plugins', CORE)),
   },
   {
     id: 'codex',
     label: 'Codex',
-    update: 'codex plugin marketplace upgrade anti-slop-ai',
+    update: 'codex plugin marketplace upgrade slop-ai-indo',
     find() {
-      const cache = path.join(os.homedir(), '.codex', 'plugins', 'cache', 'anti-slop', CORE)
+      const cacheNew = path.join(os.homedir(), '.codex', 'plugins', 'cache', 'slop-ai-indo', CORE)
+      const cacheOld = path.join(os.homedir(), '.codex', 'plugins', 'cache', 'anti-slop', CORE)
+      const cache = fs.existsSync(cacheNew) ? cacheNew : cacheOld
       const versions = listDirs(cache).sort()
       return versions.length ? { path: cache, version: versions[versions.length - 1] } : null
     },
@@ -166,8 +169,10 @@ export const PLUGIN_DOORS = [
   {
     id: 'cursor',
     label: 'Cursor',
-    update: 'agent plugin marketplace update https://github.com/yanuar1997/anti-slop-ai',
-    find: () => findClone(path.join(os.homedir(), '.cursor', 'plugins', 'local', 'anti-slop')),
+    update: 'agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo',
+    find: () =>
+      findClone(path.join(os.homedir(), '.cursor', 'plugins', 'local', 'slop-ai-indo')) ??
+      findClone(path.join(os.homedir(), '.cursor', 'plugins', 'local', 'anti-slop')),
   },
 ]
 
@@ -213,7 +218,7 @@ function copyDir(src, dest) {
 export function installSkills({ skills, targets, overwrite = false }) {
   const source = skillSourceDir()
   // Fail with the real reason instead of a TypeError from path.join(null, skill).
-  if (!source) throw new Error('Could not find the antislop skills. Reinstall the antislop package.')
+  if (!source) throw new Error('Could not find the slop-ai-indo skills. Reinstall the slop-ai-indo package.')
   const written = []
   for (const t of targets) {
     for (const skill of skills) {
@@ -232,13 +237,13 @@ const POINTER_START = '<!-- antislop:start -->'
 const POINTER_END = '<!-- antislop:end -->'
 
 const SKILL_LINES = {
-  [CORE]: 'Core filter, always on: `antislop`',
-  'antislop-ui': 'UI / visual: `antislop-ui`',
-  'antislop-copywriting': 'Copy & text: `antislop-copywriting`',
-  'antislop-human': 'People: `antislop-human`',
-  'antislop-layoutmobile': 'Mobile / responsive: `antislop-layoutmobile`',
-  'antislop-code': 'Code comments: `antislop-code`',
-  'antislop-security': 'Security audit: `antislop-security`',
+  [CORE]: 'Core filter, always on: `slop-ai-indo`',
+  'slop-ai-indo-ui': 'UI / visual: `slop-ai-indo-ui`',
+  'slop-ai-indo-copywriting': 'Copy & text: `slop-ai-indo-copywriting`',
+  'slop-ai-indo-human': 'People: `slop-ai-indo-human`',
+  'slop-ai-indo-layoutmobile': 'Mobile / responsive: `slop-ai-indo-layoutmobile`',
+  'slop-ai-indo-code': 'Code comments: `slop-ai-indo-code`',
+  'slop-ai-indo-security': 'Security audit: `slop-ai-indo-security`',
 }
 
 export const SKILL_NAMES = Object.keys(SKILL_LINES)
@@ -248,11 +253,11 @@ export const SKILL_NAMES = Object.keys(SKILL_LINES)
 function pointerBlock(skills) {
   return [
     POINTER_START,
-    '## antislop',
-    'For UI, copy, people, mobile layout, or code comments work, load the antislop skill for the task:',
+    '## slop-ai-indo',
+    'For UI, copy, people, mobile layout, or code comments work, load the slop-ai-indo skill for the task:',
     ...skills.filter((s) => SKILL_LINES[s]).map((s) => `- ${SKILL_LINES[s]}`),
-    'Before starting, ask the user when antislop applies: during the work, or after it is done.',
-    'To update antislop later: run `npx skills add yanuar1997/anti-slop-ai` or `slop.bat`.',
+    'Before starting, ask the user when slop-ai-indo applies: during the work, or after it is done.',
+    'To update slop-ai-indo later: run `npx slop-ai-indo` or `slop.bat`.',
     POINTER_END,
   ]
 }
@@ -333,14 +338,14 @@ export function updatePointers({ targets, skills }) {
     if (fs.existsSync(path.join(t.path, CORE))) for (const a of t.agents) entries.add(a.entry)
   }
 
-  // Copy DESIGN.md and antislop.md into current project if bundled
+  // Copy DESIGN.md and slop-ai-indo.md into current project if bundled
   const bundledDesign = path.join(__dirname, '..', 'DESIGN.md')
   if (fs.existsSync(bundledDesign)) {
     fs.copyFileSync(bundledDesign, path.join(process.cwd(), 'DESIGN.md'))
   }
-  const bundledAntislop = path.join(__dirname, '..', 'antislop.md')
-  if (fs.existsSync(bundledAntislop)) {
-    fs.copyFileSync(bundledAntislop, path.join(process.cwd(), 'antislop.md'))
+  const bundledSlop = path.join(__dirname, '..', 'slop-ai-indo.md')
+  if (fs.existsSync(bundledSlop)) {
+    fs.copyFileSync(bundledSlop, path.join(process.cwd(), 'slop-ai-indo.md'))
   }
 
   const block = pointerBlock(skills)

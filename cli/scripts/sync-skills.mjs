@@ -9,8 +9,8 @@ const cliSkills = path.join(__dirname, '..', 'skills')
 
 const CORE_FRONTMATTER = [
   '---',
-  'name: antislop',
-  'description: "Anti Slop: Aturan untuk AI Coding Agent. Penyaring inti. Selalu aktif untuk menghentikan slop AI generik."',
+  'name: slop-ai-indo',
+  'description: "Slop AI Indo: Aturan untuk AI Coding Agent. Penyaring inti. Selalu aktif untuk menghentikan slop AI generik."',
   'allowed-tools: Read Write Edit Glob Grep',
   '---',
   '',
@@ -18,20 +18,20 @@ const CORE_FRONTMATTER = [
 
 const version = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')).version
 
-const coreBody = fs.readFileSync(path.join(repoRoot, 'antislop.md'), 'utf8')
+const coreBody = fs.readFileSync(path.join(repoRoot, 'slop-ai-indo.md'), 'utf8')
   .replace(/\r\n/g, '\n')
   .trim()
 
 // Snyk W012: a shipped skill must not tell the agent to download its own instructions.
 if (/https?:\/\/raw\.githubusercontent\.com/.test(coreBody)) {
-  throw new Error('antislop.md carries a runtime download URL; remove it before syncing (Snyk W012)')
+  throw new Error('slop-ai-indo.md carries a runtime download URL; remove it before syncing (Snyk W012)')
 }
 
-fs.writeFileSync(path.join(repoSkills, 'antislop', 'SKILL.md'), CORE_FRONTMATTER + coreBody + '\n')
+fs.writeFileSync(path.join(repoSkills, 'slop-ai-indo', 'SKILL.md'), CORE_FRONTMATTER + coreBody + '\n')
 
 // An installed copy is a snapshot with nothing in it that names the release it came from,
 // so an update could not say what was on disk. Every install route copies this folder.
-fs.writeFileSync(path.join(repoSkills, 'antislop', 'VERSION'), version + '\n')
+fs.writeFileSync(path.join(repoSkills, 'slop-ai-indo', 'VERSION'), version + '\n')
 
 // Python leaves a __pycache__ beside the contrast checker; it must not reach the tarball.
 fs.rmSync(cliSkills, { recursive: true, force: true })
@@ -42,15 +42,16 @@ fs.cpSync(repoSkills, cliSkills, {
 
 const agentsSkills = path.join(repoRoot, '.agents', 'skills')
 if (fs.existsSync(agentsSkills)) {
+  fs.rmSync(agentsSkills, { recursive: true, force: true })
   fs.cpSync(repoSkills, agentsSkills, {
     recursive: true,
     filter: (src) => path.basename(src) !== '__pycache__',
   })
 }
 
-// Copy DESIGN.md and antislop.md into cli/ for npm package distribution
+// Copy DESIGN.md and slop-ai-indo.md into cli/ for npm package distribution
 fs.copyFileSync(path.join(repoRoot, 'DESIGN.md'), path.join(__dirname, '..', 'DESIGN.md'))
-fs.copyFileSync(path.join(repoRoot, 'antislop.md'), path.join(__dirname, '..', 'antislop.md'))
+fs.copyFileSync(path.join(repoRoot, 'slop-ai-indo.md'), path.join(__dirname, '..', 'slop-ai-indo.md'))
 
-console.log(`Regenerated skills/antislop/SKILL.md and VERSION (${version}) and synced to cli/skills/ & .agents/skills/`)
+console.log(`Regenerated skills/slop-ai-indo/SKILL.md and VERSION (${version}) and synced to cli/skills/ & .agents/skills/`)
 

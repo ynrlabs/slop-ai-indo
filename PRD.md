@@ -1,10 +1,10 @@
-# Product Requirements Document (PRD): Anti-Slop
+# Product Requirements Document (PRD): Slop AI Indo
 
 ## 1. Ringkasan Eksekutif & Tujuan Produk
-**Anti-Slop** adalah sistem penyaring (*filter*) presisi tinggi untuk AI Coding Agent (seperti Claude Code, Cursor, Cline, Antigravity, Codex, dan Kimi Code). 
+**Slop AI Indo** adalah sistem penyaring (*filter*) presisi tinggi untuk AI Coding Agent (seperti Claude Code, Cursor, Cline, Antigravity, Codex, dan Kimi Code). 
 Tujuan utamanya adalah **mencegah AI menghasilkan kode UI, teks *copywriting*, dan komentar kode yang klise, generik, dan murahan ("AI slop")**, tanpa mematikan kreativitas atau membuat hasil akhir menjadi kaku/steril.
 
-Anti-slop **bukan panduan gaya (style guide)**, melainkan **filter negatif**. Anti-slop membuang apa yang tidak boleh ada, sedangkan arahan visual dan estetika positif disuplai oleh `DESIGN.md`.
+Slop AI Indo **bukan panduan gaya (style guide)**, melainkan **filter negatif**. Slop AI Indo membuang apa yang tidak boleh ada, sedangkan arahan visual dan estetika positif disuplai oleh `DESIGN.md`.
 
 ---
 
@@ -39,13 +39,13 @@ Laporan evaluasi 4 blok yang wajib dibuat agen sebelum menyerahkan pekerjaan ke 
 
 ### 3.4. Modul Skill Aditif (Modular Skills)
 Pengguna atau agen hanya memuat modul yang relevan dengan tugas yang sedang dikerjakan:
-- `antislop` (Core filter & Delivery Gate)
-- `antislop-ui` (Tata letak, warna, geometri, shadow, dan dekorasi)
-- `antislop-copywriting` (Teks, judul, CTA, anti kata klise AI)
-- `antislop-human` (Aksesibilitas WCAG, fokus keyboard, skrip pemeriksa kontras)
-- `antislop-layoutmobile` (Responsivitas layar, breakpoint, overflow, area sentuh)
-- `antislop-code` (Sanitasi komentar kode berlebihan)
-- `antislop-security` (Audit keamanan komprehensif, tinjauan kerentanan source-first, threat modeling, verifikasi sandbox)
+- `slop-ai-indo` (Core filter & Delivery Gate)
+- `slop-ai-indo-ui` (Tata letak, warna, geometri, shadow, dan dekorasi)
+- `slop-ai-indo-copywriting` (Teks, judul, CTA, anti kata klise AI)
+- `slop-ai-indo-human` (Aksesibilitas WCAG, fokus keyboard, skrip pemeriksa kontras)
+- `slop-ai-indo-layoutmobile` (Responsivitas layar, breakpoint, overflow, area sentuh)
+- `slop-ai-indo-code` (Sanitasi komentar kode berlebihan)
+- `slop-ai-indo-security` (Audit keamanan komprehensif, tinjauan kerentanan source-first, threat modeling, verifikasi sandbox)
 
 ### 3.5. Dua Mode Penggunaan (Usage Modes)
 - **Mode DURING (Saat Pengerjaan):** Memandu pengerjaan sejak awal, memastikan setiap komponen yang dibuat langsung patuh aturan hingga lolos Delivery Gate.

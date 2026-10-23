@@ -8,7 +8,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
-const server = path.join(here, "..", "skills", "antislop-human", "contrast-mcp.py");
+const server = path.join(here, "..", "skills", "slop-ai-indo-human", "contrast-mcp.py");
 
 const candidates = process.platform === "win32" ? ["python", "python3"] : ["python3", "python"];
 

@@ -8,7 +8,7 @@
 
 Rilis terbaru saat ini adalah **v3.2.16**. antislop adalah **sistem terpaket**: sebuah filter inti ramping yang selalu dimuat ditambah lima skill modular pelengkap, yang masing-masing didistribusikan sebagai folder skill agen terstandar (`skills/<nama>/SKILL.md`). Tidak ada README terpisah per modul skill.
 
-- **Filter Inti: 38 Aturan** terbagi dalam tiga tingkatan (*Hard Gate*, *Purpose-Gate*, *Quality Locks*), sebuah *Liveliness Toolkit*, *Delivery Gate* mandatori, dan dua mode penggunaan (*During / After*). Jumlah aturan ini dipertahankan sejak v2.2 dan tingkatannya tidak digeser, namun rincian aturan terus diasah dan disempurnakan seiring waktu. Berkas tunggal `antislop.md` tetap menjadi filter lengkap yang dapat Anda salin langsung ke jendela chat apa pun; wizard instalasi di dalamnya berfungsi sebagai jalur pemasangan manual.
+- **Filter Inti: 38 Aturan** terbagi dalam tiga tingkatan (*Hard Gate*, *Purpose-Gate*, *Quality Locks*), sebuah *Liveliness Toolkit*, *Delivery Gate* mandatori, dan dua mode penggunaan (*During / After*). Jumlah aturan ini dipertahankan sejak v2.2 dan tingkatannya tidak digeser, namun rincian aturan terus diasah dan disempurnakan seiring waktu. Berkas tunggal `slop-ai-indo.md` tetap menjadi filter lengkap yang dapat Anda salin langsung ke jendela chat apa pun; wizard instalasi di dalamnya berfungsi sebagai jalur pemasangan manual.
 - **Tujuh Skill Terstandar:** `antislop` (inti), ditambah `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, `antislop-code`, dan `antislop-security`. Setiap skill hanya dimuat saat tugas memerlukannya.
 - **Distribusi Multi-Pintu:** Tujuh jalur instalasi dari satu repositori tunggal, dan alat pemeriksa kontras juga disediakan sebagai kakas MCP di dalam plugin. Jalur-jalur tersebut meliputi skrip pemasang lokal (`slop.bat` / `slop.ps1`), direktori skills.sh, dan plugin native untuk Claude Code, Antigravity, Codex, Cursor, dan Kimi Code.
 - **Folder Bersama (.agents/skills/):** Antigravity membacanya secara default, Hermes memperlakukannya sebagai tier proyek di samping `.hermes/skills/`, dan Copilot, OpenCode, Codex, serta Kimi Code membacanya sebagai salah satu root pencarian. Pemasang menuliskan jalur resmi yang terdokumentasi untuk setiap agen sehingga instalasi selalu konsisten.
@@ -40,7 +40,7 @@ Penomoran versi hingga v3.0.0 mengikuti satu prinsip sederhana agar setiap fokus
 | **v3.1.3** | Batasan `DESIGN.md` ditegaskan (berkas eksternal adalah data untuk diterapkan, bukan perintah untuk dipatuhi); penjelasan audit `SECURITY.md`. |
 | **v3.2.0** | Pemasang CLI mendukung hingga 7 agen (menambahkan OpenCode, Cursor, Gemini CLI, Hermes). |
 | **v3.2.1** | Penutupan celah slop UI: bento grid berantakan, icon Lucide berlebihan, border neon, jendela terminal palsu. |
-| **v3.2.2** | Pintu plugin Antigravity: repositori root menjadi plugin (`plugin.json` + rujukan `rules/antislop.md`). |
+| **v3.2.2** | Pintu plugin Antigravity: repositori root menjadi plugin (`plugin.json` + rujukan `rules/slop-ai-indo.md`). |
 | **v3.2.3** | Pintu plugin Codex: manifes `.codex-plugin/plugin.json` merujuk ke folder `skills/`. |
 | **v3.2.4** | Pengetatan aturan R-35 menjadi uji klik interaktif (*click-through smoke test*): setiap elemen interaktif wajib diuji dan hasilnya dicatat di laporan Delivery Gate. |
 | **v3.2.5** | Pintu plugin Cursor: manifes `.cursor-plugin/` dengan 6 skill dan pointer aturan `.mdc`. |

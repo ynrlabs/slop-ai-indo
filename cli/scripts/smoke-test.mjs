@@ -4,6 +4,7 @@ import os from 'node:os'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
+import { CORE } from '../lib/install.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const worker = path.join(__dirname, 'smoke-worker.mjs')
@@ -38,7 +39,7 @@ for (const name of ['CLAUDE.md', 'AGENTS.md', 'GEMINI.md']) {
   console.log(fs.readFileSync(entry, 'utf8'))
 }
 
-const coreSkill = path.join(tmp, '.claude', 'skills', 'antislop', 'SKILL.md')
+const coreSkill = path.join(tmp, '.claude', 'skills', CORE, 'SKILL.md')
 const coreInstalled = fs.existsSync(coreSkill)
 console.log('\ncore SKILL.md exists:', coreInstalled)
 

@@ -1,11 +1,11 @@
 {
-  "name": "anti-slop",
+  "name": "slop-ai-indo",
   "interface": {
-    "displayName": "antislop"
+    "displayName": "slop-ai-indo"
   },
   "plugins": [
     {
-      "name": "antislop",
+      "name": "slop-ai-indo",
       "source": {
         "source": "local",
         "path": "./"

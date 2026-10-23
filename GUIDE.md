@@ -38,7 +38,7 @@ Ada empat jalur pemasangan, dan perbedaan di antara keduanya lebih penting darip
 
 | Jalur | Apa yang Dilakukannya | Agen yang Didukung |
 |-------|-----------------------|--------------------|
-| **Pemasang Instan Lokal (`slop.bat`)** | Menyalin 1 paket lengkap (AGENTS.md, DESIGN.md, antislop.md, dan skill) | Seluruh agen yang mendukung standar .agents/skills |
+| **Pemasang Instan Lokal (`slop.bat`)** | Menyalin 1 paket lengkap (AGENTS.md, DESIGN.md, slop-ai-indo.md, dan skill) | Seluruh agen yang mendukung standar .agents/skills |
 | **Direktori skills.sh & GitHub** | Menyalin folder skill langsung dari GitHub | Agen yang didukung oleh direktori tersebut |
 | **Plugin Native (Plugin doors)** | Memuat antislop langsung dari repositori ini tanpa menyalin berkas ke proyek | Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline |
 | **Berkas Tunggal (The single file)** | Satu berkas Markdown yang Anda berikan ke AI apa pun | Apa pun yang dapat membaca teks, termasuk jendela chat HP |
@@ -48,7 +48,7 @@ Pilihlah salah satu. Semuanya memuat aturan yang sama persis, sehingga menambahk
 ### Jalur Mana yang Harus Saya Pilih?
 
 - **Pemasang Instan Lokal (`slop.bat` / `slop.ps1`):** Pilihan paling cepat dan lengkap jika Anda bekerja di Windows secara lokal. Secara otomatis menyalin file aturan inti, desain, dan seluruh modul skill tanpa butuh koneksi internet.
-- **Direktori skills.sh & GitHub:** Pilih ini jika Anda ingin menarik modul skill langsung dari repositori GitHub menggunakan `npx skills add yanuar1997/anti-slop-ai`.
+- **Direktori skills.sh & GitHub:** Pilih ini jika Anda ingin menarik modul skill langsung dari repositori GitHub menggunakan `npx skills add yanuar1997/slop-ai-indo`.
 - **Plugin Native:** Pilih ini jika Anda menggunakan Claude Code, Antigravity, Codex, Cursor, Kimi Code, atau Cline dan lebih suka tidak menyimpan salinan berkas di dalam proyek Anda. Anda memperbaruinya langsung melalui perintah pembaruan plugin milik agen terkait.
 - **Berkas Tunggal:** Pilih ini jika Anda tidak memiliki akses terminal, atau ingin menggunakan antislop di jendela chat browser (ChatGPT web, Claude web) atau di ponsel.
 
@@ -71,32 +71,27 @@ Jika Anda melihat keluaran seperti `v22.11.0`, komputer Anda sudah siap. Jika mu
 
 ---
 
-### 1. Pemasang Instan Lokal (`slop.bat` / `slop.ps1`)
+### 1. Pemasang Resmi NPM (`npx slop-ai-indo`)
 
-Menyalin 1 paket lengkap: `AGENTS.md`, `DESIGN.md`, `antislop.md`, dan folder `.agents/skills` langsung ke folder proyek Anda.
-
-**Langkah 1. Masuk ke folder proyek Anda.**
-Buka terminal dan arahkan ke lokasi proyek yang ingin Anda pasangi antislop:
+Cukup buka terminal di folder proyek Anda, lalu jalankan:
 
 ```bash
-cd D:\project_yanuar\nama_proyek_baru
+npx slop-ai-indo
 ```
 
-**Langkah 2. Jalankan skrip pemasang.**
+Perintah ini secara otomatis memasang **1 paket lengkap** (`AGENTS.md`, `DESIGN.md`, `slop-ai-indo.md`, dan seluruh modul `.agents/skills`) ke proyek Anda.
+
+---
+
+### 2. Pemasang Instan Lokal Windows (`slop.bat` / `slop.ps1`)
+
+Jika Anda ingin memasang secara offline tanpa koneksi internet:
 
 ```cmd
 D:\project_yanuar\anti-slop\slop.bat
 ```
 
 *(Atau jika menggunakan PowerShell: `powershell -File D:\project_yanuar\anti-slop\slop.ps1`)*
-
-**Langkah 3. Periksa ringkasan yang dicetak.**
-
-```
-Memasang Anti-Slop + DESIGN.md (Human-Crafted Standard) ke: D:\project_yanuar\nama_proyek_baru
-[SUKSES] Anti-Slop & DESIGN.md berhasil dipasang!
-AI agent kini otomatis menggunakan standar Human-Crafted.
-```
 
 **Langkah 5. Mulai sesi agen yang baru.**
 antislop dimuat saat sesi baru dimulai, sehingga jendela sesi yang sedang terbuka saat ini belum membacanya. Tutup sesi obrolan agen Anda dan buka yang baru.
@@ -107,10 +102,10 @@ Untuk memastikan antislop aktif, tanyakan hal yang hanya ada di dalam aturan ant
 
 ### 2. Direktori Skills (skills.sh)
 
-[skills.sh](https://skills.sh/yanuar1997/anti-slop-ai) adalah direktori terbuka skill agen coding. Jalur ini menggunakan kakas direktori tersebut untuk menyalin folder skill tanpa mengajukan pertanyaan:
+[skills.sh](https://skills.sh/yanuar1997/slop-ai-indo) adalah direktori terbuka skill agen coding. Jalur ini menggunakan kakas direktori tersebut untuk menyalin folder skill tanpa mengajukan pertanyaan:
 
 ```bash
-npx skills add yanuar1997/anti-slop-ai
+npx skills add yanuar1997/slop-ai-indo
 ```
 
 Gunakan bendera `--all` untuk memasang semua skill, `-g` untuk instalasi global, atau `--skill <nama>` untuk satu skill spesifik. Jalankan `--list` terlebih dahulu untuk melihat daftar skill yang tersedia.
@@ -128,8 +123,8 @@ Plugin adalah fitur langsung dari agen, bukan bawaan antislop. Anda mengarahkan 
 Di dalam sesi Claude Code, jalankan dua baris ini:
 
 ```text
-/plugin marketplace add https://github.com/yanuar1997/anti-slop-ai
-/plugin install antislop@anti-slop-ai
+/plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
+/plugin install antislop@slop-ai-indo
 ```
 
 #### Antigravity
@@ -137,7 +132,7 @@ Di dalam sesi Claude Code, jalankan dua baris ini:
 Jalankan perintah Antigravity CLI:
 
 ```bash
-agy plugin install https://github.com/yanuar1997/anti-slop-ai
+agy plugin install https://github.com/yanuar1997/slop-ai-indo
 ```
 
 Komponen `rules/` miliknya secara otomatis memuat antislop pada setiap sesi, jadi tidak ada berkas penunjuk tambahan yang perlu ditulis.
@@ -145,8 +140,8 @@ Komponen `rules/` miliknya secara otomatis memuat antislop pada setiap sesi, jad
 #### Codex
 
 ```bash
-codex plugin marketplace add yanuar1997/anti-slop-ai
-codex plugin add antislop@anti-slop-ai
+codex plugin marketplace add yanuar1997/slop-ai-indo
+codex plugin add antislop@slop-ai-indo
 ```
 
 #### Cursor
@@ -154,7 +149,7 @@ codex plugin add antislop@anti-slop-ai
 Tambahkan repositori sebagai marketplace plugin dengan Cursor Agent CLI:
 
 ```bash
-agent plugin marketplace add https://github.com/yanuar1997/anti-slop-ai
+agent plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
 ```
 
 Lalu, di dalam Cursor, buka menu **Customize** di bilah sisi (*sidebar*), cari **antislop**, dan klik **Install** (pilih cakupan proyek atau pengguna).
@@ -164,7 +159,7 @@ Lalu, di dalam Cursor, buka menu **Customize** di bilah sisi (*sidebar*), cari *
 Di dalam sesi Kimi Code:
 
 ```text
-/plugins install https://github.com/yanuar1997/anti-slop-ai
+/plugins install https://github.com/yanuar1997/slop-ai-indo
 ```
 
 Setelah instalasi selesai, jalankan `/reload` atau `/new`. Kimi Code memasang plugin per pengguna, sehingga satu instalasi langsung mencakup semua proyek.
@@ -174,7 +169,7 @@ Setelah instalasi selesai, jalankan `/reload` atau `/new`. Kimi Code memasang pl
 Plugin Cline dipasang melalui CLI:
 
 ```bash
-cline plugin install https://github.com/yanuar1997/anti-slop-ai.git
+cline plugin install https://github.com/yanuar1997/slop-ai-indo.git
 ```
 
 *Perhatian:* Dokumentasi resmi Cline saat ini membatasi plugin hanya untuk SDK, CLI, dan Kanban, dan menyatakan bahwa fitur plugin belum berlaku untuk ekstensi VS Code dan JetBrains. Jika Anda menggunakan Cline di dalam ekstensi editor kode, gunakan metode 1 (`slop.bat`) atau metode 2 (Direktori Skills).
@@ -185,23 +180,23 @@ cline plugin install https://github.com/yanuar1997/anti-slop-ai.git
 
 Gunakan metode ini jika Anda tidak memiliki terminal atau jika AI Anda hanya berupa antarmuka obrolan web/aplikasi di mana Anda tidak dapat menjalankan perintah terminal.
 
-**1. Unduh berkas `antislop.md` sekali.**
-- Lewat browser: buka halaman repositori [di sini](https://github.com/yanuar1997/anti-slop-ai), buka `antislop.md`, lalu klik tombol Download.
+**1. Unduh berkas `slop-ai-indo.md` sekali.**
+- Lewat browser: buka halaman repositori [di sini](https://github.com/yanuar1997/slop-ai-indo), buka `slop-ai-indo.md`, lalu klik tombol Download.
 - Lewat terminal (jika tersedia):
   ```bash
-  curl -o antislop.md https://raw.githubusercontent.com/yanuar1997/anti-slop-ai/main/antislop.md
+  curl -o slop-ai-indo.md https://raw.githubusercontent.com/yanuar1997/slop-ai-indo/main/slop-ai-indo.md
   ```
 
 **2. Berikan berkas tersebut kepada AI Anda, lalu sampaikan kebutuhan Anda.**
-`antislop.md` adalah teks biasa, sehingga semua model AI dapat membacanya. Jika AI Anda dapat membaca file lokal (Claude Code, Cursor, Cline, dll.), letakkan file tersebut di folder kerja proyek Anda. Jika AI Anda berupa jendela obrolan (ChatGPT web, Claude web), buka `antislop.md` di teks editor, salin semua isinya, lalu tempelkan ke obrolan.
+`slop-ai-indo.md` adalah teks biasa, sehingga semua model AI dapat membacanya. Jika AI Anda dapat membaca file lokal (Claude Code, Cursor, Cline, dll.), letakkan file tersebut di folder kerja proyek Anda. Jika AI Anda berupa jendela obrolan (ChatGPT web, Claude web), buka `slop-ai-indo.md` di teks editor, salin semua isinya, lalu tempelkan ke obrolan.
 
 Ketikkan instruksi ini kepada AI:
-> Baca `antislop.md` dan ikuti instruksi instalasinya. Saya ingin memasang skill UI dan copywriting.
+> Baca `slop-ai-indo.md` dan ikuti instruksi instalasinya. Saya ingin memasang skill UI dan copywriting.
 
 Jika Anda menempelkan isi teks secara langsung, ketik: *"Ikuti petunjuk instalasi yang saya tempelkan di atas. Saya ingin skill UI dan copywriting."*
 
 **3. Jawab pertanyaan dari wizard.**
-Wizard akan mengonfirmasi skill apa yang Anda inginkan dan menanyakan kapan antislop harus diterapkan: saat AI sedang bekerja (*during*), atau setelah pekerjaan selesai untuk audit (*after*). Pilih *during* untuk pekerjaan baru.
+Wizard akan mengonfirmasi skill apa yang Anda inginkan dan menanyakan kapan slop-ai-indo harus diterapkan: saat AI sedang bekerja (*during*), atau setelah pekerjaan selesai untuk audit (*after*). Pilih *during* untuk pekerjaan baru.
 
 ---
 
@@ -209,27 +204,27 @@ Wizard akan mengonfirmasi skill apa yang Anda inginkan dan menanyakan kapan anti
 
 Pemasang CLI, direktori skills, dan pintu plugin semuanya memerlukan terminal, sehingga tidak berjalan langsung di ponsel. Di ponsel, Anda menggunakan metode berkas tunggal:
 
-- **Claude Projects, ChatGPT Projects, atau Gemini Gems:** Semuanya menerima berkas sebagai referensi proyek. Unduh `antislop.md`, lampirkan ke dalam project atau custom instructions, lalu tambahkan instruksi singkat agar AI selalu mematuhinya. Ukuran berkas ~50 KB sangat jauh di bawah batas kuota dokumen referensi platform tersebut.
-- **Catatan Penting:** Di dalam agen coding, antislop berfungsi sebagai instruksi terstandar yang dipatuhi secara ketat. Di aplikasi chat ponsel, antislop berfungsi sebagai dokumen konteks panduan, sehingga tidak ada mekanisme otomatis yang menjalankan laporan Delivery Gate untuk Anda. Aturan tetap bekerja memfilter gaya bahasa dan tata letak, namun penegakannya bergantung pada kepatuhan model AI obrolan.
+- **Claude Projects, ChatGPT Projects, atau Gemini Gems:** Semuanya menerima berkas sebagai referensi proyek. Unduh `slop-ai-indo.md`, lampirkan ke dalam project atau custom instructions, lalu tambahkan instruksi singkat agar AI selalu mematuhinya. Ukuran berkas ~50 KB sangat jauh di bawah batas kuota dokumen referensi platform tersebut.
+- **Catatan Penting:** Di dalam agen coding, slop-ai-indo berfungsi sebagai instruksi terstandar yang dipatuhi secara ketat. Di aplikasi chat ponsel, slop-ai-indo berfungsi sebagai dokumen konteks panduan, sehingga tidak ada mekanisme otomatis yang menjalankan laporan Delivery Gate untuk Anda. Aturan tetap bekerja memfilter gaya bahasa dan tata letak, namun penegakannya bergantung pada kepatuhan model AI obrolan.
 
 ---
 
 ## Pembaruan (Update)
 
-Pembaruan antislop tidak berjalan otomatis di latar belakang. Setiap jalur diperbarui dengan menjalankan perintah jalurnya masing-masing, atau dengan menimpa salinan yang sudah ada.
+Pembaruan slop-ai-indo tidak berjalan otomatis di latar belakang. Setiap jalur diperbarui dengan menjalankan perintah jalurnya masing-masing, atau dengan menimpa salinan yang sudah ada.
 
 **Bagaimana mengetahui ada versi baru?**
-Dua tempat selalu memuat versi terkini: [halaman rilis GitHub](https://github.com/yanuar1997/anti-slop-ai/releases) dan lencana versi di bagian atas berkas [README.md](README.md).
+Dua tempat selalu memuat versi terkini: [halaman rilis GitHub](https://github.com/yanuar1997/slop-ai-indo/releases) dan lencana versi di bagian atas berkas [README.md](README.md).
 
 **Versi berapa yang sedang terpasang di komputer Anda?**
-Folder `antislop` yang terpasang memuat file `VERSION`. Anda dapat membukanya langsung, atau bertanya pada agen Anda: *"Versi antislop berapa yang sedang terpasang?"*.
+Folder `slop-ai-indo` yang terpasang memuat file `VERSION`. Anda dapat membukanya langsung, atau bertanya pada agen Anda: *"Versi slop-ai-indo berapa yang sedang terpasang?"*.
 
 ### Perintah Pembaruan Cepat
 
 Untuk memperbarui skill ke versi terbaru dari GitHub, jalankan perintah berikut di folder proyek Anda:
 
 ```bash
-npx skills add yanuar1997/anti-slop-ai
+npx skills add yanuar1997/slop-ai-indo
 ```
 
 Atau jika menggunakan installer lokal Windows, jalankan kembali `slop.bat` di folder proyek Anda.
@@ -240,13 +235,13 @@ Perintah ini akan mencari di proyek saat ini dan folder home pengguna, memperbar
 
 | Platform Agen | Perintah Pembaruan |
 |---------------|--------------------|
-| **Claude Code** | `claude plugin update antislop@anti-slop-ai` (lalu buka ulang atau jalankan `/reload-plugins`) |
-| **Antigravity** | Jalankan ulang: `agy plugin install https://github.com/yanuar1997/anti-slop-ai` |
-| **Codex** | `codex plugin marketplace upgrade anti-slop-ai` |
-| **Cursor** | `agent plugin marketplace update https://github.com/yanuar1997/anti-slop-ai` (atau via panel Customize) |
-| **Kimi Code** | Jalankan ulang: `/plugins install https://github.com/yanuar1997/anti-slop-ai` lalu `/reload` |
-| **Cline** | `cline plugin install https://github.com/yanuar1997/anti-slop-ai.git --force` |
-| **Berkas Tunggal** | Unduh ulang berkas `antislop.md` terbaru dan gantikan file yang lama |
+| **Claude Code** | `claude plugin update antislop@slop-ai-indo` (lalu buka ulang atau jalankan `/reload-plugins`) |
+| **Antigravity** | Jalankan ulang: `agy plugin install https://github.com/yanuar1997/slop-ai-indo` |
+| **Codex** | `codex plugin marketplace upgrade slop-ai-indo` |
+| **Cursor** | `agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo` (atau via panel Customize) |
+| **Kimi Code** | Jalankan ulang: `/plugins install https://github.com/yanuar1997/slop-ai-indo` lalu `/reload` |
+| **Cline** | `cline plugin install https://github.com/yanuar1997/slop-ai-indo.git --force` |
+| **Berkas Tunggal** | Unduh ulang berkas `slop-ai-indo.md` terbaru dan gantikan file yang lama |
 
 ---
 
@@ -255,15 +250,15 @@ Perintah ini akan mencari di proyek saat ini dan folder home pengguna, memperbar
 ### Menghapus Pemasang CLI
 
 Dua hal yang perlu dihapus:
-1. **Folder skill yang disalin:** Hapus folder `antislop` atau `antislop-*` di dalam folder skill agen Anda (misalnya di `.agents/skills/` atau `.claude/skills/`).
+1. **Folder skill yang disalin:** Hapus folder `slop-ai-indo` atau `slop-ai-indo-*` di dalam folder skill agen Anda (misalnya di `.agents/skills/` atau `.claude/skills/`).
 2. **Blok penunjuk di file inisialisasi:** Buka `AGENTS.md`, `CLAUDE.md`, atau `GEMINI.md`, cari blok antara `<!-- antislop:start -->` dan `<!-- antislop:end -->`, lalu hapus blok tersebut. Jika file tersebut tidak memuat aturan lain, Anda dapat menghapus file tersebut.
 
 ### Menghapus Plugin Native
 
-- **Claude Code:** `/plugin uninstall antislop@anti-slop`
+- **Claude Code:** `/plugin uninstall antislop@slop-ai-indo`
 - **Antigravity:** `agy plugin uninstall antislop` (atau `agy plugin disable antislop` untuk menonaktifkan sementara)
-- **Codex:** `codex plugin remove antislop@anti-slop`
-- **Cursor:** Hapus dari panel Customize, atau hapus marketplacenya: `agent plugin marketplace remove anti-slop`
+- **Codex:** `codex plugin remove antislop@slop-ai-indo`
+- **Cursor:** Hapus dari panel Customize, atau hapus marketplacenya: `agent plugin marketplace remove slop-ai-indo`
 - **Kimi Code:** `/plugins remove antislop`
 - **Cline:** Hapus folder plugin di `~/.cline/plugins/_installed/`
 

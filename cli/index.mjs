@@ -20,12 +20,12 @@ import {
 } from './lib/install.mjs'
 
 const EXTRA_SKILLS = [
-  { value: 'antislop-ui', label: 'antislop-ui', hint: 'UI and visual design rules' },
-  { value: 'antislop-copywriting', label: 'antislop-copywriting', hint: 'copywriting and text rules' },
-  { value: 'antislop-human', label: 'antislop-human', hint: 'accessibility, with the contrast checker' },
-  { value: 'antislop-layoutmobile', label: 'antislop-layoutmobile', hint: 'responsive layout rules' },
-  { value: 'antislop-code', label: 'antislop-code', hint: 'code comment rules' },
-  { value: 'antislop-security', label: 'antislop-security', hint: 'deep security audit and vulnerability review' },
+  { value: 'slop-ai-indo-ui', label: 'slop-ai-indo-ui', hint: 'UI and visual design rules' },
+  { value: 'slop-ai-indo-copywriting', label: 'slop-ai-indo-copywriting', hint: 'copywriting and text rules' },
+  { value: 'slop-ai-indo-human', label: 'slop-ai-indo-human', hint: 'accessibility, with the contrast checker' },
+  { value: 'slop-ai-indo-layoutmobile', label: 'slop-ai-indo-layoutmobile', hint: 'responsive layout rules' },
+  { value: 'slop-ai-indo-code', label: 'slop-ai-indo-code', hint: 'code comment rules' },
+  { value: 'slop-ai-indo-security', label: 'slop-ai-indo-security', hint: 'deep security audit and vulnerability review' },
 ]
 
 function stop(message) {
@@ -52,7 +52,7 @@ function printPluginDoors(found) {
 
 async function main() {
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
-    console.log(`antislop ${VERSION}`)
+    console.log(`slop-ai-indo ${VERSION}`)
     return
   }
 

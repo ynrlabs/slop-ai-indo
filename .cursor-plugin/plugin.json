@@ -1,13 +1,13 @@
 {
-  "name": "antislop",
-  "displayName": "antislop",
+  "name": "slop-ai-indo",
+  "displayName": "slop-ai-indo",
   "description": "Anti Slop: Rules for AI Coding Agents. Stops generic AI slop in generated UI, copy, and code. Loads as six skills.",
-  "version": "3.2.16",
+  "version": "1.0.0",
   "author": {
     "name": "Yanuar (yanuar1997)"
   },
-  "homepage": "https://github.com/yanuar1997/anti-slop-ai",
-  "repository": "https://github.com/yanuar1997/anti-slop-ai",
+  "homepage": "https://github.com/yanuar1997/slop-ai-indo",
+  "repository": "https://github.com/yanuar1997/slop-ai-indo",
   "license": "MIT",
   "logo": "./assets/profile.png",
   "keywords": ["ai-slop", "design-rules", "copy-rules", "agent-skills", "ui", "accessibility"],

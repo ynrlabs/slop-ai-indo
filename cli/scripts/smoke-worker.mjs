@@ -17,7 +17,7 @@ import {
   VERSION,
 } from '../lib/install.mjs'
 
-const skills = ['antislop', 'antislop-ui']
+const skills = [CORE, 'slop-ai-indo-ui']
 
 const failures = []
 
@@ -61,7 +61,7 @@ const agWritten = installSkills({ skills, targets: agTargets, overwrite: false }
 check('D antigravity written', agWritten.length, 2)
 const agPointers = updatePointers({ targets: agTargets, skills })
 check('D antigravity pointers', agPointers.map((p) => path.basename(p)), ['AGENTS.md'])
-check('D .agents/skills/antislop/SKILL.md exists', fs.existsSync(path.join(process.cwd(), '.agents', 'skills', 'antislop', 'SKILL.md')), true)
+check('D .agents/skills/' + CORE + '/SKILL.md exists', fs.existsSync(path.join(process.cwd(), '.agents', 'skills', CORE, 'SKILL.md')), true)
 
 // OpenCode, Cursor, and Gemini each install and point to their own entry file.
 for (const agent of ['opencode', 'cursor', 'gemini']) {
@@ -70,7 +70,7 @@ for (const agent of ['opencode', 'cursor', 'gemini']) {
   const pointers = updatePointers({ targets: t, skills })
   check(`D2 ${agent} written`, w.length, 2)
   check(`D2 ${agent} pointer`, pointers.map((p) => path.basename(p)), [agent === 'gemini' ? 'GEMINI.md' : 'AGENTS.md'])
-  check(`D2 ${agent} folder exists`, fs.existsSync(path.join(process.cwd(), agent === 'gemini' ? '.gemini' : agent === 'cursor' ? '.cursor' : '.opencode', 'skills', 'antislop', 'SKILL.md')), true)
+  check(`D2 ${agent} folder exists`, fs.existsSync(path.join(process.cwd(), agent === 'gemini' ? '.gemini' : agent === 'cursor' ? '.cursor' : '.opencode', 'skills', CORE, 'SKILL.md')), true)
 }
 
 // Cline keeps a folder of its own and reads .claude/skills beside it, so both fill up.
@@ -79,7 +79,7 @@ check('D8 cline project target', clineProject[0].path, path.join(process.cwd(), 
 check('D8 cline global target', resolveTargets('global', ['cline'])[0].path, path.join(os.homedir(), '.cline', 'skills'))
 check('D8 cline written', installSkills({ skills, targets: clineProject, overwrite: false }).length, 2)
 check('D8 cline pointer', updatePointers({ targets: clineProject, skills }).map((p) => path.basename(p)), ['AGENTS.md'])
-check('D8 cline folder exists', fs.existsSync(path.join(process.cwd(), '.cline', 'skills', 'antislop', 'SKILL.md')), true)
+check('D8 cline folder exists', fs.existsSync(path.join(process.cwd(), '.cline', 'skills', CORE, 'SKILL.md')), true)
 
 // Amp shares the project's .agents/skills, which the Antigravity block already filled,
 // but its global folder is a different path.
@@ -142,9 +142,9 @@ check('F global targets', globalTargets.map((t) => `${t.agents.map((a) => a.id).
 ])
 
 // Copies are identical and the pointer block dedupes.
-const src = fs.readFileSync(path.join(skillSourceDir(), 'antislop-ui', 'SKILL.md'), 'utf8')
-const dst = fs.readFileSync(path.join(process.cwd(), '.claude', 'skills', 'antislop-ui', 'SKILL.md'), 'utf8')
-check('G antislop-ui SKILL.md identical', src === dst, true)
+const src = fs.readFileSync(path.join(skillSourceDir(), 'slop-ai-indo-ui', 'SKILL.md'), 'utf8')
+const dst = fs.readFileSync(path.join(process.cwd(), '.claude', 'skills', 'slop-ai-indo-ui', 'SKILL.md'), 'utf8')
+check('G slop-ai-indo-ui SKILL.md identical', src === dst, true)
 
 // The conflict prompt reports the release on disk from this file alone.
 check('G installed version is stamped', installedVersion(targets[0].path), VERSION)
@@ -236,7 +236,7 @@ check('K update reports every folder it found', upd.results.length, present.leng
 check('K update lands on this release', upd.results.every((r) => r.to === VERSION), true)
 check('K update keeps the skill selection', upd.results.every((r) => r.skills.includes(CORE)), true)
 check('K update writes a pointer', upd.pointers.length > 0, true)
-check('K pointer carries the update line', fs.readFileSync(path.join(process.cwd(), 'AGENTS.md'), 'utf8').includes('antislop-ai --update'), true)
+check('K pointer carries the update line', fs.readFileSync(path.join(process.cwd(), 'AGENTS.md'), 'utf8').includes('slop-ai-indo'), true)
 const again = updateAll({ locations: ['project'] })
 check('K update is repeatable', again.results.map((r) => r.from), upd.results.map((r) => r.to))
 

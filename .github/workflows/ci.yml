@@ -26,11 +26,11 @@ jobs:
 
       # The contrast table is a set of claims about a formula; recompute every row.
       - name: Contrast table matches the formula
-        run: python3 skills/antislop-human/contrast-check.py --selftest
+        run: python3 skills/slop-ai-indo-human/contrast-check.py --selftest
 
-      # skills/antislop/SKILL.md is generated from antislop.md, so an unsynced
+      # skills/slop-ai-indo/SKILL.md is generated from slop-ai-indo.md, so an unsynced
       # core edit would ship a skill that disagrees with it.
-      - name: Generated core skill is in sync with antislop.md
+      - name: Generated core skill is in sync with slop-ai-indo.md
         run: |
           node cli/scripts/sync-skills.mjs
           git diff --exit-code -- skills/

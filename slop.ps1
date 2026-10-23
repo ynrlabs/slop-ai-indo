@@ -14,11 +14,11 @@ if (-not (Test-Path $TargetFolder)) {
 
 $source = $PSScriptRoot
 
-Write-Host "Memasang Anti-Slop + DESIGN.md (Human-Crafted Standard) ke: $TargetFolder" -ForegroundColor Cyan
+Write-Host "Memasang Slop AI Indo + DESIGN.md (Human-Crafted Standard) ke: $TargetFolder" -ForegroundColor Cyan
 
 Copy-Item -Force "$source\DESIGN.md" "$TargetFolder\"
 Copy-Item -Force "$source\AGENTS.md" "$TargetFolder\"
-Copy-Item -Force "$source\antislop.md" "$TargetFolder\"
+Copy-Item -Force "$source\slop-ai-indo.md" "$TargetFolder\"
 
 $targetAgents = Join-Path $TargetFolder ".agents"
 if (-not (Test-Path $targetAgents)) {
@@ -27,5 +27,5 @@ if (-not (Test-Path $targetAgents)) {
 
 Copy-Item -Recurse -Force "$source\.agents\*" "$targetAgents\"
 
-Write-Host "[SUKSES] Anti-Slop & DESIGN.md berhasil dipasang di $TargetFolder!" -ForegroundColor Green
+Write-Host "[SUKSES] Slop AI Indo & DESIGN.md berhasil dipasang di $TargetFolder!" -ForegroundColor Green
 Write-Host "AI agent kini otomatis menggunakan standar Human-Crafted (Siku tajam, kanvas bersih ala n8n)." -ForegroundColor White

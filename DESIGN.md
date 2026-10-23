@@ -1,7 +1,7 @@
 # DESIGN.md - Sistem Desain Human-Crafted (Standar Anti-AI Style)
 
 > **Tujuan Dokumen:** Menjadi standar baku visual dan arsitektur UI harian untuk semua proyek perangkat lunak (Web, SaaS, Mobile/Flutter, Laravel).  
-> Dokumen ini adalah pasangan wajib dari **antislop.md**: jika antislop membuang elemen klise/sampah AI, `DESIGN.md` ini yang mendikte bentuk fisik, geometri siku, palet warna, dan hierarki agar hasil coding AI **terlihat 100% seperti buatan tim desainer manusia profesional (Human-Crafted)** seperti n8n, Linear, Stripe, dan Notion.
+> Dokumen ini adalah pasangan wajib dari **slop-ai-indo.md**: jika Slop AI Indo membuang elemen klise/sampah AI, `DESIGN.md` ini yang mendikte bentuk fisik, geometri siku, palet warna, dan hierarki agar hasil coding AI **terlihat 100% seperti buatan tim desainer manusia profesional (Human-Crafted)** seperti n8n, Linear, Stripe, dan Notion.
 
 ---
 
@@ -83,4 +83,4 @@ Untuk aplikasi otomatisasi alur, diagram, atau kanvas multi-agent:
 ## 6. Ringkasan Cepat untuk Prompt AI
 
 Saat memulai fitur baru di proyek apa pun, Anda cukup menyertakan instruksi berikut ke AI:
-> *"Terapkan aturan antislop.md dan DESIGN.md: gunakan tampilan human-crafted gaya n8n (kanvas terang bersih, sudut siku tegas 4-6px, tanpa tombol kapsul, tanpa gradien neon AI, dan kode bersih tanpa komentar sampah)."*
+> *"Terapkan aturan slop-ai-indo.md dan DESIGN.md: gunakan tampilan human-crafted gaya n8n (kanvas terang bersih, sudut siku tegas 4-6px, tanpa tombol kapsul, tanpa gradien neon AI, dan kode bersih tanpa komentar sampah)."*

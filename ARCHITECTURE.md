@@ -1,6 +1,6 @@
-# ARCHITECTURE.md - Arsitektur Sistem Anti-Slop
+# ARCHITECTURE.md - Arsitektur Sistem Slop AI Indo
 
-Dokumen ini menjelaskan rancangan arsitektural sistem **Anti-Slop**, alur integrasi aturan ke dalam agen AI, serta mekanisme evaluasi dan pengiriman hasil kerja.
+Dokumen ini menjelaskan rancangan arsitektural sistem **Slop AI Indo**, alur integrasi aturan ke dalam agen AI, serta mekanisme evaluasi dan pengiriman hasil kerja.
 
 ---
 
@@ -16,12 +16,12 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Anti-Slop**, alur integr
 |                          LAYER 1: ENTRY & DISCOVERY                             |
 |  - Pointer Blocks: AGENTS.md, CLAUDE.md, GEMINI.md, .mdc rules                  |
 |  - Plugin Doors: Antigravity, Cursor, Claude Code, Cline, Codex, Kimi           |
-|  - Installer Scripts: slop.bat, slop.ps1, install.ps1, npx skills               |
+|  - Installer Scripts: npx slop-ai-indo, slop.bat, slop.ps1, install.ps1         |
 +---------------------------------------------------------------------------------+
                                          |
                                          v
 +---------------------------------------------------------------------------------+
-|                       LAYER 2: CORE FILTER ENGINE (antislop.md)                 |
+|                       LAYER 2: CORE FILTER ENGINE (slop-ai-indo.md)             |
 |  - 38 Mandatory Rules (R-01 s/d R-38)                                           |
 |    * Tier 1: Hard Gate (Mutlak, Tanpa Pengecualian)                             |
 |    * Tier 2: Purpose-Gate (Harus Ada Justifikasi Fungsional)                    |
@@ -35,12 +35,12 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Anti-Slop**, alur integr
                      v                                       v
 +---------------------------------------+   +-------------------------------------+
 |     LAYER 3: ADDITIVE SKILLS          |   |      LAYER 4: DIRECTION & STYLE     |
-| - antislop-ui (Visual & Komponen)     |   | - DESIGN.md                         |
-| - antislop-copywriting (Teks & Hype)  |   |   * Kanvas Terang Enterprise        |
-| - antislop-human (Aksesibilitas/WCAG) |   |   * Siku Tegas (Radius 4px - 6px)   |
-| - antislop-layoutmobile (Responsif)   |   |   * Tipografi Modern Bersih         |
-| - antislop-code (Komentar Kode Rapi)  |   |   * Larangan Tombol Kapsul & Neon   |
-| - antislop-security (Audit Keamanan)  |   +-------------------------------------+
+| - slop-ai-indo-ui (Visual & Komponen)     |   | - DESIGN.md                         |
+| - slop-ai-indo-copywriting (Teks & Hype)  |   |   * Kanvas Terang Enterprise        |
+| - slop-ai-indo-human (Aksesibilitas/WCAG) |   |   * Siku Tegas (Radius 4px - 6px)   |
+| - slop-ai-indo-layoutmobile (Responsif)   |   |   * Tipografi Modern Bersih         |
+| - slop-ai-indo-code (Komentar Kode Rapi)  |   |   * Larangan Tombol Kapsul & Neon   |
+| - slop-ai-indo-security (Audit Keamanan)  |   +-------------------------------------+
 +---------------------------------------+
                      |                                       |
                      +-------------------+-------------------+
@@ -66,14 +66,14 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Anti-Slop**, alur integr
 
 ### 2.1. Inisialisasi Sesi (Session Start)
 1. Agen membaca file konfigurasi root (`AGENTS.md` atau `CLAUDE.md`).
-2. Pointer block mengarahkan agen untuk memuat `antislop.md` sebagai filter inti.
+2. Pointer block mengarahkan agen untuk memuat `slop-ai-indo.md` sebagai filter inti.
 3. Agen mendeteksi jenis tugas yang diminta pengguna:
-   - Jika membuat/mengubah UI: Agen memuat `skills/antislop-ui/SKILL.md` dan membaca arahan `DESIGN.md`.
-   - Jika menulis konten/copy: Agen memuat `skills/antislop-copywriting/SKILL.md`.
-   - Jika memvalidasi aksesibilitas/kontras: Agen memuat `skills/antislop-human/SKILL.md`.
-   - Jika membuat layout mobile: Agen memuat `skills/antislop-layoutmobile/SKILL.md`.
-   - Jika membersihkan komentar kode: Agen memuat `skills/antislop-code/SKILL.md`.
-   - Jika melakukan audit keamanan atau review kerentanan kode/API/service: Agen memuat `skills/antislop-security/SKILL.md`.
+   - Jika membuat/mengubah UI: Agen memuat `skills/slop-ai-indo-ui/SKILL.md` dan membaca arahan `DESIGN.md`.
+   - Jika menulis konten/copy: Agen memuat `skills/slop-ai-indo-copywriting/SKILL.md`.
+   - Jika memvalidasi aksesibilitas/kontras: Agen memuat `skills/slop-ai-indo-human/SKILL.md`.
+   - Jika membuat layout mobile: Agen memuat `skills/slop-ai-indo-layoutmobile/SKILL.md`.
+   - Jika membersihkan komentar kode: Agen memuat `skills/slop-ai-indo-code/SKILL.md`.
+   - Jika melakukan audit keamanan atau review kerentanan kode/API/service: Agen memuat `skills/slop-ai-indo-security/SKILL.md`.
 
 ### 2.2. Mode Operasi: During vs After
 - **Mode DURING:** Agen mengevaluasi setiap potongan kode (HTML, CSS, JS, Blade, Flutter) secara real-time terhadap aturan R-01 s/d R-38 sebelum menulisnya ke berkas.
@@ -91,7 +91,7 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Anti-Slop**, alur integr
 1. **CLI Installer (`cli/`)**:
    - Mendeteksi 11 IDE dan agen coding yang terpasang di komputer pengguna.
    - Menulis file rujukan dan menyalin modul skill tanpa menyentuh kode aplikasi utama.
-2. **WCAG Contrast Checker (`skills/antislop-human/contrast-check.py`)**:
+2. **WCAG Contrast Checker (`skills/slop-ai-indo-human/contrast-check.py`)**:
    - Menghitung rasio luminansi relatif antara warna teks (foreground) dan warna latar (background).
    - Menjamin nilai kontras minimal 4.5:1 untuk teks biasa dan 3:1 untuk elemen UI grafis / teks tebal.
 3. **Contrast MCP Server (`contrast-mcp.py`)**:

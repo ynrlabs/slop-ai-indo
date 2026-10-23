@@ -36,7 +36,7 @@ const MANIFESTS = [
 /** R-02's carve-out, encoded so a new em dash in ordinary prose still fails. */
 function emDashes() {
   const bad = []
-  const files = ['antislop.md', 'README.md', 'GUIDE.md', 'ROADMAP.md', 'SECURITY.md', ...SKILLS]
+  const files = ['slop-ai-indo.md', 'README.md', 'GUIDE.md', 'ROADMAP.md', 'SECURITY.md', ...SKILLS]
 
   for (const file of files) {
     let section = ''
@@ -63,7 +63,7 @@ function emDashes() {
 
 /** Every rule the core defines must have a Delivery Gate item citing it, and vice versa. */
 function gateCoverage() {
-  const core = read('antislop.md')
+  const core = read('slop-ai-indo.md')
   const defined = new Set([...core.matchAll(/^#### (R-\d{2}) —/gm)].map((m) => m[1]))
   const gate = core.split(/## (?:Delivery Gate \(Mandatory\)|Delivery Gate \(Gerbang Serah Terima Mandatori\))/)[1] ?? ''
   const cited = new Set([...gate.matchAll(/\((R-\d{2})\)/g)].map((m) => m[1]))
@@ -80,11 +80,11 @@ function gateCoverage() {
 
 /** A skill may reference core rules by number. It may not invent one. */
 function skillReferences() {
-  const defined = new Set([...read('antislop.md').matchAll(/^#### (R-\d{2}) —/gm)].map((m) => m[1]))
+  const defined = new Set([...read('slop-ai-indo.md').matchAll(/^#### (R-\d{2}) —/gm)].map((m) => m[1]))
   const bad = []
   for (const file of SKILLS) {
     for (const r of new Set([...read(file).matchAll(/\bR-\d{2}\b/g)].map((m) => m[0]))) {
-      if (!defined.has(r)) bad.push(`${file} cites ${r}, which antislop.md does not define`)
+      if (!defined.has(r)) bad.push(`${file} cites ${r}, which slop-ai-indo.md does not define`)
     }
   }
   return bad
@@ -112,9 +112,9 @@ function versions() {
     ['.cursor-plugin/plugin.json', json('.cursor-plugin/plugin.json')?.version],
     ['.kimi-plugin/plugin.json', json('.kimi-plugin/plugin.json')?.version],
     // Stamped into every install, so a stale one makes the installer misreport what is on disk.
-    ['skills/antislop/VERSION', read('skills/antislop/VERSION').trim()],
+    ['skills/slop-ai-indo/VERSION', read('skills/slop-ai-indo/VERSION').trim()],
     ['cli/lib/banner.mjs', read('cli/lib/banner.mjs').match(/installer v(\d+\.\d+\.\d+)/)?.[1]],
-    ['skills/antislop-human/contrast-mcp.py', read('skills/antislop-human/contrast-mcp.py').match(/SERVER_VERSION = "(\d+\.\d+\.\d+)"/)?.[1]],
+    ['skills/slop-ai-indo-human/contrast-mcp.py', read('skills/slop-ai-indo-human/contrast-mcp.py').match(/SERVER_VERSION = "(\d+\.\d+\.\d+)"/)?.[1]],
   ]
 
   return found
@@ -150,10 +150,10 @@ function frontmatter() {
 /** A new skill has to be registered in all four places below or it cannot install. */
 function registration() {
   const names = SKILLS.map((f) => f.split('/')[1])
-  const core = 'antislop'
+  const core = 'slop-ai-indo'
   const places = [
-    ['rules/antislop.md', read('rules/antislop.md')],
-    ['rules/antislop.mdc', read('rules/antislop.mdc')],
+    ['rules/slop-ai-indo.md', read('rules/slop-ai-indo.md')],
+    ['rules/slop-ai-indo.mdc', read('rules/slop-ai-indo.mdc')],
     ["cli/index.mjs (EXTRA_SKILLS)", read('cli/index.mjs')],
     ['cli/lib/install.mjs (SKILL_LINES)', read('cli/lib/install.mjs')],
   ]
@@ -171,7 +171,7 @@ function registration() {
 
 /** A rule's tier decides its gate block: Hard Gate 1, Purpose-Gate 2, Quality Locks 4. */
 function tiers() {
-  const core = read('antislop.md')
+  const core = read('slop-ai-indo.md')
   const part2 = (core.split(/## (?:Part 2:|Bagian 2:)/)[1] ?? '').split(/## (?:Part 3:|Bagian 3:|Delivery Gate)/)[0] ?? ''
 
   const group = {}
@@ -243,8 +243,8 @@ function docLinks() {
 
 /** The WCAG formula is duplicated, and only contrast-check.py has a selftest. */
 function contrastTwins() {
-  const check = read('skills/antislop-human/contrast-check.py')
-  const mcp = read('skills/antislop-human/contrast-mcp.py')
+  const check = read('skills/slop-ai-indo-human/contrast-check.py')
+  const mcp = read('skills/slop-ai-indo-human/contrast-mcp.py')
   const constants = ['0.03928', '12.92', '1.055', '0.2126', '0.7152', '0.0722', '0.05']
 
   const bad = []

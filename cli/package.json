@@ -8,10 +8,10 @@
   },
   "license": "MIT",
   "author": "Yanuar (yanuar1997)",
-  "homepage": "https://github.com/yanuar1997/anti-slop-ai",
+  "homepage": "https://github.com/yanuar1997/slop-ai-indo",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yanuar1997/anti-slop-ai.git"
+    "url": "git+https://github.com/yanuar1997/slop-ai-indo.git"
   },
   "keywords": [
     "ai-slop",
@@ -31,7 +31,7 @@
     "lib/",
     "skills/",
     "DESIGN.md",
-    "antislop.md"
+    "slop-ai-indo.md"
   ],
   "scripts": {
     "test": "node scripts/smoke-test.mjs",
