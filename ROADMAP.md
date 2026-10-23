@@ -55,7 +55,7 @@ Penomoran versi hingga v3.0.0 mengikuti satu prinsip sederhana agar setiap fokus
 | **v3.2.14** | Pintu integrasi Cline: konfigurasi root `package.json` untuk `cline plugin install`. |
 | **v3.2.15** | Integrasi Amp: pembacaan direktori `.agents/skills/` level proyek dan `~/.config/agents/skills/` level pengguna. |
 | **v3.2.16** | Fitur pembaruan otomatis untuk seluruh instalasi lokal dan global. Deteksi status plugin lokal (Claude, Codex, Antigravity, Cursor) dengan petunjuk perintah pembaruan presisi. |
-| **v1.0.1** | **Rilis Saat Ini.** Penambahan marketplace OpenCode dan dua modul baru: `slop-ai-indo-docs` (kebersihan dokumen teknis & PRD) dan `slop-ai-indo-identity` (karakter & identitas visual produk). |
+| **v1.0.2** | **Rilis Saat Ini.** Penambahan marketplace OpenCode dan dua modul baru: `slop-ai-indo-docs` (kebersihan dokumen teknis & PRD) dan `slop-ai-indo-identity` (karakter & identitas visual produk). |
 
 ---
 

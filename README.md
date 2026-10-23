@@ -180,8 +180,8 @@ Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pe
 | **slop-ai-indo-layoutmobile** | Responsivitas mobile: adaptasi layar HP hingga desktop, breakpoint, grid, overflow, area sentuh | v1.0.0 |
 | **slop-ai-indo-code** | Kebersihan komentar kode: membuang komentar klise AI, menjaga komentar penting arsitektural | v1.0.0 |
 | **slop-ai-indo-security** | Audit keamanan mendalam: tinjauan kerentanan source-first, threat modeling, verifikasi sandbox, pelaporan defensif | v1.0.0 |
-| **slop-ai-indo-docs** | Dokumentasi teknis: pencegahan narasi hampa, cuplikan kode halusinasi, dan arsitektur fiktif di README & PRD | v1.0.1 |
-| **slop-ai-indo-identity** | Karakter & identitas produk: pencegahan penjiplakan layout SaaS populer, ikon generik, dan palet acak | v1.0.1 |
+| **slop-ai-indo-docs** | Dokumentasi teknis: pencegahan narasi hampa, cuplikan kode halusinasi, dan arsitektur fiktif di README & PRD | v1.0.2 |
+| **slop-ai-indo-identity** | Karakter & identitas produk: pencegahan penjiplakan layout SaaS populer, ikon generik, dan palet acak | v1.0.2 |
 
 Pilih skill yang sesuai dengan pekerjaan:
 - Membuat UI → `slop-ai-indo-ui`
@@ -204,7 +204,7 @@ Slop AI Indo digunakan dalam salah satu dari dua mode, yang ditentukan di awal s
 
 ## Peta Jalan (Roadmap)
 
-**v1.0.1** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
+**v1.0.2** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
 
 ## FAQ (Pertanyaan yang Sering Diajukan)
 
