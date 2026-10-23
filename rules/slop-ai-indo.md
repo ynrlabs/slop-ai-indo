@@ -17,6 +17,8 @@ Untuk pekerjaan UI, teks, aksesibilitas, tata letak mobile, atau komentar kode, 
 - Mobile / responsif: skills/slop-ai-indo-layoutmobile/SKILL.md
 - Komentar kode: skills/slop-ai-indo-code/SKILL.md
 - Audit keamanan: skills/slop-ai-indo-security/SKILL.md
+- Dokumentasi teknis & API: skills/slop-ai-indo-docs/SKILL.md
+- Identitas & karakter produk: skills/slop-ai-indo-identity/SKILL.md
 - Arahan Visual: DESIGN.md
 
 Selalu patuhi DESIGN.md setiap kali membuat komponen UI, style, atau tata letak.

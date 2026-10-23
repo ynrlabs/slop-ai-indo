@@ -1,5 +1,5 @@
 ---
-description: Penunjuk slop-ai-indo & DESIGN.md yang selalu aktif. Menjaga ketujuh skill slop-ai-indo dan standar Human-Crafted Design tetap berjalan.
+description: Penunjuk slop-ai-indo & DESIGN.md yang selalu aktif. Menjaga sembilan skill slop-ai-indo dan standar Human-Crafted Design tetap berjalan.
 globs: **/*
 alwaysApply: true
 ---
@@ -22,5 +22,7 @@ Referensi skill:
 - Mobile: skills/slop-ai-indo-layoutmobile/SKILL.md
 - Kode: skills/slop-ai-indo-code/SKILL.md
 - Keamanan: skills/slop-ai-indo-security/SKILL.md
+- Dokumen: skills/slop-ai-indo-docs/SKILL.md
+- Identitas: skills/slop-ai-indo-identity/SKILL.md
 - Arahan Desain: DESIGN.md
 </EXTREMELY_IMPORTANT>

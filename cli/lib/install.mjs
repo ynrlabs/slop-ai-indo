@@ -174,6 +174,14 @@ export const PLUGIN_DOORS = [
       findClone(path.join(os.homedir(), '.cursor', 'plugins', 'local', 'slop-ai-indo')) ??
       findClone(path.join(os.homedir(), '.cursor', 'plugins', 'local', 'anti-slop')),
   },
+  {
+    id: 'opencode',
+    label: 'OpenCode',
+    update: 'opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo',
+    find: () =>
+      findClone(path.join(os.homedir(), '.config', 'opencode', 'plugins', 'slop-ai-indo')) ??
+      findClone(path.join(os.homedir(), '.config', 'opencode', 'plugins', CORE)),
+  },
 ]
 
 // A door that moves its files breaks its own probe and nothing else: the installer stops
@@ -244,6 +252,8 @@ const SKILL_LINES = {
   'slop-ai-indo-layoutmobile': 'Mobile / responsive: `slop-ai-indo-layoutmobile`',
   'slop-ai-indo-code': 'Code comments: `slop-ai-indo-code`',
   'slop-ai-indo-security': 'Security audit: `slop-ai-indo-security`',
+  'slop-ai-indo-docs': 'Technical documentation: `slop-ai-indo-docs`',
+  'slop-ai-indo-identity': 'Brand & visual character: `slop-ai-indo-identity`',
 }
 
 export const SKILL_NAMES = Object.keys(SKILL_LINES)

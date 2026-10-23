@@ -61,7 +61,7 @@ Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 
 ```text
 /plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
-/plugin install antislop@slop-ai-indo
+/plugin install slop-ai-indo@slop-ai-indo
 ```
 
 ### 5. Plugin (Antigravity)
@@ -78,7 +78,7 @@ Repositori ini berfungsi sebagai plugin dan marketplace Codex. Tambahkan marketp
 
 ```bash
 codex plugin marketplace add yanuar1997/slop-ai-indo
-codex plugin add antislop@slop-ai-indo
+codex plugin add slop-ai-indo@slop-ai-indo
 ```
 
 ### 7. Plugin (Cursor)
@@ -89,7 +89,7 @@ Repositori ini adalah plugin Cursor. Tambahkan sebagai marketplace plugin menggu
 agent plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
 ```
 
-Kemudian buka menu **Customize** di Cursor, cari **antislop**, dan pilih **Install** (pilih cakupan proyek atau user).
+Kemudian buka menu **Customize** di Cursor, cari **slop-ai-indo**, dan pilih **Install** (pilih cakupan proyek atau user).
 
 ### 8. Plugin (Kimi Code)
 
@@ -108,6 +108,14 @@ cline plugin install https://github.com/yanuar1997/slop-ai-indo.git
 ```
 
 *Catatan:* Dokumentasi resmi Cline saat ini membatasi plugin untuk lingkungan CLI/SDK/Kanban, dan belum berlaku untuk ekstensi editor VS Code/JetBrains. Untuk pengguna ekstensi editor, gunakan metode 1 (`slop.bat`) atau metode 2 (Direktori Skills GitHub).
+
+### 10. Plugin (OpenCode)
+
+Repositori ini berfungsi sebagai plugin dan marketplace OpenCode. Pasang menggunakan OpenCode CLI:
+
+```bash
+opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo
+```
 
 ### Di Mana Lokasi Skill Disimpan
 
@@ -150,12 +158,13 @@ npx slop-ai-indo
 | Pemasang Resmi NPM | `npx slop-ai-indo` |
 | Skrip Lokal Windows | `slop.bat` |
 | Direktori skills.sh & GitHub | `npx skills add yanuar1997/slop-ai-indo` |
-| Plugin Claude Code | `claude plugin update antislop@slop-ai-indo` |
+| Plugin Claude Code | `claude plugin update slop-ai-indo@slop-ai-indo` |
 | Plugin Antigravity | `agy plugin install https://github.com/yanuar1997/slop-ai-indo` |
 | Plugin Codex | `codex plugin marketplace upgrade slop-ai-indo` |
 | Plugin Cursor | `agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo` |
 | Plugin Kimi Code | `/plugins install https://github.com/yanuar1997/slop-ai-indo` |
 | Plugin Cline | `cline plugin install https://github.com/yanuar1997/slop-ai-indo.git --force` |
+| Plugin OpenCode | `opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo` |
 | Manual | Unduh ulang berkas `slop-ai-indo.md` |
 
 Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pembaruan.
@@ -171,6 +180,8 @@ Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pe
 | **slop-ai-indo-layoutmobile** | Responsivitas mobile: adaptasi layar HP hingga desktop, breakpoint, grid, overflow, area sentuh | v1.0.0 |
 | **slop-ai-indo-code** | Kebersihan komentar kode: membuang komentar klise AI, menjaga komentar penting arsitektural | v1.0.0 |
 | **slop-ai-indo-security** | Audit keamanan mendalam: tinjauan kerentanan source-first, threat modeling, verifikasi sandbox, pelaporan defensif | v1.0.0 |
+| **slop-ai-indo-docs** | Dokumentasi teknis: pencegahan narasi hampa, cuplikan kode halusinasi, dan arsitektur fiktif di README & PRD | v1.0.1 |
+| **slop-ai-indo-identity** | Karakter & identitas produk: pencegahan penjiplakan layout SaaS populer, ikon generik, dan palet acak | v1.0.1 |
 
 Pilih skill yang sesuai dengan pekerjaan:
 - Membuat UI → `slop-ai-indo-ui`
@@ -179,6 +190,8 @@ Pilih skill yang sesuai dengan pekerjaan:
 - Desain responsif mobile → `slop-ai-indo-layoutmobile`
 - Komentar kode program → `slop-ai-indo-code`
 - Audit keamanan & kerentanan kode → `slop-ai-indo-security`
+- Dokumentasi teknis & PRD → `slop-ai-indo-docs`
+- Identitas produk & branding → `slop-ai-indo-identity`
 - Tugas campuran → pasang beberapa skill sekaligus
 - Tanpa skill tambahan → berkas inti sendirian sudah merupakan filter yang lengkap
 
@@ -191,7 +204,7 @@ Slop AI Indo digunakan dalam salah satu dari dua mode, yang ditentukan di awal s
 
 ## Peta Jalan (Roadmap)
 
-**v1.0.0** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
+**v1.0.1** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
 
 ## FAQ (Pertanyaan yang Sering Diajukan)
 
@@ -202,7 +215,7 @@ Bukan, melainkan sebuah **penyaring (filter)**. Slop AI Indo tidak mendikte pale
 Semua agen AI coding modern, melalui metode berikut:
 - **Pemasang resmi NPM (`npx slop-ai-indo`):** Mendukung Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, dan Kimi Code.
 - **Direktori skills (GitHub) dan skrip lokal:** Tersedia via `slop.bat` dan `slop.ps1`.
-- **Plugin native:** Tersedia untuk Claude Code, Antigravity, Codex, Cursor, Kimi Code, dan Cline dari repositori ini.
+- **Plugin native:** Tersedia untuk Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, dan OpenCode dari repositori ini.
 - **Berkas tunggal (`slop-ai-indo.md`):** Berfungsi pada agen AI apa pun yang dapat membaca teks Markdown polos, termasuk jendela chat browser atau aplikasi ponsel.
 
 ### Apa yang dimaksud dengan "Skill"?

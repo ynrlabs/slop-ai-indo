@@ -51,11 +51,11 @@ Penomoran versi hingga v3.0.0 mengikuti satu prinsip sederhana agar setiap fokus
 | **v3.2.10** | Penambahan GitHub Copilot sebagai target installer. Penanganan tabrakan nama skill pada agen yang membaca multi-folder. Koreksi aturan em-dash R-02. |
 | **v3.2.11** | Sinkronisasi folder global Codex ke `$HOME/.agents/skills`. Penambahan chart riwayat bintang (*star history*) di README. |
 | **v3.2.12** | Integrasi Kimi Code: manifes `.kimi-plugin/plugin.json` yang memuat 6 skill dan pointer `systemPromptPath`. |
-| **v3.2.13** | Penamaan versi otomatis pada disk (`skills/antislop/VERSION`) sehingga agen dan CLI dapat membaca versi yang terpasang secara pasti. Perbaikan parser pemisah markdown code-fence. |
+| **v3.2.13** | Penamaan versi otomatis pada disk (`skills/slop-ai-indo/VERSION`) sehingga agen dan CLI dapat membaca versi yang terpasang secara pasti. Perbaikan parser pemisah markdown code-fence. |
 | **v3.2.14** | Pintu integrasi Cline: konfigurasi root `package.json` untuk `cline plugin install`. |
 | **v3.2.15** | Integrasi Amp: pembacaan direktori `.agents/skills/` level proyek dan `~/.config/agents/skills/` level pengguna. |
 | **v3.2.16** | Fitur pembaruan otomatis untuk seluruh instalasi lokal dan global. Deteksi status plugin lokal (Claude, Codex, Antigravity, Cursor) dengan petunjuk perintah pembaruan presisi. |
-| **v3.3.0** | **Rilis Saat Ini.** Integrasi modul skill `antislop-security` (audit keamanan menyeluruh, source-first hunting, verifikasi sandbox aman, skema ledger & temuan). |
+| **v1.0.1** | **Rilis Saat Ini.** Penambahan marketplace OpenCode dan dua modul baru: `slop-ai-indo-docs` (kebersihan dokumen teknis & PRD) dan `slop-ai-indo-identity` (karakter & identitas visual produk). |
 
 ---
 
@@ -65,23 +65,14 @@ Dua aturan menjaga antrean pengembangan tetap jujur:
 1. **Maksimal satu agen baru per versi:** Setiap rilis hanya membuka paling banyak satu pintu agen baru, sehingga potensi masalah terisolasi.
 2. **Babak pemeliharaan tidak merilis agen baru:** Didedikasikan khusus untuk membayar hutang teknis, validasi ulang terhadap perubahan dokumentasi vendor, dan perbaikan laporan komunitas.
 
-| Versi Target | Item | Rincian / Makna |
-|--------------|------|-----------------|
-| **v3.2.17** | Pi Coding Agent | Penambahan baris installer, pointer `AGENTS.md`, dan rujukan `package.json` root. |
-| **v3.2.18** | Oh My Pi | Katalog marketplace dan verifikasi skema update Oh My Pi. |
-| **v3.2.19** | Babak Pemeliharaan (Maintenance) | Pengujian langsung instalasi Cline & Kimi Code, serta opsi penyimpanan preferensi mode penggunaan. |
-
 ### Rencana Jangka Panjang (Tanpa Janji Versi)
-- **Katalog Terbuka OpenAI:** Integrasi bundel skill untuk direktori ChatGPT & Codex.
-- **Kiro & Roo Code:** Verifikasi mekanisme pembacaan folder aturan (`.roo/rules/` vs `.roo/skills/`).
-- **antislop-compact:** Eksperimen varian berkas ringkas independen untuk penggunaan cepat.
-- **Kandidat Skill Tambahan:** Eksplorasi modul `antislop-docs` dan `antislop-identity`.
+- **slop-ai-indo-compact:** Eksperimen varian berkas ringkas independen untuk penggunaan cepat.
 
 ---
 
 ## Hal yang Berada di Luar Cakupan (Not in Scope)
 
-antislop tetap berpegang teguh sebagai **penyaring (filter), bukan panduan gaya (style guide)**:
+slop-ai-indo tetap berpegang teguh sebagai **penyaring (filter), bukan panduan gaya (style guide)**:
 - Tidak memaksakan estetika tunggal, tidak membatasi framework tertentu, dan tidak melarang tren desain secara membabi-buta.
 - Tidak pernah mempercantik antarmuka secara sepihak; arah visual dan keindahan adalah hak prerogatif Anda di dalam `DESIGN.md`.
-- Tidak terbatas hanya pada pembuatan halaman web: filter yang sama berlaku untuk teks tulisan (`antislop-copywriting`) dan komentar kode (`antislop-code`).
+- Tidak terbatas hanya pada pembuatan halaman web: filter yang sama berlaku untuk teks tulisan (`slop-ai-indo-copywriting`), komentar kode (`slop-ai-indo-code`), dokumentasi teknis (`slop-ai-indo-docs`), dan identitas produk (`slop-ai-indo-identity`).

@@ -1,0 +1,17 @@
+{
+  "name": "slop-ai-indo",
+  "owner": {
+    "name": "Yanuar (yanuar1997)"
+  },
+  "metadata": {
+    "description": "The slop-ai-indo plugin marketplace for OpenCode. Anti Slop: Rules for AI Coding Agents."
+  },
+  "plugins": [
+    {
+      "name": "slop-ai-indo",
+      "source": ".",
+      "version": "1.0.1",
+      "description": "Anti Slop: Rules for AI Coding Agents. Stops generic AI slop in generated UI, copy, and code. Loads as seven skills."
+    }
+  ]
+}

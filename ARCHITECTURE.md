@@ -15,7 +15,7 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Slop AI Indo**, alur int
 +---------------------------------------------------------------------------------+
 |                          LAYER 1: ENTRY & DISCOVERY                             |
 |  - Pointer Blocks: AGENTS.md, CLAUDE.md, GEMINI.md, .mdc rules                  |
-|  - Plugin Doors: Antigravity, Cursor, Claude Code, Cline, Codex, Kimi           |
+|  - Plugin Doors: Antigravity, Cursor, Claude Code, Cline, Codex, Kimi, OpenCode |
 |  - Installer Scripts: npx slop-ai-indo, slop.bat, slop.ps1, install.ps1         |
 +---------------------------------------------------------------------------------+
                                          |

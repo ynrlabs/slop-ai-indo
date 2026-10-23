@@ -3,40 +3,40 @@ name: slop-ai-indo
 description: "Slop AI Indo: Aturan untuk AI Coding Agent. Penyaring inti. Selalu aktif untuk menghentikan slop AI generik."
 allowed-tools: Read Write Edit Glob Grep
 ---
-# antislop
+# slop-ai-indo
 
-> Anti Slop: Aturan untuk AI Coding Agent
+> Slop AI Indo: Aturan Anti-Slop & Standar Human-Crafted untuk AI Coding Agents
 
 > Patuhi aturan-aturan ini setiap kali membuat atau membangun UI untuk situs web, aplikasi web, atau antarmuka apa pun.
 > Tujuannya: desain harus terasa **dibuat oleh desainer manusia profesional**, bukan digenerasi secara asal oleh AI.
-> Sebelum pekerjaan UI dimulai, tanyakan kepada pengguna (dalam bahasa obrolan mereka) kapan antislop harus diterapkan: saat pekerjaan berlangsung (*during*), atau setelah pekerjaan selesai (*after*). Jangan mulai bekerja sebelum mereka menjawab.
+> Sebelum pekerjaan UI dimulai, tanyakan kepada pengguna (dalam bahasa obrolan mereka) kapan slop-ai-indo harus diterapkan: saat pekerjaan berlangsung (*during*), atau setelah pekerjaan selesai (*after*). Jangan mulai bekerja sebelum mereka menjawab.
 
 ---
 
 ## Panduan Instalasi Pertama Kali (First-Run Install Wizard)
 
-antislop adalah sebuah sistem: berkas inti ini ditambah **modul skill** opsional, satu per bidang kebutuhan (`antislop-ui`, `antislop-copywriting`, dll., masing-masing berupa folder dengan berkas `SKILL.md`). Bagian ini memasang modul-modul tersebut sekali. Ini adalah **sebuah tawaran, bukan kewajiban**: jika pengguna lebih suka, berkas inti ini sendirian sudah merupakan filter yang lengkap.
+slop-ai-indo adalah sebuah sistem: berkas inti ini ditambah **modul skill** opsional, satu per bidang kebutuhan (`slop-ai-indo-ui`, `slop-ai-indo-copywriting`, dll., masing-masing berupa folder dengan berkas `SKILL.md`). Bagian ini memasang modul-modul tersebut sekali. Ini adalah **sebuah tawaran, bukan kewajiban**: jika pengguna lebih suka, berkas inti ini sendirian sudah merupakan filter yang lengkap.
 
-**Lewati bagian ini** jika file inisialisasi proyek (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, atau padanannya yang dibaca oleh kakas saat sesi dimulai) sudah memuat blok penunjuk (*pointer block*) antislop. Itu berarti antislop sudah terpasang. Kembalilah ke sini hanya jika pengguna meminta untuk menambah atau menghapus skill.
+**Lewati bagian ini** jika file inisialisasi proyek (`AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, atau padanannya yang dibaca oleh kakas saat sesi dimulai) sudah memuat blok penunjuk (*pointer block*) slop-ai-indo. Itu berarti slop-ai-indo sudah terpasang. Kembalilah ke sini hanya jika pengguna meminta untuk menambah atau menghapus skill.
 
-Jika tidak ada blok penunjuk antislop dan berkas ini sedang dibaca untuk pertama kalinya, jalankan wizard:
+Jika tidak ada blok penunjuk slop-ai-indo dan berkas ini sedang dibaca untuk pertama kalinya, jalankan wizard:
 
 > Langkah-langkah di bawah ini adalah pemasangan manual untuk setup di mana hanya berkas ini yang tersedia. Tidak ada jaringan internet yang digunakan: modul skill yang belum ada diambil secara lokal oleh pengguna, tidak pernah diunduh otomatis oleh agen dari internet.
 
-1. **Jelaskan setup sebelum melakukan apa pun.** Beri tahu pengguna bahwa Anda akan (a) memastikan skill yang dipilih berada di folder `skills/<nama>/` di samping berkas ini (pengguna yang menyalinnya; agen tidak pernah mengunduh dari jaringan, lihat langkah 4), dan (b) menambahkan blok penunjuk antislop di akhir file inisialisasi proyek. Minta persetujuan. Jangan pernah mengubah file inisialisasi secara diam-diam.
-2. **Tanyakan skill mana yang ingin dipasang** (pilihan ganda, dalam bahasa obrolan pengguna). Cantumkan hanya skill yang ada pada versi antislop ini:
+1. **Jelaskan setup sebelum melakukan apa pun.** Beri tahu pengguna bahwa Anda akan (a) memastikan skill yang dipilih berada di folder `skills/<nama>/` di samping berkas ini (pengguna yang menyalinnya; agen tidak pernah mengunduh dari jaringan, lihat langkah 4), dan (b) menambahkan blok penunjuk slop-ai-indo di akhir file inisialisasi proyek. Minta persetujuan. Jangan pernah mengubah file inisialisasi secara diam-diam.
+2. **Tanyakan skill mana yang ingin dipasang** (pilihan ganda, dalam bahasa obrolan pengguna). Cantumkan hanya skill yang ada pada versi slop-ai-indo ini:
    - **1. Semua (Semua yang tersedia / All - Direkomendasikan):** pasang setiap skill yang tersedia. Pilih ini jika pekerjaan mencakup UI, teks, aksesibilitas, atau tata letak mobile.
-   - **2. `antislop-ui` (UI / visual):** pilih ini untuk membangun atau mengedit antarmuka: warna, tata letak, komponen, dekorasi, gerak animasi.
-   - **3. `antislop-copywriting` (teks & copy):** pilih ini untuk menulis atau mengedit teks: judul, tombol aksi (CTA), proposisi nilai, nada bicara, teks landing page, deskripsi produk.
-   - **4. `antislop-human` (manusia & aksesibilitas):** pilih ini untuk memastikan UI ramah bagi mata dan tangan pengguna: rasio kontras warna, navigasi keyboard, status fokus.
-   - **5. `antislop-layoutmobile` (mobile / responsif):** pilih ini untuk tata letak yang harus beradaptasi mulus di berbagai ukuran layar: breakpoint, skala, grid, overflow, area sentuh.
-   - **6. `antislop-code` (komentar kode):** pilih ini untuk merapikan komentar kode program: menghapus komentar klise AI, menjaga komentar penting, tanpa menyentuh logika kode.
-   - **7. `antislop-security` (audit keamanan):** pilih ini untuk audit keamanan komprehensif, tinjauan kerentanan source-first, threat modeling, verifikasi sandbox terisolasi, dan remediasi keamanan defensif.
+   - **2. `slop-ai-indo-ui` (UI / visual):** pilih ini untuk membangun atau mengedit antarmuka: warna, tata letak, komponen, dekorasi, gerak animasi.
+   - **3. `slop-ai-indo-copywriting` (teks & copy):** pilih ini untuk menulis atau mengedit teks: judul, tombol aksi (CTA), proposisi nilai, nada bicara, teks landing page, deskripsi produk.
+   - **4. `slop-ai-indo-human` (manusia & aksesibilitas):** pilih ini untuk memastikan UI ramah bagi mata dan tangan pengguna: rasio kontras warna, navigasi keyboard, status fokus.
+   - **5. `slop-ai-indo-layoutmobile` (mobile / responsif):** pilih ini untuk tata letak yang harus beradaptasi mulus di berbagai ukuran layar: breakpoint, skala, grid, overflow, area sentuh.
+   - **6. `slop-ai-indo-code` (komentar kode):** pilih ini untuk merapikan komentar kode program: menghapus komentar klise AI, menjaga komentar penting, tanpa menyentuh logika kode.
+   - **7. `slop-ai-indo-security` (audit keamanan):** pilih ini untuk audit keamanan komprehensif, tinjauan kerentanan source-first, threat modeling, verifikasi sandbox terisolasi, dan remediasi keamanan defensif.
 
    Jika pengguna menolak atau mengatakan "inti saja" (*core only*), berhenti di sini dan gunakan berkas ini sendirian sebagai filter. Jangan pasang modul tambahan apa pun.
-3. **Penyelarasan Arah Desain** (hanya jika skill UI dipilih). Periksa keberadaan berkas `DESIGN.md` atau panduan merek/gaya eksplisit. Jika tidak ada, jujurlah bahwa antislop adalah **filter, bukan pembuat keindahan**: tanpa arah desain, output cenderung monoton. Sarankan untuk memiliki `DESIGN.md`, lalu tawarkan opsi berikut:
+3. **Penyelarasan Arah Desain** (hanya jika skill UI dipilih). Periksa keberadaan berkas `DESIGN.md` atau panduan merek/gaya eksplisit. Jika tidak ada, jujurlah bahwa slop-ai-indo adalah **filter, bukan pembuat keindahan**: tanpa arah desain, output cenderung monoton. Sarankan untuk memiliki `DESIGN.md`, lalu tawarkan opsi berikut:
    - **1. Pengguna menyediakan arah desain (Direkomendasikan).** Pengguna menulis `DESIGN.md` mereka sendiri, atau menjawab beberapa pertanyaan singkat tentang arah visual (identitas, kepribadian, palet warna, tipografi, suasana) dan agen mencatat jawaban tersebut ke dalam `DESIGN.md`. Pengguna adalah konseptornya; agen hanya memformat. Jangan pernah mengarang konten contoh untuk `DESIGN.md`.
-   - **2. Agen membuatkan arah desain, dengan peringatan jujur.** Agen merumuskan arah desain sendiri, menyatakan secara transparan bahwa selera bawaan agen cenderung mengarah pada selera default AI yang justru disaring oleh antislop, sehingga hasilnya berpotensi terasa datar. Jika opsi ini dipilih, tetap tanyakan brief minimal (produk, target audiens, kesan) sebelum mulai koding.
+   - **2. Agen membuatkan arah desain, dengan peringatan jujur.** Agen merumuskan arah desain sendiri, menyatakan secara transparan bahwa selera bawaan agen cenderung mengarah pada selera default AI yang justru disaring oleh slop-ai-indo, sehingga hasilnya berpotensi terasa datar. Jika opsi ini dipilih, tetap tanyakan brief minimal (produk, target audiens, kesan) sebelum mulai koding.
    - **3. Pengguna melewati arah desain untuk saat ini.** Lanjutkan tanpa `DESIGN.md`. Setiap UI yang dibangun dengan cara ini wajib diberi label *"draft without direction"* dengan skala dial ENERGY 1 / RHYTHM 1 / MOTION 1 (R-37), dan tidak dianggap sebagai hasil serah terima final.
 4. **Tempatkan folder skill yang dipilih; pengguna yang menyalin, agen tidak mengunduh.** File `SKILL.md` adalah instruksi yang akan dipatuhi oleh agen, sehingga agen yang mengunduh file tersebut di runtime sama saja dengan mengunduh instruksi baru untuk dirinya sendiri dari internet: jangan lakukan itu, dan jangan meminta akses jaringan di sini. Modul skill disertakan sebagai folder dalam paket rilis (`skills/<nama>/SKILL.md`). Jika folder skill belum ada di samping berkas ini, beri tahu pengguna modul mana yang kurang. `slop-ai-indo-human` juga membutuhkan skrip `contrast-check.py` dari folder yang sama.
 5. **Tambahkan blok penunjuk di BAGIAN AKHIR file inisialisasi proyek** (file yang dibaca kakas agen di awal sesi: `CLAUDE.md` untuk Claude Code, `AGENTS.md` untuk Codex/Universal, `GEMINI.md` untuk Gemini CLI, dsb.). Jika file tersebut belum ada, buat baru. Jangan pernah mengubah konten yang sudah ada sebelumnya:
@@ -50,8 +50,8 @@ Jika tidak ada blok penunjuk antislop dan berkas ini sedang dibaca untuk pertama
    - Mobile / responsif: `skills/slop-ai-indo-layoutmobile/SKILL.md`
    - Komentar kode: `skills/slop-ai-indo-code/SKILL.md`
    - Audit keamanan: `skills/slop-ai-indo-security/SKILL.md`
-   Sebelum mulai, tanyakan pengguna kapan antislop diterapkan: selama pengerjaan, atau setelah selesai.
-   Untuk memperbarui antislop nanti: unduh ulang `slop-ai-indo.md`, jalankan `npx slop-ai-indo`, atau jalankan `npx skills add yanuar1997/slop-ai-indo`.
+   Sebelum mulai, tanyakan pengguna kapan slop-ai-indo diterapkan: selama pengerjaan, atau setelah selesai.
+   Untuk memperbarui slop-ai-indo nanti: unduh ulang `slop-ai-indo.md`, jalankan `npx slop-ai-indo`, atau jalankan `npx skills add yanuar1997/slop-ai-indo`.
    <!-- slop-ai-indo:end -->
    ```
 6. **Tanyakan pertanyaan mode penggunaan** (lihat "Dua Mode Penggunaan"), lalu lanjutkan pekerjaan.
@@ -60,34 +60,35 @@ Jika tidak ada blok penunjuk antislop dan berkas ini sedang dibaca untuk pertama
 
 ### Jika Sudah Terpasang, dan Pengguna Bertanya Cara Memperbarui
 
-antislop tidak pernah memperbarui dirinya sendiri secara otomatis di latar belakang. Jawab berdasarkan metode instalasi yang digunakan pengguna. Jalankan `npx slop-ai-indo` atau jalankan kembali `slop.bat` sebagai jalur tercepat: perintah ini memperbarui setiap folder antislop di tingkat proyek.
+slop-ai-indo tidak pernah memperbarui dirinya sendiri secara otomatis di latar belakang. Jawab berdasarkan metode instalasi yang digunakan pengguna. Jalankan `npx slop-ai-indo` atau jalankan kembali `slop.bat` sebagai jalur tercepat: perintah ini memperbarui setiap folder slop-ai-indo di tingkat proyek.
 
 - **Pemasang Resmi NPM (`npx slop-ai-indo`):** jalankan kembali di folder proyek Anda.
 - **Pemasang Skrip Lokal Windows (`slop.bat` / `slop.ps1`):** jalankan kembali di folder proyek Anda.
 - **Direktori skills (`npx skills add yanuar1997/slop-ai-indo`):** jalankan perintah yang sama kembali.
 - **Pintu Plugin Native:** diperbarui melalui perintah bawaan agen masing-masing:
-  - **Claude Code**: `claude plugin update antislop@slop-ai-indo`
+  - **Claude Code**: `claude plugin update slop-ai-indo@slop-ai-indo`
   - **Antigravity**: `agy plugin install https://github.com/yanuar1997/slop-ai-indo`
   - **Codex**: `codex plugin marketplace upgrade slop-ai-indo`
   - **Cursor**: `agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo`
   - **Kimi Code**: `/plugins install https://github.com/yanuar1997/slop-ai-indo`
   - **Cline**: `cline plugin install https://github.com/yanuar1997/slop-ai-indo.git --force`
+  - **OpenCode**: `opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo`
 - **Berkas Tunggal Ini Sendiri:** unduh ulang dan gantikan berkas lama.
 
 ---
 
 ## Dua Mode Penggunaan (Two Usage Modes)
 
-antislop digunakan dalam salah satu dari dua cara. Di awal sesi, tanyakan kepada pengguna mode mana yang berlaku, dalam bahasa obrolan pengguna. Jangan memulai pekerjaan UI sebelum mereka menjawab.
+slop-ai-indo digunakan dalam salah satu dari dua cara. Di awal sesi, tanyakan kepada pengguna mode mana yang berlaku, dalam bahasa obrolan pengguna. Jangan memulai pekerjaan UI sebelum mereka menjawab.
 
-> **Kapan Anda ingin menerapkan antislop?**
+> **Kapan Anda ingin menerapkan slop-ai-indo?**
 > 1. **DURING (Saat Pengerjaan):** Saya akan menerapkan aturan saat menulis kode/teks, sehingga AI slop dicegah sejak awal dan ditutup dengan laporan Delivery Gate.
 > 2. **AFTER (Audit Pasca Pengerjaan):** Saya akan mengaudit kode yang sudah ada: menyajikan daftar temuan bernomor dengan prioritas, Anda memilih nomor mana yang diperbaiki, lalu saya memperbaikinya dan memberikan laporan tindak lanjut.
 >
 > Pilih nomor 1 atau 2?
 
 - **Mode 1 (During):** patuhi aturan selama proses pembuatan. Mencegah slop dari awal dan diakhiri dengan evaluasi Delivery Gate. Gunakan untuk fitur/UI baru.
-- **Mode 2 (After):** audit proyek yang sudah selesai. Hasilkan daftar temuan bernomor di `anti-slop/audit-001-YYYY-MM-DD.md`. Setiap temuan merujuk pada aturan yang dilanggar (R-XX) dan alasan satu baris. Prioritas mengikuti tingkatan aturan: Hard Gate = TINGGI, Purpose-Gate = SEDANG, Quality Locks = RENDAH. Jangan mengubah kode apa pun sebelum pengguna menyetujui nomor tertentu.
+- **Mode 2 (After):** audit proyek yang sudah selesai. Hasilkan daftar temuan bernomor di `slop-ai-indo/audit-001-YYYY-MM-DD.md`. Setiap temuan merujuk pada aturan yang dilanggar (R-XX) dan alasan satu baris. Prioritas mengikuti tingkatan aturan: Hard Gate = TINGGI, Purpose-Gate = SEDANG, Quality Locks = RENDAH. Jangan mengubah kode apa pun sebelum pengguna menyetujui nomor tertentu.
 
 > **Tiga langkah yang mutlak berjalan di kedua mode:** Selesaikan arah desain sebelum koding (R-37), mintalah konfirmasi sebelum membuat aset visual baru (R-23), dan jalankan evaluasi Delivery Gate sebelum serah terima.
 

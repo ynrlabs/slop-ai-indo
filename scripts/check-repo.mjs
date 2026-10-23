@@ -29,6 +29,8 @@ const MANIFESTS = [
   '.cursor-plugin/marketplace.json',
   '.kimi-plugin/plugin.json',
   '.agents/plugins/marketplace.json',
+  '.opencode-plugin/plugin.json',
+  '.opencode-plugin/marketplace.json',
   'plugin.json',
   'cli/package.json',
 ]
@@ -111,6 +113,8 @@ function versions() {
     ['.codex-plugin/plugin.json', json('.codex-plugin/plugin.json')?.version],
     ['.cursor-plugin/plugin.json', json('.cursor-plugin/plugin.json')?.version],
     ['.kimi-plugin/plugin.json', json('.kimi-plugin/plugin.json')?.version],
+    ['.opencode-plugin/plugin.json', json('.opencode-plugin/plugin.json')?.version],
+    ['.opencode-plugin/marketplace.json', json('.opencode-plugin/marketplace.json')?.plugins?.[0]?.version],
     // Stamped into every install, so a stale one makes the installer misreport what is on disk.
     ['skills/slop-ai-indo/VERSION', read('skills/slop-ai-indo/VERSION').trim()],
     ['cli/lib/banner.mjs', read('cli/lib/banner.mjs').match(/installer v(\d+\.\d+\.\d+)/)?.[1]],

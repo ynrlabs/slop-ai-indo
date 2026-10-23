@@ -40,7 +40,7 @@ Ada empat jalur pemasangan, dan perbedaan di antara keduanya lebih penting darip
 |-------|-----------------------|--------------------|
 | **Pemasang Instan Lokal (`slop.bat`)** | Menyalin 1 paket lengkap (AGENTS.md, DESIGN.md, slop-ai-indo.md, dan skill) | Seluruh agen yang mendukung standar .agents/skills |
 | **Direktori skills.sh & GitHub** | Menyalin folder skill langsung dari GitHub | Agen yang didukung oleh direktori tersebut |
-| **Plugin Native (Plugin doors)** | Memuat antislop langsung dari repositori ini tanpa menyalin berkas ke proyek | Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline |
+| **Plugin Native (Plugin doors)** | Memuat slop-ai-indo langsung dari repositori ini tanpa menyalin berkas ke proyek | Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, OpenCode |
 | **Berkas Tunggal (The single file)** | Satu berkas Markdown yang Anda berikan ke AI apa pun | Apa pun yang dapat membaca teks, termasuk jendela chat HP |
 
 Pilihlah salah satu. Semuanya memuat aturan yang sama persis, sehingga menambahkan cara kedua hanya akan membuat Anda memiliki dua hal yang harus diperbarui.
@@ -49,8 +49,8 @@ Pilihlah salah satu. Semuanya memuat aturan yang sama persis, sehingga menambahk
 
 - **Pemasang Instan Lokal (`slop.bat` / `slop.ps1`):** Pilihan paling cepat dan lengkap jika Anda bekerja di Windows secara lokal. Secara otomatis menyalin file aturan inti, desain, dan seluruh modul skill tanpa butuh koneksi internet.
 - **Direktori skills.sh & GitHub:** Pilih ini jika Anda ingin menarik modul skill langsung dari repositori GitHub menggunakan `npx skills add yanuar1997/slop-ai-indo`.
-- **Plugin Native:** Pilih ini jika Anda menggunakan Claude Code, Antigravity, Codex, Cursor, Kimi Code, atau Cline dan lebih suka tidak menyimpan salinan berkas di dalam proyek Anda. Anda memperbaruinya langsung melalui perintah pembaruan plugin milik agen terkait.
-- **Berkas Tunggal:** Pilih ini jika Anda tidak memiliki akses terminal, atau ingin menggunakan antislop di jendela chat browser (ChatGPT web, Claude web) atau di ponsel.
+- **Plugin Native:** Pilih ini jika Anda menggunakan Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, atau OpenCode dan lebih suka tidak menyimpan salinan berkas di dalam proyek Anda. Anda memperbaruinya langsung melalui perintah pembaruan plugin milik agen terkait.
+- **Berkas Tunggal:** Pilih ini jika Anda tidak memiliki akses terminal, atau ingin menggunakan slop-ai-indo di jendela chat browser (ChatGPT web, Claude web) atau di ponsel.
 
 ### Sebelum Anda Memulai
 
@@ -174,6 +174,14 @@ cline plugin install https://github.com/yanuar1997/slop-ai-indo.git
 
 *Perhatian:* Dokumentasi resmi Cline saat ini membatasi plugin hanya untuk SDK, CLI, dan Kanban, dan menyatakan bahwa fitur plugin belum berlaku untuk ekstensi VS Code dan JetBrains. Jika Anda menggunakan Cline di dalam ekstensi editor kode, gunakan metode 1 (`slop.bat`) atau metode 2 (Direktori Skills).
 
+#### OpenCode
+
+Repositori ini berfungsi sebagai plugin dan marketplace OpenCode. Pasang menggunakan OpenCode CLI:
+
+```bash
+opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo
+```
+
 ---
 
 ### 4. Berkas Tunggal (The Single File)
@@ -229,18 +237,19 @@ npx skills add yanuar1997/slop-ai-indo
 
 Atau jika menggunakan installer lokal Windows, jalankan kembali `slop.bat` di folder proyek Anda.
 
-Perintah ini akan mencari di proyek saat ini dan folder home pengguna, memperbarui setiap folder antislop yang ditemukan, mempertahankan pilihan skill yang sebelumnya sudah dipasang, dan mencetak nomor versi yang diperbarui.
+Perintah ini akan mencari di proyek saat ini dan folder home pengguna, memperbarui setiap folder slop-ai-indo yang ditemukan, mempertahankan pilihan skill yang sebelumnya sudah dipasang, dan mencetak nomor versi yang diperbarui.
 
 ### Pembaruan Tiap Plugin Native
 
 | Platform Agen | Perintah Pembaruan |
 |---------------|--------------------|
-| **Claude Code** | `claude plugin update antislop@slop-ai-indo` (lalu buka ulang atau jalankan `/reload-plugins`) |
+| **Claude Code** | `claude plugin update slop-ai-indo@slop-ai-indo` (lalu buka ulang atau jalankan `/reload-plugins`) |
 | **Antigravity** | Jalankan ulang: `agy plugin install https://github.com/yanuar1997/slop-ai-indo` |
 | **Codex** | `codex plugin marketplace upgrade slop-ai-indo` |
 | **Cursor** | `agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo` (atau via panel Customize) |
 | **Kimi Code** | Jalankan ulang: `/plugins install https://github.com/yanuar1997/slop-ai-indo` lalu `/reload` |
 | **Cline** | `cline plugin install https://github.com/yanuar1997/slop-ai-indo.git --force` |
+| **OpenCode** | `opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo` |
 | **Berkas Tunggal** | Unduh ulang berkas `slop-ai-indo.md` terbaru dan gantikan file yang lama |
 
 ---
@@ -251,16 +260,17 @@ Perintah ini akan mencari di proyek saat ini dan folder home pengguna, memperbar
 
 Dua hal yang perlu dihapus:
 1. **Folder skill yang disalin:** Hapus folder `slop-ai-indo` atau `slop-ai-indo-*` di dalam folder skill agen Anda (misalnya di `.agents/skills/` atau `.claude/skills/`).
-2. **Blok penunjuk di file inisialisasi:** Buka `AGENTS.md`, `CLAUDE.md`, atau `GEMINI.md`, cari blok antara `<!-- antislop:start -->` dan `<!-- antislop:end -->`, lalu hapus blok tersebut. Jika file tersebut tidak memuat aturan lain, Anda dapat menghapus file tersebut.
+2. **Blok penunjuk di file inisialisasi:** Buka `AGENTS.md`, `CLAUDE.md`, atau `GEMINI.md`, cari blok antara `<!-- slop-ai-indo:start -->` dan `<!-- slop-ai-indo:end -->`, lalu hapus blok tersebut. Jika file tersebut tidak memuat aturan lain, Anda dapat menghapus file tersebut.
 
 ### Menghapus Plugin Native
 
-- **Claude Code:** `/plugin uninstall antislop@slop-ai-indo`
-- **Antigravity:** `agy plugin uninstall antislop` (atau `agy plugin disable antislop` untuk menonaktifkan sementara)
-- **Codex:** `codex plugin remove antislop@slop-ai-indo`
+- **Claude Code:** `/plugin uninstall slop-ai-indo@slop-ai-indo`
+- **Antigravity:** `agy plugin uninstall slop-ai-indo` (atau `agy plugin disable slop-ai-indo` untuk menonaktifkan sementara)
+- **Codex:** `codex plugin remove slop-ai-indo@slop-ai-indo`
 - **Cursor:** Hapus dari panel Customize, atau hapus marketplacenya: `agent plugin marketplace remove slop-ai-indo`
-- **Kimi Code:** `/plugins remove antislop`
+- **Kimi Code:** `/plugins remove slop-ai-indo`
 - **Cline:** Hapus folder plugin di `~/.cline/plugins/_installed/`
+- **OpenCode:** `opencode plugin uninstall slop-ai-indo`
 
 ---
 

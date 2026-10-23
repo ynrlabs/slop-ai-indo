@@ -26,6 +26,8 @@ const EXTRA_SKILLS = [
   { value: 'slop-ai-indo-layoutmobile', label: 'slop-ai-indo-layoutmobile', hint: 'responsive layout rules' },
   { value: 'slop-ai-indo-code', label: 'slop-ai-indo-code', hint: 'code comment rules' },
   { value: 'slop-ai-indo-security', label: 'slop-ai-indo-security', hint: 'deep security audit and vulnerability review' },
+  { value: 'slop-ai-indo-docs', label: 'slop-ai-indo-docs', hint: 'technical documentation, README, and API hygiene' },
+  { value: 'slop-ai-indo-identity', label: 'slop-ai-indo-identity', hint: 'brand identity, visual character, and anti-cloning' },
 ]
 
 function stop(message) {
