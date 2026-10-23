@@ -210,4 +210,4 @@ Folder modul yang mendalami satu topik spesifik (UI, penulisan teks, aksesibilit
 
 ## Pengembang & Kontributor
 
-Dikembangkan dan dirawat oleh [Yanuar (yanuar1997)](https://github.com/yanuar1997). Terima kasih kepada semua pihak yang telah berkontribusi membuat Slop AI Indo menjadi lebih baik.
+Dikembangkan dan dirawat oleh [Yanuar (yanuar1997)](https://github.com/yanuar1997). 
