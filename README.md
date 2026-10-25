@@ -324,7 +324,7 @@ Jika linter menemukan pelanggaran aturan pada kode PR, pipeline otomatis berstat
 
 ## Peta Jalan (Roadmap)
 
-**v1.0.2** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
+**v1.1.0** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
 
 ## FAQ (Pertanyaan yang Sering Diajukan)
 
