@@ -33,7 +33,7 @@ npx slop-ai-indo
 ```
 
 Perintah ini secara otomatis memasang **1 paket lengkap**:
-- `DESIGN.md`: Standar estetika human-crafted (siku presisi 4px - 6px, kanvas terang ala n8n).
+- `DESIGN.md`: Standar estetika human-crafted (bisa dipilih langsung saat instalasi: Enterprise SaaS, Dark Modern, Editorial, Utilitarian, atau Default).
 - `AGENTS.md`: Aturan otomatis AI agent saat membuka proyek terkait.
 - `slop-ai-indo.md`: Mesin filter inti (38 aturan wajib).
 - `.agents/`: Folder konfigurasi lengkap dengan 7 modul skill terstandar (termasuk modul audit keamanan `slop-ai-indo-security`).
@@ -182,6 +182,8 @@ Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pe
 | **slop-ai-indo-security** | Audit keamanan mendalam: tinjauan kerentanan source-first, threat modeling, verifikasi sandbox, pelaporan defensif | v1.0.0 |
 | **slop-ai-indo-docs** | Dokumentasi teknis: pencegahan narasi hampa, cuplikan kode halusinasi, dan arsitektur fiktif di README & PRD | v1.0.2 |
 | **slop-ai-indo-identity** | Karakter & identitas produk: pencegahan penjiplakan layout SaaS populer, ikon generik, dan palet acak | v1.0.2 |
+| **slop-ai-indo-backend** | Arsitektur backend & API: pencegahan silent catch, query N+1, endpoint tanpa skema validasi, transaksi ACID | v1.1.0 |
+| **slop-ai-indo-test** | Pengujian otomatis & mocking: pemberantasan tes palsu, over-mocking, asersi hampa, skenario kegagalan nyata | v1.1.0 |
 
 Pilih skill yang sesuai dengan pekerjaan:
 - Membuat UI → `slop-ai-indo-ui`
@@ -192,6 +194,8 @@ Pilih skill yang sesuai dengan pekerjaan:
 - Audit keamanan & kerentanan kode → `slop-ai-indo-security`
 - Dokumentasi teknis & PRD → `slop-ai-indo-docs`
 - Identitas produk & branding → `slop-ai-indo-identity`
+- Arsitektur backend & API → `slop-ai-indo-backend`
+- Pengujian otomatis & unit test → `slop-ai-indo-test`
 - Tugas campuran → pasang beberapa skill sekaligus
 - Tanpa skill tambahan → berkas inti sendirian sudah merupakan filter yang lengkap
 
@@ -201,6 +205,122 @@ Slop AI Indo digunakan dalam salah satu dari dua mode, yang ditentukan di awal s
 
 - **DURING (Saat Pengerjaan):** Memandu pengerjaan saat kode sedang dibangun, diakhiri dengan evaluasi Delivery Gate. Gunakan saat membuat UI baru dari nol.
 - **AFTER (Audit Pasca Pengerjaan):** Mengaudit pekerjaan yang sudah selesai: menghasilkan daftar temuan bernomor, meminta persetujuan mana yang harus diperbaiki, lalu memberikan laporan tindak lanjut. Gunakan untuk membersihkan kode yang sudah ada.
+
+## Mesin Linter Deterministik (`slop-lint`)
+
+Verifikasi kode secara instan dan deterministik tanpa menunggu evaluasi subjektif LLM:
+
+```bash
+# Memeriksa seluruh file di proyek saat ini
+npx slop-ai-indo lint
+
+# Memeriksa folder tertentu
+npx slop-ai-indo lint ./src
+
+# Output format JSON untuk integrasi CI/CD
+npx slop-ai-indo lint --json
+```
+
+Linter ini memindai berkas secara statis dan memvalidasi aturan inti:
+- **UI & CSS:** `transition: all` (R-09), tombol kapsul 9999px (R-12), outer neon glow (R-11), penghapusan focus outline tanpa pengganti (R-06).
+- **Teks & Copywriting:** Kata klise promosi AI (*"unlock the power"*, *"seamless synergy"*, *"game-changing"*, dll.) (R-02), angka/metrik kepuasan fiktif tanpa kutipan (R-08), dan em-dash jamak tanpa tujuan.
+- **Kebersihan Kode:** Komentar klise yang mengulang sintaks (R-31) dan placeholder TODO malas/halusinasi (R-32).
+
+## Server MCP Terpadu (`slop-mcp`)
+
+Slop AI Indo menyediakan server Model Context Protocol (MCP) terpadu berbasis stdio untuk dipanggil langsung oleh AI agent di IDE (Claude Code, Cursor, Antigravity, Cline, Windsurf):
+
+```bash
+# Menjalankan server MCP secara langsung
+npx slop-ai-indo mcp
+```
+
+### Konfigurasi MCP di IDE
+Tambahkan entri berikut pada konfigurasi MCP IDE Anda:
+
+```json
+{
+  "mcpServers": {
+    "slop-ai-indo": {
+      "command": "npx",
+      "args": ["-y", "slop-ai-indo", "mcp"]
+    }
+  }
+}
+```
+
+### Tools yang Disediakan Server MCP:
+1. **`check_contrast`**: Menghitung rasio kontras WCAG 2.1 antara dua warna heksadesimal dengan vonis kepatuhan AA (normal & large text).
+2. **`lint_snippet`**: Memeriksa potongan kode aktif secara in-memory dari AI slop sebelum ditulis ke disk.
+3. **`lint_file`**: Menjalankan analisis statis deterministik pada path berkas atau direktori proyek.
+4. **`validate_delivery_gate`**: Memvalidasi kelengkapan 4 blok wajib laporan Delivery Gate (Aturan, Smoke Test, Kontras, dan PASS/FAIL).
+5. **`get_rule`**: Mengambil referensi detail dan solusi perbaikan dari suatu aturan anti-slop berdasarkan Rule ID.
+
+---
+
+## Git Pre-commit Hook & CI/CD Pipeline
+
+Slop AI Indo menyediakan penjaga gerbang otomatis (*automated gatekeeper*) agar kode yang mengandung AI slop tidak pernah masuk ke repositori git atau lolos ke branch produksi.
+
+### 1. Git Pre-commit Hook Lokal
+
+Pasang Git pre-commit hook ke direktori repositori Anda hanya dengan satu perintah:
+
+```bash
+npx slop-ai-indo hook
+```
+
+Fitur Pre-commit Hook:
+- **Zero-overhead & Cepat (<100ms):** Hanya memindai berkas yang sedang di-*stage* (`git diff --cached`), tanpa overhead subprocess yang lambat.
+- **Deteksi Pelanggaran Statis:** Otomatis memblokir commit jika kode Anda memuat warna heksadesimal mentah (`R-02`), teks placeholder/lorem ipsum mentah (`R-06` & `R-12`), blok try-catch kosong (`R-08`), debugging `console.log` liar (`R-09`), import font yang tidak sesuai aturan (`R-11`), atau pelanggaran lainnya.
+- **Bypass Darurat:** Jika dalam kondisi darurat Anda tetap harus melakukan commit, gunakan opsi bawaan git atau environment variable:
+  ```bash
+  git commit -m "emergency fix" --no-verify
+  # atau
+  SLOP_SKIP_HOOK=1 git commit -m "emergency fix"
+  ```
+
+### 2. Integrasi CI/CD (GitHub Actions)
+
+Jadikan audit anti-slop sebagai salah satu tahap pengecekan otomatis pada setiap *Pull Request* dan *Push*.
+
+Salin template workflow yang sudah disediakan ke direktori proyek Anda:
+
+```bash
+mkdir -p .github/workflows
+cp templates/slop-audit.yml .github/workflows/
+```
+
+Contoh isi workflow (`.github/workflows/slop-audit.yml`):
+
+```yaml
+name: Slop AI Audit Gate
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+
+jobs:
+  audit:
+    name: Audit Anti-Slop Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Run Deterministic Slop Linter
+        run: npx -y slop-ai-indo lint .
+```
+
+Jika linter menemukan pelanggaran aturan pada kode PR, pipeline otomatis berstatus *Failed* dengan rincian baris dan Rule ID yang harus diperbaiki oleh kontributor atau AI agent.
 
 ## Peta Jalan (Roadmap)
 

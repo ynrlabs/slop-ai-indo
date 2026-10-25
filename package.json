@@ -8,9 +8,16 @@
   "cline": {
     "plugins": [
       {
-        "paths": ["./.cline-plugin/plugin.js"],
+        "paths": [
+          "./.cline-plugin/plugin.js"
+        ],
         "capabilities": []
       }
     ]
+  },
+  "bin": {
+    "slop-ai-indo": "./cli/index.mjs",
+    "slop-lint": "./cli/bin/slop-lint.mjs",
+    "slop-mcp": "./cli/bin/slop-mcp.mjs"
   }
 }

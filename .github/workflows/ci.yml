@@ -42,5 +42,6 @@ jobs:
         working-directory: cli
         run: npm ci
 
-      - name: Installer smoke test
-        run: node cli/scripts/smoke-test.mjs
+      - name: Full Test Suite (Smoke test, Linter, MCP)
+        working-directory: cli
+        run: npm test

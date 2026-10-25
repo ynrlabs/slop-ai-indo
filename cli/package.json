@@ -4,7 +4,9 @@
   "description": "Interactive installer for antislop skills and design standards (Bahasa Indonesia).",
   "type": "module",
   "bin": {
-    "slop-ai-indo": "index.mjs"
+    "slop-ai-indo": "index.mjs",
+    "slop-lint": "bin/slop-lint.mjs",
+    "slop-mcp": "bin/slop-mcp.mjs"
   },
   "license": "MIT",
   "author": "Yanuar (yanuar1997)",
@@ -27,16 +29,21 @@
     "node": ">=18"
   },
   "files": [
+    "bin/",
     "index.mjs",
     "lib/",
     "skills/",
+    "presets/",
     "DESIGN.md",
     "slop-ai-indo.md"
   ],
   "scripts": {
-    "test": "node scripts/smoke-test.mjs",
+    "test": "node scripts/smoke-test.mjs && node scripts/test-linter.mjs && node scripts/test-mcp.mjs && node scripts/test-hook.mjs",
     "sync-skills": "node scripts/sync-skills.mjs",
-    "prepublishOnly": "npm run sync-skills"
+    "prepublishOnly": "npm run sync-skills",
+    "test:linter": "node scripts/test-linter.mjs",
+    "test:mcp": "node scripts/test-mcp.mjs",
+    "test:hook": "node scripts/test-hook.mjs"
   },
   "dependencies": {
     "@clack/prompts": "^1.7.0",

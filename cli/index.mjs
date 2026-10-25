@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 import pc from 'picocolors'
 import { intro, outro, select, multiselect, confirm, isCancel, cancel, log, spinner } from '@clack/prompts'
 import { banner } from './lib/banner.mjs'
@@ -17,6 +20,7 @@ import {
   updateAll,
   updatePointers,
   VERSION,
+  DESIGN_PRESETS,
 } from './lib/install.mjs'
 
 const EXTRA_SKILLS = [
@@ -28,6 +32,8 @@ const EXTRA_SKILLS = [
   { value: 'slop-ai-indo-security', label: 'slop-ai-indo-security', hint: 'deep security audit and vulnerability review' },
   { value: 'slop-ai-indo-docs', label: 'slop-ai-indo-docs', hint: 'technical documentation, README, and API hygiene' },
   { value: 'slop-ai-indo-identity', label: 'slop-ai-indo-identity', hint: 'brand identity, visual character, and anti-cloning' },
+  { value: 'slop-ai-indo-backend', label: 'slop-ai-indo-backend', hint: 'backend architecture, API, and database hygiene' },
+  { value: 'slop-ai-indo-test', label: 'slop-ai-indo-test', hint: 'testing rules, anti-fake test and mock hygiene' },
 ]
 
 function stop(message) {
@@ -53,6 +59,41 @@ function printPluginDoors(found) {
 }
 
 async function main() {
+  if (process.argv[2] === 'lint' || process.argv.includes('--lint')) {
+    const { spawnSync } = await import('node:child_process')
+    const lintBin = path.join(__dirname, 'bin', 'slop-lint.mjs')
+    const lintArgs = process.argv.slice(2).filter((a) => a !== 'lint' && a !== '--lint')
+    const res = spawnSync(process.execPath, [lintBin, ...lintArgs], { stdio: 'inherit' })
+    process.exit(res.status ?? 0)
+  }
+
+  if (process.argv[2] === 'mcp' || process.argv.includes('--mcp')) {
+    const { spawnSync } = await import('node:child_process')
+    const mcpBin = path.join(__dirname, 'bin', 'slop-mcp.mjs')
+    const res = spawnSync(process.execPath, [mcpBin], { stdio: 'inherit' })
+    process.exit(res.status ?? 0)
+  }
+
+  if (process.argv[2] === 'hook' || process.argv.includes('--hook')) {
+    const { installGitHook, runPreCommitHook } = await import('./lib/hook.mjs')
+    if (process.argv.includes('--run')) {
+      const exitCode = runPreCommitHook()
+      process.exit(exitCode)
+    } else {
+      try {
+        const file = installGitHook(process.cwd())
+        console.log(pc.green('✔ Git pre-commit hook berhasil dipasang: ') + pc.dim(file))
+        console.log(pc.cyan('Setiap kali Anda menjalankan `git commit`, slop-lint akan otomatis memvalidasi staged files.'))
+        process.exit(0)
+      } catch (err) {
+        console.error(pc.red(`Gagal memasang hook: ${err.message}`))
+        process.exit(1)
+      }
+    }
+  }
+
+
+
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
     console.log(`slop-ai-indo ${VERSION}`)
     return
@@ -115,6 +156,18 @@ async function main() {
   })
   if (isCancel(location)) stop('Install cancelled.')
 
+  let chosenPreset = 'enterprise'
+  if (location === 'project') {
+    log.step('Pilih Preset Desain (DESIGN.md)')
+    const preset = await select({
+      message: 'Pilih arah visual dan standar estetika untuk proyek ini:',
+      options: DESIGN_PRESETS,
+      initialValue: 'enterprise',
+    })
+    if (isCancel(preset)) stop('Install cancelled.')
+    chosenPreset = preset
+  }
+
   log.step('Choose which agents get antislop')
   const detected = detectAgents(location)
   const chosen = await multiselect({
@@ -164,7 +217,7 @@ async function main() {
   const spin = spinner()
   spin.start('Installing skills...')
   const written = installSkills({ skills, targets, overwrite })
-  const pointers = location === 'project' ? updatePointers({ targets, skills }) : []
+  const pointers = location === 'project' ? updatePointers({ targets, skills, designPreset: chosenPreset }) : []
   spin.stop('Done.')
 
   if (pointers.length > 0) {

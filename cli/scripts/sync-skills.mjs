@@ -49,6 +49,14 @@ if (fs.existsSync(agentsSkills)) {
   })
 }
 
+// Copy presets/ into cli/presets for npm package distribution
+const repoPresets = path.join(repoRoot, 'presets')
+const cliPresets = path.join(__dirname, '..', 'presets')
+if (fs.existsSync(repoPresets)) {
+  fs.rmSync(cliPresets, { recursive: true, force: true })
+  fs.cpSync(repoPresets, cliPresets, { recursive: true })
+}
+
 // Copy DESIGN.md and slop-ai-indo.md into cli/ for npm package distribution
 fs.copyFileSync(path.join(repoRoot, 'DESIGN.md'), path.join(__dirname, '..', 'DESIGN.md'))
 fs.copyFileSync(path.join(repoRoot, 'slop-ai-indo.md'), path.join(__dirname, '..', 'slop-ai-indo.md'))

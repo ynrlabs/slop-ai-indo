@@ -9,6 +9,14 @@ export const CORE = 'slop-ai-indo'
 
 export const VERSION = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')).version
 
+export const DESIGN_PRESETS = [
+  { value: 'enterprise', label: 'Enterprise SaaS (Rekomendasi)', hint: 'Kanvas terang, radius 4-6px, presisi ala Linear / n8n' },
+  { value: 'dark-modern', label: 'Dark Modern', hint: 'Kanvas gelap matte obsidian, monokrom presisi ala Vercel / Supabase' },
+  { value: 'editorial', label: 'Editorial & Content', hint: 'Warm canvas, serif typography ala Substack / Stripe Press' },
+  { value: 'utilitarian', label: 'Utilitarian & Dense Data', hint: 'High-density grid, border tegas, tabular data ala Grafana' },
+  { value: 'default', label: 'Bawaan (Default)', hint: 'Gunakan standar DESIGN.md asli slop-ai-indo' },
+]
+
 /** The release an existing install came from, or null when it predates the VERSION file.
  * Nothing else on disk names it, so without this an update cannot tell the user what
  * they already have.
@@ -254,6 +262,8 @@ const SKILL_LINES = {
   'slop-ai-indo-security': 'Security audit: `slop-ai-indo-security`',
   'slop-ai-indo-docs': 'Technical documentation: `slop-ai-indo-docs`',
   'slop-ai-indo-identity': 'Brand & visual character: `slop-ai-indo-identity`',
+  'slop-ai-indo-backend': 'Backend & API: `slop-ai-indo-backend`',
+  'slop-ai-indo-test': 'Testing & mocks: `slop-ai-indo-test`',
 }
 
 export const SKILL_NAMES = Object.keys(SKILL_LINES)
@@ -342,16 +352,25 @@ function writeBlock(entry, block) {
   fs.writeFileSync(entry, body + eol)
 }
 
-export function updatePointers({ targets, skills }) {
+export function updatePointers({ targets, skills, designPreset = 'enterprise' } = {}) {
   const entries = new Set()
   for (const t of targets) {
     if (fs.existsSync(path.join(t.path, CORE))) for (const a of t.agents) entries.add(a.entry)
   }
 
-  // Copy DESIGN.md and slop-ai-indo.md into current project if bundled
+  // Copy chosen DESIGN.md preset and slop-ai-indo.md into current project if bundled
+  const presetFile = `${designPreset}.md`
+  const bundledPreset = path.join(__dirname, '..', 'presets', presetFile)
+  const repoPreset = path.join(__dirname, '..', '..', 'presets', presetFile)
   const bundledDesign = path.join(__dirname, '..', 'DESIGN.md')
-  if (fs.existsSync(bundledDesign)) {
-    fs.copyFileSync(bundledDesign, path.join(process.cwd(), 'DESIGN.md'))
+
+  let sourceDesign = null
+  if (fs.existsSync(bundledPreset)) sourceDesign = bundledPreset
+  else if (fs.existsSync(repoPreset)) sourceDesign = repoPreset
+  else if (fs.existsSync(bundledDesign)) sourceDesign = bundledDesign
+
+  if (sourceDesign) {
+    fs.copyFileSync(sourceDesign, path.join(process.cwd(), 'DESIGN.md'))
   }
   const bundledSlop = path.join(__dirname, '..', 'slop-ai-indo.md')
   if (fs.existsSync(bundledSlop)) {
