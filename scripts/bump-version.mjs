@@ -1,6 +1,6 @@
 import fs from 'node:fs'
 
-const newVersion = '1.3.0'
+const newVersion = process.argv[2] || '1.3.1'
 
 // 1. package.json
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'))
@@ -56,5 +56,15 @@ fs.writeFileSync('cli/lib/banner.mjs', banner)
 let contrast = fs.readFileSync('skills/slop-ai-indo-human/contrast-mcp.py', 'utf8')
 contrast = contrast.replace(/SERVER_VERSION = "\d+\.\d+\.\d+"/, `SERVER_VERSION = "${newVersion}"`)
 fs.writeFileSync('skills/slop-ai-indo-human/contrast-mcp.py', contrast)
+
+// 12. README.md
+let readme = fs.readFileSync('README.md', 'utf8')
+readme = readme.replace(/\*\*v\d+\.\d+\.\d+\*\* adalah rilis saat ini/, `**v${newVersion}** adalah rilis saat ini`)
+fs.writeFileSync('README.md', readme)
+
+// 13. ROADMAP.md
+let roadmap = fs.readFileSync('ROADMAP.md', 'utf8')
+roadmap = roadmap.replace(/Rilis terbaru saat ini adalah \*\*v\d+\.\d+\.\d+\*\*/, `Rilis terbaru saat ini adalah **v${newVersion}**`)
+fs.writeFileSync('ROADMAP.md', roadmap)
 
 console.log('Bumped all manifests to version', newVersion)
