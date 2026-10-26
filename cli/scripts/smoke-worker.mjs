@@ -36,7 +36,7 @@ check('A detected (fresh project)', fresh, [])
 const defaultTargets = resolveTargets('project')
 console.log('A default targets:', defaultTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
 // Copilot, Kimi Code, and Amp share Antigravity's folder, so eleven resolve to eight.
-check('A eleven agents over eight folders', [AGENTS.length, defaultTargets.length], [11, 8])
+check('A thirteen agents over ten folders', [AGENTS.length, defaultTargets.length], [13, 10])
 check('A copilot and kimi share the antigravity folder', resolveTargets('project', ['antigravity', 'copilot', 'kimi']).length, 1)
 
 // Claude Code only, via explicit selection (old behavior preserved).
@@ -64,13 +64,13 @@ check('D antigravity pointers', agPointers.map((p) => path.basename(p)), ['AGENT
 check('D .agents/skills/' + CORE + '/SKILL.md exists', fs.existsSync(path.join(process.cwd(), '.agents', 'skills', CORE, 'SKILL.md')), true)
 
 // OpenCode, Cursor, and Gemini each install and point to their own entry file.
-for (const agent of ['opencode', 'cursor', 'gemini']) {
+for (const agent of ['opencode', 'cursor', 'gemini', 'omp', 'deepseek']) {
   const t = resolveTargets('project', [agent])
   const w = installSkills({ skills, targets: t, overwrite: false })
   const pointers = updatePointers({ targets: t, skills })
   check(`D2 ${agent} written`, w.length, 2)
   check(`D2 ${agent} pointer`, pointers.map((p) => path.basename(p)), [agent === 'gemini' ? 'GEMINI.md' : 'AGENTS.md'])
-  check(`D2 ${agent} folder exists`, fs.existsSync(path.join(process.cwd(), agent === 'gemini' ? '.gemini' : agent === 'cursor' ? '.cursor' : '.opencode', 'skills', CORE, 'SKILL.md')), true)
+  check(`D2 ${agent} folder exists`, fs.existsSync(path.join(process.cwd(), agent === 'gemini' ? '.gemini' : agent === 'cursor' ? '.cursor' : agent === 'omp' ? '.omp' : agent === 'deepseek' ? '.deepseek' : '.opencode', 'skills', CORE, 'SKILL.md')), true)
 }
 
 // Cline keeps a folder of its own and reads .claude/skills beside it, so both fill up.
@@ -120,7 +120,7 @@ check('D6 hermes writes a project pointer', updatePointers({ targets: hermesProj
 
 // Detection now sees the agents that were installed.
 const after = detectAgents('project')
-check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'gemini', 'hermes', 'kimi', 'opencode'])
+check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kimi', 'omp', 'opencode'])
 
 // OpenCode reads .claude/skills and .agents/skills too, so a project that installs into
 // two of them holds the same names twice and OpenCode picks between them unpredictably.

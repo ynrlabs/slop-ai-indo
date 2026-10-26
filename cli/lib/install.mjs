@@ -55,6 +55,10 @@ export const AGENTS = [
   // Kimi Code reads the shared folder at both scopes. Its own .kimi-code/skills is never
   // written here, and $KIMI_CODE_HOME/skills moves with an env var the installer cannot see.
   { id: 'kimi', label: 'Kimi Code', dir: '.agents/skills', entry: 'AGENTS.md' },
+  // Oh My Pi reads .omp/skills and supports .agents/skills as well as .claude/skills.
+  { id: 'omp', label: 'Oh My Pi', dir: '.omp/skills', readsAlso: ['.agents/skills', '.claude/skills'], entry: 'AGENTS.md' },
+  // DeepSeek coding agent and Deep Code CLI read .deepseek/skills and the shared .agents/skills.
+  { id: 'deepseek', label: 'DeepSeek', dir: '.deepseek/skills', readsAlso: ['.agents/skills'], entry: 'AGENTS.md' },
 ]
 
 export function skillSourceDir() {

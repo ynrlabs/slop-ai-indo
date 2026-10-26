@@ -131,8 +131,10 @@ Setiap skill berbentuk folder berstandar terbuka Agent Skills (`<nama>/SKILL.md`
 | Hermes | `.hermes/skills/` |
 | GitHub Copilot | `.agents/skills/` |
 | Kimi Code | `.agents/skills/` |
+| Oh My Pi | `.omp/skills/` |
+| DeepSeek | `.deepseek/skills/` |
 
-Antigravity, Copilot, Kimi Code, dan Amp berbagi satu folder (`.agents/skills/`). Pemasang menuliskan folder bersama ini sehingga memilih mereka bersamaan hanya memasang skill satu kali.
+Antigravity, Copilot, Kimi Code, dan Amp berbagi satu folder (`.agents/skills/`). Pemasang menuliskan folder bersama ini sehingga memilih mereka bersamaan hanya memasang skill satu kali. Oh My Pi (`.omp/skills/`) dan DeepSeek (`.deepseek/skills/`) juga mendukung pembacaan folder bersama tersebut secara langsung.
 
 ### Manual (Berkas Tunggal)
 
@@ -331,7 +333,7 @@ Bukan, melainkan sebuah **penyaring (filter)**. Slop AI Indo tidak mendikte pale
 
 ### Agen AI apa saja yang didukung?
 Semua agen AI coding modern, melalui metode berikut:
-- **Pemasang resmi NPM (`npx slop-ai-indo`):** Mendukung Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, dan Kimi Code.
+- **Pemasang resmi NPM (`npx slop-ai-indo`):** Mendukung Claude Code, Codex, Antigravity, OpenCode, Cursor, Cline, Amp, Gemini CLI, Hermes, GitHub Copilot, Kimi Code, Oh My Pi, dan DeepSeek.
 - **Direktori skills (GitHub) dan skrip lokal:** Tersedia via `slop.bat` dan `slop.ps1`.
 - **Plugin native:** Tersedia untuk Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, dan OpenCode dari repositori ini.
 - **Berkas tunggal (`slop-ai-indo.md`):** Berfungsi pada agen AI apa pun yang dapat membaca teks Markdown polos, termasuk jendela chat browser atau aplikasi ponsel.

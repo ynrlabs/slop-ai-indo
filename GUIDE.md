@@ -291,6 +291,8 @@ Dua hal yang perlu dihapus:
 | Hermes | `.hermes/skills/` |
 | GitHub Copilot | `.agents/skills/` |
 | Kimi Code | `.agents/skills/` |
+| Oh My Pi | `.omp/skills/` |
+| DeepSeek | `.deepseek/skills/` |
 
 ### Apa itu Skill?
 
