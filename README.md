@@ -16,7 +16,12 @@ Filter inti mencegah kode murahan (*slop*) tetapi tidak menciptakan arah gaya. `
 
 ## Lihat Perbedaannya
 
-Instruksi yang sama, halaman yang sama, digenerasi empat kali. Slop AI Indo memfilter; `DESIGN.md` memberikan arah visual. Keduanya adalah dua tugas yang berbeda, dan ini adalah empat hasilnya. Bagian teks dan kode disajikan sebagai pasangan sebelum-dan-sesudah, karena tidak memerlukan arahan gaya visual tambahan.
+Instruksi yang sama, halaman yang sama, dievaluasi dengan dan tanpa filter. Slop AI Indo memfilter kode murahan, sementara `DESIGN.md` memberikan arah visual yang presisi:
+
+| **Tanpa Filter** | **Dengan Slop AI Indo** | **Dengan DESIGN.md** | **Dengan Keduanya (Rekomendasi)** |
+|:---|:---|:---|:---|
+| ![Tanpa Filter](assets/compare/ui/without.webp) | ![Hanya Slop AI Indo](assets/compare/ui/w-antislop.webp) | ![Hanya DESIGN.md](assets/compare/ui/w-design.webp) | ![Kombinasi Terbaik](assets/compare/ui/w-all.webp) |
+| Output awal AI: logo bintang berkilau, badge kapsul beta, dan jendela terminal rekaan. | Bersih dan jujur: filter membuang angka buatan dan dekorasi klise. | Estetika visual terarah, namun pola AI slop masih terbawa. | Angka jujur, struktur bersih, dan arah visual presisi ala SaaS enterprise profesional. |
 
 
 
@@ -36,7 +41,7 @@ Perintah ini secara otomatis memasang **1 paket lengkap**:
 - `DESIGN.md`: Standar estetika human-crafted (bisa dipilih langsung saat instalasi: Enterprise SaaS, Dark Modern, Editorial, Utilitarian, atau Default).
 - `AGENTS.md`: Aturan otomatis AI agent saat membuka proyek terkait.
 - `slop-ai-indo.md`: Mesin filter inti (38 aturan wajib).
-- `.agents/`: Folder konfigurasi lengkap dengan 7 modul skill terstandar (termasuk modul audit keamanan `slop-ai-indo-security`).
+- `.agents/`: Folder konfigurasi lengkap dengan 11 modul skill terstandar (termasuk arsitektur backend, audit keamanan, testing, dan kebersihan kode).
 
 ### 2. Pemasang Instan Lokal Windows (`slop.bat`)
 
@@ -61,7 +66,7 @@ Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 
 ```text
 /plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
-/plugin install slop-ai-indo@slop-ai-indo
+/plugin install slop-ai-indo
 ```
 
 ### 5. Plugin (Antigravity)
@@ -78,7 +83,7 @@ Repositori ini berfungsi sebagai plugin dan marketplace Codex. Tambahkan marketp
 
 ```bash
 codex plugin marketplace add yanuar1997/slop-ai-indo
-codex plugin add slop-ai-indo@slop-ai-indo
+codex plugin add slop-ai-indo
 ```
 
 ### 7. Plugin (Cursor)
@@ -158,7 +163,7 @@ npx slop-ai-indo
 | Pemasang Resmi NPM | `npx slop-ai-indo` |
 | Skrip Lokal Windows | `slop.bat` |
 | Direktori skills.sh & GitHub | `npx skills add yanuar1997/slop-ai-indo` |
-| Plugin Claude Code | `claude plugin update slop-ai-indo@slop-ai-indo` |
+| Plugin Claude Code | `claude plugin update slop-ai-indo` |
 | Plugin Antigravity | `agy plugin install https://github.com/yanuar1997/slop-ai-indo` |
 | Plugin Codex | `codex plugin marketplace upgrade slop-ai-indo` |
 | Plugin Cursor | `agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo` |
@@ -178,11 +183,11 @@ Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pe
 | **slop-ai-indo-copywriting** | Penulisan & teks: judul, CTA, tone, anti kata klise AI, higienitas markdown | v1.0.0 |
 | **slop-ai-indo-human** | Aksesibilitas: rasio kontras (disertai checker), navigasi keyboard, fokus, status elemen | v1.0.0 |
 | **slop-ai-indo-layoutmobile** | Responsivitas mobile: adaptasi layar HP hingga desktop, breakpoint, grid, overflow, area sentuh | v1.0.0 |
-| **slop-ai-indo-code** | Kebersihan komentar kode: membuang komentar klise AI, menjaga komentar penting arsitektural | v1.0.0 |
+| **slop-ai-indo-code** | Kebersihan komentar kode: membuang komentar klise AI, larangan DocBlock boilerplate pada native typing, menjaga komentar arsitektural | v1.0.0 |
 | **slop-ai-indo-security** | Audit keamanan mendalam: tinjauan kerentanan source-first, threat modeling, verifikasi sandbox, pelaporan defensif | v1.0.0 |
 | **slop-ai-indo-docs** | Dokumentasi teknis: pencegahan narasi hampa, cuplikan kode halusinasi, dan arsitektur fiktif di README & PRD | v1.0.2 |
 | **slop-ai-indo-identity** | Karakter & identitas produk: pencegahan penjiplakan layout SaaS populer, ikon generik, dan palet acak | v1.0.2 |
-| **slop-ai-indo-backend** | Arsitektur backend & API: pencegahan silent catch, query N+1, endpoint tanpa skema validasi, transaksi ACID | v1.1.0 |
+| **slop-ai-indo-backend** | Arsitektur backend & API: Clean REST URL, parameter binding, controller ramping, DTO/Resource, database lookup table, $fillable, foreign key cascade | v1.1.0 |
 | **slop-ai-indo-test** | Pengujian otomatis & mocking: pemberantasan tes palsu, over-mocking, asersi hampa, skenario kegagalan nyata | v1.1.0 |
 
 Pilih skill yang sesuai dengan pekerjaan:
@@ -224,7 +229,8 @@ npx slop-ai-indo lint --json
 Linter ini memindai berkas secara statis dan memvalidasi aturan inti:
 - **UI & CSS:** `transition: all` (R-09), tombol kapsul 9999px (R-12), outer neon glow (R-11), penghapusan focus outline tanpa pengganti (R-06).
 - **Teks & Copywriting:** Kata klise promosi AI (*"unlock the power"*, *"seamless synergy"*, *"game-changing"*, dll.) (R-02), angka/metrik kepuasan fiktif tanpa kutipan (R-08), dan em-dash jamak tanpa tujuan.
-- **Kebersihan Kode:** Komentar klise yang mengulang sintaks (R-31) dan placeholder TODO malas/halusinasi (R-32).
+- **Kebersihan Kode:** Komentar klise yang mengulang sintaks dan DocBlock boilerplate pada native typing (R-31), placeholder TODO malas/halusinasi (R-32).
+- **Backend & Keamanan:** Clean RESTful URLs, parameter binding anti-SQL Injection, dan sanitasi query (B-09 s/d B-15).
 
 ## Server MCP Terpadu (`slop-mcp`)
 
@@ -324,7 +330,7 @@ Jika linter menemukan pelanggaran aturan pada kode PR, pipeline otomatis berstat
 
 ## Peta Jalan (Roadmap)
 
-**v1.1.0** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
+**v1.2.1** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
 
 ## FAQ (Pertanyaan yang Sering Diajukan)
 
