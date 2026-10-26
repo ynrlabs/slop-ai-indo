@@ -42,9 +42,9 @@ Sebuah temuan mencatat bahwa pembacaan `DESIGN.md` untuk arahan desain. Inti atu
 
 Socket sebelumnya memberikan peringatan pada perintah instalasi yang disebutkan oleh wizard. Wizard kini tidak lagi menyebutkan perintah instalasi atau path repositori di dalam teksnya, dan pemeriksaan Socket kini telah lulus (PASS).
 
-## Audit Keamanan Defensif Mandiri (`antislop-security`)
+## Audit Keamanan Defensif Mandiri (`slop-ai-indo-security`)
 
-Ekosistem Slop AI Indo menyertakan modul audit keamanan mendalam `antislop-security`. Modul ini mengimplementasikan alur tinjauan kerentanan source-first yang sepenuhnya defensif:
+Ekosistem Slop AI Indo menyertakan modul audit keamanan mendalam `slop-ai-indo-security`. Modul ini mengimplementasikan alur tinjauan kerentanan source-first yang sepenuhnya defensif:
 - Berjalan secara terisolasi tanpa memicu akses jaringan keluar yang tidak sah.
 - Validasi berbasis sandbox loopback lokal dan skema laporan terstandar (`report-schema.json`).
 - Menegakkan prinsip write-isolation yang ketat antara agen hunter, validator, dan laporan akhir.

@@ -21,7 +21,7 @@ const python = candidates.find(
 if (!python) {
   // stderr, never stdout: stdout is the JSON-RPC channel.
   console.error(
-    `antislop-contrast: no working Python found (tried ${candidates.join(", ")}). ` +
+    `slop-ai-indo-contrast: no working Python found (tried ${candidates.join(", ")}). ` +
       "Install Python 3 to use the contrast tool."
   );
   process.exit(1);

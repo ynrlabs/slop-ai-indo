@@ -7,7 +7,7 @@ allowed-tools: Bash(python *) Bash(python3 *) Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill Aspek Manusia & Aksesibilitas
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini mengulas mendalam aspek kebutuhan manusia: antarmuka harus tetap dapat digunakan oleh pengguna dengan berbagai kondisi penglihatan, motorik tangan, dan perangkat yang beragam. Kontras warna, keyboard, fokus, variasi status antarmuka, serta detail mobile yang mengecualikan orang sungguhan.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini mengulas mendalam aspek kebutuhan manusia: antarmuka harus tetap dapat digunakan oleh pengguna dengan berbagai kondisi penglihatan, motorik tangan, dan perangkat yang beragam. Kontras warna, keyboard, fokus, variasi status antarmuka, serta detail mobile yang mengecualikan orang sungguhan.
 
 ## Cara Menggunakan Skill Ini
 
@@ -121,7 +121,7 @@ Gunakan tabel ini sebagai pemeriksaan cepat kewarasan desain, bukan pengganti mu
 
 ## Zoom & Penggunaan Mobile
 
-Mekanisme tata letak teknis tampilan mobile (breakpoint layar, skala, sistem grid, luapan konten, dan ukuran target sentuhan) dibahas mendalam pada skill `antislop-layoutmobile`. Bagian ini khusus menangani detail mobile yang mengecualikan manusia secara langsung: pembesaran tampilan (zoom) dan interaksi keyboard virtual.
+Mekanisme tata letak teknis tampilan mobile (breakpoint layar, skala, sistem grid, luapan konten, dan ukuran target sentuhan) dibahas mendalam pada skill `slop-ai-indo-layoutmobile`. Bagian ini khusus menangani detail mobile yang mengecualikan manusia secara langsung: pembesaran tampilan (zoom) dan interaksi keyboard virtual.
 
 ### Teks yang Tidak Bisa Diperbesar (Text That Cannot Zoom)
 

@@ -79,8 +79,8 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Slop AI Indo**, alur int
 - **Mode DURING:** Agen mengevaluasi setiap potongan kode (HTML, CSS, JS, Blade, Flutter) secara real-time terhadap aturan R-01 s/d R-38 sebelum menulisnya ke berkas.
 - **Mode AFTER:** Agen membaca berkas yang sudah ada, memetakan pelanggaran ke dalam daftar temuan bernomor (misalnya: *Finding #1: Border-radius 9999px pada tombol kirim melanggar R-12*), meminta persetujuan perbaikan, lalu melakukan refactoring bertahap.
 
-### 2.3. Hubungan Simbiotik antara `antislop` dan `DESIGN.md`
-- **`antislop`** bertindak sebagai **Validator Negatif**: Menolak kode murahan, gradien klise, angka palsu, dan tombol kapsul lonjong.
+### 2.3. Hubungan Simbiotik antara `Slop AI Indo` dan `DESIGN.md`
+- **`Slop AI Indo`** bertindak sebagai **Validator Negatif**: Menolak kode murahan, gradien klise, angka palsu, dan tombol kapsul lonjong.
 - **`DESIGN.md`** bertindak sebagai **Arsitek Positif**: Memberikan palet warna spesifik (`#f8fafc`, `#ffffff`, `#0f172a`), ukuran padding, font sans-serif modern, dan proporsi geometri kartu presisi.
 - Hasil kombinasi keduanya menghasilkan tampilan perangkat lunak kelas enterprise setara SaaS manusia profesional (seperti n8n dan Linear).
 

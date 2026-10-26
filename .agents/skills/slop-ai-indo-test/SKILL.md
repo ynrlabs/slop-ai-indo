@@ -7,7 +7,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill Pengujian Otomatis & Mocking
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini menyaring kebiasaan buruk model AI dalam menghasilkan test code (seperti membuat tes hampa demi mengejar coverage, melakukan mocking berlebihan hingga logika asli tidak pernah dieksekusi, atau hanya menguji happy path). Muat skill ini saat tugas menulis unit test, integration test, atau test suite.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini menyaring kebiasaan buruk model AI dalam menghasilkan test code (seperti membuat tes hampa demi mengejar coverage, melakukan mocking berlebihan hingga logika asli tidak pernah dieksekusi, atau hanya menguji happy path). Muat skill ini saat tugas menulis unit test, integration test, atau test suite.
 
 ## Cara Menggunakan Skill Ini
 

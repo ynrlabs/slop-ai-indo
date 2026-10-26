@@ -241,7 +241,7 @@ const again = updateAll({ locations: ['project'] })
 check('K update is repeatable', again.results.map((r) => r.from), upd.results.map((r) => r.to))
 
 // A clean directory has nothing to replace, and saying so is the whole answer.
-const clean = fs.mkdtempSync(path.join(os.tmpdir(), 'antislop-clean-'))
+const clean = fs.mkdtempSync(path.join(os.tmpdir(), 'slop-ai-indo-clean-'))
 const here = process.cwd()
 process.chdir(clean)
 check('K update says nothing when nothing is installed', updateAll({ locations: ['project'] }).results.length, 0)

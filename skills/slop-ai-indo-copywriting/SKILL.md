@@ -7,7 +7,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill Teks & Copywriting
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini mengulas mendalam aspek teks dan gaya penulisan: judul utama (headline), ajakan bertindak (CTA), nada bicara, proposisi nilai, dan pola-pola klise yang membuat tulisan buatan AI sangat mudah dikenali. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah menduplikasi atau mengubah penomorannya. Muat skill ini saat tugas melibatkan penulisan atau penyuntingan salinan pemasaran (marketing copy), teks produk, halaman landing page, atau prosa apa pun yang ditujukan untuk dibaca oleh manusia.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini mengulas mendalam aspek teks dan gaya penulisan: judul utama (headline), ajakan bertindak (CTA), nada bicara, proposisi nilai, dan pola-pola klise yang membuat tulisan buatan AI sangat mudah dikenali. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah menduplikasi atau mengubah penomorannya. Muat skill ini saat tugas melibatkan penulisan atau penyuntingan salinan pemasaran (marketing copy), teks produk, halaman landing page, atau prosa apa pun yang ditujukan untuk dibaca oleh manusia.
 
 ## Cara Menggunakan Skill Ini
 
@@ -201,7 +201,7 @@ allowed-tools: Read Write Edit Glob Grep
 - **Pola:** Mengarang angka statistik, kutipan testimoni, nama tokoh, tanggal peluncuran, atau fitur produk yang tampak realistis padahal fiktif murni.
 - **Mengapa terbaca khas AI:** Kebohongan yang tampak spesifik jauh lebih berbahaya dibanding klaim samar, karena rekayasa tersebut tampak jujur padahal palsu. Ini adalah cacat fatal yang tidak boleh ada dalam salinan produk.
 - **Sebelum:**
-  > Dipercaya oleh lebih dari 10.000 tim. "Antislop memangkas waktu review kode kami hingga separuhnya." - Sarah Chen, VP of Engineering di PT Maju Mundur.
+  > Dipercaya oleh lebih dari 10.000 tim. "Slop AI Indo memangkas waktu review kode kami hingga separuhnya." - Sarah Chen, VP of Engineering di PT Maju Mundur.
 - **Sesudah:**
   > Jika tidak ada klien atau testimoni nyata, jangan tuliskan angka atau kutipan fiktif. Jelaskan fungsi nyata dari produk tersebut. Setiap metrik nyata wajib memiliki sumber data yang dapat dipertanggungjawabkan (R-17, R-36).
 - **Aturan:** R-17, R-18, R-36, R-38, C-5.
@@ -231,7 +231,7 @@ allowed-tools: Read Write Edit Glob Grep
 ### Em Dashes
 
 - **The pattern:** Karakter em dash (`—`) yang digunakan sebagai sisipan penjelas atau penghubung kalimat: *"institutions — not the people — continue"*.
-- **Why it reads as AI:** Karakter ini adalah salah satu tanda paling khas dan berulang pada teks buatan AI, dan aturan inti antislop melarangnya secara keras.
+- **Why it reads as AI:** Karakter ini adalah salah satu tanda paling khas dan berulang pada teks buatan AI, dan aturan inti Slop AI Indo melarangnya secara keras.
 - **Rule:** Aturan R-02 melarang karakter em dash dalam teks keluaran apa pun. Ganti setiap kemunculannya dengan opsi berikut: titik (mulai kalimat baru), koma (sisipan ringkas), titik dua (memulai penjelasan), tanda kurung (keterangan tambahan), atau susun ulang struktur kalimatnya. Periksa juga tanda em dash berjarak (` — `) maupun tanda hubung ganda (` -- `) yang digunakan dengan maksud yang sama.
 - **Before:**
   > Kebijakan ini — yang diumumkan tanpa peringatan — berdampak pada ribuan pekerja.
@@ -253,7 +253,7 @@ allowed-tools: Read Write Edit Glob Grep
 - **Sesudah:**
   > Aplikasi ini menggabungkan OKR, KPI, dan alat strategi visual untuk memudahkan perencanaan bisnis Anda.
 - **Aturan:** R-36.
-- **Pengecualian dokumentasi:** Label penanda struktural teknis dalam aturan dokumentasi antislop (seperti penanda `**FORBIDDEN**` atau `**REQUIRED**`) adalah konvensi format pedoman teknis dan dikecualikan dari larangan ini.
+- **Pengecualian dokumentasi:** Label penanda struktural teknis dalam aturan dokumentasi Slop AI Indo (seperti penanda `**FORBIDDEN**` atau `**REQUIRED**`) adalah konvensi format pedoman teknis dan dikecualikan dari larangan ini.
 
 ### Tanda Petik Berlebihan (Excessive Quotation Marks)
 
@@ -277,7 +277,7 @@ allowed-tools: Read Write Edit Glob Grep
 - **Sesudah:**
   > Pembaruan ini menyempurnakan navigasi antarmuka, mempercepat waktu muat halaman, serta mengenkripsi seluruh pertukaran data secara otomatis.
 - **Aturan:** R-36.
-- **Pengecualian dokumentasi:** Format `- **Ciri:**` / `- **Alasan:**` / `- **Solusi:**` yang menstrukturkan panduan aturan antislop adalah konvensi dokumentasi teknis dan dikecualikan.
+- **Pengecualian dokumentasi:** Format `- **Ciri:**` / `- **Alasan:**` / `- **Solusi:**` yang menstrukturkan panduan aturan Slop AI Indo adalah konvensi dokumentasi teknis dan dikecualikan.
 
 ### Emoji di Judul dan Poin (Emojis in Headings)
 

@@ -1,10 +1,10 @@
-# Panduan Lengkap antislop (The antislop guide)
+# Panduan Lengkap Slop AI Indo (The Slop AI Indo Guide)
 
-antislop adalah sebuah penyaring (*filter*) yang Anda berikan kepada asisten AI coding yang sudah biasa Anda gunakan. Tujuannya adalah menghentikan AI menghasilkan kode atau teks murahan (*slop*): halaman web, teks tulisan, dan komentar kode yang terlihat generik dan jelas-jelas buatan bot AI. Ini adalah sebuah **filter, bukan panduan gaya (style guide)**. antislop tidak pernah mendikte warna, jenis font, atau tata letak Anda. Ia membuang elemen murahan tersebut dan menyerahkan arah desain sepenuhnya kepada Anda.
+Slop AI Indo adalah sebuah penyaring (*filter*) yang Anda berikan kepada asisten AI coding yang sudah biasa Anda gunakan. Tujuannya adalah menghentikan AI menghasilkan kode atau teks murahan (*slop*): halaman web, teks tulisan, dan komentar kode yang terlihat generik dan jelas-jelas buatan bot AI. Ini adalah sebuah **filter, bukan panduan gaya (style guide)**. Slop AI Indo tidak pernah mendikte warna, jenis font, atau tata letak Anda. Ia membuang elemen murahan tersebut dan menyerahkan arah desain sepenuhnya kepada Anda.
 
-Baru mengenal antislop? Bacalah panduan ini dari awal hingga akhir sekali saja.
+Baru mengenal Slop AI Indo? Bacalah panduan ini dari awal hingga akhir sekali saja.
 
-Panduan ini terbagi menjadi empat bagian. **Pemasangan (Install)** memandu cara memasang antislop pada agen Anda. **Pembaruan (Update)** dan **Penghapusan (Remove)** menjelaskan langkah perawatan di kemudian hari. **Referensi (Reference)** memuat fakta-fakta teknis yang dapat Anda lihat sewaktu-waktu: daftar skill, tabel lokasi folder tiap agen, dan batasan apa yang sengaja tidak dilakukan oleh antislop.
+Panduan ini terbagi menjadi empat bagian. **Pemasangan (Install)** memandu cara memasang Slop AI Indo pada agen Anda. **Pembaruan (Update)** dan **Penghapusan (Remove)** menjelaskan langkah perawatan di kemudian hari. **Referensi (Reference)** memuat fakta-fakta teknis yang dapat Anda lihat sewaktu-waktu: daftar skill, tabel lokasi folder tiap agen, dan batasan apa yang sengaja tidak dilakukan oleh Slop AI Indo.
 
 Tiga bagian pertama membahas jalur pemasangan yang sama dalam urutan yang sama, sehingga setelah Anda menemukan metode yang Anda pilih di satu bagian, Anda akan tahu posisinya di bagian lainnya. Jika Anda hanya ingin segera memasang, langsung lompat ke [Pemasangan](#pemasangan-install).
 
@@ -16,11 +16,11 @@ Tiga bagian pertama membahas jalur pemasangan yang sama dalam urutan yang sama, 
 - Teks yang terdengar sangat bersemangat dan hiperbola tetapi tidak memiliki substansi nyata.
 - Halaman web yang terlihat bagus di tangkapan layar tetapi mengecewakan pengguna manusia nyata: teks yang menyatu dengan latar belakang (sulit dibaca), atau pengguna keyboard yang terkunci tidak bisa navigasi.
 
-Jika Anda pernah menggunakan AI untuk membuat halaman web atau menulis teks, Anda pasti pernah melihat *slop*. antislop diciptakan untuk menghilangkannya.
+Jika Anda pernah menggunakan AI untuk membuat halaman web atau menulis teks, Anda pasti pernah melihat *slop*. Slop AI Indo diciptakan untuk menghilangkannya.
 
 ## Untuk Apa Saja Anda Dapat Menggunakannya?
 
-Setiap output AI yang rentan menjadi murahan dapat diperbaiki dengan antislop:
+Setiap output AI yang rentan menjadi murahan dapat diperbaiki dengan Slop AI Indo:
 
 - **Membangun halaman atau aplikasi web baru:** tata letak, warna, struktur, dan animasi.
 - **Menulis atau menyunting teks (*copywriting*):** judul, tombol, email, dan nada bicara yang tidak terdengar seperti buatan bot AI.
@@ -94,9 +94,9 @@ D:\project_yanuar\anti-slop\slop.bat
 *(Atau jika menggunakan PowerShell: `powershell -File D:\project_yanuar\anti-slop\slop.ps1`)*
 
 **Langkah 5. Mulai sesi agen yang baru.**
-antislop dimuat saat sesi baru dimulai, sehingga jendela sesi yang sedang terbuka saat ini belum membacanya. Tutup sesi obrolan agen Anda dan buka yang baru.
+Slop AI Indo dimuat saat sesi baru dimulai, sehingga jendela sesi yang sedang terbuka saat ini belum membacanya. Tutup sesi obrolan agen Anda dan buka yang baru.
 
-Untuk memastikan antislop aktif, tanyakan hal yang hanya ada di dalam aturan antislop, misalnya: *"Apa bunyi aturan R-02 pada antislop?"*. Jika agen menjawab berdasarkan aturan tersebut, instalasi Anda berhasil.
+Untuk memastikan Slop AI Indo aktif, tanyakan hal yang hanya ada di dalam aturan Slop AI Indo, misalnya: *"Apa bunyi aturan R-02 pada Slop AI Indo?"*. Jika agen menjawab berdasarkan aturan tersebut, instalasi Anda berhasil.
 
 ---
 
@@ -116,7 +116,7 @@ Metode ini menyalin modul skill langsung dari GitHub ke `.agents/skills/`. Jika 
 
 ### 3. Plugin Native (Plugin Doors)
 
-Plugin adalah fitur langsung dari agen, bukan bawaan antislop. Anda mengarahkan agen ke repositori ini satu kali, dan sejak saat itu agen memuat antislop langsung dari repositori. Tidak ada berkas yang disalin ke dalam proyek Anda. Versi baru diperoleh cukup dengan memperbarui pluginnya.
+Plugin adalah fitur langsung dari agen, bukan bawaan Slop AI Indo. Anda mengarahkan agen ke repositori ini satu kali, dan sejak saat itu agen memuat Slop AI Indo langsung dari repositori. Tidak ada berkas yang disalin ke dalam proyek Anda. Versi baru diperoleh cukup dengan memperbarui pluginnya.
 
 #### Claude Code
 
@@ -124,7 +124,7 @@ Di dalam sesi Claude Code, jalankan dua baris ini:
 
 ```text
 /plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
-/plugin install antislop@slop-ai-indo
+/plugin install slop-ai-indo
 ```
 
 #### Antigravity
@@ -135,13 +135,13 @@ Jalankan perintah Antigravity CLI:
 agy plugin install https://github.com/yanuar1997/slop-ai-indo
 ```
 
-Komponen `rules/` miliknya secara otomatis memuat antislop pada setiap sesi, jadi tidak ada berkas penunjuk tambahan yang perlu ditulis.
+Komponen `rules/` miliknya secara otomatis memuat Slop AI Indo pada setiap sesi, jadi tidak ada berkas penunjuk tambahan yang perlu ditulis.
 
 #### Codex
 
 ```bash
 codex plugin marketplace add yanuar1997/slop-ai-indo
-codex plugin add antislop@slop-ai-indo
+codex plugin add slop-ai-indo
 ```
 
 #### Cursor
@@ -152,7 +152,7 @@ Tambahkan repositori sebagai marketplace plugin dengan Cursor Agent CLI:
 agent plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
 ```
 
-Lalu, di dalam Cursor, buka menu **Customize** di bilah sisi (*sidebar*), cari **antislop**, dan klik **Install** (pilih cakupan proyek atau pengguna).
+Lalu, di dalam Cursor, buka menu **Customize** di bilah sisi (*sidebar*), cari **slop-ai-indo**, dan klik **Install** (pilih cakupan proyek atau pengguna).
 
 #### Kimi Code
 
@@ -276,7 +276,7 @@ Dua hal yang perlu dihapus:
 
 ## Referensi Teknis (Reference)
 
-### Di Mana Tiap Agen Membaca antislop?
+### Di Mana Tiap Agen Membaca Slop AI Indo?
 
 | Agen Coding | Jalur Pembacaan Proyek |
 |-------------|------------------------|
@@ -295,15 +295,19 @@ Dua hal yang perlu dihapus:
 ### Apa itu Skill?
 
 Skill adalah modul opsional (berisi berkas `SKILL.md`) yang mendalami satu topik tertentu secara mendalam. Filter inti bekerja secara mandiri; modul skill menambahkan kepatuhan spesifik:
-- **antislop-ui:** Tampilan visual, geometri sudut, warna, komponen, animasi.
-- **antislop-copywriting:** Judul, tombol aksi, nada bicara, larangan klaim/statistik palsu AI.
-- **antislop-human:** Keterbacaan warna, kepatuhan rasio kontras WCAG, navigasi keyboard.
-- **antislop-layoutmobile:** Tata letak responsif HP ke desktop, breakpoint, area sentuh minimal 44x44px.
-- **antislop-code:** Pembersihan komentar kode klise tanpa mengubah logika kode.
-- **antislop-security:** Audit keamanan mendalam, identifikasi kerentanan source-first, threat modeling, pengujian sandbox aman, dan pelaporan defensif terstruktur.
+- **slop-ai-indo-ui:** Tampilan visual, geometri sudut, warna, komponen, animasi.
+- **slop-ai-indo-copywriting:** Judul, tombol aksi, nada bicara, larangan klaim/statistik palsu AI.
+- **slop-ai-indo-human:** Keterbacaan warna, kepatuhan rasio kontras WCAG, navigasi keyboard.
+- **slop-ai-indo-layoutmobile:** Tata letak responsif HP ke desktop, breakpoint, area sentuh minimal 44x44px.
+- **slop-ai-indo-code:** Pembersihan komentar kode klise tanpa mengubah logika kode.
+- **slop-ai-indo-security:** Audit keamanan mendalam, identifikasi kerentanan source-first, threat modeling, pengujian sandbox aman, dan pelaporan defensif terstruktur.
+- **slop-ai-indo-docs:** Standar kebersihan dokumentasi teknis, README, PRD, dan spesifikasi arsitektur.
+- **slop-ai-indo-identity:** Karakter produk unik, branding terarah, dan pencegahan klon template generik.
+- **slop-ai-indo-backend:** Arsitektur server, API controller, sanitasi query database, dan error handling.
+- **slop-ai-indo-test:** Pengujian otomatis, validasi skenario gagal nyata, dan pencegahan over-mocking.
 
-### Apa yang Sengaja Tidak Dilakukan oleh antislop?
+### Apa yang Sengaja Tidak Dilakukan oleh Slop AI Indo?
 
-antislop tidak pernah mempercantik antarmuka secara sepihak tanpa arahan. antislop membuang apa yang murahan (*slop*); ia tidak menciptakan konsep gaya dari ketiadaan. Jika Anda menginginkan gaya visual tertentu, tuangkan dalam berkas `DESIGN.md` di proyek Anda, dan AI akan membangun antarmuka sesuai dokumen tersebut.
+Slop AI Indo tidak pernah mempercantik antarmuka secara sepihak tanpa arahan. Slop AI Indo membuang apa yang murahan (*slop*); ia tidak menciptakan konsep gaya dari ketiadaan. Jika Anda menginginkan gaya visual tertentu, tuangkan dalam berkas `DESIGN.md` di proyek Anda, dan AI akan membangun antarmuka sesuai dokumen tersebut.
 
-Jika berkas `DESIGN.md` Anda secara eksplisit meminta sesuatu yang dianggap *slop* oleh aturan antislop, sistem tidak akan menuruti secara diam-diam dan juga tidak akan mengabaikan Anda secara sepihak: sistem akan menyebutkan elemen yang diminta, menyebutkan aturan yang dilanggar, dan meminta konfirmasi apakah Anda tetap ingin mempertahankannya.
+Jika berkas `DESIGN.md` Anda secara eksplisit meminta sesuatu yang dianggap *slop* oleh aturan Slop AI Indo, sistem tidak akan menuruti secara diam-diam dan juga tidak akan mengabaikan Anda secara sepihak: sistem akan menyebutkan elemen yang diminta, menyebutkan aturan yang dilanggar, dan meminta konfirmasi apakah Anda tetap ingin mempertahankannya.

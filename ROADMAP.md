@@ -1,15 +1,15 @@
-# antislop: Peta Jalan Pengembangan (Roadmap)
+# Slop AI Indo: Peta Jalan Pengembangan (Roadmap)
 
-> Bagaimana antislop berevolusi dari satu berkas aturan tunggal menjadi sistem skill/plugin lintas agen yang dapat dipasang. Baru mengenal antislop? Bacalah [panduan pengguna](GUIDE.md) terlebih dahulu. Lihat [README.md](README.md) untuk ikhtisar produk.
+> Bagaimana Slop AI Indo berevolusi dari satu berkas aturan tunggal menjadi sistem skill/plugin lintas agen yang dapat dipasang. Baru mengenal Slop AI Indo? Bacalah [panduan pengguna](GUIDE.md) terlebih dahulu. Lihat [README.md](README.md) untuk ikhtisar produk.
 
 ---
 
 ## Posisi Kita Saat Ini
 
-Rilis terbaru saat ini adalah **v3.2.16**. antislop adalah **sistem terpaket**: sebuah filter inti ramping yang selalu dimuat ditambah lima skill modular pelengkap, yang masing-masing didistribusikan sebagai folder skill agen terstandar (`skills/<nama>/SKILL.md`). Tidak ada README terpisah per modul skill.
+Rilis terbaru saat ini adalah **v1.2.0**. Slop AI Indo adalah **sistem terpaket**: sebuah filter inti ramping yang selalu dimuat ditambah sepuluh skill modular pelengkap, yang masing-masing didistribusikan sebagai folder skill agen terstandar (`skills/<nama>/SKILL.md`). Tidak ada README terpisah per modul skill.
 
 - **Filter Inti: 38 Aturan** terbagi dalam tiga tingkatan (*Hard Gate*, *Purpose-Gate*, *Quality Locks*), sebuah *Liveliness Toolkit*, *Delivery Gate* mandatori, dan dua mode penggunaan (*During / After*). Jumlah aturan ini dipertahankan sejak v2.2 dan tingkatannya tidak digeser, namun rincian aturan terus diasah dan disempurnakan seiring waktu. Berkas tunggal `slop-ai-indo.md` tetap menjadi filter lengkap yang dapat Anda salin langsung ke jendela chat apa pun; wizard instalasi di dalamnya berfungsi sebagai jalur pemasangan manual.
-- **Tujuh Skill Terstandar:** `antislop` (inti), ditambah `antislop-ui`, `antislop-copywriting`, `antislop-human`, `antislop-layoutmobile`, `antislop-code`, dan `antislop-security`. Setiap skill hanya dimuat saat tugas memerlukannya.
+- **Sebelas Skill Terstandar:** `slop-ai-indo` (inti), ditambah `slop-ai-indo-ui`, `slop-ai-indo-copywriting`, `slop-ai-indo-human`, `slop-ai-indo-layoutmobile`, `slop-ai-indo-code`, `slop-ai-indo-security`, `slop-ai-indo-docs`, `slop-ai-indo-identity`, `slop-ai-indo-backend`, dan `slop-ai-indo-test`. Setiap skill hanya dimuat saat tugas memerlukannya.
 - **Distribusi Multi-Pintu:** Tujuh jalur instalasi dari satu repositori tunggal, dan alat pemeriksa kontras juga disediakan sebagai kakas MCP di dalam plugin. Jalur-jalur tersebut meliputi skrip pemasang lokal (`slop.bat` / `slop.ps1`), direktori skills.sh, dan plugin native untuk Claude Code, Antigravity, Codex, Cursor, dan Kimi Code.
 - **Folder Bersama (.agents/skills/):** Antigravity membacanya secara default, Hermes memperlakukannya sebagai tier proyek di samping `.hermes/skills/`, dan Copilot, OpenCode, Codex, serta Kimi Code membacanya sebagai salah satu root pencarian. Pemasang menuliskan jalur resmi yang terdokumentasi untuk setiap agen sehingga instalasi selalu konsisten.
 
@@ -25,16 +25,16 @@ Penomoran versi hingga v3.0.0 mengikuti satu prinsip sederhana agar setiap fokus
 |-------|------------------|
 | **v2.1.0** | Penambahan dua mode penggunaan (*During / After*) dan banner v3.0.0. |
 | **v2.1.1** | Standarisasi repositori (penyederhanaan cermin dokumen). |
-| **v2.2.0** | Skill modular pertama: `antislop-ui` (UI / visual). Filter inti ditambah First-Run Install Wizard. |
-| **v2.3.0** | Penambahan `antislop-copywriting` (penulisan teks, judul, dan tone). |
-| **v2.4.0** | Penambahan `antislop-human` (aksesibilitas, kontras warna, disertai skrip pemeriksa kontras). |
-| **v2.4.1** | Penambahan `GUIDE.md`: panduan bahasa lugas bagi pengguna baru antislop. |
+| **v2.2.0** | Skill modular pertama: `slop-ai-indo-ui` (UI / visual). Filter inti ditambah First-Run Install Wizard. |
+| **v2.3.0** | Penambahan `slop-ai-indo-copywriting` (penulisan teks, judul, dan tone). |
+| **v2.4.0** | Penambahan `slop-ai-indo-human` (aksesibilitas, kontras warna, disertai skrip pemeriksa kontras). |
+| **v2.4.1** | Penambahan `GUIDE.md`: panduan bahasa lugas bagi pengguna baru Slop AI Indo. |
 | **v2.4.2** | Perbaikan polaritas checklist skill (#9) dan pembersihan dokumentasi. |
-| **v2.5.0** | Penambahan `antislop-layoutmobile` (tata letak responsif HP ke desktop). |
+| **v2.5.0** | Penambahan `slop-ai-indo-layoutmobile` (tata letak responsif HP ke desktop). |
 | **v3.0.0** | Pemaketan sistem skill/plugin: folder `skills/`, dua pintu distribusi, skrip installer lokal (`slop.bat`), pemeriksa kontras sebagai tool MCP, lisensi MIT. |
 | **v3.0.1** | Perbaikan Snyk W012 (tanpa curl di runtime pada modul terpaket), kejelasan dokumentasi. |
 | **v3.0.2** | Penyesuaian launcher python adaptif (`python3` di macOS/Linux, `python` di Windows). |
-| **v3.1.0** | Penambahan `antislop-code` (pembersihan komentar kode klise AI); pola Data Pengisi dan Emoji Dekoratif. |
+| **v3.1.0** | Penambahan `slop-ai-indo-code` (pembersihan komentar kode klise AI); pola Data Pengisi dan Emoji Dekoratif. |
 | **v3.1.1** | Pemasang CLI berhenti menyalin README per-skill ke proyek; wizard menghapus perintah install langsung (membersihkan peringatan Socket di skills.sh). |
 | **v3.1.2** | Pemasang CLI menanyakan agen target secara interaktif agar folder mendarat di lokasi yang tepat. |
 | **v3.1.3** | Batasan `DESIGN.md` ditegaskan (berkas eksternal adalah data untuk diterapkan, bukan perintah untuk dipatuhi); penjelasan audit `SECURITY.md`. |

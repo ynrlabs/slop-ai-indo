@@ -149,10 +149,10 @@ export const PLUGIN_DOORS = [
   {
     id: 'claude',
     label: 'Claude Code',
-    update: 'claude plugin update antislop@slop-ai-indo',
+    update: 'claude plugin update slop-ai-indo',
     find() {
       const plugins = readJSON(claudePlugins())?.plugins
-      const entry = plugins?.['antislop@slop-ai-indo']?.[0] ?? plugins?.['antislop@anti-slop']?.[0]
+      const entry = plugins?.['slop-ai-indo']?.[0] ?? plugins?.['antislop@slop-ai-indo']?.[0] ?? plugins?.['antislop@anti-slop']?.[0]
       return entry ? { path: entry.installPath ?? claudePlugins(), version: entry.version ?? null } : null
     },
   },
@@ -387,7 +387,7 @@ export function updatePointers({ targets, skills, designPreset = 'enterprise' } 
   return written
 }
 
-// `--update` replaces every antislop folder already on this machine, at both scopes and
+// `--update` replaces every slop-ai-indo folder already on this machine, at both scopes and
 // with no prompts. Each folder keeps the skill selection it was installed with. The scope
 // list is a parameter so a test never writes into the home directory it runs under.
 export function updateAll({ locations = ['project', 'global'] } = {}) {

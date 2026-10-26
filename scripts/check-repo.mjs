@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * The rules antislop applies to other people's repos, applied to this one.
+ * The rules slop-ai-indo applies to other people's repos, applied to this one.
  * Run it before opening a PR:
  *
  *   node scripts/check-repo.mjs

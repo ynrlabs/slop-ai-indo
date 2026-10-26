@@ -7,7 +7,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill Identitas & Karakter Produk
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti) dan `DESIGN.md`. Skill ini menegakkan keunikan identitas visual, karakter produk, dan konsistensi branding. Skill ini mencegah peniruan buta terhadap produk populer (Linear, Vercel, Stripe), melarang dekorasi template AI murahan (ikon sparkle tanpa fungsi, glow berlebihan, badge kapsul hampa), serta menuntut arah desain yang terencana. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah mengubah penomorannya. Muat skill ini saat merancang arah visual atau mendefinisikan bahasa produk baru.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti) dan `DESIGN.md`. Skill ini menegakkan keunikan identitas visual, karakter produk, dan konsistensi branding. Skill ini mencegah peniruan buta terhadap produk populer (Linear, Vercel, Stripe), melarang dekorasi template AI murahan (ikon sparkle tanpa fungsi, glow berlebihan, badge kapsul hampa), serta menuntut arah desain yang terencana. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah mengubah penomorannya. Muat skill ini saat merancang arah visual atau mendefinisikan bahasa produk baru.
 
 ## Cara Menggunakan Skill Ini
 

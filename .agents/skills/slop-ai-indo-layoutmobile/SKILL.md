@@ -7,7 +7,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill Tata Letak Mobile
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini mengulas mendalam kebutuhan tata letak responsif: bagaimana layout harus mengalir ulang (reflow) secara wajar di berbagai ukuran layar, dari ponsel genggam hingga layar desktop lebar. Breakpoint layar, skala ukuran, penataan grid, pencegahan luapan konten, ukuran target sentuhan, dan arsitektur navigasi mobile. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah menduplikasi atau mengubah penomorannya. Muat skill ini saat tugas melibatkan perancangan atau pengeditan tata letak yang harus tampil kokoh di semua lebar layar.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini mengulas mendalam kebutuhan tata letak responsif: bagaimana layout harus mengalir ulang (reflow) secara wajar di berbagai ukuran layar, dari ponsel genggam hingga layar desktop lebar. Breakpoint layar, skala ukuran, penataan grid, pencegahan luapan konten, ukuran target sentuhan, dan arsitektur navigasi mobile. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah menduplikasi atau mengubah penomorannya. Muat skill ini saat tugas melibatkan perancangan atau pengeditan tata letak yang harus tampil kokoh di semua lebar layar.
 
 ## Cara Menggunakan Skill Ini
 

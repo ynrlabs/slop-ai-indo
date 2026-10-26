@@ -20,7 +20,7 @@ jobs:
           cache: npm
           cache-dependency-path: cli/package-lock.json
 
-      # The rules antislop applies to other repos, applied to this one.
+      # The rules slop-ai-indo applies to other repos, applied to this one.
       - name: Repo guardrails
         run: node scripts/check-repo.mjs
 

@@ -23,7 +23,7 @@ function tree(dir, prefix = '') {
   return out
 }
 
-const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'antislop-smoke-'))
+const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'slop-ai-indo-smoke-'))
 const result = spawnSync(process.execPath, [worker], { cwd: tmp, encoding: 'utf8' })
 console.log('--- worker output ---')
 console.log(result.stdout.trim())

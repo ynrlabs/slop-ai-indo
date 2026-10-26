@@ -104,14 +104,14 @@ async function main() {
   if (process.argv.includes('--update')) {
     const { results, pointers } = updateAll()
     if (results.length === 0) {
-      console.log(`antislop ${VERSION}: no installed folders found. Nothing to update.`)
+      console.log(`slop-ai-indo ${VERSION}: no installed folders found. Nothing to update.`)
     } else {
       for (const r of results) {
-        const from = r.from ? `antislop ${r.from}` : 'an older release that records no version'
+        const from = r.from ? `slop-ai-indo ${r.from}` : 'an older release that records no version'
         console.log(`${r.path}`)
-        console.log(`  ${from} -> antislop ${VERSION}  (${r.skills.length} skill(s) for ${r.agents.join(', ')})`)
+        console.log(`  ${from} -> slop-ai-indo ${VERSION}  (${r.skills.length} skill(s) for ${r.agents.join(', ')})`)
       }
-      console.log(`\nUpdated ${results.length} folder(s) to antislop ${VERSION}.`)
+      console.log(`\nUpdated ${results.length} folder(s) to slop-ai-indo ${VERSION}.`)
       if (pointers.length > 0) {
         console.log(`Pointer refreshed in ${pointers.map((p) => path.basename(p)).join(', ')}.`)
       }
@@ -124,15 +124,15 @@ async function main() {
   // Without a terminal the prompts read EOF at once: the run printed the banner, installed
   // nothing, and still exited 0, so a script around it saw success. Fail loudly instead.
   if (!process.stdin.isTTY) {
-    console.error('antislop: this installer needs a terminal. Run it in an interactive shell.')
+    console.error('slop-ai-indo: this installer needs a terminal. Run it in an interactive shell.')
     process.exit(1)
   }
 
   console.log(banner())
-  intro('Install antislop into your agent setup')
+  intro('Install slop-ai-indo into your agent setup')
 
   if (!skillSourceDir()) {
-    stop('Could not find the antislop skills. Reinstall the antislop package.')
+    stop('Could not find the slop-ai-indo skills. Reinstall the slop-ai-indo package.')
   }
 
   log.step('Choose your skills')
@@ -146,7 +146,7 @@ async function main() {
   if (isCancel(extra)) stop('Install cancelled.')
   const skills = [CORE, ...(extra ?? [])]
 
-  log.step('Choose where antislop goes')
+  log.step('Choose where slop-ai-indo goes')
   const location = await select({
     message: 'Install location',
     options: [
@@ -168,10 +168,10 @@ async function main() {
     chosenPreset = preset
   }
 
-  log.step('Choose which agents get antislop')
+  log.step('Choose which agents get slop-ai-indo')
   const detected = detectAgents(location)
   const chosen = await multiselect({
-    message: 'Which agent(s) should antislop install into?',
+    message: 'Which agent(s) should slop-ai-indo install into?',
     options: AGENTS.map((a) => ({
       value: a.id,
       label: a.label,
@@ -194,7 +194,7 @@ async function main() {
     // Overwriting is how an update happens, and the version on disk is the one fact
     // the user cannot look up anywhere. Name both sides so the choice is obvious.
     const found = [...new Set(targets.map((t) => installedVersion(t.path)).filter(Boolean))]
-    const have = found.length > 0 ? `antislop ${found.join(' and ')}` : 'an antislop old enough that it records no version'
+    const have = found.length > 0 ? `slop-ai-indo ${found.join(' and ')}` : 'a version old enough that it records no version'
     log.warn(`Already here: ${have}. This installer carries ${VERSION}.`)
 
     const answer = await select({
@@ -227,7 +227,7 @@ async function main() {
   const agentCount = new Set(written.flatMap((w) => w.agents)).size
   if (written.length > 0) {
     outro(`Installed ${written.length} skill(s) into ${agentCount} agent folder(s).`)
-    console.log(pc.dim('antislop is ready. The next agent session loads it.'))
+    console.log(pc.dim('slop-ai-indo is ready. The next agent session loads it.'))
   } else {
     // "Existing folders were kept" used to read as success. The copies are the
     // old release, so say that plainly and name the choice that fixes it.
@@ -245,7 +245,7 @@ async function main() {
   // which reads both and does not document which copy it keeps.
   for (const dup of detectDuplicateReads({ targets, location })) {
     log.warn(
-      `${dup.agent.label} reads both ${dup.paths.join(' and ')}, and antislop is now in both. ` +
+      `${dup.agent.label} reads both ${dup.paths.join(' and ')}, and slop-ai-indo is now in both. ` +
         'It may load either copy. Remove one of them to be safe.'
     )
   }

@@ -7,7 +7,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill UI & Visual
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini mengulas mendalam aspek visual dan antarmuka pengguna: palet warna, tata letak, hierarki komponen, dekorasi, alur struktural, dan gerak animasi. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah menduplikasi atau mengubah penomorannya. Muat skill ini saat tugas membangun atau mengedit situs web, web app, atau antarmuka apa pun.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini mengulas mendalam aspek visual dan antarmuka pengguna: palet warna, tata letak, hierarki komponen, dekorasi, alur struktural, dan gerak animasi. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah menduplikasi atau mengubah penomorannya. Muat skill ini saat tugas membangun atau mengedit situs web, web app, atau antarmuka apa pun.
 
 ## Cara Menggunakan Skill Ini
 

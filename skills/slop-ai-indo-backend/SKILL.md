@@ -7,7 +7,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill Arsitektur Backend & API
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini menyaring kebiasaan buruk model AI dalam menulis kode server, handler API, interaksi database, dan error handling (seperti menelan error diam-diam, endpoint tanpa validasi, query tanpa limit, atau kebocoran kredensial). Muat skill ini saat tugas melibatkan pengembangan backend, controller, service layer, atau API.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini menyaring kebiasaan buruk model AI dalam menulis kode server, handler API, interaksi database, dan error handling (seperti menelan error diam-diam, endpoint tanpa validasi, query tanpa limit, atau kebocoran kredensial). Muat skill ini saat tugas melibatkan pengembangan backend, controller, service layer, atau API.
 
 ## Cara Menggunakan Skill Ini
 

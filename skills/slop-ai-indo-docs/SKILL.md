@@ -7,7 +7,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill Dokumentasi Teknis
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini menetapkan standar mutu dokumentasi teknis: berkas README, PRD, spesifikasi arsitektur, panduan API, dan petunjuk instalasi. Skill ini menyaring narasi hampa berbunga-bunga, klaim kehebatan palsu, cuplikan kode yang tidak dapat dijalankan, dan arsitektur fiktif. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah mengubah penomoran aturan. Muat skill ini saat tugas menulis atau menyunting dokumentasi proyek.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini menetapkan standar mutu dokumentasi teknis: berkas README, PRD, spesifikasi arsitektur, panduan API, dan petunjuk instalasi. Skill ini menyaring narasi hampa berbunga-bunga, klaim kehebatan palsu, cuplikan kode yang tidak dapat dijalankan, dan arsitektur fiktif. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah mengubah penomoran aturan. Muat skill ini saat tugas menulis atau menyunting dokumentasi proyek.
 
 ## Cara Menggunakan Skill Ini
 

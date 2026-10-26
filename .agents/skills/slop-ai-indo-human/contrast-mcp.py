@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Minimal MCP stdio server exposing the antislop contrast checker as a tool.
+"""Minimal MCP stdio server exposing the slop-ai-indo contrast checker as a tool.
 
 All logging goes to stderr; stdout is reserved for JSON-RPC responses.
 """
@@ -7,7 +7,7 @@ import json
 import sys
 
 PROTOCOL_VERSION = "2024-11-05"
-SERVER_NAME = "antislop-contrast"
+SERVER_NAME = "slop-ai-indo-contrast"
 SERVER_VERSION = "1.2.0"
 
 TOOLS = [

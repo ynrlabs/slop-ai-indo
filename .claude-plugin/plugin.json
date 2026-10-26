@@ -11,7 +11,7 @@
   "keywords": ["ai-slop", "design-rules", "copy-rules", "agent-skills", "ui", "accessibility"],
   "skills": ["./skills/"],
   "mcpServers": {
-    "antislop-contrast": {
+    "slop-ai-indo-contrast": {
       "command": "node",
       "args": ["${CLAUDE_PLUGIN_ROOT}/.claude-plugin/contrast-mcp-launcher.mjs"],
       "env": {}

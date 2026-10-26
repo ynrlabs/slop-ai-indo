@@ -7,7 +7,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 > Anti Slop: Aturan untuk AI Coding Agent. Skill Komentar Kode Program
 
-> Bagian dari sistem antislop. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini menyaring komentar yang terbaca generik khas AI (dekoratif, mengulang hal yang sudah jelas, kaku, berisik) sambil tetap mempertahankan komentar yang memuat informasi arsitektural nyata. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah menduplikasi atau mengubah penomoran aturan. Muat skill ini saat tugas menulis atau merapikan komentar kode.
+> Bagian dari sistem Slop AI Indo. Dibaca bersama dengan `slop-ai-indo.md` (inti). Skill ini menyaring komentar yang terbaca generik khas AI (dekoratif, mengulang hal yang sudah jelas, kaku, berisik) sambil tetap mempertahankan komentar yang memuat informasi arsitektural nyata. Skill ini merujuk ke aturan inti berdasarkan nomor dan tidak pernah menduplikasi atau mengubah penomoran aturan. Muat skill ini saat tugas menulis atau merapikan komentar kode.
 
 ## Cara Menggunakan Skill Ini
 
