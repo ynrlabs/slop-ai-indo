@@ -22,6 +22,10 @@ jobs:
         with:
           node-version: 20
 
+      - name: Install CLI Dependencies
+        working-directory: cli
+        run: npm ci
+
       - name: Run slop-lint Audit
         run: |
-          npx --yes slop-ai-indo lint . --tier=hard-gate
+          node cli/bin/slop-lint.mjs . --tier=hard-gate
