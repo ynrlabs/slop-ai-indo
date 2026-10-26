@@ -198,6 +198,21 @@ Pilih skill yang sesuai dengan pekerjaan:
 - Tugas campuran → pasang beberapa skill sekaligus
 - Tanpa skill tambahan → berkas inti sendirian sudah merupakan filter yang lengkap
 
+## Rekomendasi Preset Desain (DESIGN.md)
+
+Saat memasang ke dalam proyek (`npx slop-ai-indo`), Anda dapat memilih preset estetika human-crafted yang otomatis disalin menjadi `DESIGN.md`:
+
+| Preset | Karakter Visual & Arah Desain | Rekomendasi Kasus Penggunaan |
+|--------|-------------------------------|------------------------------|
+| **Enterprise SaaS** *(enterprise)* | Kanvas terang bersih, sudut 4px - 6px, border hairline, hierarki elegan ala Linear, n8n, Stripe, Notion. | Rekomendasi umum untuk aplikasi web B2B, SaaS, CRM, dashboard operasional, portal enterprise. |
+| **Dark Modern** *(dark-modern)* | Kanvas matte zinc/obsidian `#09090b`, sudut 6px - 8px, hairline border, tanpa pendaran neon ala Vercel, Supabase, Raycast. | Cloud console, platform developer, AI tooling modern, produk bertema dark mode default. |
+| **Fintech & Transaksi** *(fintech)* | Kanvas slate kokoh, angka tabular (`tabular-nums`), field nominal terstruktur, badge status audit perbankan ala Stripe, Wise, Mercury, Brex. | Gateway pembayaran, checkout e-commerce, dashboard investasi, akuntansi, aplikasi perbankan. |
+| **Developer Tooling & Docs** *(devtools)* | Tata letak three-pane, kontainer kode presisi dengan tombol salin, badge shortcut keyboard (`<kbd>`), callout teknis ala Tailwind Docs, Cloudflare, Prisma. | Portal dokumentasi API, library open-source, knowledge base teknis, CLI reference. |
+| **Minimalist Monochrome** *(minimal-monochrome)* | Monokromatik hitam-putih murni, rasio kontras maksimal, garis tegas 1px - 2px solid, zero drop-shadow ala Raycast, Basecamp, Teenage Engineering. | Utility tools, antarmuka minimalis radikal, portfolio desain, brutalism arsitektural. |
+| **Editorial & Content** *(editorial)* | Kanvas hangat (warm off-white), tipografi serif anggun, panjang baris terukur 65ch - 75ch ala Substack, Stripe Press, ReadCV. | Blog, newsletter, publikasi artikel panjang, platform media dan konten berbasis tulisan. |
+| **Utilitarian & Dense Data** *(utilitarian)* | Rasio data-ke-tinta tinggi, grid padat tanpa ruang mubazir, border penyekat tegas, status data semantik ala Grafana, Datadog, Retool. | Monitoring server, dashboard analitik teknis, visualisasi metrik real-time, industrial SCADA/IoT. |
+| **Bawaan** *(default)* | Standar dasar human-crafted asli slop-ai-indo. | Proyek umum yang ingin menyesuaikan arah gaya secara mandiri dari awal. |
+
 ## Mode Penggunaan (Usage Modes)
 
 Slop AI Indo digunakan dalam salah satu dari dua mode, yang ditentukan di awal sesi:

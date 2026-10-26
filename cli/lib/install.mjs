@@ -10,8 +10,11 @@ export const CORE = 'slop-ai-indo'
 export const VERSION = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')).version
 
 export const DESIGN_PRESETS = [
-  { value: 'enterprise', label: 'Enterprise SaaS (Rekomendasi)', hint: 'Kanvas terang, radius 4-6px, presisi ala Linear / n8n' },
+  { value: 'enterprise', label: 'Enterprise SaaS (Rekomendasi Umum)', hint: 'Kanvas terang, radius 4-6px, presisi ala Linear / n8n' },
   { value: 'dark-modern', label: 'Dark Modern', hint: 'Kanvas gelap matte obsidian, monokrom presisi ala Vercel / Supabase' },
+  { value: 'fintech', label: 'Fintech & Dashboard Finansial', hint: 'Keamanan finansial, angka tabular, presisi ala Stripe / Mercury / Wise' },
+  { value: 'devtools', label: 'Developer Tooling & Docs', hint: 'Dokumentasi teknis, syntax split-panel ala Tailwind / Cloudflare' },
+  { value: 'minimal-monochrome', label: 'Minimalist Monochrome', hint: 'Monokrom hitam-putih murni, kontras tinggi ala Raycast / Teenage Eng' },
   { value: 'editorial', label: 'Editorial & Content', hint: 'Warm canvas, serif typography ala Substack / Stripe Press' },
   { value: 'utilitarian', label: 'Utilitarian & Dense Data', hint: 'High-density grid, border tegas, tabular data ala Grafana' },
   { value: 'default', label: 'Bawaan (Default)', hint: 'Gunakan standar DESIGN.md asli slop-ai-indo' },
