@@ -22,18 +22,18 @@ try {
 
   if (!isQuiet) {
     console.log(pc.bold(pc.cyan('\n🔍 slop-lint: Mesin Linter Deterministik Slop AI Indo')))
-    console.log(pc.dim(`Memeriksa: ${targetPath}\n`))
+    console.log(pc.dim(`Memeriksa direktori: ${targetPath}\n`))
   }
 
   if (result.findings.length === 0) {
     if (!isQuiet) {
       console.log(pc.green('✔ BERSIH:') + pc.dim(` ${result.scannedFiles} file diperiksa, nol slop terdeteksi.`))
-      console.log(pc.bold(pc.green('Status: PASSED (Bebas dari Slop)\n')))
+      console.log(pc.bold(pc.green(`Skor Kualitas: 100/100 | Status: PASSED (Bebas dari Slop)\n`)))
     }
     process.exit(0)
   }
 
-  // Group findings by file
+  // Kelompokkan temuan berdasarkan berkas
   const byFile = new Map()
   for (const f of result.findings) {
     if (!byFile.has(f.file)) byFile.set(f.file, [])
@@ -45,19 +45,27 @@ try {
     console.log(pc.bold(pc.underline(relFile)))
     for (const item of items) {
       const isHard = item.tier === 'Hard Gate'
-      const tierBadge = isHard ? pc.red(`[${item.tier}]`) : pc.yellow(`[${item.tier}]`)
+      const isPurpose = item.tier === 'Purpose-Gate'
+      const tierBadge = isHard
+        ? pc.red(`[${item.tier}]`)
+        : isPurpose
+          ? pc.magenta(`[${item.tier}]`)
+          : pc.yellow(`[${item.tier}]`)
       const ruleCode = pc.bold(item.ruleId)
-      console.log(`  ${pc.dim(`baris ${item.line}`)} ${tierBadge} ${ruleCode} ${pc.bold(item.name)}`)
+      const location = `${item.line}:${item.column}`
+      console.log(`  ${pc.dim(location)} ${tierBadge} ${ruleCode} ${pc.bold(item.name)}`)
       console.log(`    ${pc.dim('Kode:')} ${pc.italic(item.snippet)}`)
       console.log(`    ${pc.cyan('Solusi:')} ${item.fix}\n`)
     }
   }
 
   console.log(pc.dim('─'.repeat(60)))
+  const scoreColor = result.score >= 80 ? pc.green : result.score >= 60 ? pc.yellow : pc.red
   console.log(
     `Total diperiksa: ${pc.bold(result.scannedFiles)} file | Ditemukan: ${pc.bold(result.counts.total)} temuan ` +
-    `(${pc.red(`${result.counts.hardGate} Hard Gate`)}, ${pc.yellow(`${result.counts.qualityLocks} Quality Lock`)})`
+    `(${pc.red(`${result.counts.hardGate} Hard Gate`)}, ${pc.magenta(`${result.counts.purposeGate} Purpose-Gate`)}, ${pc.yellow(`${result.counts.qualityLocks} Quality Lock`)})`
   )
+  console.log(`Skor Kebersihan Kode: ${scoreColor(pc.bold(`${result.score}/100`))}`)
 
   if (result.passed) {
     console.log(pc.bold(pc.yellow('Status: WARNING (Peringatan Kualitas, Hard Gate lolos)\n')))
@@ -67,6 +75,6 @@ try {
     process.exit(1)
   }
 } catch (err) {
-  console.error(pc.red(`Error: ${err.message}`))
+  console.error(pc.red(`Kesalahan: ${err.message}`))
   process.exit(1)
 }

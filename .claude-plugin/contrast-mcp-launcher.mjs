@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Starts contrast-mcp.py with whichever Python name this machine has.
- * The manifest's `command` is a single string and cannot pick per platform.
+ * Menjalankan contrast-mcp.py menggunakan runtime Python yang tersedia di sistem.
+ * Properti `command` pada manifes berupa string tunggal dan tidak dapat memilih secara otomatis per platform.
  */
 import { spawn, spawnSync } from "node:child_process";
 import path from "node:path";
@@ -12,17 +12,17 @@ const server = path.join(here, "..", "skills", "slop-ai-indo-human", "contrast-m
 
 const candidates = process.platform === "win32" ? ["python", "python3"] : ["python3", "python"];
 
-// Run each candidate: the Windows `python` stub is on PATH but only opens the
-// Store, and pyenv shims exit non-zero when no version is set.
+// Coba setiap kandidat: stub Windows python ada di PATH tetapi membuka Windows Store,
+// dan shim pyenv menghasilkan exit non-zero jika versi belum dipilih.
 const python = candidates.find(
   (bin) => spawnSync(bin, ["-c", ""], { stdio: "ignore" }).status === 0
 );
 
 if (!python) {
-  // stderr, never stdout: stdout is the JSON-RPC channel.
+  // Tulis ke stderr, jangan stdout: stdout dipakai untuk channel protokol JSON-RPC.
   console.error(
-    `slop-ai-indo-contrast: no working Python found (tried ${candidates.join(", ")}). ` +
-      "Install Python 3 to use the contrast tool."
+    `slop-ai-indo-contrast: tidak ditemukan runtime Python yang berfungsi (mencoba ${candidates.join(", ")}). ` +
+      "Silakan pasang Python 3 untuk menggunakan alat pemeriksa kontras."
   );
   process.exit(1);
 }

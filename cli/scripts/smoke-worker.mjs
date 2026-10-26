@@ -21,239 +21,236 @@ const skills = [CORE, 'slop-ai-indo-ui']
 
 const failures = []
 
-/** Prints the line this always printed and records whether it held, so one run
- * reports every break rather than stopping at the first.
+/**
+ * Mencetak baris pemeriksaan dan mencatat hasilnya.
+ * Seluruh pemeriksaan dijalankan hingga selesai untuk mengumpulkan semua error.
  */
 const check = (label, actual, expected) => {
   const ok = JSON.stringify(actual) === JSON.stringify(expected)
-  console.log(ok ? `ok   ${label}:` : `FAIL ${label}:`, actual, ok ? '' : `(expected ${JSON.stringify(expected)})`)
+  console.log(ok ? `ok   ${label}:` : `FAIL ${label}:`, actual, ok ? '' : `(diharapkan ${JSON.stringify(expected)})`)
   if (!ok) failures.push(label)
 }
 
-// Fresh state: nothing detected, and the default selection is every agent.
+// Kondisi awal (fresh project): belum ada agen terdeteksi, target bawaan mencakup semua agen.
 const fresh = detectAgents('project')
-check('A detected (fresh project)', fresh, [])
+check('A terdeteksi (proyek baru)', fresh, [])
 const defaultTargets = resolveTargets('project')
-console.log('A default targets:', defaultTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
-// Copilot, Kimi Code, and Amp share Antigravity's folder, so eleven resolve to eight.
-check('A thirteen agents over ten folders', [AGENTS.length, defaultTargets.length], [13, 10])
-check('A copilot and kimi share the antigravity folder', resolveTargets('project', ['antigravity', 'copilot', 'kimi']).length, 1)
+console.log('A target bawaan:', defaultTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
+// Copilot, Kimi Code, dan Amp berbagi folder Antigravity, sehingga 13 agen memetakan ke 10 folder target.
+check('A 13 agen dalam 10 folder', [AGENTS.length, defaultTargets.length], [13, 10])
+check('A copilot dan kimi berbagi folder antigravity', resolveTargets('project', ['antigravity', 'copilot', 'kimi']).length, 1)
 
-// Claude Code only, via explicit selection (old behavior preserved).
+// Hanya Claude Code, melalui pemilihan eksplisit.
 const targets = resolveTargets('project', ['claude'])
 let written = installSkills({ skills, targets, overwrite: false })
 let pointers = updatePointers({ targets, skills })
-console.log('B targets:', targets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
-console.log('B written:', written.map((w) => `${w.agents.join('+')}:${w.skill}`).join(', '))
-check('B pointers', pointers.map((p) => path.basename(p)), ['CLAUDE.md'])
+console.log('B target:', targets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '))
+console.log('B berkas tertulis:', written.map((w) => `${w.agents.join('+')}:${w.skill}`).join(', '))
+check('B pointer', pointers.map((p) => path.basename(p)), ['CLAUDE.md'])
 
 const conflicts = detectConflicts({ skills, targets })
 written = installSkills({ skills, targets, overwrite: false })
-check('C conflicts', conflicts.length, 2)
-check('C written without overwrite', written.length, 0)
+check('C konflik terdeteksi', conflicts.length, 2)
+check('C penulisan tanpa overwrite', written.length, 0)
 written = installSkills({ skills, targets, overwrite: true })
-check('C overwritten', written.length, 2)
+check('C tertulis ulang dengan overwrite', written.length, 2)
 
-// Antigravity on a fresh project: .agents/ does not exist yet, install creates it.
+// Antigravity pada proyek baru: .agents/ belum ada, instalasi akan membuatnya.
 const agTargets = resolveTargets('project', ['antigravity'])
-console.log('D antigravity targets:', agTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '), '(exists=false before install)')
+console.log('D target antigravity:', agTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path} exists=${t.exists}`).join(' | '), '(exists=false sebelum instalasi)')
 const agWritten = installSkills({ skills, targets: agTargets, overwrite: false })
-check('D antigravity written', agWritten.length, 2)
+check('D berkas antigravity tertulis', agWritten.length, 2)
 const agPointers = updatePointers({ targets: agTargets, skills })
-check('D antigravity pointers', agPointers.map((p) => path.basename(p)), ['AGENTS.md'])
-check('D .agents/skills/' + CORE + '/SKILL.md exists', fs.existsSync(path.join(process.cwd(), '.agents', 'skills', CORE, 'SKILL.md')), true)
+check('D pointer antigravity', agPointers.map((p) => path.basename(p)), ['AGENTS.md'])
+check('D .agents/skills/' + CORE + '/SKILL.md ada', fs.existsSync(path.join(process.cwd(), '.agents', 'skills', CORE, 'SKILL.md')), true)
 
-// OpenCode, Cursor, and Gemini each install and point to their own entry file.
+// OpenCode, Cursor, Gemini, Oh My Pi, dan DeepSeek masing-masing menulis ke berkas entri sendiri.
 for (const agent of ['opencode', 'cursor', 'gemini', 'omp', 'deepseek']) {
   const t = resolveTargets('project', [agent])
   const w = installSkills({ skills, targets: t, overwrite: false })
   const pointers = updatePointers({ targets: t, skills })
-  check(`D2 ${agent} written`, w.length, 2)
+  check(`D2 ${agent} tertulis`, w.length, 2)
   check(`D2 ${agent} pointer`, pointers.map((p) => path.basename(p)), [agent === 'gemini' ? 'GEMINI.md' : 'AGENTS.md'])
-  check(`D2 ${agent} folder exists`, fs.existsSync(path.join(process.cwd(), agent === 'gemini' ? '.gemini' : agent === 'cursor' ? '.cursor' : agent === 'omp' ? '.omp' : agent === 'deepseek' ? '.deepseek' : '.opencode', 'skills', CORE, 'SKILL.md')), true)
+  check(`D2 ${agent} folder ada`, fs.existsSync(path.join(process.cwd(), agent === 'gemini' ? '.gemini' : agent === 'cursor' ? '.cursor' : agent === 'omp' ? '.omp' : agent === 'deepseek' ? '.deepseek' : '.opencode', 'skills', CORE, 'SKILL.md')), true)
 }
 
-// Cline keeps a folder of its own and reads .claude/skills beside it, so both fill up.
+// Cline memiliki foldernya sendiri dan juga membaca .claude/skills.
 const clineProject = resolveTargets('project', ['cline'])
-check('D8 cline project target', clineProject[0].path, path.join(process.cwd(), '.cline', 'skills'))
-check('D8 cline global target', resolveTargets('global', ['cline'])[0].path, path.join(os.homedir(), '.cline', 'skills'))
-check('D8 cline written', installSkills({ skills, targets: clineProject, overwrite: false }).length, 2)
+check('D8 cline target proyek', clineProject[0].path, path.join(process.cwd(), '.cline', 'skills'))
+check('D8 cline target global', resolveTargets('global', ['cline'])[0].path, path.join(os.homedir(), '.cline', 'skills'))
+check('D8 cline tertulis', installSkills({ skills, targets: clineProject, overwrite: false }).length, 2)
 check('D8 cline pointer', updatePointers({ targets: clineProject, skills }).map((p) => path.basename(p)), ['AGENTS.md'])
-check('D8 cline folder exists', fs.existsSync(path.join(process.cwd(), '.cline', 'skills', CORE, 'SKILL.md')), true)
+check('D8 cline folder ada', fs.existsSync(path.join(process.cwd(), '.cline', 'skills', CORE, 'SKILL.md')), true)
 
-// Amp shares the project's .agents/skills, which the Antigravity block already filled,
-// but its global folder is a different path.
+// Amp berbagi .agents/skills proyek yang sudah dibuat oleh Antigravity, namun folder globalnya berbeda.
 const ampProject = resolveTargets('project', ['amp'])
-check('D9 amp shares the agents folder', ampProject[0].path, path.join(process.cwd(), '.agents', 'skills'))
-check('D9 amp global target', resolveTargets('global', ['amp'])[0].path, path.join(os.homedir(), '.config', 'agents', 'skills'))
-check('D9 amp writes nothing twice', installSkills({ skills, targets: ampProject, overwrite: false }).length, 0)
+check('D9 amp berbagi folder agents', ampProject[0].path, path.join(process.cwd(), '.agents', 'skills'))
+check('D9 amp target global', resolveTargets('global', ['amp'])[0].path, path.join(os.homedir(), '.config', 'agents', 'skills'))
+check('D9 amp tidak menulis ganda', installSkills({ skills, targets: ampProject, overwrite: false }).length, 0)
 check('D9 amp pointer', updatePointers({ targets: ampProject, skills }).map((p) => path.basename(p)), ['AGENTS.md'])
 
-// Hermes reads a project's .hermes/skills, and ~/.hermes/skills for a global install.
+// Hermes membaca .hermes/skills proyek, dan ~/.hermes/skills untuk instalasi global.
 const hermesProject = resolveTargets('project', ['hermes'])
 const hermesGlobal = resolveTargets('global', ['hermes'])
-check('D3 hermes project target', hermesProject[0].path, path.join(process.cwd(), '.hermes', 'skills'))
-check('D3 hermes global target', hermesGlobal[0].path, path.join(os.homedir(), '.hermes', 'skills'))
+check('D3 hermes target proyek', hermesProject[0].path, path.join(process.cwd(), '.hermes', 'skills'))
+check('D3 hermes target global', hermesGlobal[0].path, path.join(os.homedir(), '.hermes', 'skills'))
 const hermesWritten = installSkills({ skills, targets: hermesProject, overwrite: false })
-check('D3 hermes written into the project', hermesWritten.length, 2)
-check('D3 hermes detected in project', detectAgents('project').includes('hermes'), true)
+check('D3 hermes tertulis ke proyek', hermesWritten.length, 2)
+check('D3 hermes terdeteksi di proyek', detectAgents('project').includes('hermes'), true)
 
-// OpenCode splits its scopes: project folder for a project install, ~/.config for global.
+// OpenCode membagi cakupannya: folder proyek untuk instalasi proyek, ~/.config untuk global.
 const ocProject = resolveTargets('project', ['opencode'])
 const ocGlobal = resolveTargets('global', ['opencode'])
-check('D4 opencode project target', ocProject[0].path, path.join(process.cwd(), '.opencode', 'skills'))
-check('D4 opencode global target', ocGlobal[0].path, path.join(os.homedir(), '.config', 'opencode', 'skills'))
+check('D4 opencode target proyek', ocProject[0].path, path.join(process.cwd(), '.opencode', 'skills'))
+check('D4 opencode target global', ocGlobal[0].path, path.join(os.homedir(), '.config', 'opencode', 'skills'))
 
-// Antigravity reads a project's .agents/skills but not the one under the home dir.
+// Antigravity membaca .agents/skills proyek namun bukan yang ada di direktori home.
 const agGlobal = resolveTargets('global', ['antigravity'])
-check('D5 antigravity project target', resolveTargets('project', ['antigravity'])[0].path, path.join(process.cwd(), '.agents', 'skills'))
-check('D5 antigravity global target', agGlobal[0].path, path.join(os.homedir(), '.gemini', 'config', 'skills'))
+check('D5 antigravity target proyek', resolveTargets('project', ['antigravity'])[0].path, path.join(process.cwd(), '.agents', 'skills'))
+check('D5 antigravity target global', agGlobal[0].path, path.join(os.homedir(), '.gemini', 'config', 'skills'))
 
-// Kimi Code has no folder of its own here: both scopes are the shared .agents/skills.
-check('D7 kimi project target', resolveTargets('project', ['kimi'])[0].path, path.join(process.cwd(), '.agents', 'skills'))
+// Kimi Code tidak memiliki foldernya sendiri: kedua cakupan memakai .agents/skills bersama.
+check('D7 kimi target proyek', resolveTargets('project', ['kimi'])[0].path, path.join(process.cwd(), '.agents', 'skills'))
 
-// updatePointers has no other source for the entry file, so no row may omit it.
-check('D6 every agent names an entry file', AGENTS.filter((a) => !a.entry).map((a) => a.id), [])
+// updatePointers membutuhkan berkas entri, tidak boleh ada baris agen yang mengabaikannya.
+check('D6 setiap agen memiliki berkas entri', AGENTS.filter((a) => !a.entry).map((a) => a.id), [])
 
-// Hermes reads a project's AGENTS.md, so a project install of it must write the pointer.
-check('D6 hermes writes a project pointer', updatePointers({ targets: hermesProject, skills }).map((p) => path.basename(p)), ['AGENTS.md'])
+// Hermes membaca AGENTS.md proyek, sehingga instalasi proyek harus menulis pointer ke sana.
+check('D6 hermes menulis pointer proyek', updatePointers({ targets: hermesProject, skills }).map((p) => path.basename(p)), ['AGENTS.md'])
 
-// Detection now sees the agents that were installed.
+// Deteksi sekarang melihat seluruh agen yang telah terinstal.
 const after = detectAgents('project')
-check('E detected after installs', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kimi', 'omp', 'opencode'])
+check('E terdeteksi setelah instalasi', [...after].sort(), ['amp', 'antigravity', 'claude', 'cline', 'copilot', 'cursor', 'deepseek', 'gemini', 'hermes', 'kimi', 'omp', 'opencode'])
 
-// OpenCode reads .claude/skills and .agents/skills too, so a project that installs into
-// two of them holds the same names twice and OpenCode picks between them unpredictably.
+// OpenCode membaca .claude/skills dan .agents/skills, sehingga instalasi ke keduanya menghasilkan pembacaan ganda.
 const dupReads = detectDuplicateReads({ targets: resolveTargets('project', ['claude', 'opencode']), location: 'project' })
-check('E duplicate read named', dupReads.map((d) => [d.agent.id, d.paths.length]), [['opencode', 2]])
-check('E one folder alone is not a duplicate', detectDuplicateReads({ targets: resolveTargets('project', ['opencode']), location: 'project' }), [])
-// Cline reads .claude/skills beside its own folder, so Claude Code plus Cline collides.
-check('E cline duplicate read named', detectDuplicateReads({ targets: resolveTargets('project', ['claude', 'cline']), location: 'project' }).map((d) => [d.agent.id, d.paths.length]), [['cline', 2]])
-// Amp loads .claude/skills beside the shared folder, so Claude Code plus Amp collides too.
-check('E amp duplicate read named', detectDuplicateReads({ targets: resolveTargets('project', ['claude', 'amp']), location: 'project' }).map((d) => [d.agent.id, d.paths.length]), [['amp', 2]])
-check('E global scope is not checked', detectDuplicateReads({ targets: resolveTargets('global', ['claude', 'opencode']), location: 'global' }), [])
+check('E pembacaan ganda terdeteksi', dupReads.map((d) => [d.agent.id, d.paths.length]), [['opencode', 2]])
+check('E satu folder tunggal bukan duplikat', detectDuplicateReads({ targets: resolveTargets('project', ['opencode']), location: 'project' }), [])
+// Cline membaca .claude/skills sekaligus foldernya sendiri.
+check('E pembacaan ganda cline terdeteksi', detectDuplicateReads({ targets: resolveTargets('project', ['claude', 'cline']), location: 'project' }).map((d) => [d.agent.id, d.paths.length]), [['cline', 2]])
+// Amp membaca .claude/skills di samping folder bersama.
+check('E pembacaan ganda amp terdeteksi', detectDuplicateReads({ targets: resolveTargets('project', ['claude', 'amp']), location: 'project' }).map((d) => [d.agent.id, d.paths.length]), [['amp', 2]])
+check('E cakupan global tidak diperiksa duplikasi', detectDuplicateReads({ targets: resolveTargets('global', ['claude', 'opencode']), location: 'global' }), [])
 
-// Codex's global scope is the shared folder, not ~/.codex/skills, which Codex calls deprecated.
-// Kimi Code lands there too, so the grouping has to hold at global scope as well.
+// Cakupan global Codex adalah folder bersama, bukan ~/.codex/skills yang deprecated.
+// Kimi Code juga berada di sana.
 const globalTargets = resolveTargets('global', ['claude', 'codex', 'kimi'])
-check('F global targets', globalTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path}`), [
+check('F target global', globalTargets.map((t) => `${t.agents.map((a) => a.id).join('+')}@${t.path}`), [
   `claude@${path.join(os.homedir(), '.claude', 'skills')}`,
   `codex+kimi@${path.join(os.homedir(), '.agents', 'skills')}`,
 ])
 
-// Copies are identical and the pointer block dedupes.
+// Salinan identik dan deduplikasi blok pointer.
 const src = fs.readFileSync(path.join(skillSourceDir(), 'slop-ai-indo-ui', 'SKILL.md'), 'utf8')
 const dst = fs.readFileSync(path.join(process.cwd(), '.claude', 'skills', 'slop-ai-indo-ui', 'SKILL.md'), 'utf8')
-check('G slop-ai-indo-ui SKILL.md identical', src === dst, true)
+check('G slop-ai-indo-ui SKILL.md identik', src === dst, true)
 
-// The conflict prompt reports the release on disk from this file alone.
-check('G installed version is stamped', installedVersion(targets[0].path), VERSION)
-check('G no install means no version', installedVersion(path.join(process.cwd(), 'nowhere')), null)
+// Pengecekan versi yang terpasang dari berkas VERSION.
+check('G versi terpasang tercatat dengan benar', installedVersion(targets[0].path), VERSION)
+check('G tanpa instalasi menghasilkan versi null', installedVersion(path.join(process.cwd(), 'nowhere')), null)
 
 updatePointers({ targets, skills })
 const entry = fs.readFileSync(path.join(process.cwd(), 'CLAUDE.md'), 'utf8')
-check('H blocks after a second run', (entry.match(/antislop:start/g) || []).length, 1)
+check('H blok setelah eksekusi kedua tetap satu', (entry.match(/antislop:start/g) || []).length, 1)
 
-// The entry file belongs to the author. Each fixture below used to be damaged.
+// Berkas entri adalah milik pengguna: setiap kasus uji memastikan berkas tidak rusak.
 const entryPath = path.join(process.cwd(), 'CLAUDE.md')
 const write = (text) => fs.writeFileSync(entryPath, text)
 const read = () => fs.readFileSync(entryPath, 'utf8')
 
 write('# Mine\r\n\r\nNotes.\r\n')
 updatePointers({ targets, skills })
-check('I CRLF kept', read().includes('\r\n<!-- antislop:start -->'), true)
-check('I bare LF count', (read().match(/(?<!\r)\n/g) || []).length, 0)
+check('I CRLF dipertahankan', read().includes('\r\n<!-- antislop:start -->'), true)
+check('I jumlah bare LF nol', (read().match(/(?<!\r)\n/g) || []).length, 0)
 
 write('# Mine\n\n```md\n<!-- antislop:start -->\n<!-- antislop:end -->\n```\n')
 updatePointers({ targets, skills })
-check('I fenced example untouched', read().includes('```md\n<!-- antislop:start -->\n<!-- antislop:end -->\n```'), true)
-check('I real block added beside it', (read().match(/antislop:start/g) || []).length, 2)
+check('I contoh dalam code fence tidak tersentuh', read().includes('```md\n<!-- antislop:start -->\n<!-- antislop:end -->\n```'), true)
+check('I blok riil ditambahkan di luar code fence', (read().match(/antislop:start/g) || []).length, 2)
 
 write('# Mine\n<!-- antislop:end -->\n')
 updatePointers({ targets, skills })
 const stable = read()
 updatePointers({ targets, skills })
-check('I orphan marker does not grow', read() === stable, true)
-check('I orphan marker is gone', (read().match(/antislop:end/g) || []).length, 1)
+check('I marker yatim tidak bertambah', read() === stable, true)
+check('I marker yatim dibersihkan', (read().match(/antislop:end/g) || []).length, 1)
 
-// A fence left open at EOF is a typo, not a boundary: the block lands inside it and has
-// to be found again, or every run appends another copy.
+// Fence yang terbuka di EOF adalah salah ketik, bukan batas penutup.
 write('# Mine\n\nNotes:\n\n```bash\nnpm i\n')
 updatePointers({ targets, skills })
 const fenced = read()
 updatePointers({ targets, skills })
 updatePointers({ targets, skills })
-check('J unclosed fence stable', read() === fenced, true)
-check('J unclosed fence keeps code', read().includes('npm i'), true)
-check('J unclosed fence one block', (read().match(/antislop:start/g) || []).length, 1)
+check('J unclosed fence stabil', read() === fenced, true)
+check('J unclosed fence mempertahankan kode', read().includes('npm i'), true)
+check('J unclosed fence tepat satu blok', (read().match(/antislop:start/g) || []).length, 1)
 
-// A mistyped end marker is the author's text, so the block is appended, not swapped in.
+// Penanda akhir yang salah ketik adalah teks pengguna, sehingga blok baru ditambahkan di akhir.
 write('# Mine\n\n<!-- antislop:start -->\nold\n<!-- antislop:End -->\n\n## Notes\nKeep this line.\n')
 updatePointers({ targets, skills })
-check('J mistyped end keeps the tail', read().includes('Keep this line.'), true)
-check('J mistyped end one block', (read().match(/antislop:start/g) || []).length, 1)
+check('J end marker salah ketik mempertahankan teks lanjutan', read().includes('Keep this line.'), true)
+check('J end marker salah ketik menghasilkan satu blok riil', (read().match(/antislop:start/g) || []).length, 1)
 
-// A longer fence run is not closed by a shorter one inside the example.
+// Fence run yang lebih panjang tidak ditutup oleh fence yang lebih pendek.
 write('# Mine\n\n````md\n```md\n<!-- antislop:start -->\n<!-- antislop:end -->\n```\n````\n')
 updatePointers({ targets, skills })
-check('J four-backtick example untouched', read().includes('````md\n```md\n<!-- antislop:start -->'), true)
+check('J contoh empat backtick tidak tersentuh', read().includes('````md\n```md\n<!-- antislop:start -->'), true)
 
-// A fence-like line with trailing text is code, not a closing fence.
+// Baris serupa fence dengan teks tambahan adalah kode, bukan fence penutup.
 for (const fence of ['```', '~~~']) {
   const example = `${fence}md\n${fence}js\n<!-- antislop:start -->\nKeep this example.\n<!-- antislop:end -->\n${fence}`
   write(`# Mine\n\n${example}\n`)
   updatePointers({ targets, skills })
-  check(`J ${fence} with info string keeps the example`, read().includes(example), true)
-  check(`J ${fence} real block added outside the example`, (read().match(/antislop:start/g) || []).length, 2)
+  check(`J ${fence} dengan info string mempertahankan contoh`, read().includes(example), true)
+  check(`J ${fence} blok riil ditambahkan di luar contoh`, (read().match(/antislop:start/g) || []).length, 2)
   const first = read()
   updatePointers({ targets, skills })
-  check(`J ${fence} example stays intact on reinstall`, read() === first, true)
+  check(`J ${fence} contoh tetap utuh saat reinstall`, read() === first, true)
 }
 
-// A stray end marker below the block is ours too, and must not survive.
+// Marker penutup liar di bawah blok dibersihkan.
 write('# Mine\n<!-- antislop:start -->\nold\n<!-- antislop:end -->\nTail text\n<!-- antislop:end -->\n')
 updatePointers({ targets, skills })
-check('J stray end below cleared', (read().match(/antislop:end/g) || []).length, 1)
-check('J text below the block kept', read().includes('Tail text'), true)
+check('J marker penutup liar di bawah dibersihkan', (read().match(/antislop:end/g) || []).length, 1)
+check('J teks di bawah blok tetap dipertahankan', read().includes('Tail text'), true)
 
-// Dominant line ending wins, so two CRLF lines do not flip a mostly-LF file.
+// Akhiran baris (EOL) dominan yang menang: dua baris CRLF tidak membalik berkas mayoritas LF.
 write('# Mine\n' + 'line\n'.repeat(10) + 'a\r\nb\r\n')
 updatePointers({ targets, skills })
-check('J mostly-LF stays LF', (read().match(/\r\n/g) || []).length, 0)
+check('J mayoritas LF tetap menggunakan LF', (read().match(/\r\n/g) || []).length, 0)
 
-// A second marker pair leaves a stray start behind unless every marker line is cleared.
+// Sepasang marker ganda dibersihkan menyisakan satu.
 write('# Mine\n<!-- antislop:start -->\nX\n<!-- antislop:end -->\nKeep this too.\n<!-- antislop:start -->\nY\n<!-- antislop:end -->\n')
 updatePointers({ targets, skills })
-check('J duplicate pair settles to one', (read().match(/antislop:start/g) || []).length, 1)
-check('J duplicate pair keeps text', read().includes('Keep this too.'), true)
+check('J pasangan ganda disatukan menjadi satu', (read().match(/antislop:start/g) || []).length, 1)
+check('J teks di antara pasangan ganda tetap utuh', read().includes('Keep this too.'), true)
 
-// --update replaces what is already on disk, keeps each folder's skill selection, and
-// names the release it replaced. The scope list keeps a test out of the home directory.
+// Flag `--update` mengganti apa yang ada di disk, mempertahankan skill terpilih sebelumnya.
 const present = resolveTargets('project').filter((t) => fs.existsSync(path.join(t.path, CORE)))
-check('K update finds the installed folders', present.length > 0, true)
+check('K update menemukan seluruh folder terpasang', present.length > 0, true)
 const upd = updateAll({ locations: ['project'] })
-check('K update reports every folder it found', upd.results.length, present.length)
-check('K update lands on this release', upd.results.every((r) => r.to === VERSION), true)
-check('K update keeps the skill selection', upd.results.every((r) => r.skills.includes(CORE)), true)
-check('K update writes a pointer', upd.pointers.length > 0, true)
-check('K pointer carries the update line', fs.readFileSync(path.join(process.cwd(), 'AGENTS.md'), 'utf8').includes('slop-ai-indo'), true)
+check('K update melaporkan setiap folder yang ditemukan', upd.results.length, present.length)
+check('K update memperbarui ke rilis versi saat ini', upd.results.every((r) => r.to === VERSION), true)
+check('K update mempertahankan pilihan skill', upd.results.every((r) => r.skills.includes(CORE)), true)
+check('K update menulis blok pointer', upd.pointers.length > 0, true)
+check('K pointer memuat baris identifikasi slop-ai-indo', fs.readFileSync(path.join(process.cwd(), 'AGENTS.md'), 'utf8').includes('slop-ai-indo'), true)
 const again = updateAll({ locations: ['project'] })
-check('K update is repeatable', again.results.map((r) => r.from), upd.results.map((r) => r.to))
+check('K update dapat diulang (repeatable)', again.results.map((r) => r.from), upd.results.map((r) => r.to))
 
-// A clean directory has nothing to replace, and saying so is the whole answer.
+// Direktori bersih tidak memiliki apapun untuk diperbarui.
 const clean = fs.mkdtempSync(path.join(os.tmpdir(), 'slop-ai-indo-clean-'))
 const here = process.cwd()
 process.chdir(clean)
-check('K update says nothing when nothing is installed', updateAll({ locations: ['project'] }).results.length, 0)
-check('K update writes no pointer when nothing is installed', updateAll({ locations: ['project'] }).pointers.length, 0)
+check('K update tidak melakukan apapun saat tidak ada folder terpasang', updateAll({ locations: ['project'] }).results.length, 0)
+check('K update tidak menulis pointer saat tidak ada folder terpasang', updateAll({ locations: ['project'] }).pointers.length, 0)
 process.chdir(here)
 fs.rmSync(clean, { recursive: true, force: true })
 
-// A door row without a command would print a blank line where the answer belongs.
-check('K every plugin door names itself and its command', PLUGIN_DOORS.filter((d) => !d.id || !d.label || !d.update).map((d) => d.id), [])
+// Setiap baris plugin door harus memiliki nama dan perintah pembaruan.
+check('K setiap plugin door memiliki id label dan perintah', PLUGIN_DOORS.filter((d) => !d.id || !d.label || !d.update).map((d) => d.id), [])
 
 if (failures.length > 0) {
-  console.error(`\n${failures.length} check(s) failed: ${failures.join(', ')}`)
+  console.error(`\n${failures.length} pemeriksaan gagal: ${failures.join(', ')}`)
   process.exit(1)
 }
-console.log('\nall checks passed')
+console.log('\nsemua pemeriksaan berhasil')

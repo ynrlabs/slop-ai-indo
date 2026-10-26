@@ -5,35 +5,35 @@ let failed = 0
 
 function assert(condition, message) {
   if (condition) {
-    console.log(`✔ [PASS] ${message}`)
+    console.log(`✔ [LULUS] ${message}`)
     passed++
   } else {
-    console.error(`✖ [FAIL] ${message}`)
+    console.error(`✖ [GAGAL] ${message}`)
     failed++
   }
 }
 
-// 1. Test computeContrast
+// 1. Pengujian kalkulasi kontras warna
 const c1 = computeContrast('#0f172a', '#ffffff')
-assert(c1.ratio >= 10 && c1.normalText.pass === true, 'High contrast color passes WCAG AA')
+assert(c1.ratio >= 10 && c1.normalText.pass === true, 'Warna kontras tinggi memenuhi standar WCAG AA')
 
 const c2 = computeContrast('#777777', '#ffffff')
-assert(c2.ratio < 4.5 && c2.normalText.pass === false, 'Low contrast color fails WCAG AA normal text')
+assert(c2.ratio < 4.5 && c2.normalText.pass === false, 'Warna kontras rendah ditolak untuk teks normal WCAG AA')
 
-// 2. Test tool call check_contrast
+// 2. Pengujian pemanggilan tool check_contrast
 const toolRes1 = handleToolCall('check_contrast', { foreground: '#000000', background: '#ffffff' })
 const parsed1 = JSON.parse(toolRes1.content[0].text)
-assert(parsed1.ratio === 21, 'Black on white contrast ratio is 21')
+assert(parsed1.ratio === 21, 'Rasio kontras hitam di atas putih bernilai 21:1')
 
-// 3. Test tool call lint_snippet
+// 3. Pengujian pemanggilan tool lint_snippet
 const toolRes2 = handleToolCall('lint_snippet', {
   code: '<button class="rounded-full transition-all">Unlock the power</button>',
   filename: 'test.html'
 })
 const parsed2 = JSON.parse(toolRes2.content[0].text)
-assert(parsed2.passed === false && parsed2.totalFindings >= 2, 'Lint snippet detects slop in HTML button')
+assert(parsed2.passed === false && parsed2.totalFindings >= 2, 'Linter snippet berhasil mendeteksi slop pada tombol HTML')
 
-// 4. Test tool call validate_delivery_gate
+// 4. Pengujian pemanggilan tool validate_delivery_gate
 const validReport = `
 ## Delivery Gate Report
 - Aturan yang diuji: R-01, R-09, R-12 dipatuhi
@@ -43,17 +43,17 @@ const validReport = `
 `
 const dgRes = handleToolCall('validate_delivery_gate', { report: validReport })
 const parsedDg = JSON.parse(dgRes.content[0].text)
-assert(parsedDg.valid === true, 'Valid 4-block Delivery Gate report recognized')
+assert(parsedDg.valid === true, 'Laporan verifikasi lengkap dinyatakan valid')
 
-const invalidReport = 'All looks good to me!'
+const invalidReport = 'Semua terlihat baik!'
 const dgResInvalid = handleToolCall('validate_delivery_gate', { report: invalidReport })
 const parsedDgInvalid = JSON.parse(dgResInvalid.content[0].text)
-assert(parsedDgInvalid.valid === false && parsedDgInvalid.missing.length === 4, 'Incomplete Delivery Gate rejected')
+assert(parsedDgInvalid.valid === false && parsedDgInvalid.missing.length === 4, 'Laporan verifikasi tidak lengkap berhasil ditolak')
 
-// 5. Test tool call get_rule
+// 5. Pengujian pemanggilan tool get_rule
 const ruleRes = handleToolCall('get_rule', { ruleId: 'R-09' })
 const parsedRule = JSON.parse(ruleRes.content[0].text)
-assert(parsedRule.length > 0 && parsedRule[0].id === 'R-09', 'Rule R-09 retrieved accurately')
+assert(parsedRule.length > 0 && parsedRule[0].id === 'R-09', 'Aturan R-09 berhasil diambil dengan akurat')
 
-console.log(`\nMCP Tool Tests: ${passed} passed, ${failed} failed.`)
+console.log(`\nHasil Pengujian Tool MCP: ${passed} lolos, ${failed} gagal.`)
 if (failed > 0) process.exit(1)

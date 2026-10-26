@@ -25,11 +25,11 @@ function tree(dir, prefix = '') {
 
 const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'slop-ai-indo-smoke-'))
 const result = spawnSync(process.execPath, [worker], { cwd: tmp, encoding: 'utf8' })
-console.log('--- worker output ---')
+console.log('--- output worker ---')
 console.log(result.stdout.trim())
-if (result.status !== 0) console.error('worker stderr:', result.stderr)
+if (result.status !== 0) console.error('stderr worker:', result.stderr)
 
-console.log('\n--- files written to temp project ---')
+console.log('\n--- berkas yang ditulis ke proyek sementara ---')
 console.log(tree(tmp).join('\n'))
 
 for (const name of ['CLAUDE.md', 'AGENTS.md', 'GEMINI.md']) {
@@ -41,17 +41,15 @@ for (const name of ['CLAUDE.md', 'AGENTS.md', 'GEMINI.md']) {
 
 const coreSkill = path.join(tmp, '.claude', 'skills', CORE, 'SKILL.md')
 const coreInstalled = fs.existsSync(coreSkill)
-console.log('\ncore SKILL.md exists:', coreInstalled)
+console.log('\nSKILL.md inti terpasang:', coreInstalled)
 
-// Every failure is collected here and decided before cleanup, so a failing run
-// still leaves a tidy temp dir behind.
+// Semua kegagalan dicatat di sini sebelum pembersihan direktori sementara,
+// sehingga jika terjadi kegagalan, folder sementara tetap dibersihkan dengan rapi.
 const reasons = []
-if (result.status !== 0) reasons.push(`worker exited ${result.status}`)
-if (!coreInstalled) reasons.push('core SKILL.md was not installed')
+if (result.status !== 0) reasons.push(`worker berhenti dengan kode ${result.status}`)
+if (!coreInstalled) reasons.push('SKILL.md inti tidak terpasang')
 
-// The wizard needs a terminal. With stdin closed it used to print its prompts, install
-// nothing, and still exit 0, so callers saw success. It has to refuse and say why.
-// Loading it needs the cli's dependencies, so a bare checkout reports a skip instead.
+// Wizard interaktif memerlukan terminal. Jika stdin ditutup, wizard menolak jalan.
 const cliDeps = fs.existsSync(path.join(__dirname, '..', 'node_modules', '@clack'))
 if (cliDeps) {
   const noTty = spawnSync(process.execPath, [path.join(__dirname, '..', 'index.mjs')], {
@@ -59,18 +57,18 @@ if (cliDeps) {
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
   })
-  const refused = noTty.status === 1 && /needs a terminal/.test(noTty.stderr)
-  console.log('no-terminal run: exit', noTty.status, '| refused:', refused)
-  if (!refused) reasons.push(`a no-terminal run should exit 1 and say why, got exit ${noTty.status}`)
+  const refused = noTty.status === 1 && /(?:memerlukan terminal|needs a terminal)/.test(noTty.stderr)
+  console.log('eksekusi tanpa terminal: status', noTty.status, '| ditolak secara benar:', refused)
+  if (!refused) reasons.push(`eksekusi tanpa terminal harus keluar kode 1 dan menjelaskan alasannya, didapat ${noTty.status}`)
 } else {
-  console.log('no-terminal run: skipped, cli dependencies are not installed')
+  console.log('eksekusi tanpa terminal: dilewati, dependensi cli belum terinstal')
 }
 
 fs.rmSync(tmp, { recursive: true, force: true })
-console.log('\ncleaned up temp project.')
+console.log('\ndirektori proyek sementara berhasil dibersihkan.')
 
 if (reasons.length > 0) {
-  console.error('\nsmoke test failed: ' + reasons.join('; '))
+  console.error('\nsmoke test gagal: ' + reasons.join('; '))
   process.exit(1)
 }
-console.log('smoke test passed.')
+console.log('smoke test lulus sempurna.')

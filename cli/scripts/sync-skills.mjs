@@ -22,18 +22,17 @@ const coreBody = fs.readFileSync(path.join(repoRoot, 'slop-ai-indo.md'), 'utf8')
   .replace(/\r\n/g, '\n')
   .trim()
 
-// Snyk W012: a shipped skill must not tell the agent to download its own instructions.
+// Snyk W012: skill yang dirilis dilarang meminta agen mengunduh instruksinya sendiri saat runtime.
 if (/https?:\/\/raw\.githubusercontent\.com/.test(coreBody)) {
-  throw new Error('slop-ai-indo.md carries a runtime download URL; remove it before syncing (Snyk W012)')
+  throw new Error('slop-ai-indo.md memuat URL unduhan runtime; hapus sebelum sinkronisasi (Snyk W012)')
 }
 
 fs.writeFileSync(path.join(repoSkills, 'slop-ai-indo', 'SKILL.md'), CORE_FRONTMATTER + coreBody + '\n')
 
-// An installed copy is a snapshot with nothing in it that names the release it came from,
-// so an update could not say what was on disk. Every install route copies this folder.
+// Salinan yang terpasang adalah snapshot; berkas VERSION mencatat rilis asalnya.
 fs.writeFileSync(path.join(repoSkills, 'slop-ai-indo', 'VERSION'), version + '\n')
 
-// Python leaves a __pycache__ beside the contrast checker; it must not reach the tarball.
+// Python meninggalkan folder __pycache__ di samping alat pemeriksa kontras warna; jangan sertakan ke tarball paket.
 fs.rmSync(cliSkills, { recursive: true, force: true })
 fs.cpSync(repoSkills, cliSkills, {
   recursive: true,
@@ -49,7 +48,7 @@ if (fs.existsSync(agentsSkills)) {
   })
 }
 
-// Copy presets/ into cli/presets for npm package distribution
+// Salin presets/ ke cli/presets untuk distribusi paket npm
 const repoPresets = path.join(repoRoot, 'presets')
 const cliPresets = path.join(__dirname, '..', 'presets')
 if (fs.existsSync(repoPresets)) {
@@ -57,7 +56,7 @@ if (fs.existsSync(repoPresets)) {
   fs.cpSync(repoPresets, cliPresets, { recursive: true })
 }
 
-// Copy DESIGN.md, slop-ai-indo.md, README.md, and LICENSE into cli/ for npm package distribution
+// Salin DESIGN.md, slop-ai-indo.md, README.md, dan LICENSE ke cli/ untuk paket npm
 fs.copyFileSync(path.join(repoRoot, 'DESIGN.md'), path.join(__dirname, '..', 'DESIGN.md'))
 fs.copyFileSync(path.join(repoRoot, 'slop-ai-indo.md'), path.join(__dirname, '..', 'slop-ai-indo.md'))
 fs.copyFileSync(path.join(repoRoot, 'README.md'), path.join(__dirname, '..', 'README.md'))
@@ -65,5 +64,4 @@ if (fs.existsSync(path.join(repoRoot, 'LICENSE'))) {
   fs.copyFileSync(path.join(repoRoot, 'LICENSE'), path.join(__dirname, '..', 'LICENSE'))
 }
 
-console.log(`Regenerated skills/slop-ai-indo/SKILL.md and VERSION (${version}) and synced to cli/skills/ & .agents/skills/`)
-
+console.log(`Berhasil memperbarui skills/slop-ai-indo/SKILL.md dan VERSION (${version}) serta menyinkronkan ke cli/skills/ & .agents/skills/`)

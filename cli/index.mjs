@@ -24,16 +24,16 @@ import {
 } from './lib/install.mjs'
 
 const EXTRA_SKILLS = [
-  { value: 'slop-ai-indo-ui', label: 'slop-ai-indo-ui', hint: 'UI and visual design rules' },
-  { value: 'slop-ai-indo-copywriting', label: 'slop-ai-indo-copywriting', hint: 'copywriting and text rules' },
-  { value: 'slop-ai-indo-human', label: 'slop-ai-indo-human', hint: 'accessibility, with the contrast checker' },
-  { value: 'slop-ai-indo-layoutmobile', label: 'slop-ai-indo-layoutmobile', hint: 'responsive layout rules' },
-  { value: 'slop-ai-indo-code', label: 'slop-ai-indo-code', hint: 'code comment rules' },
-  { value: 'slop-ai-indo-security', label: 'slop-ai-indo-security', hint: 'deep security audit and vulnerability review' },
-  { value: 'slop-ai-indo-docs', label: 'slop-ai-indo-docs', hint: 'technical documentation, README, and API hygiene' },
-  { value: 'slop-ai-indo-identity', label: 'slop-ai-indo-identity', hint: 'brand identity, visual character, and anti-cloning' },
-  { value: 'slop-ai-indo-backend', label: 'slop-ai-indo-backend', hint: 'backend architecture, API, and database hygiene' },
-  { value: 'slop-ai-indo-test', label: 'slop-ai-indo-test', hint: 'testing rules, anti-fake test and mock hygiene' },
+  { value: 'slop-ai-indo-ui', label: 'slop-ai-indo-ui', hint: 'Desain visual, warna, dan tata letak kanvas terang' },
+  { value: 'slop-ai-indo-copywriting', label: 'slop-ai-indo-copywriting', hint: 'Copywriting, judul, anti kata klise AI, dan tone' },
+  { value: 'slop-ai-indo-human', label: 'slop-ai-indo-human', hint: 'Aksesibilitas WCAG AA dan alat pemeriksa kontras' },
+  { value: 'slop-ai-indo-layoutmobile', label: 'slop-ai-indo-layoutmobile', hint: 'Responsivitas mobile, breakpoint, dan area sentuh' },
+  { value: 'slop-ai-indo-code', label: 'slop-ai-indo-code', hint: 'Higienitas komentar kode dan pencegahan boilerplate' },
+  { value: 'slop-ai-indo-security', label: 'slop-ai-indo-security', hint: 'Audit keamanan komprehensif dan review kerentanan' },
+  { value: 'slop-ai-indo-docs', label: 'slop-ai-indo-docs', hint: 'Dokumentasi teknis, PRD, dan panduan API jujur' },
+  { value: 'slop-ai-indo-identity', label: 'slop-ai-indo-identity', hint: 'Identitas produk, branding unik, dan anti penjiplakan' },
+  { value: 'slop-ai-indo-backend', label: 'slop-ai-indo-backend', hint: 'Arsitektur backend, REST API, dan query database' },
+  { value: 'slop-ai-indo-test', label: 'slop-ai-indo-test', hint: 'Pengujian otomatis, unit test, dan anti mock palsu' },
 ]
 
 function stop(message) {
@@ -41,17 +41,15 @@ function stop(message) {
   process.exit(0)
 }
 
-// Show the folder the chosen location actually writes. Agents with their own global
-// folder (OpenCode, Antigravity) differ from the project one.
+// Menampilkan folder target pemasangan
 function displayDir(agent, location) {
   return location === 'global' ? `~/${agent.globalDir ?? agent.dir}` : agent.dir
 }
 
-// A plugin door keeps its own copy, so --update cannot reach it. Name the command for
-// the ones found rather than send the reader back to a table in the guide.
+// Menampilkan daftar plugin door yang ditemukan
 function printPluginDoors(found) {
   if (found.length === 0) return
-  console.log('\nInstalled as a plugin (these keep their own copy, so updating them is separate):')
+  console.log('\nTerpasang sebagai plugin (memiliki salinan tersendiri, pembaruan dijalankan terpisah):')
   for (const p of found) {
     console.log(`  ${p.door.label}${p.version ? ` ${p.version}` : ''}`)
     console.log(`    ${p.door.update}`)
@@ -92,69 +90,65 @@ async function main() {
     }
   }
 
-
-
   if (process.argv.includes('--version') || process.argv.includes('-v')) {
-    console.log(`slop-ai-indo ${VERSION}`)
+    console.log(`slop-ai-indo v${VERSION}`)
     return
   }
 
-  // --update is the non-interactive path, so it runs before the terminal guard and prints
-  // plain lines: an update is something a script or a user in a hurry can run unattended.
+  // Jalur pembaruan otomatis tanpa interaksi (--update)
   if (process.argv.includes('--update')) {
     const { results, pointers } = updateAll()
     if (results.length === 0) {
-      console.log(`slop-ai-indo ${VERSION}: no installed folders found. Nothing to update.`)
+      console.log(`slop-ai-indo v${VERSION}: tidak ada folder skill terpasang yang ditemukan. Tidak ada yang diperbarui.`)
     } else {
       for (const r of results) {
-        const from = r.from ? `slop-ai-indo ${r.from}` : 'an older release that records no version'
+        const from = r.from ? `slop-ai-indo ${r.from}` : 'versi lama tanpa penanda versi'
         console.log(`${r.path}`)
-        console.log(`  ${from} -> slop-ai-indo ${VERSION}  (${r.skills.length} skill(s) for ${r.agents.join(', ')})`)
+        console.log(`  ${from} -> slop-ai-indo v${VERSION} (${r.skills.length} skill untuk ${r.agents.join(', ')})`)
       }
-      console.log(`\nUpdated ${results.length} folder(s) to slop-ai-indo ${VERSION}.`)
+      console.log(`\nBerhasil memperbarui ${results.length} folder ke slop-ai-indo v${VERSION}.`)
       if (pointers.length > 0) {
-        console.log(`Pointer refreshed in ${pointers.map((p) => path.basename(p)).join(', ')}.`)
+        console.log(`Pointer konteks diperbarui di: ${pointers.map((p) => path.basename(p)).join(', ')}.`)
       }
-      console.log('Start a new agent session for the new rules to load.')
+      console.log('Mulai sesi agen baru agar aturan terkini dimuat.')
     }
     printPluginDoors(detectPluginDoors())
     return
   }
 
-  // Without a terminal the prompts read EOF at once: the run printed the banner, installed
-  // nothing, and still exited 0, so a script around it saw success. Fail loudly instead.
+  // Validasi terminal interaktif
   if (!process.stdin.isTTY) {
-    console.error('slop-ai-indo: this installer needs a terminal. Run it in an interactive shell.')
+    console.error('slop-ai-indo: Pemasang ini memerlukan terminal interaktif. Jalankan di shell interaktif.')
     process.exit(1)
   }
 
   console.log(banner())
-  intro('Install slop-ai-indo into your agent setup')
+  intro('Pasang slop-ai-indo ke dalam lingkungan agen AI Anda')
 
   if (!skillSourceDir()) {
-    stop('Could not find the slop-ai-indo skills. Reinstall the slop-ai-indo package.')
+    stop('Direktori sumber skill slop-ai-indo tidak ditemukan. Pasang ulang paket slop-ai-indo.')
   }
 
-  log.step('Choose your skills')
-  console.log(`  ${pc.green('●')} ${pc.bold(CORE)}  ${pc.dim('core rules, always on')}`)
+  log.step('Pilih Skill')
+  console.log(`  ${pc.green('●')} ${pc.bold(CORE)}  ${pc.dim('filter inti 38 aturan, selalu aktif')}`)
 
   const extra = await multiselect({
-    message: 'Extra skills to install',
+    message: 'Pilih skill tambahan yang ingin dipasang:',
     options: EXTRA_SKILLS,
     required: false,
   })
-  if (isCancel(extra)) stop('Install cancelled.')
+  if (isCancel(extra)) stop('Pemasangan dibatalkan.')
   const skills = [CORE, ...(extra ?? [])]
 
-  log.step('Choose where slop-ai-indo goes')
+  log.step('Pilih Lokasi Target')
   const location = await select({
-    message: 'Install location',
+    message: 'Tentukan lokasi pemasangan skill:',
     options: [
-      { value: 'project', label: 'This project', hint: 'only this folder' },
-      { value: 'global', label: 'Everywhere', hint: 'all your projects' },
+      { value: 'project', label: 'Proyek ini saja (Rekomendasi)', hint: 'hanya disimpan di folder proyek saat ini' },
+      { value: 'global', label: 'Global (Seluruh komputer)', hint: 'berlaku untuk seluruh proyek di profil pengguna' },
     ],
   })
-  if (isCancel(location)) stop('Install cancelled.')
+  if (isCancel(location)) stop('Pemasangan dibatalkan.')
 
   let chosenPreset = 'enterprise'
   if (location === 'project') {
@@ -164,94 +158,86 @@ async function main() {
       options: DESIGN_PRESETS,
       initialValue: 'enterprise',
     })
-    if (isCancel(preset)) stop('Install cancelled.')
+    if (isCancel(preset)) stop('Pemasangan dibatalkan.')
     chosenPreset = preset
   }
 
-  log.step('Choose which agents get slop-ai-indo')
+  log.step('Pilih Agen Coding')
   const detected = detectAgents(location)
   const chosen = await multiselect({
-    message: 'Which agent(s) should slop-ai-indo install into?',
+    message: 'Agen coding mana yang ingin dipasangi slop-ai-indo?',
     options: AGENTS.map((a) => ({
       value: a.id,
       label: a.label,
-      hint: detected.includes(a.id) ? `found here (${displayDir(a, location)})` : `will create ${displayDir(a, location)}`,
+      hint: detected.includes(a.id) ? `ditemukan (${displayDir(a, location)})` : `akan membuat ${displayDir(a, location)}`,
     })),
-    required: 'Pick at least one agent.',
+    required: 'Pilih minimal satu agen coding.',
     initialValues: detected,
   })
-  if (isCancel(chosen)) stop('Install cancelled.')
+  if (isCancel(chosen)) stop('Pemasangan dibatalkan.')
 
   const targets = resolveTargets(location, chosen)
   await log.message(
-    'Installing into:\n' + targets.map((t) => '  ' + t.path).join('\n'),
+    'Memasang ke folder:\n' + targets.map((t) => '  ' + t.path).join('\n'),
     { symbol: pc.cyan('│') }
   )
 
   const conflicts = detectConflicts({ skills, targets })
   let overwrite = false
   if (conflicts.length > 0) {
-    // Overwriting is how an update happens, and the version on disk is the one fact
-    // the user cannot look up anywhere. Name both sides so the choice is obvious.
     const found = [...new Set(targets.map((t) => installedVersion(t.path)).filter(Boolean))]
-    const have = found.length > 0 ? `slop-ai-indo ${found.join(' and ')}` : 'a version old enough that it records no version'
-    log.warn(`Already here: ${have}. This installer carries ${VERSION}.`)
+    const have = found.length > 0 ? `slop-ai-indo ${found.join(' dan ')}` : 'versi lama yang belum memiliki penanda'
+    log.warn(`Sudah terpasang sebelumnya: ${have}. Pemasang saat ini membawa v${VERSION}.`)
 
     const answer = await select({
-      message: `${conflicts.length} skill folder(s) already exist. What should I do?`,
+      message: `${conflicts.length} folder skill sudah ada. Apa yang ingin dilakukan?`,
       options: [
-        { value: 'overwrite', label: 'Overwrite them', hint: `update to ${VERSION}` },
-        { value: 'keep', label: 'Keep what is there', hint: 'stay on what is installed' },
+        { value: 'overwrite', label: 'Timpa dengan versi baru', hint: `perbarui ke v${VERSION}` },
+        { value: 'keep', label: 'Pertahankan yang sudah ada', hint: 'tetap di versi yang terpasang' },
       ],
     })
-    if (isCancel(answer)) stop('Install cancelled.')
+    if (isCancel(answer)) stop('Pemasangan dibatalkan.')
     overwrite = answer === 'overwrite'
   }
 
   const proceed = await confirm({
-    message: `Install ${skills.length} skill(s) now?`,
+    message: `Pasang ${skills.length} skill sekarang?`,
     initialValue: true,
   })
-  if (isCancel(proceed) || proceed === false) stop('Install cancelled.')
+  if (isCancel(proceed) || proceed === false) stop('Pemasangan dibatalkan.')
 
   const spin = spinner()
-  spin.start('Installing skills...')
+  spin.start('Menyalin berkas skill...')
   const written = installSkills({ skills, targets, overwrite })
   const pointers = location === 'project' ? updatePointers({ targets, skills, designPreset: chosenPreset }) : []
-  spin.stop('Done.')
+  spin.stop('Penyalinan selesai.')
 
   if (pointers.length > 0) {
-    log.step('Pointer written to ' + pointers.map((p) => path.basename(p)).join(', '))
+    log.step('Pointer konteks ditulis ke: ' + pointers.map((p) => path.basename(p)).join(', '))
   }
 
   const agentCount = new Set(written.flatMap((w) => w.agents)).size
   if (written.length > 0) {
-    outro(`Installed ${written.length} skill(s) into ${agentCount} agent folder(s).`)
-    console.log(pc.dim('slop-ai-indo is ready. The next agent session loads it.'))
+    outro(`Berhasil memasang ${written.length} skill ke dalam ${agentCount} folder agen.`)
+    console.log(pc.dim('slop-ai-indo siap digunakan. Sesi agen berikutnya akan otomatis memuat aturan ini.'))
   } else {
-    // "Existing folders were kept" used to read as success. The copies are the
-    // old release, so say that plainly and name the choice that fixes it.
-    outro('Nothing new to install. Existing folders were kept.')
-    console.log(pc.dim('They may be older than this release. To update, run it again and pick "Overwrite them".'))
+    outro('Tidak ada skill baru yang disalin. Salinan yang ada dipertahankan.')
+    console.log(pc.dim('Jika ingin memperbarui ke versi terbaru, jalankan kembali dan pilih "Timpa dengan versi baru".'))
   }
 
-  // Hermes gates project skills behind a one-time, per-repo trust step, so name it here
-  // rather than let the user meet it as a banner after the install looked finished.
+  // Peringatan trust khusus Hermes
   if (location === 'project' && targets.some((t) => t.agents.some((a) => a.id === 'hermes'))) {
-    log.warn('Hermes needs one more step: run `hermes skills trust` in this project.')
+    log.warn('Hermes memerlukan satu langkah tambahan: jalankan `hermes skills trust` di proyek ini.')
   }
 
-  // Two folders holding the same skill names is how a skill goes missing in OpenCode,
-  // which reads both and does not document which copy it keeps.
+  // Deteksi duplikasi pembacaan folder
   for (const dup of detectDuplicateReads({ targets, location })) {
     log.warn(
-      `${dup.agent.label} reads both ${dup.paths.join(' and ')}, and slop-ai-indo is now in both. ` +
-        'It may load either copy. Remove one of them to be safe.'
+      `${dup.agent.label} membaca kedua folder ${dup.paths.join(' dan ')}, dan slop-ai-indo kini ada di keduanya. ` +
+        'Agen dapat memuat salah satu salinan secara acak. Hapus salah satunya untuk konsistensi.'
     )
   }
 
-  // Installing through the installer does not update a plugin door the user also has,
-  // and nothing else would tell them that copy exists.
   printPluginDoors(detectPluginDoors())
 }
 

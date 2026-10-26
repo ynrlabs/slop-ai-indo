@@ -17,47 +17,44 @@ export const DESIGN_PRESETS = [
   { value: 'default', label: 'Bawaan (Default)', hint: 'Gunakan standar DESIGN.md asli slop-ai-indo' },
 ]
 
-/** The release an existing install came from, or null when it predates the VERSION file.
- * Nothing else on disk names it, so without this an update cannot tell the user what
- * they already have.
+/**
+ * Versi rilis dari instalasi yang ada, atau null jika mendahului berkas VERSION.
+ * Tidak ada berkas lain di disk yang mencatat versi, sehingga tanpa berkas ini
+ * proses pembaruan tidak dapat mengetahui versi yang sudah terpasang sebelumnya.
  */
 export function installedVersion(targetPath) {
   const file = path.join(targetPath, CORE, 'VERSION')
   return fs.existsSync(file) ? fs.readFileSync(file, 'utf8').trim() : null
 }
 
-// Every row carries the entry file it writes, so a new agent cannot be added
-// without one: `entry` is what `updatePointers` needs and nothing else supplies it.
-// `readsAlso` lists the other project folders the agent loads skills from besides its
-// own, so a duplicate can be named instead of discovered later as a missing skill.
+// Setiap baris membawa berkas entri yang ditulisnya. Agen baru tidak dapat ditambahkan
+// tanpa entri: properti `entry` dibutuhkan oleh `updatePointers`.
+// Properti `readsAlso` mencantumkan folder proyek lain tempat agen memuat skill selain miliknya,
+// sehingga duplikasi dapat dideteksi sejak awal daripada hilang tanpa jejak.
 export const AGENTS = [
   { id: 'claude', label: 'Claude Code', dir: '.claude/skills', entry: 'CLAUDE.md' },
-  // Antigravity reads a project's .agents/skills, but not the one under the home dir.
+  // Antigravity membaca .agents/skills proyek, bukan yang ada di direktori home.
   { id: 'antigravity', label: 'Antigravity', dir: '.agents/skills', globalDir: '.gemini/config/skills', entry: 'AGENTS.md' },
-  // Codex reads $HOME/.agents/skills at user scope and calls its own $CODEX_HOME/skills
-  // the deprecated user location, so a global install belongs in the shared folder. In a
-  // project it reads .codex/skills and walks .agents/skills up from the working directory.
+  // Codex membaca $HOME/.agents/skills di cakupan global pengguna dan mengarahkan $CODEX_HOME/skills.
+  // Di proyek, Codex membaca .codex/skills dan menelusuri .agents/skills dari working directory.
   { id: 'codex', label: 'Codex', dir: '.codex/skills', globalDir: '.agents/skills', readsAlso: ['.agents/skills'], entry: 'AGENTS.md' },
-  // OpenCode documents ~/.config/opencode for global skills; ~/.opencode is undocumented.
+  // OpenCode mendokumentasikan ~/.config/opencode untuk skill global; ~/.opencode tidak terdokumentasi resmi.
   { id: 'opencode', label: 'OpenCode', dir: '.opencode/skills', globalDir: '.config/opencode/skills', readsAlso: ['.claude/skills', '.agents/skills'], entry: 'AGENTS.md' },
   { id: 'cursor', label: 'Cursor', dir: '.cursor/skills', entry: 'AGENTS.md' },
-  // Cline reads .claude/skills as well as its own folder, so the two collide in one
-  // project. A global skill outranks a project one here, the reverse of every other row.
+  // Cline membaca .claude/skills sekaligus foldernya sendiri, sehingga keduanya dapat bersinggungan di satu proyek.
   { id: 'cline', label: 'Cline', dir: '.cline/skills', readsAlso: ['.claude/skills'], entry: 'AGENTS.md' },
-  // Amp shares the project's .agents/skills but keeps a global folder of its own, and it
-  // also loads .claude/skills. Its user path outranks the project one.
+  // Amp berbagi .agents/skills proyek namun memiliki folder global tersendiri, serta turut memuat .claude/skills.
   { id: 'amp', label: 'Amp', dir: '.agents/skills', globalDir: '.config/agents/skills', readsAlso: ['.claude/skills'], entry: 'AGENTS.md' },
   { id: 'gemini', label: 'Gemini CLI', dir: '.gemini/skills', entry: 'GEMINI.md' },
-  // Hermes reads a project's .hermes/skills and .agents/skills, project tier first.
+  // Hermes membaca .hermes/skills dan .agents/skills milik proyek.
   { id: 'hermes', label: 'Hermes', dir: '.hermes/skills', readsAlso: ['.agents/skills'], entry: 'AGENTS.md' },
-  // Copilot reads the shared .agents/skills folder, so it shares Antigravity's target.
+  // Copilot membaca folder bersama .agents/skills, berbagi target direktori dengan Antigravity.
   { id: 'copilot', label: 'GitHub Copilot', dir: '.agents/skills', entry: 'AGENTS.md' },
-  // Kimi Code reads the shared folder at both scopes. Its own .kimi-code/skills is never
-  // written here, and $KIMI_CODE_HOME/skills moves with an env var the installer cannot see.
+  // Kimi Code membaca folder bersama di kedua cakupan.
   { id: 'kimi', label: 'Kimi Code', dir: '.agents/skills', entry: 'AGENTS.md' },
-  // Oh My Pi reads .omp/skills and supports .agents/skills as well as .claude/skills.
+  // Oh My Pi membaca .omp/skills dan mendukung .agents/skills serta .claude/skills.
   { id: 'omp', label: 'Oh My Pi', dir: '.omp/skills', readsAlso: ['.agents/skills', '.claude/skills'], entry: 'AGENTS.md' },
-  // DeepSeek coding agent and Deep Code CLI read .deepseek/skills and the shared .agents/skills.
+  // DeepSeek membaca .deepseek/skills dan shared .agents/skills.
   { id: 'deepseek', label: 'DeepSeek', dir: '.deepseek/skills', readsAlso: ['.agents/skills'], entry: 'AGENTS.md' },
 ]
 
@@ -73,14 +70,14 @@ function resolveBase(location) {
   return location === 'global' ? os.homedir() : process.cwd()
 }
 
-// Some agents keep global skills outside ~/<dir>, like OpenCode's ~/.config.
+// Beberapa agen menyimpan skill global di luar ~/<dir>, seperti ~/.config milik OpenCode.
 function skillPath(agent, location) {
   const dir = location === 'global' ? (agent.globalDir ?? agent.dir) : agent.dir
   return path.join(resolveBase(location), dir)
 }
 
-// Agents that share a folder share a target, so the skills are copied once and the
-// conflict count matches the folders on disk rather than the agents selected.
+// Agen yang berbagi folder memakai target yang sama, sehingga skill hanya disalin satu kali
+// dan jumlah konflik sesuai dengan folder di disk, bukan jumlah agen yang dipilih.
 export function resolveTargets(location, selected = AGENTS.map((a) => a.id)) {
   const byPath = new Map()
   for (const agent of AGENTS.filter((a) => selected.includes(a.id))) {
@@ -92,8 +89,8 @@ export function resolveTargets(location, selected = AGENTS.map((a) => a.id)) {
   return [...byPath.values()]
 }
 
-// OpenCode, Hermes, Cline, and Amp read more than one project folder, so installing into
-// two of them puts the same names in both. None documents which copy wins, so name it.
+// OpenCode, Hermes, Cline, Amp, Oh My Pi, dan DeepSeek membaca lebih dari satu folder proyek.
+// Memasang ke dua folder berbeda dapat menempatkan salinan skill yang sama di kedua tempat.
 export function detectDuplicateReads({ targets, location }) {
   if (location !== 'project') return []
   const paths = new Set(targets.map((t) => t.path))
@@ -109,14 +106,14 @@ export function detectDuplicateReads({ targets, location }) {
   return found
 }
 
-// Agents whose folder already exists, used to pre-check the picker. A missing
-// folder does not mean a missing agent, so the user can still add one.
+// Agen yang foldernya sudah ada di disk, digunakan untuk pra-pilihan pada picker.
+// Folder yang belum ada bukan berarti agen tidak terpasang, pengguna tetap bisa memilihnya.
 export function detectAgents(location) {
   return AGENTS.filter((a) => fs.existsSync(path.dirname(skillPath(a, location)))).map((a) => a.id)
 }
 
-// The plugin doors keep a copy of their own under a vendor path, and none of those paths
-// is documented as a stable interface. These probes only read, and a miss stays silent.
+// Plugin door menyimpan salinan sendiri di bawah jalur vendor.
+// Pemeriksaan ini hanya membaca; jika tidak ditemukan akan diabaikan tanpa melempar error.
 function readJSON(file) {
   try {
     return JSON.parse(fs.readFileSync(file, 'utf8'))
@@ -133,8 +130,8 @@ function listDirs(dir) {
   }
 }
 
-// A door that cloned the repo carries the VERSION file; one cloned before it shipped
-// does not, and an unknown version is reported as unknown rather than guessed.
+// Door yang meng-clone repo membawa berkas VERSION; yang di-clone sebelum rilis tidak membawanya.
+// Versi yang tidak dikenal dilaporkan sebagai null daripada ditebak.
 function cloneVersion(dir) {
   try {
     return fs.readFileSync(path.join(dir, 'skills', CORE, 'VERSION'), 'utf8').trim()
@@ -196,8 +193,8 @@ export const PLUGIN_DOORS = [
   },
 ]
 
-// A door that moves its files breaks its own probe and nothing else: the installer stops
-// naming that door instead of failing, which is the whole reason a miss has to be silent.
+// Door yang memindahkan berkasnya merusak pemeriksaannya sendiri: pemasang berhenti
+// menyebutkan door tersebut alih-alih melempar error gagal.
 export function detectPluginDoors() {
   return PLUGIN_DOORS.flatMap((door) => {
     let found = null
@@ -226,7 +223,7 @@ function copyDir(src, dest) {
   fs.rmSync(dest, { recursive: true, force: true })
   fs.mkdirSync(dest, { recursive: true })
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
-    // README.md is GitHub-facing only; never ship it into a user's agent setup.
+    // README.md hanya untuk tampilan repositori GitHub; jangan disalin ke direktori skill pengguna.
     if (entry.name === 'README.md') continue
     const s = path.join(src, entry.name)
     const d = path.join(dest, entry.name)
@@ -237,8 +234,8 @@ function copyDir(src, dest) {
 
 export function installSkills({ skills, targets, overwrite = false }) {
   const source = skillSourceDir()
-  // Fail with the real reason instead of a TypeError from path.join(null, skill).
-  if (!source) throw new Error('Could not find the slop-ai-indo skills. Reinstall the slop-ai-indo package.')
+  // Berikan alasan jelas daripada TypeError dari path.join(null, skill).
+  if (!source) throw new Error('Tidak dapat menemukan direktori sumber skill slop-ai-indo. Silakan instal ulang paket slop-ai-indo.')
   const written = []
   for (const t of targets) {
     for (const skill of skills) {
@@ -257,37 +254,37 @@ const POINTER_START = '<!-- antislop:start -->'
 const POINTER_END = '<!-- antislop:end -->'
 
 const SKILL_LINES = {
-  [CORE]: 'Core filter, always on: `slop-ai-indo`',
-  'slop-ai-indo-ui': 'UI / visual: `slop-ai-indo-ui`',
-  'slop-ai-indo-copywriting': 'Copy & text: `slop-ai-indo-copywriting`',
-  'slop-ai-indo-human': 'People: `slop-ai-indo-human`',
-  'slop-ai-indo-layoutmobile': 'Mobile / responsive: `slop-ai-indo-layoutmobile`',
-  'slop-ai-indo-code': 'Code comments: `slop-ai-indo-code`',
-  'slop-ai-indo-security': 'Security audit: `slop-ai-indo-security`',
-  'slop-ai-indo-docs': 'Technical documentation: `slop-ai-indo-docs`',
-  'slop-ai-indo-identity': 'Brand & visual character: `slop-ai-indo-identity`',
-  'slop-ai-indo-backend': 'Backend & API: `slop-ai-indo-backend`',
-  'slop-ai-indo-test': 'Testing & mocks: `slop-ai-indo-test`',
+  [CORE]: 'Penyaring inti, selalu aktif: `slop-ai-indo`',
+  'slop-ai-indo-ui': 'UI & estetika visual: `slop-ai-indo-ui`',
+  'slop-ai-indo-copywriting': 'Teks & copywriting: `slop-ai-indo-copywriting`',
+  'slop-ai-indo-human': 'Aksesibilitas & manusia: `slop-ai-indo-human`',
+  'slop-ai-indo-layoutmobile': 'Mobile & responsif: `slop-ai-indo-layoutmobile`',
+  'slop-ai-indo-code': 'Komentar kode bersih: `slop-ai-indo-code`',
+  'slop-ai-indo-security': 'Audit keamanan & kerentanan: `slop-ai-indo-security`',
+  'slop-ai-indo-docs': 'Dokumentasi teknis: `slop-ai-indo-docs`',
+  'slop-ai-indo-identity': 'Identitas brand & karakter visual: `slop-ai-indo-identity`',
+  'slop-ai-indo-backend': 'Backend, API, & sanitasi query: `slop-ai-indo-backend`',
+  'slop-ai-indo-test': 'Pengujian otomatis & anti-mocking: `slop-ai-indo-test`',
 }
 
 export const SKILL_NAMES = Object.keys(SKILL_LINES)
 
-// Names the skills rather than importing the core: an `@` import pulls all 46 KB
-// of it into every session, including ones that touch no UI.
+// Menyebutkan nama-nama skill daripada mengimpor core: impor '@' akan memuat seluruh 46 KB
+// ke setiap sesi, termasuk sesi yang tidak menyentuh antarmuka pengguna.
 function pointerBlock(skills) {
   return [
     POINTER_START,
     '## slop-ai-indo',
-    'For UI, copy, people, mobile layout, or code comments work, load the slop-ai-indo skill for the task:',
+    'Untuk pekerjaan UI, copy, aksesibilitas, layout mobile, komentar kode, backend, keamanan, atau testing, muat skill slop-ai-indo yang relevan:',
     ...skills.filter((s) => SKILL_LINES[s]).map((s) => `- ${SKILL_LINES[s]}`),
-    'Before starting, ask the user when slop-ai-indo applies: during the work, or after it is done.',
-    'To update slop-ai-indo later: run `npx slop-ai-indo` or `slop.bat`.',
+    'Sebelum mulai, tanyakan ke pengguna kapan slop-ai-indo diterapkan: selama pengerjaan atau setelah selesai.',
+    'Untuk memperbarui slop-ai-indo nanti: jalankan `npx slop-ai-indo` atau `slop.bat`.',
     POINTER_END,
   ]
 }
 
-// A marker inside a code fence is someone's example, not our block. Fence runs are matched
-// by length, and a fence left open at EOF is a typo rather than a boundary.
+// Penanda di dalam code fence adalah contoh milik pengguna, bukan blok kita. Panjang pembatas code fence
+// dicocokkan berdasarkan panjang karakter backtick, dan fence yang terbuka di EOF dianggap salah ketik.
 function scanMarkers(lines) {
   const fenced = new Array(lines.length).fill(false)
   let mark = null
@@ -324,8 +321,8 @@ function scanMarkers(lines) {
 
 function writeBlock(entry, block) {
   const existing = fs.existsSync(entry) ? fs.readFileSync(entry, 'utf8') : ''
-  // Follow the file's dominant ending. Keying on "contains any CRLF" would flip a
-  // mostly-LF file, which is the damage this is here to avoid.
+  // Ikuti line ending (EOL) dominan pada berkas. Memeriksa "apakah ada CRLF" saja
+  // dapat mengubah berkas yang mayoritas LF, hal yang harus dicegah.
   const crlf = (existing.match(/\r\n/g) || []).length
   const eol = crlf > (existing.match(/\n/g) || []).length - crlf ? '\r\n' : '\n'
   const lines = existing.split(/\r?\n/)
@@ -334,8 +331,8 @@ function writeBlock(entry, block) {
   const end = start === -1 ? -1 : ends.find((i) => i > start) ?? -1
   const paired = start !== -1 && end !== -1
 
-  // Only marker lines are ever removed. Reading a lone start as "the block runs to EOF"
-  // would delete everything the author wrote after a marker they mistyped.
+  // Hanya baris penanda (marker) yang dihapus. Menafsirkan penanda awal tunggal
+  // sampai EOF dapat menghapus teks asli yang ditulis oleh pengguna.
   const removed = new Set([...starts, ...ends])
   if (paired) for (let i = start; i <= end; i++) removed.add(i)
 
@@ -343,8 +340,8 @@ function writeBlock(entry, block) {
   const head = lines.slice(0, insertAt).filter((_, i) => !removed.has(i))
   const tail = lines.slice(insertAt).filter((_, i) => !removed.has(insertAt + i))
 
-  // Tidy the two seams only: a /\n{3,}/g sweep over the whole document would also
-  // collapse blank lines the author wrote inside their code fences.
+  // Rapikan hanya pada sambungan batas blok: penggantian /\n{3,}/g di seluruh dokumen
+  // dapat merusak baris kosong yang sengaja ditulis pengguna di dalam code block.
   while (head.length && head[head.length - 1].trim() === '') head.pop()
   while (tail.length && tail[0].trim() === '') tail.shift()
 
@@ -362,7 +359,7 @@ export function updatePointers({ targets, skills, designPreset = 'enterprise' } 
     if (fs.existsSync(path.join(t.path, CORE))) for (const a of t.agents) entries.add(a.entry)
   }
 
-  // Copy chosen DESIGN.md preset and slop-ai-indo.md into current project if bundled
+  // Salin preset DESIGN.md dan slop-ai-indo.md ke direktori proyek saat ini jika tersedia
   const presetFile = `${designPreset}.md`
   const bundledPreset = path.join(__dirname, '..', 'presets', presetFile)
   const repoPreset = path.join(__dirname, '..', '..', 'presets', presetFile)
@@ -391,9 +388,10 @@ export function updatePointers({ targets, skills, designPreset = 'enterprise' } 
   return written
 }
 
-// `--update` replaces every slop-ai-indo folder already on this machine, at both scopes and
-// with no prompts. Each folder keeps the skill selection it was installed with. The scope
-// list is a parameter so a test never writes into the home directory it runs under.
+// Flag `--update` mengganti setiap folder slop-ai-indo yang sudah ada di komputer ini,
+// di kedua cakupan (project dan global) tanpa prompt interaktif.
+// Setiap folder mempertahankan pilihan skill sebelumnya. Parameter cakupan memungkinkan
+// pengujian berjalan tanpa menyentuh direktori home pengguna.
 export function updateAll({ locations = ['project', 'global'] } = {}) {
   const results = []
   const projectTargets = []
@@ -414,7 +412,7 @@ export function updateAll({ locations = ['project', 'global'] } = {}) {
     }
   }
 
-  // One block per entry file, so the union of every project folder's skills is the list.
+  // Satu blok per berkas entri pointer, sehingga gabungan skill dari seluruh folder proyek dijadikan satu daftar.
   const pointers = projectTargets.length > 0
     ? updatePointers({ targets: projectTargets, skills: [...projectSkills] })
     : []

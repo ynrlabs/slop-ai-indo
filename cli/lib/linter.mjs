@@ -3,7 +3,7 @@ import path from 'node:path'
 
 /**
  * Slop AI Indo - Mesin Linter Deterministik
- * Memeriksa kode, styling, dan teks secara statis terhadap 38 aturan anti-slop.
+ * Memeriksa kode, tata letak, styling, dan teks secara statis terhadap aturan anti-slop.
  */
 
 function getFileExtension(filePath) {
@@ -13,10 +13,10 @@ function getFileExtension(filePath) {
 }
 
 export const RULES = {
-  // --- TIER 1: HARD GATES (Mutlak, Tanpa Pengecualian) ---
+  // --- TINGKATAN 1: HARD GATES (Mutlak, Tanpa Pengecualian) ---
   'R-02-HYPE': {
     id: 'R-02',
-    name: 'AI Copywriting Hype Phrases',
+    name: 'Frasa Klise Promosi AI (Hype Phrases)',
     tier: 'Hard Gate',
     description: 'Kata atau frasa klise promosi khas AI dilarang.',
     fix: 'Ganti dengan bahasa lugas, spesifik, dan manusiawi tanpa klaim bombastis.',
@@ -41,10 +41,10 @@ export const RULES = {
 
   'R-02-EM-DASH': {
     id: 'R-02',
-    name: 'Consecutive Em Dashes',
+    name: 'Tanda Em Dash Jamak Berturut-turut',
     tier: 'Hard Gate',
-    description: 'Penggunaan em dash (—) berulang-ulang tanpa tujuan editorial.',
-    fix: 'Gunakan titik atau tanda baca standar; batasi em dash maksimal 1 per paragraf.',
+    description: 'Penggunaan em dash berulang-ulang tanpa tujuan editorial yang sah.',
+    fix: 'Gunakan titik, koma, atau tanda kurung standar; batasi em dash maksimal 1 per paragraf.',
     check: (line) => {
       const count = (line.match(/—/g) || []).length
       return count >= 2
@@ -54,10 +54,10 @@ export const RULES = {
 
   'R-08-FAKE-METRICS': {
     id: 'R-08',
-    name: 'Unsubstantiated / Fake AI Metrics',
+    name: 'Metrik & Statistik Fiktif Rekayasa AI',
     tier: 'Hard Gate',
-    description: 'Metrik atau angka kepuasan fiktif buatan AI tanpa atribusi.',
-    fix: 'Hapus angka karangan; hanya tampilkan angka nyata dengan kutipan sumber yang jelas.',
+    description: 'Metrik atau angka kepuasan fiktif buatan AI tanpa atribusi sumber nyata.',
+    fix: 'Hapus angka karangan; hanya tampilkan angka nyata dengan sumber yang dapat diverifikasi.',
     patterns: [
       /\b99\.9%\s+(?:satisfaction|uptime guaranteed|happy clients)\b/i,
       /\b100%\s+(?:guaranteed|satisfaction|risk-free)\b/i,
@@ -70,10 +70,10 @@ export const RULES = {
 
   'R-09-TRANSITION-ALL': {
     id: 'R-09',
-    name: 'Unbounded Transition All',
+    name: 'Transisi Global Tanpa Batas (transition: all)',
     tier: 'Hard Gate',
-    description: 'Penggunaan transition: all atau transisi pada geometri (width/height/top/left).',
-    fix: 'Gunakan transisi spesifik GPU (opacity, transform, color) atau transition-colors.',
+    description: 'Penggunaan transition: all atau transisi pada geometri (width/height/top/left) yang memicu reflow berat.',
+    fix: 'Gunakan transisi spesifik GPU (opacity, transform, color) atau utility transition-colors.',
     patterns: [
       /transition\s*:\s*all\b/i,
       /\btransition-all\b/,
@@ -84,10 +84,10 @@ export const RULES = {
 
   'R-11-NEON-GLOW': {
     id: 'R-11',
-    name: 'Artificial Outer Neon Glow',
+    name: 'Pendaran Neon Luar Artifisial (Outer Neon Glow)',
     tier: 'Hard Gate',
     description: 'Efek pendaran neon luar berlebihan pada kartu atau border.',
-    fix: 'Ganti dengan hairline border halus (1px solid #e2e8f0 atau #27272a) dan shadow realistis.',
+    fix: 'Ganti dengan border garis tipis solid 1px (#e2e8f0 untuk terang, #27272a untuk gelap) dan shadow realistis.',
     patterns: [
       /box-shadow\s*:[^;]*0\s+0\s+(?:[1-9]\d*px|[6-9]px)[^;]*(?:cyan|magenta|#00f|#0ff|#f0f|rgba\(\s*(?:0,\s*255|255,\s*0|168,\s*85))/i,
       /filter\s*:[^;]*drop-shadow\(\s*0\s+0\s+[1-9]\d*px/i,
@@ -97,25 +97,25 @@ export const RULES = {
 
   'R-12-PILL-BUTTON': {
     id: 'R-12',
-    name: 'Extreme Capsule / Pill Button',
+    name: 'Tombol Balon Kapsul Ekstrem (Pill-shaped Button)',
     tier: 'Hard Gate',
-    description: 'Tombol dengan border-radius kapsul ekstrem (9999px) dilarang.',
-    fix: 'Gunakan border-radius presisi 4px–6px (rounded-md atau rounded) ala Linear & n8n.',
+    description: 'Tombol aksi dengan border-radius kapsul ekstrem (9999px atau rounded-full) dilarang.',
+    fix: 'Gunakan border-radius presisi 4px-6px (rounded-md atau rounded) ala Linear dan n8n.',
     patterns: [
       /border-radius\s*:\s*(?:9999px|1000px|50px|100%)/i,
       /<(?:button|a)[^>]*class="[^"]*\brounded-full\b[^"]*"[^>]*>/i,
     ],
-    // Only flag on elements or styles that indicate buttons/cards, allow avatars
+    // Pengecualian khusus: Izinkan rounded-full pada avatar, foto profil pengguna, atau badge titik status
     ignoreIf: (line) => /\b(?:avatar|user-photo|rounded-avatar|profile-pic|icon-circle|badge-dot)\b/i.test(line),
     extensions: ['.css', '.scss', '.html', '.php', '.blade.php', '.jsx', '.tsx', '.vue', '.svelte'],
   },
 
   'R-06-FOCUS-OUTLINE-NONE': {
     id: 'R-06',
-    name: 'Missing Focus Indicator',
+    name: 'Indikator Fokus Keyboard Hilang (outline: none)',
     tier: 'Hard Gate',
-    description: 'Menghapus focus outline tanpa menyediakan :focus-visible atau ring pengganti.',
-    fix: 'Pertahankan focus outline atau sediakan :focus-visible yang kontras untuk navigasi keyboard.',
+    description: 'Menghapus focus outline tanpa menyediakan :focus-visible atau ring pengganti bagi aksesibilitas keyboard.',
+    fix: 'Pertahankan focus outline atau sediakan :focus-visible yang kontras untuk navigasi keyboard pengguna.',
     patterns: [
       /outline\s*:\s*(?:none|0)\s*;/i,
       /\bfocus:outline-none\b(?![^"]*\bfocus:(?:ring|border)\b)/,
@@ -123,10 +123,113 @@ export const RULES = {
     extensions: ['.css', '.scss', '.html', '.php', '.blade.php', '.jsx', '.tsx', '.vue', '.svelte'],
   },
 
-  // --- TIER 3: QUALITY LOCKS (Konsistensi Kode & Kebersihan) ---
+  'R-24-DEAD-LINKS': {
+    id: 'R-24',
+    name: 'Tautan Navigasi Mati / Anchor Kosong',
+    tier: 'Hard Gate',
+    description: 'Tautan href="#" atau link tanpa tujuan nyata yang menuju ke halaman kosong.',
+    fix: 'Hubungkan ke ID seksi yang nyata, rute yang valid, atau gunakan tombol jika memicu aksi.',
+    patterns: [
+      /<a\b[^>]*\bhref\s*=\s*["'](?:#|javascript:void\(0\);?|javascript:;)["'][^>]*>/i,
+    ],
+    extensions: ['.html', '.php', '.blade.php', '.jsx', '.tsx', '.vue', '.svelte'],
+  },
+
+  'R-32-LAZY-PLACEHOLDERS': {
+    id: 'R-32',
+    name: 'Placeholder Malas Khas AI',
+    tier: 'Hard Gate',
+    description: 'Placeholder kode malas yang ditinggalkan AI tanpa implementasi tuntas.',
+    fix: 'Implementasikan kode secara tuntas atau tangani fallback/error secara eksplisit.',
+    patterns: [
+      /\/\/\s*TODO:?\s*(?:implement later|add logic here|fill in|coming soon)\b/i,
+      /\/\/\s*(?:rest of|remaining)\s+(?:code|logic|implementation)\s+(?:goes here|here)\b/i,
+      /\/\*[\s\S]*?(?:rest of code|add implementation)[\s\S]*?\*\//i,
+      /<!--\s*(?:rest of|remaining)\s+(?:content|sections?)\s*-->/i,
+    ],
+    extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.jsx', '.php', '.py', '.html', '.blade.php', '.vue', '.svelte'],
+  },
+
+  'B-01-SILENT-CATCH': {
+    id: 'B-01',
+    name: 'Penanganan Error Hampa (Silent Catch)',
+    tier: 'Hard Gate',
+    description: 'Menelan exception atau error tanpa logging, re-throw, atau umpan balik ke pemanggil.',
+    fix: 'Catat pesan error ke logger resmi sistem atau lempar kembali exception agar kegagalan dapat ditelusuri.',
+    patterns: [
+      /catch\s*\([^)]*\)\s*\{\s*(?:\/\/[^\n]*)?\s*\}/i,
+    ],
+    extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.php', '.java'],
+  },
+
+  'B-02-GUARDED-EMPTY': {
+    id: 'B-02',
+    name: 'Mass Assignment Rentan ($guarded = [])',
+    tier: 'Hard Gate',
+    description: 'Membuka seluruh kolom database terhadap mass assignment tanpa perlindungan.',
+    fix: 'Deklarasikan properti $fillable secara eksplisit untuk menentukan kolom yang aman diisi.',
+    patterns: [
+      /\bprotected\s+\$guarded\s*=\s*\[\s*\];/i,
+    ],
+    extensions: ['.php'],
+  },
+
+  // --- TINGKATAN 2: PURPOSE-GATE (Wajib Ada Alasan Tertulis) ---
+  'R-01-GRADIENT': {
+    id: 'R-01',
+    name: 'Gradien Biru-Ungu Generik AI',
+    tier: 'Purpose-Gate',
+    description: 'Gradien biru ke ungu/cyan khas template AI tanpa alasan hierarki atau identitas merek tertulis.',
+    fix: 'Gunakan warna solid terarah atau ambil palet kanvas terang dari panduan DESIGN.md.',
+    patterns: [
+      /\bfrom-(?:purple|indigo|violet)-(?:500|600)\s+to-(?:pink|blue|cyan)-(?:500|600)\b/i,
+      /\blinear-gradient\([^)]*(?:#6366f1|#8b5cf6|#a855f7|purple)[^)]*(?:#ec4899|#06b6d4|#3b82f6|cyan)\b/i,
+    ],
+    extensions: ['.css', '.scss', '.html', '.blade.php', '.jsx', '.tsx', '.vue', '.svelte'],
+  },
+
+  'R-04-SPARKLE-ICON': {
+    id: 'R-04',
+    name: 'Ikon Bintang Sparkle / Magic AI Generik',
+    tier: 'Purpose-Gate',
+    description: 'Ikon bintang sparkle atau tongkat sihir yang disematkan tanpa fungsi nyata.',
+    fix: 'Ganti dengan ikon fungsional yang relevan dengan tindakan atau konten pengguna.',
+    patterns: [
+      /<(?:Sparkles|Wand2?|MagicWand|IconSparkles?)\b[^>]*\/?>/i,
+      /\blucide:sparkles?\b/i,
+      /\b(?:fa-magic|fa-wand-magic-sparkles)\b/i,
+    ],
+    extensions: ['.jsx', '.tsx', '.vue', '.svelte', '.html', '.blade.php'],
+  },
+
+  'R-10-GLASSMORPHISM': {
+    id: 'R-10',
+    name: 'Efek Kaca Menumpuk (Excessive Glassmorphism)',
+    tier: 'Purpose-Gate',
+    description: 'Efek kaca (backdrop-blur) yang dipasang pada banyak elemen sekaligus tanpa fungsi hierarki.',
+    fix: 'Gunakan latar belakang solid atau batasi efek kaca maksimal pada 1 elemen aksen (misal navbar melayang).',
+    patterns: [
+      /\bbackdrop-blur-(?:md|lg|xl)\s+(?:bg-white|bg-black)\/(?:5|10|20)\b/i,
+    ],
+    extensions: ['.css', '.scss', '.html', '.blade.php', '.jsx', '.tsx', '.vue', '.svelte'],
+  },
+
+  // --- TINGKATAN 3: QUALITY LOCKS (Konsistensi Kode & Kebersihan) ---
+  'R-15-GENERIC-CTA': {
+    id: 'R-15',
+    name: 'Tombol CTA Generik Klise AI',
+    tier: 'Quality Lock',
+    description: 'Teks ajakan bertindak (CTA) klise AI yang tidak spesifik terhadap konteks tindakan.',
+    fix: 'Gunakan label tombol spesifik terhadap aksi nyata (misal: "Mulai Uji Coba Gratis", "Lihat Demo Langsung").',
+    patterns: [
+      /<button[^>]*>\s*(?:Get\s+Started\s+Today|Transform\s+Your\s+Business|Supercharge\s+Your\s+Workflow|Unlock\s+Your\s+Potential)\s*<\/button>/i,
+    ],
+    extensions: ['.html', '.blade.php', '.jsx', '.tsx', '.vue', '.svelte'],
+  },
+
   'R-31-TRIVIAL-COMMENTS': {
     id: 'R-31',
-    name: 'Trivial / Redundant AI Comments',
+    name: 'Komentar Trivial & DocBlock Boilerplate',
     tier: 'Quality Lock',
     description: 'Komentar kode klise atau DocBlock boilerplate yang hanya mengulang sintaks atau memparafrase nama fungsi.',
     fix: 'Hapus komentar atau DocBlock yang sudah jelas dari nama/tipe fungsi; jelaskan alasan bisnis jika perlu.',
@@ -143,21 +246,6 @@ export const RULES = {
     ],
     extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.jsx', '.php', '.py', '.go', '.vue', '.svelte'],
   },
-
-  'R-32-LAZY-PLACEHOLDERS': {
-    id: 'R-32',
-    name: 'Hallucinated / Lazy Placeholders',
-    tier: 'Hard Gate',
-    description: 'Placeholder kode malas khas AI yang tidak diimplementasikan.',
-    fix: 'Implementasikan kode secara tuntas atau tangani fallback/error secara eksplisit.',
-    patterns: [
-      /\/\/\s*TODO:?\s*(?:implement later|add logic here|fill in|coming soon)\b/i,
-      /\/\/\s*(?:rest of|remaining)\s+(?:code|logic|implementation)\s+(?:goes here|here)\b/i,
-      /\/\*[\s\S]*?(?:rest of code|add implementation)[\s\S]*?\*\//i,
-      /<!--\s*(?:rest of|remaining)\s+(?:content|sections?)\s*-->/i,
-    ],
-    extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.jsx', '.php', '.py', '.html', '.blade.php', '.vue', '.svelte'],
-  },
 }
 
 const DEFAULT_IGNORES = [
@@ -170,6 +258,9 @@ const DEFAULT_IGNORES = [
   '.opencode',
   '.cline',
   '.gemini',
+  '.omp',
+  '.deepseek',
+  '.hermes',
   'dist',
   'build',
   'vendor',
@@ -182,7 +273,7 @@ const DEFAULT_IGNORES = [
 ]
 
 /**
- * Scan a single file content against registered rules.
+ * Memeriksa konten satu berkas terhadap seluruh aturan yang terdaftar.
  */
 export function lintContent(content, filePath = 'snippet') {
   const ext = getFileExtension(filePath)
@@ -221,6 +312,7 @@ export function lintContent(content, filePath = 'snippet') {
       }
 
       if (matched) {
+        const colNum = matchText ? Math.max(1, line.indexOf(matchText) + 1) : 1
         findings.push({
           ruleId: rule.id,
           ruleKey: key,
@@ -228,6 +320,7 @@ export function lintContent(content, filePath = 'snippet') {
           tier: rule.tier,
           file: filePath,
           line: lineNum,
+          column: colNum,
           snippet: line.trim(),
           matched: matchText,
           description: rule.description,
@@ -241,12 +334,12 @@ export function lintContent(content, filePath = 'snippet') {
 }
 
 /**
- * Recursively scan directory or file.
+ * Memeriksa direktori atau berkas target secara rekursif.
  */
 export function lintPath(targetPath, { ignores = DEFAULT_IGNORES, tier = 'all' } = {}) {
   const resolved = path.resolve(targetPath)
   if (!fs.existsSync(resolved)) {
-    throw new Error(`Target path does not exist: ${resolved}`)
+    throw new Error(`Jalur target tidak ditemukan: ${resolved}`)
   }
 
   const stat = fs.statSync(resolved)
@@ -285,18 +378,27 @@ export function lintPath(targetPath, { ignores = DEFAULT_IGNORES, tier = 'all' }
       }
       scannedFiles++
     } catch {
-      // Skip unreadable binary files
+      // Lewati berkas biner atau berkas yang tidak dapat dibaca
     }
   }
+
+  const hardGateCount = allFindings.filter((f) => f.tier === 'Hard Gate').length
+  const purposeGateCount = allFindings.filter((f) => f.tier === 'Purpose-Gate').length
+  const qualityLocksCount = allFindings.filter((f) => f.tier === 'Quality Lock').length
+
+  // Formula skor kebersihan kualitas kode (0 - 100)
+  const penalty = (hardGateCount * 15) + (purposeGateCount * 8) + (qualityLocksCount * 4)
+  const score = Math.max(0, 100 - penalty)
 
   return {
     scannedFiles,
     findings: allFindings,
-    passed: allFindings.filter((f) => f.tier === 'Hard Gate').length === 0,
+    passed: hardGateCount === 0,
+    score,
     counts: {
-      hardGate: allFindings.filter((f) => f.tier === 'Hard Gate').length,
-      purposeGate: allFindings.filter((f) => f.tier === 'Purpose-Gate').length,
-      qualityLocks: allFindings.filter((f) => f.tier === 'Quality Lock').length,
+      hardGate: hardGateCount,
+      purposeGate: purposeGateCount,
+      qualityLocks: qualityLocksCount,
       total: allFindings.length,
     },
   }

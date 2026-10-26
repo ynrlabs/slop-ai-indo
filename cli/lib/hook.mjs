@@ -12,7 +12,7 @@ function shouldIgnoreHookFile(filePath) {
   const base = path.basename(norm)
 
   // Abaikan folder dependensi, konfigurasi agen, artefak build, dan internal dev tools
-  if (/(?:^|\/)(node_modules|\.git|\.agents|\.claude|\.cursor|\.codex|\.opencode|\.cline|\.gemini|vendor|coverage|\.next|\.nuxt|dist|build|scripts|presets|skills)(?:\/|$)/i.test(norm)) {
+  if (/(?:^|\/)(node_modules|\.git|\.agents|\.claude|\.cursor|\.codex|\.opencode|\.cline|\.gemini|\.omp|\.deepseek|vendor|coverage|\.next|\.nuxt|dist|build|scripts|presets|skills)(?:\/|$)/i.test(norm)) {
     return true
   }
 
