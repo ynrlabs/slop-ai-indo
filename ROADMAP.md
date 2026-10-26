@@ -6,7 +6,7 @@
 
 ## Posisi Kita Saat Ini
 
-Rilis terbaru saat ini adalah **v1.2.1**. Slop AI Indo adalah **sistem terpaket**: sebuah filter inti ramping yang selalu dimuat ditambah sepuluh skill modular pelengkap, yang masing-masing didistribusikan sebagai folder skill agen terstandar (`skills/<nama>/SKILL.md`). Tidak ada README terpisah per modul skill.
+Rilis terbaru saat ini adalah **v1.3.0**. Slop AI Indo adalah **sistem terpaket**: sebuah filter inti ramping yang selalu dimuat ditambah sepuluh skill modular pelengkap, yang masing-masing didistribusikan sebagai folder skill agen terstandar (`skills/<nama>/SKILL.md`). Tidak ada README terpisah per modul skill.
 
 - **Filter Inti: 38 Aturan** terbagi dalam tiga tingkatan (*Hard Gate*, *Purpose-Gate*, *Quality Locks*), sebuah *Liveliness Toolkit*, dan dua mode penggunaan (*During / After*). Jumlah aturan ini dipertahankan sejak v2.2 dan tingkatannya tidak digeser, namun rincian aturan terus diasah dan disempurnakan seiring waktu. Berkas tunggal `slop-ai-indo.md` tetap menjadi filter lengkap yang dapat Anda salin langsung ke jendela chat apa pun; wizard instalasi di dalamnya berfungsi sebagai jalur pemasangan manual.
 - **Sebelas Skill Terstandar:** `slop-ai-indo` (inti), ditambah `slop-ai-indo-ui`, `slop-ai-indo-copywriting`, `slop-ai-indo-human`, `slop-ai-indo-layoutmobile`, `slop-ai-indo-code`, `slop-ai-indo-security`, `slop-ai-indo-docs`, `slop-ai-indo-identity`, `slop-ai-indo-backend`, dan `slop-ai-indo-test`. Setiap skill hanya dimuat saat tugas memerlukannya.
@@ -55,7 +55,10 @@ Penomoran versi hingga v3.0.0 mengikuti satu prinsip sederhana agar setiap fokus
 | **v3.2.14** | Pintu integrasi Cline: konfigurasi root `package.json` untuk `cline plugin install`. |
 | **v3.2.15** | Integrasi Amp: pembacaan direktori `.agents/skills/` level proyek dan `~/.config/agents/skills/` level pengguna. |
 | **v3.2.16** | Fitur pembaruan otomatis untuk seluruh instalasi lokal dan global. Deteksi status plugin lokal (Claude, Codex, Antigravity, Cursor) dengan petunjuk perintah pembaruan presisi. |
-| **v1.0.2** | **Rilis Saat Ini.** Penambahan marketplace OpenCode dan dua modul baru: `slop-ai-indo-docs` (kebersihan dokumen teknis & PRD) dan `slop-ai-indo-identity` (karakter & identitas visual produk). |
+| **v1.0.2** | Penambahan marketplace OpenCode dan dua modul baru: `slop-ai-indo-docs` (kebersihan dokumen teknis & PRD) dan `slop-ai-indo-identity` (karakter & identitas visual produk). |
+| **v1.1.0** | Penambahan modul backend & API (`slop-ai-indo-backend`), testing & anti-mocking (`slop-ai-indo-test`), dan kebersihan komentar (`slop-ai-indo-code`). Server MCP terpadu (`slop-mcp`), Git pre-commit hook otomatis (`slop-hook`), dan mesin linter deterministik (`slop-lint`). |
+| **v1.2.1** | Penambahan dukungan agen Oh My Pi dan DeepSeek. Pembaruan 8 preset desain lengkap (`enterprise`, `dark-modern`, `fintech`, `devtools`, `minimal-monochrome`, `editorial`, `utilitarian`, `default`), dan refactor installer interaktif. |
+| **v1.3.0** | **Rilis Saat Ini.** Peningkatan mesin linter deterministik (`slop-lint`) dengan deteksi 15 aturan lintas 3 tingkatan (termasuk silent catch B-01, mass assignment B-02, ikon sparkle R-04, glassmorphism R-10, link mati R-24), migrasi workflow CI/CD ke Node 22, standarisasi preset desain, dan pembersihan aturan internal. |
 
 ---
 

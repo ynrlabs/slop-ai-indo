@@ -30,7 +30,7 @@ npx slop-ai-indo
 ```
 
 Perintah ini secara otomatis memasang **1 paket lengkap**:
-- `DESIGN.md`: Standar estetika human-crafted (bisa dipilih langsung saat instalasi: Enterprise SaaS, Dark Modern, Editorial, Utilitarian, atau Default).
+- `DESIGN.md`: Standar estetika human-crafted (bisa dipilih langsung saat instalasi: Enterprise SaaS, Dark Modern, Fintech & Transaksi, DevTools, Minimalist Monochrome, Editorial, Utilitarian, atau Bawaan).
 - `AGENTS.md`: Aturan otomatis AI agent saat membuka proyek terkait.
 - `slop-ai-indo.md`: Mesin filter inti (38 aturan wajib).
 - `.agents/`: Folder konfigurasi lengkap dengan 11 modul skill terstandar (termasuk arsitektur backend, audit keamanan, testing, dan kebersihan kode).
@@ -231,15 +231,36 @@ npx slop-ai-indo lint
 # Memeriksa folder tertentu
 npx slop-ai-indo lint ./src
 
+# Hanya memeriksa aturan tingkatan Hard Gate
+npx slop-ai-indo lint . --tier=hard-gate
+
 # Output format JSON untuk integrasi CI/CD
 npx slop-ai-indo lint --json
+
+# Mode senyap (hanya kode keluar dan ringkasan jika error)
+npx slop-ai-indo lint --quiet
 ```
 
-Linter ini memindai berkas secara statis dan memvalidasi aturan inti:
-- **UI & CSS:** `transition: all` (R-09), tombol kapsul 9999px (R-12), outer neon glow (R-11), penghapusan focus outline tanpa pengganti (R-06).
-- **Teks & Copywriting:** Kata klise promosi AI (*"unlock the power"*, *"seamless synergy"*, *"game-changing"*, dll.) (R-02), angka/metrik kepuasan fiktif tanpa kutipan (R-08), dan em-dash jamak tanpa tujuan.
-- **Kebersihan Kode:** Komentar klise yang mengulang sintaks dan DocBlock boilerplate pada native typing (R-31), placeholder TODO malas/halusinasi (R-32).
-- **Backend & Keamanan:** Clean RESTful URLs, parameter binding anti-SQL Injection, dan sanitasi query (B-09 s/d B-15).
+Linter ini memindai berkas secara statis dan memvalidasi aturan anti-slop lintas 3 tingkatan gerbang:
+- **Hard Gate (Wajib Lulus Mutlak):**
+  - Frasa klise promosi AI seperti *"unlock the power"*, *"seamless synergy"*, *"game-changing"* (`R-02`).
+  - Penggunaan tanda em dash ganda berurutan tanpa tujuan editorial (`R-02`).
+  - Metrik & statistik kepuasan fiktif rekayasa AI tanpa sumber nyata (`R-08`).
+  - Transisi global `transition: all` dan transisi geometri pembuat lag (`R-09`).
+  - Pendaran neon luar berlebihan / outer neon glow (`R-11`).
+  - Tombol balon kapsul ekstrem (`rounded-full` / 9999px) di luar avatar (`R-12`).
+  - Indikator fokus keyboard hilang (`outline: none`) tanpa cincin fokus pengganti (`R-06`).
+  - Tautan navigasi mati atau anchor kosong `href="#"` (`R-24`).
+  - Placeholder malas khas AI seperti `// TODO: implement later` atau `// rest of code` (`R-32`).
+  - Penanganan error hampa / silent catch `catch (e) {}` (`B-01`).
+  - Mass assignment model database tanpa perlindungan `$guarded = []` (`B-02`).
+- **Purpose-Gate (Wajib Alasan Fungsional Tertulis):**
+  - Gradien biru-ke-ungu generik khas template AI (`R-01`).
+  - Ikon bintang sparkle atau magic wand tanpa fungsi nyata (`R-04`).
+  - Efek kaca menumpuk berlebihan / excessive glassmorphism (`R-10`).
+- **Quality Locks (Kerapian & Konsistensi):**
+  - Tombol CTA generik klise AI (`R-15`).
+  - Komentar kode trivial & DocBlock boilerplate yang mengulang sintaks (`R-31`).
 
 ## Server MCP Terpadu (`slop-mcp`)
 
@@ -268,7 +289,7 @@ Tambahkan entri berikut pada konfigurasi MCP IDE Anda:
 1. **`check_contrast`**: Menghitung rasio kontras WCAG 2.1 antara dua warna heksadesimal dengan vonis kepatuhan AA (normal & large text).
 2. **`lint_snippet`**: Memeriksa potongan kode aktif secara in-memory dari AI slop sebelum ditulis ke disk.
 3. **`lint_file`**: Menjalankan analisis statis deterministik pada path berkas atau direktori proyek.
-4. **`validate_delivery_gate`**: Memvalidasi kelengkapan 4 blok wajib laporan Delivery Gate (Aturan, Smoke Test, Kontras, dan PASS/FAIL).
+4. **`validate_delivery_gate`**: Memvalidasi kelengkapan 4 blok laporan Delivery Gate (Aturan, Smoke Test, Kontras, dan status akhir).
 5. **`get_rule`**: Mengambil referensi detail dan solusi perbaikan dari suatu aturan anti-slop berdasarkan Rule ID.
 
 ---
@@ -287,7 +308,7 @@ npx slop-ai-indo hook
 
 Fitur Pre-commit Hook:
 - **Zero-overhead & Cepat (<100ms):** Hanya memindai berkas yang sedang di-*stage* (`git diff --cached`), tanpa overhead subprocess yang lambat.
-- **Deteksi Pelanggaran Statis:** Otomatis memblokir commit jika kode Anda memuat warna heksadesimal mentah (`R-02`), teks placeholder/lorem ipsum mentah (`R-06` & `R-12`), blok try-catch kosong (`R-08`), debugging `console.log` liar (`R-09`), import font yang tidak sesuai aturan (`R-11`), atau pelanggaran lainnya.
+- **Deteksi Pelanggaran Statis:** Otomatis memblokir commit jika kode staged memuat pelanggaran *Hard Gate* (frasa promosi klise `R-02`, metrik fiktif `R-08`, `transition: all` `R-09`, outer neon glow `R-11`, tombol kapsul `R-12`, outline none tanpa ring `R-06`, link mati `href="#"` `R-24`, placeholder malas `R-32`, silent catch `B-01`, atau `$guarded = []` `B-02`).
 - **Bypass Darurat:** Jika dalam kondisi darurat Anda tetap harus melakukan commit, gunakan opsi bawaan git atau environment variable:
   ```bash
   git commit -m "emergency fix" --no-verify
@@ -328,7 +349,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Run Deterministic Slop Linter
@@ -339,7 +360,7 @@ Jika linter menemukan pelanggaran aturan pada kode PR, pipeline otomatis berstat
 
 ## Peta Jalan (Roadmap)
 
-**v1.2.1** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
+**v1.3.0** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
 
 ## FAQ (Pertanyaan yang Sering Diajukan)
 
