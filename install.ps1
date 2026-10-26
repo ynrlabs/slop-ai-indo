@@ -1,15 +1,15 @@
 # Slop AI Indo Remote Installer (Windows PowerShell 5.1+)
-# Penggunaan: irm https://raw.githubusercontent.com/yanuar1997/slop-ai-indo/master/install.ps1 | iex
+# Penggunaan: irm https://raw.githubusercontent.com/ynrlabs/slop-ai-indo/master/install.ps1 | iex
 
 $ErrorActionPreference = "Stop"
 $target = (Get-Location).Path
-$repoZipUrl = "https://github.com/yanuar1997/slop-ai-indo/archive/refs/heads/master.zip"
+$repoZipUrl = "https://github.com/ynrlabs/slop-ai-indo/archive/refs/heads/master.zip"
 $tempZip = Join-Path $env:TEMP "slop-ai-indo-master-$([guid]::NewGuid().ToString().Substring(0,8)).zip"
 $tempExtract = Join-Path $env:TEMP "slop-ai-indo-extract-$([guid]::NewGuid().ToString().Substring(0,8))"
 
 Write-Host "`n=== Memasang Paket Lengkap Slop AI Indo (Human-Crafted Standard) ===" -ForegroundColor Cyan
 Write-Host "Target folder: $target" -ForegroundColor Gray
-Write-Host "Mengunduh dari GitHub (yanuar1997/slop-ai-indo)..." -ForegroundColor Yellow
+Write-Host "Mengunduh dari GitHub (ynrlabs/slop-ai-indo)..." -ForegroundColor Yellow
 
 try {
     # Download zip archive

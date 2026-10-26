@@ -48,7 +48,7 @@ Pilihlah salah satu. Semuanya memuat aturan yang sama persis, sehingga menambahk
 ### Jalur Mana yang Harus Saya Pilih?
 
 - **Pemasang Instan Lokal (`slop.bat` / `slop.ps1`):** Pilihan paling cepat dan lengkap jika Anda bekerja di Windows secara lokal. Secara otomatis menyalin file aturan inti, desain, dan seluruh modul skill tanpa butuh koneksi internet.
-- **Direktori skills.sh & GitHub:** Pilih ini jika Anda ingin menarik modul skill langsung dari repositori GitHub menggunakan `npx skills add yanuar1997/slop-ai-indo`.
+- **Direktori skills.sh & GitHub:** Pilih ini jika Anda ingin menarik modul skill langsung dari repositori GitHub menggunakan `npx skills add ynrlabs/slop-ai-indo`.
 - **Plugin Native:** Pilih ini jika Anda menggunakan Claude Code, Antigravity, Codex, Cursor, Kimi Code, Cline, atau OpenCode dan lebih suka tidak menyimpan salinan berkas di dalam proyek Anda. Anda memperbaruinya langsung melalui perintah pembaruan plugin milik agen terkait.
 - **Berkas Tunggal:** Pilih ini jika Anda tidak memiliki akses terminal, atau ingin menggunakan slop-ai-indo di jendela chat browser (ChatGPT web, Claude web) atau di ponsel.
 
@@ -102,10 +102,10 @@ Untuk memastikan Slop AI Indo aktif, tanyakan hal yang hanya ada di dalam aturan
 
 ### 2. Direktori Skills (skills.sh)
 
-[skills.sh](https://skills.sh/yanuar1997/slop-ai-indo) adalah direktori terbuka skill agen coding. Jalur ini menggunakan kakas direktori tersebut untuk menyalin folder skill tanpa mengajukan pertanyaan:
+[skills.sh](https://skills.sh/ynrlabs/slop-ai-indo) adalah direktori terbuka skill agen coding. Jalur ini menggunakan kakas direktori tersebut untuk menyalin folder skill tanpa mengajukan pertanyaan:
 
 ```bash
-npx skills add yanuar1997/slop-ai-indo
+npx skills add ynrlabs/slop-ai-indo
 ```
 
 Gunakan bendera `--all` untuk memasang semua skill, `-g` untuk instalasi global, atau `--skill <nama>` untuk satu skill spesifik. Jalankan `--list` terlebih dahulu untuk melihat daftar skill yang tersedia.
@@ -123,7 +123,7 @@ Plugin adalah fitur langsung dari agen, bukan bawaan Slop AI Indo. Anda mengarah
 Di dalam sesi Claude Code, jalankan dua baris ini:
 
 ```text
-/plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
+/plugin marketplace add https://github.com/ynrlabs/slop-ai-indo
 /plugin install slop-ai-indo
 ```
 
@@ -132,7 +132,7 @@ Di dalam sesi Claude Code, jalankan dua baris ini:
 Jalankan perintah Antigravity CLI:
 
 ```bash
-agy plugin install https://github.com/yanuar1997/slop-ai-indo
+agy plugin install https://github.com/ynrlabs/slop-ai-indo
 ```
 
 Komponen `rules/` miliknya secara otomatis memuat Slop AI Indo pada setiap sesi, jadi tidak ada berkas penunjuk tambahan yang perlu ditulis.
@@ -140,7 +140,7 @@ Komponen `rules/` miliknya secara otomatis memuat Slop AI Indo pada setiap sesi,
 #### Codex
 
 ```bash
-codex plugin marketplace add yanuar1997/slop-ai-indo
+codex plugin marketplace add ynrlabs/slop-ai-indo
 codex plugin add slop-ai-indo
 ```
 
@@ -149,7 +149,7 @@ codex plugin add slop-ai-indo
 Tambahkan repositori sebagai marketplace plugin dengan Cursor Agent CLI:
 
 ```bash
-agent plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
+agent plugin marketplace add https://github.com/ynrlabs/slop-ai-indo
 ```
 
 Lalu, di dalam Cursor, buka menu **Customize** di bilah sisi (*sidebar*), cari **slop-ai-indo**, dan klik **Install** (pilih cakupan proyek atau pengguna).
@@ -159,7 +159,7 @@ Lalu, di dalam Cursor, buka menu **Customize** di bilah sisi (*sidebar*), cari *
 Di dalam sesi Kimi Code:
 
 ```text
-/plugins install https://github.com/yanuar1997/slop-ai-indo
+/plugins install https://github.com/ynrlabs/slop-ai-indo
 ```
 
 Setelah instalasi selesai, jalankan `/reload` atau `/new`. Kimi Code memasang plugin per pengguna, sehingga satu instalasi langsung mencakup semua proyek.
@@ -169,7 +169,7 @@ Setelah instalasi selesai, jalankan `/reload` atau `/new`. Kimi Code memasang pl
 Plugin Cline dipasang melalui CLI:
 
 ```bash
-cline plugin install https://github.com/yanuar1997/slop-ai-indo.git
+cline plugin install https://github.com/ynrlabs/slop-ai-indo.git
 ```
 
 *Perhatian:* Dokumentasi resmi Cline saat ini membatasi plugin hanya untuk SDK, CLI, dan Kanban, dan menyatakan bahwa fitur plugin belum berlaku untuk ekstensi VS Code dan JetBrains. Jika Anda menggunakan Cline di dalam ekstensi editor kode, gunakan metode 1 (`slop.bat`) atau metode 2 (Direktori Skills).
@@ -179,7 +179,7 @@ cline plugin install https://github.com/yanuar1997/slop-ai-indo.git
 Repositori ini berfungsi sebagai plugin dan marketplace OpenCode. Pasang menggunakan OpenCode CLI:
 
 ```bash
-opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo
+opencode plugin marketplace install https://github.com/ynrlabs/slop-ai-indo
 ```
 
 ---
@@ -189,10 +189,10 @@ opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo
 Gunakan metode ini jika Anda tidak memiliki terminal atau jika AI Anda hanya berupa antarmuka obrolan web/aplikasi di mana Anda tidak dapat menjalankan perintah terminal.
 
 **1. Unduh berkas `slop-ai-indo.md` sekali.**
-- Lewat browser: buka halaman repositori [di sini](https://github.com/yanuar1997/slop-ai-indo), buka `slop-ai-indo.md`, lalu klik tombol Download.
+- Lewat browser: buka halaman repositori [di sini](https://github.com/ynrlabs/slop-ai-indo), buka `slop-ai-indo.md`, lalu klik tombol Download.
 - Lewat terminal (jika tersedia):
   ```bash
-  curl -o slop-ai-indo.md https://raw.githubusercontent.com/yanuar1997/slop-ai-indo/main/slop-ai-indo.md
+  curl -o slop-ai-indo.md https://raw.githubusercontent.com/ynrlabs/slop-ai-indo/main/slop-ai-indo.md
   ```
 
 **2. Berikan berkas tersebut kepada AI Anda, lalu sampaikan kebutuhan Anda.**
@@ -222,7 +222,7 @@ Pemasang CLI, direktori skills, dan pintu plugin semuanya memerlukan terminal, s
 Pembaruan slop-ai-indo tidak berjalan otomatis di latar belakang. Setiap jalur diperbarui dengan menjalankan perintah jalurnya masing-masing, atau dengan menimpa salinan yang sudah ada.
 
 **Bagaimana mengetahui ada versi baru?**
-Dua tempat selalu memuat versi terkini: [halaman rilis GitHub](https://github.com/yanuar1997/slop-ai-indo/releases) dan lencana versi di bagian atas berkas [README.md](README.md).
+Dua tempat selalu memuat versi terkini: [halaman rilis GitHub](https://github.com/ynrlabs/slop-ai-indo/releases) dan lencana versi di bagian atas berkas [README.md](README.md).
 
 **Versi berapa yang sedang terpasang di komputer Anda?**
 Folder `slop-ai-indo` yang terpasang memuat file `VERSION`. Anda dapat membukanya langsung, atau bertanya pada agen Anda: *"Versi slop-ai-indo berapa yang sedang terpasang?"*.
@@ -232,7 +232,7 @@ Folder `slop-ai-indo` yang terpasang memuat file `VERSION`. Anda dapat membukany
 Untuk memperbarui skill ke versi terbaru dari GitHub, jalankan perintah berikut di folder proyek Anda:
 
 ```bash
-npx skills add yanuar1997/slop-ai-indo
+npx skills add ynrlabs/slop-ai-indo
 ```
 
 Atau jika menggunakan installer lokal Windows, jalankan kembali `slop.bat` di folder proyek Anda.
@@ -244,12 +244,12 @@ Perintah ini akan mencari di proyek saat ini dan folder home pengguna, memperbar
 | Platform Agen | Perintah Pembaruan |
 |---------------|--------------------|
 | **Claude Code** | `claude plugin update slop-ai-indo@slop-ai-indo` (lalu buka ulang atau jalankan `/reload-plugins`) |
-| **Antigravity** | Jalankan ulang: `agy plugin install https://github.com/yanuar1997/slop-ai-indo` |
+| **Antigravity** | Jalankan ulang: `agy plugin install https://github.com/ynrlabs/slop-ai-indo` |
 | **Codex** | `codex plugin marketplace upgrade slop-ai-indo` |
-| **Cursor** | `agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo` (atau via panel Customize) |
-| **Kimi Code** | Jalankan ulang: `/plugins install https://github.com/yanuar1997/slop-ai-indo` lalu `/reload` |
-| **Cline** | `cline plugin install https://github.com/yanuar1997/slop-ai-indo.git --force` |
-| **OpenCode** | `opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo` |
+| **Cursor** | `agent plugin marketplace update https://github.com/ynrlabs/slop-ai-indo` (atau via panel Customize) |
+| **Kimi Code** | Jalankan ulang: `/plugins install https://github.com/ynrlabs/slop-ai-indo` lalu `/reload` |
+| **Cline** | `cline plugin install https://github.com/ynrlabs/slop-ai-indo.git --force` |
+| **OpenCode** | `opencode plugin marketplace install https://github.com/ynrlabs/slop-ai-indo` |
 | **Berkas Tunggal** | Unduh ulang berkas `slop-ai-indo.md` terbaru dan gantikan file yang lama |
 
 ---

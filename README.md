@@ -46,10 +46,10 @@ slop.bat
 
 ### 3. Direktori Skills (skills.sh & GitHub)
 
-slop-ai-indo juga terdaftar di [skills.sh](https://skills.sh/yanuar1997/slop-ai-indo) dan dapat dipasang langsung dari repositori GitHub:
+slop-ai-indo juga terdaftar di [skills.sh](https://skills.sh/ynrlabs/slop-ai-indo) dan dapat dipasang langsung dari repositori GitHub:
 
 ```bash
-npx skills add yanuar1997/slop-ai-indo
+npx skills add ynrlabs/slop-ai-indo
 ```
 
 ### 4. Plugin (Claude Code)
@@ -57,7 +57,7 @@ npx skills add yanuar1997/slop-ai-indo
 Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 
 ```text
-/plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
+/plugin marketplace add https://github.com/ynrlabs/slop-ai-indo
 /plugin install slop-ai-indo
 ```
 
@@ -66,7 +66,7 @@ Tambahkan repositori ke marketplace sekali, lalu pasang pluginnya:
 Repositori ini juga merupakan plugin native untuk Antigravity. Pasang menggunakan Antigravity CLI:
 
 ```bash
-agy plugin install https://github.com/yanuar1997/slop-ai-indo
+agy plugin install https://github.com/ynrlabs/slop-ai-indo
 ```
 
 ### 6. Plugin (Codex)
@@ -74,7 +74,7 @@ agy plugin install https://github.com/yanuar1997/slop-ai-indo
 Repositori ini berfungsi sebagai plugin dan marketplace Codex. Tambahkan marketplace sekali, lalu pasang pluginnya:
 
 ```bash
-codex plugin marketplace add yanuar1997/slop-ai-indo
+codex plugin marketplace add ynrlabs/slop-ai-indo
 codex plugin add slop-ai-indo
 ```
 
@@ -83,7 +83,7 @@ codex plugin add slop-ai-indo
 Repositori ini adalah plugin Cursor. Tambahkan sebagai marketplace plugin menggunakan Cursor Agent CLI:
 
 ```bash
-agent plugin marketplace add https://github.com/yanuar1997/slop-ai-indo
+agent plugin marketplace add https://github.com/ynrlabs/slop-ai-indo
 ```
 
 Kemudian buka menu **Customize** di Cursor, cari **slop-ai-indo**, dan pilih **Install** (pilih cakupan proyek atau user).
@@ -93,7 +93,7 @@ Kemudian buka menu **Customize** di Cursor, cari **slop-ai-indo**, dan pilih **I
 Pasang langsung di sesi Kimi Code, lalu buka sesi baru:
 
 ```text
-/plugins install https://github.com/yanuar1997/slop-ai-indo
+/plugins install https://github.com/ynrlabs/slop-ai-indo
 ```
 
 ### 9. Plugin (Cline)
@@ -101,7 +101,7 @@ Pasang langsung di sesi Kimi Code, lalu buka sesi baru:
 Pasang menggunakan Cline CLI:
 
 ```bash
-cline plugin install https://github.com/yanuar1997/slop-ai-indo.git
+cline plugin install https://github.com/ynrlabs/slop-ai-indo.git
 ```
 
 *Catatan:* Dokumentasi resmi Cline saat ini membatasi plugin untuk lingkungan CLI/SDK/Kanban, dan belum berlaku untuk ekstensi editor VS Code/JetBrains. Untuk pengguna ekstensi editor, gunakan metode 1 (`slop.bat`) atau metode 2 (Direktori Skills GitHub).
@@ -111,7 +111,7 @@ cline plugin install https://github.com/yanuar1997/slop-ai-indo.git
 Repositori ini berfungsi sebagai plugin dan marketplace OpenCode. Pasang menggunakan OpenCode CLI:
 
 ```bash
-opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo
+opencode plugin marketplace install https://github.com/ynrlabs/slop-ai-indo
 ```
 
 ### Di Mana Lokasi Skill Disimpan
@@ -141,7 +141,7 @@ Antigravity, Copilot, Kimi Code, dan Amp berbagi satu folder (`.agents/skills/`)
 Berkas inti `slop-ai-indo.md` adalah filter lengkap yang dapat Anda salin langsung ke jendela obrolan AI apa pun. Unduh dan minta agen Anda untuk membacanya; panduan wizard di dalamnya akan memandu instalasi skill secara manual:
 
 ```bash
-curl -o slop-ai-indo.md https://raw.githubusercontent.com/yanuar1997/slop-ai-indo/main/slop-ai-indo.md
+curl -o slop-ai-indo.md https://raw.githubusercontent.com/ynrlabs/slop-ai-indo/main/slop-ai-indo.md
 ```
 
 ## Pembaruan (Update)
@@ -156,14 +156,14 @@ npx slop-ai-indo
 |--------|--------------------|
 | Pemasang Resmi NPM | `npx slop-ai-indo` |
 | Skrip Lokal Windows | `slop.bat` |
-| Direktori skills.sh & GitHub | `npx skills add yanuar1997/slop-ai-indo` |
+| Direktori skills.sh & GitHub | `npx skills add ynrlabs/slop-ai-indo` |
 | Plugin Claude Code | `claude plugin update slop-ai-indo` |
-| Plugin Antigravity | `agy plugin install https://github.com/yanuar1997/slop-ai-indo` |
+| Plugin Antigravity | `agy plugin install https://github.com/ynrlabs/slop-ai-indo` |
 | Plugin Codex | `codex plugin marketplace upgrade slop-ai-indo` |
-| Plugin Cursor | `agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo` |
-| Plugin Kimi Code | `/plugins install https://github.com/yanuar1997/slop-ai-indo` |
-| Plugin Cline | `cline plugin install https://github.com/yanuar1997/slop-ai-indo.git --force` |
-| Plugin OpenCode | `opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo` |
+| Plugin Cursor | `agent plugin marketplace update https://github.com/ynrlabs/slop-ai-indo` |
+| Plugin Kimi Code | `/plugins install https://github.com/ynrlabs/slop-ai-indo` |
+| Plugin Cline | `cline plugin install https://github.com/ynrlabs/slop-ai-indo.git --force` |
+| Plugin OpenCode | `opencode plugin marketplace install https://github.com/ynrlabs/slop-ai-indo` |
 | Manual | Unduh ulang berkas `slop-ai-indo.md` |
 
 Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pembaruan.
@@ -358,4 +358,4 @@ Folder modul yang mendalami satu topik spesifik (UI, penulisan teks, aksesibilit
 
 ## Pengembang & Kontributor
 
-Dikembangkan dan dirawat oleh [Yanuar (yanuar1997)](https://github.com/yanuar1997). 
+Dikembangkan dan dirawat oleh [Yanuar (ynrlabs)](https://github.com/ynrlabs). 

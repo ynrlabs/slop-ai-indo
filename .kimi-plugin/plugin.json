@@ -3,9 +3,9 @@
   "version": "1.2.1",
   "description": "Anti Slop: Rules for AI Coding Agents. Stops generic AI slop in generated UI, copy, and code. Loads as six skills.",
   "author": {
-    "name": "Yanuar (yanuar1997)"
+    "name": "Yanuar (ynrlabs)"
   },
-  "homepage": "https://github.com/yanuar1997/slop-ai-indo",
+  "homepage": "https://github.com/ynrlabs/slop-ai-indo",
   "license": "MIT",
   "keywords": ["ai-slop", "design-rules", "copy-rules", "agent-skills", "ui", "accessibility"],
   "skills": "./skills/",
@@ -14,7 +14,7 @@
     "displayName": "slop-ai-indo",
     "shortDescription": "Anti Slop: Rules for AI Coding Agents.",
     "longDescription": "Stops generic AI slop in generated UI, copy, and code. The core filter is always available; the UI, copywriting, human, responsive layout, and code comment skills load for the task at hand. A filter, not a style guide.",
-    "developerName": "Yanuar (yanuar1997)",
-    "websiteURL": "https://github.com/yanuar1997/slop-ai-indo"
+    "developerName": "Yanuar (ynrlabs)",
+    "websiteURL": "https://github.com/ynrlabs/slop-ai-indo"
   }
 }

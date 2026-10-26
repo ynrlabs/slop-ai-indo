@@ -46,7 +46,7 @@ Jika tidak ada blok penunjuk slop-ai-indo dan berkas ini sedang dibaca untuk per
    - Komentar kode: `skills/slop-ai-indo-code/SKILL.md`
    - Audit keamanan: `skills/slop-ai-indo-security/SKILL.md`
    Sebelum mulai, tanyakan pengguna kapan slop-ai-indo diterapkan: selama pengerjaan, atau setelah selesai.
-   Untuk memperbarui slop-ai-indo nanti: unduh ulang `slop-ai-indo.md`, jalankan `npx slop-ai-indo`, atau jalankan `npx skills add yanuar1997/slop-ai-indo`.
+   Untuk memperbarui slop-ai-indo nanti: unduh ulang `slop-ai-indo.md`, jalankan `npx slop-ai-indo`, atau jalankan `npx skills add ynrlabs/slop-ai-indo`.
    <!-- slop-ai-indo:end -->
    ```
 6. **Tanyakan pertanyaan mode penggunaan** (lihat "Dua Mode Penggunaan"), lalu lanjutkan pekerjaan.
@@ -59,15 +59,15 @@ slop-ai-indo tidak pernah memperbarui dirinya sendiri secara otomatis di latar b
 
 - **Pemasang Resmi NPM (`npx slop-ai-indo`):** jalankan kembali di folder proyek Anda.
 - **Pemasang Skrip Lokal Windows (`slop.bat` / `slop.ps1`):** jalankan kembali di folder proyek Anda.
-- **Direktori skills (`npx skills add yanuar1997/slop-ai-indo`):** jalankan perintah yang sama kembali.
+- **Direktori skills (`npx skills add ynrlabs/slop-ai-indo`):** jalankan perintah yang sama kembali.
 - **Pintu Plugin Native:** diperbarui melalui perintah bawaan agen masing-masing:
   - **Claude Code**: `claude plugin update slop-ai-indo@slop-ai-indo`
-  - **Antigravity**: `agy plugin install https://github.com/yanuar1997/slop-ai-indo`
+  - **Antigravity**: `agy plugin install https://github.com/ynrlabs/slop-ai-indo`
   - **Codex**: `codex plugin marketplace upgrade slop-ai-indo`
-  - **Cursor**: `agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo`
-  - **Kimi Code**: `/plugins install https://github.com/yanuar1997/slop-ai-indo`
-  - **Cline**: `cline plugin install https://github.com/yanuar1997/slop-ai-indo.git --force`
-  - **OpenCode**: `opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo`
+  - **Cursor**: `agent plugin marketplace update https://github.com/ynrlabs/slop-ai-indo`
+  - **Kimi Code**: `/plugins install https://github.com/ynrlabs/slop-ai-indo`
+  - **Cline**: `cline plugin install https://github.com/ynrlabs/slop-ai-indo.git --force`
+  - **OpenCode**: `opencode plugin marketplace install https://github.com/ynrlabs/slop-ai-indo`
 - **Berkas Tunggal Ini Sendiri:** unduh ulang dan gantikan berkas lama.
 
 ---

@@ -2,7 +2,7 @@
   "name": "slop-ai-indo",
   "description": "The slop-ai-indo skill/plugin. Anti Slop: Rules for AI Coding Agents.",
   "owner": {
-    "name": "Yanuar (yanuar1997)"
+    "name": "Yanuar (ynrlabs)"
   },
   "plugins": [
     {

@@ -9,11 +9,11 @@
     "slop-mcp": "bin/slop-mcp.mjs"
   },
   "license": "MIT",
-  "author": "Yanuar (yanuar1997)",
-  "homepage": "https://github.com/yanuar1997/slop-ai-indo",
+  "author": "Yanuar (ynrlabs)",
+  "homepage": "https://github.com/ynrlabs/slop-ai-indo",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yanuar1997/slop-ai-indo.git"
+    "url": "git+https://github.com/ynrlabs/slop-ai-indo.git"
   },
   "keywords": [
     "ai-slop",

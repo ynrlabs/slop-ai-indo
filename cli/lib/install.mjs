@@ -163,7 +163,7 @@ export const PLUGIN_DOORS = [
   {
     id: 'antigravity',
     label: 'Antigravity',
-    update: 'agy plugin install https://github.com/yanuar1997/slop-ai-indo',
+    update: 'agy plugin install https://github.com/ynrlabs/slop-ai-indo',
     find: () => findClone(path.join(os.homedir(), '.gemini', 'config', 'plugins', CORE)),
   },
   {
@@ -181,7 +181,7 @@ export const PLUGIN_DOORS = [
   {
     id: 'cursor',
     label: 'Cursor',
-    update: 'agent plugin marketplace update https://github.com/yanuar1997/slop-ai-indo',
+    update: 'agent plugin marketplace update https://github.com/ynrlabs/slop-ai-indo',
     find: () =>
       findClone(path.join(os.homedir(), '.cursor', 'plugins', 'local', 'slop-ai-indo')) ??
       findClone(path.join(os.homedir(), '.cursor', 'plugins', 'local', 'anti-slop')),
@@ -189,7 +189,7 @@ export const PLUGIN_DOORS = [
   {
     id: 'opencode',
     label: 'OpenCode',
-    update: 'opencode plugin marketplace install https://github.com/yanuar1997/slop-ai-indo',
+    update: 'opencode plugin marketplace install https://github.com/ynrlabs/slop-ai-indo',
     find: () =>
       findClone(path.join(os.homedir(), '.config', 'opencode', 'plugins', 'slop-ai-indo')) ??
       findClone(path.join(os.homedir(), '.config', 'opencode', 'plugins', CORE)),
