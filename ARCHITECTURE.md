@@ -47,11 +47,11 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Slop AI Indo**, alur int
                                          |
                                          v
 +---------------------------------------------------------------------------------+
-|                       LAYER 5: VERIFICATION & DELIVERY GATE                     |
+|                       LAYER 5: VERIFICATION & SMOKE TEST                        |
 |  - Smoke Test Interaktif (R-35): Klik dan uji setiap tombol & form              |
 |  - Audit Kontras Warna WCAG: contrast-check.py / contrast-mcp.py                |
 |  - Verifikasi Keamanan Sandbox & Ledger: validate-findings / coverage-ledger    |
-|  - Delivery Gate PASS/FAIL Report (4 Blok Evaluasi Mandatori)                   |
+|  - Verifikasi Fungsional Langsung Bebas Cacat                                   |
 +---------------------------------------------------------------------------------+
                                          |
                                          v

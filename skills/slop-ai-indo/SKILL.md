@@ -82,15 +82,15 @@ slop-ai-indo tidak pernah memperbarui dirinya sendiri secara otomatis di latar b
 slop-ai-indo digunakan dalam salah satu dari dua cara. Di awal sesi, tanyakan kepada pengguna mode mana yang berlaku, dalam bahasa obrolan pengguna. Jangan memulai pekerjaan UI sebelum mereka menjawab.
 
 > **Kapan Anda ingin menerapkan slop-ai-indo?**
-> 1. **DURING (Saat Pengerjaan):** Saya akan menerapkan aturan saat menulis kode/teks, sehingga AI slop dicegah sejak awal dan ditutup dengan laporan Delivery Gate.
+> 1. **DURING (Saat Pengerjaan):** Saya akan menerapkan aturan saat menulis kode/teks, sehingga AI slop dicegah sejak awal.
 > 2. **AFTER (Audit Pasca Pengerjaan):** Saya akan mengaudit kode yang sudah ada: menyajikan daftar temuan bernomor dengan prioritas, Anda memilih nomor mana yang diperbaiki, lalu saya memperbaikinya dan memberikan laporan tindak lanjut.
 >
 > Pilih nomor 1 atau 2?
 
-- **Mode 1 (During):** patuhi aturan selama proses pembuatan. Mencegah slop dari awal dan diakhiri dengan evaluasi Delivery Gate. Gunakan untuk fitur/UI baru.
+- **Mode 1 (During):** patuhi aturan selama proses pembuatan. Mencegah slop dari awal. Gunakan untuk fitur/UI baru.
 - **Mode 2 (After):** audit proyek yang sudah selesai. Hasilkan daftar temuan bernomor di `slop-ai-indo/audit-001-YYYY-MM-DD.md`. Setiap temuan merujuk pada aturan yang dilanggar (R-XX) dan alasan satu baris. Prioritas mengikuti tingkatan aturan: Hard Gate = TINGGI, Purpose-Gate = SEDANG, Quality Locks = RENDAH. Jangan mengubah kode apa pun sebelum pengguna menyetujui nomor tertentu.
 
-> **Tiga langkah yang mutlak berjalan di kedua mode:** Selesaikan arah desain sebelum koding (R-37), mintalah konfirmasi sebelum membuat aset visual baru (R-23), dan jalankan evaluasi Delivery Gate sebelum serah terima.
+> **Tiga langkah yang mutlak berjalan di kedua mode:** Selesaikan arah desain sebelum koding (R-37), mintalah konfirmasi sebelum membuat aset visual baru (R-23), dan verifikasi fungsionalitas sebelum serah terima (R-35).
 
 ---
 
@@ -249,7 +249,7 @@ Semua 38 aturan dikelompokkan ke dalam tiga tingkatan kepatuhan:
 #### R-35 — Verifikasi Sebelum Serah Terima (Smoke Test Wajib)
 - Jalankan atau build aplikasi sebelum menyatakan pekerjaan selesai.
 - Klik dan uji setiap elemen interaktif satu per satu (tombol, input form, tab, modal, navigasi).
-- Laporkan bukti uji coba klik ini secara rinci di dalam laporan Delivery Gate.
+- Pastikan seluruh elemen interaktif telah diuji klik dan berfungsi sebelum pekerjaan diserahkan.
 
 #### R-36 — Larangan Klaim Kredibilitas Rekayasa
 - **DILARANG:** Mengarang sertifikasi keamanan, regulasi, atau metrik performa ("SOC 2", "ISO 27001", "300% lebih cepat") tanpa bukti nyata.
@@ -370,70 +370,3 @@ Setiap elemen interaktif harus memenuhi salah satu fungsi konkret berikut:
 - Mengubah status elemen (menu mobile buka/tutup, accordion, tab konten, theme toggle).
 - Memicu aksi eksternal (`mailto:`, link keluar yang sah).
 - Submit form dengan umpan balik visual yang jelas.
-
----
-
-## Delivery Gate (Gerbang Serah Terima Mandatori)
-
-Jalankan evaluasi gerbang ini SEBELUM menyerahkan hasil pekerjaan ke pengguna. Tampilkan hasilnya dalam bentuk **Laporan PASS/FAIL**:
-
-### Blok 1: Hard Gate (Semua jawaban wajib TIDAK / NO)
-- [ ] Apakah ada karakter em dash (`—`) pada teks buatan agen? *(R-02)*
-- [ ] Apakah ada luapan horizontal atau layout patah di layar ponsel? *(R-03)*
-- [ ] Apakah ada angka statistik yang tidak memiliki sumber nyata? *(R-17)*
-- [ ] Apakah ada testimoni fiktif dengan foto profil AI atau nama palsu? *(R-18)*
-- [ ] Apakah ada aset visual yang dibuat tanpa konfirmasi atau tanpa penanda placeholder yang jujur? *(R-23)*
-- [ ] Apakah ada link navbar yang menuju ke halaman yang tidak ada? *(R-24)*
-- [ ] Apakah ada teks yang rasio kontrasnya di bawah standar WCAG AA (4.5:1 / 3:1)? *(R-25)*
-- [ ] Apakah ada tombol atau form yang tidak berfungsi apa-apa? *(R-26)*
-- [ ] Apakah antarmuka kehilangan penanganan status kosong, loading, atau error? *(R-27)*
-- [ ] Apakah seksi FAQ memuat pertanyaan template generik? *(R-28)*
-- [ ] Apakah antarmuka tidak dapat dioperasikan dengan keyboard atau kehilangan indikator fokus? *(R-32)*
-- [ ] Apakah ada fitur yang ditambahkan lewat skrip patching string replacement eksternal? *(R-33)*
-- [ ] Jika ada toggle tema, apakah salah satu mode merusak tampilan? *(R-34)*
-- [ ] Apakah aplikasi diserahkan tanpa pernah dijalankan / tanpa bukti smoke test klik? *(R-35)*
-- [ ] Apakah ada klaim sertifikasi atau performa yang diada-adakan? *(R-36)*
-- [ ] Apakah desain dibuat tanpa arah dan tidak diberi label *"draft without direction"*? *(R-37)*
-- [ ] Apakah ada konten fiktif yang disamarkan seolah-olah nyata? *(R-38)*
-
-### Blok 2: Purpose-Gate (Teknik diizinkan, wajib memiliki alasan tertulis)
-Untuk setiap teknik, teknik itu sendiri diizinkan. GAGAL (FAIL) jika muncul sebagai default tanpa tujuan, atau jika alasannya tidak dituliskan:
-- [ ] Apakah gradien atau efek glow muncul sebagai default tanpa alasan hierarki atau identitas merek tertulis? *(R-01)*
-- [ ] Apakah ada ikon generik (bintang sparkle, petir, berlian, robot) tanpa relevansi tertulis? *(R-04)*
-- [ ] Apakah ada font monospace besar atau label uppercase dengan tracking lebar tanpa alasan karakter merek tertulis? *(R-06)*
-- [ ] Apakah ada latar pola grid, cetak biru, atau titik-titik tanpa tujuan identitas visual tertulis? *(R-07)*
-- [ ] Apakah panah dekoratif (`→` / `↗`) dipasang di hampir setiap tombol tanpa tujuan tertulis? *(R-08)*
-- [ ] Apakah ada badge kapsul generik ("Didukung AI", "Beta", "Baru") tanpa fungsi nyata? *(R-09)*
-- [ ] Apakah efek glassmorphism diterapkan pada lebih dari 1-2 elemen sekaligus? *(R-10)*
-- [ ] Apakah bayangan tebal diterapkan pada setiap komponen tanpa alasan elevasi tertulis? *(R-12)*
-- [ ] Apakah efek glow diterapkan pada kartu, tombol, badge, dan border secara bersamaan? *(R-13)*
-- [ ] Apakah seluruh kartu fitur memiliki ukuran, ikon, dan padding identik tanpa hierarki tertulis? *(R-14)*
-- [ ] Apakah seluruh elemen memakai animasi template tanpa tujuan UX tertulis atau bertentangan dengan dial MOTION? *(R-19)*
-- [ ] Apakah ada ilustrasi generik (vektor 3D blob, Undraw) tanpa kaitan produk tertulis? *(R-22)*
-
-### Blok 3: Liveliness (Semua jawaban wajib YA / YES)
-- [ ] Apakah skala dial (ENERGY / RHYTHM / MOTION) dideklarasikan secara eksplisit?
-- [ ] Apakah hasil visual konsisten dengan nilai dial yang dipilih?
-- [ ] Apakah terdapat satu titik fokus yang jelas pada tiap tampilan?
-- [ ] Apakah spasi digunakan secara struktural untuk memisahkan dan memberi ritme?
-- [ ] Apakah ada satu aksen warna solid yang terarah?
-- [ ] Apakah terdapat motif identitas yang konsisten?
-- [ ] Apakah pernyataan Design Read dideklarasikan sebelum mulai koding?
-
-### Blok 4: Craftsmanship & Quality Locks (Semua jawaban wajib TIDAK / NO)
-- [ ] C-1: Apakah ada keputusan visual atau teks yang alasannya hanya "karena bawaan default AI"?
-- [ ] C-2: Apakah ada elemen interaktif yang tidak berfungsi tanpa label jelas?
-- [ ] C-3: Apakah ada seksi yang ada hanya untuk mengisi template AI?
-- [ ] C-4: Apakah antarmuka rusak dalam kondisi status, tema, breakpoint, atau navigasi tanpa mouse?
-- [ ] C-5: Apakah ada testimoni, angka statistik, atau klaim yang direkayasa?
-- [ ] Apakah tata letak mengikuti template klise AI atau ritme seksi bertentangan dengan dial RHYTHM? *(R-05)*
-- [ ] Apakah tombol atau form dibuat membulat balon (*pill-shaped*) tanpa variasi sudut siku? *(R-11)*
-- [ ] Apakah tombol CTA masih menggunakan kalimat klise generik? *(R-15)*
-- [ ] Apakah ada kata-kata promosi hiperbola khas AI? *(R-16)*
-- [ ] Apakah desain terasa generik jika logo dan nama produk ditukar? *(R-20)*
-- [ ] Apakah mode gelap dipaksakan sebagai default tanpa alasan merek, atau toggle tema ditunda? *(R-21)*
-- [ ] Apakah palet warna melebihi 2-3 warna utama + 1 aksen tanpa sistem desain jelas? *(R-29)*
-- [ ] Apakah desain menjiplak produk populer tanpa diminta? *(R-30)*
-- [ ] Apakah ada keputusan visual utama yang tidak dapat dijelaskan alasannya dalam satu baris? *(R-31)*
-
-Jika ada satu saja item yang GAGAL (*FAIL*), jangan serahkan hasil kerja. Perbaiki terlebih dahulu, jalankan evaluasi ulang, dan serahkan hanya jika seluruh kriteria LULUS (*PASS*).

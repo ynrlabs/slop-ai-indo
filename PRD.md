@@ -30,16 +30,15 @@ Mencegah hasil UI menjadi dingin dan hampa setelah difilter. Terdiri dari 3 skal
 - **RHYTHM:** Variasi ukuran grid, spasi, dan pergantian densitas konten antar seksi.
 - **MOTION:** Kehalusan dan kesopanan transisi interaktif.
 
-### 3.3. Delivery Gate (Gerbang Serah Terima Wajib)
-Laporan evaluasi 4 blok yang wajib dibuat agen sebelum menyerahkan pekerjaan ke pengguna:
-1. **Aturan yang Diuji:** Daftar aturan relevan yang dipatuhi.
-2. **Bukti Interaktivitas (Smoke Test):** Bukti uji coba elemen interaktif secara nyata.
-3. **Pemeriksaan Kontras (Human/WCAG):** Rasio kontras teks terhadap latar belakang.
-4. **Status Kelulusan (PASS/FAIL):** Keputusan tegas apakah hasil pekerjaan layak dirilis.
+### 3.3. Verifikasi Fungsional (Functional Verification)
+Verifikasi langsung sebelum menyerahkan pekerjaan ke pengguna:
+1. **Bukti Interaktivitas (Smoke Test):** Uji coba klik elemen interaktif secara nyata (tombol, input, form, modal, link navigasi).
+2. **Pemeriksaan Kontras (Human/WCAG):** Rasio kontras teks terhadap latar belakang memenuhi standar AA (4.5:1 / 3:1).
+3. **Kepatuhan Aturan:** Bebas dari elemen klise generik AI tanpa mewajibkan laporan checklist formal yang membebani output token.
 
 ### 3.4. Modul Skill Aditif (Modular Skills)
 Pengguna atau agen hanya memuat modul yang relevan dengan tugas yang sedang dikerjakan:
-- `slop-ai-indo` (Core filter & Delivery Gate)
+- `slop-ai-indo` (Core filter 38 aturan)
 - `slop-ai-indo-ui` (Tata letak, warna, geometri, shadow, dan dekorasi)
 - `slop-ai-indo-copywriting` (Teks, judul, CTA, anti kata klise AI)
 - `slop-ai-indo-human` (Aksesibilitas WCAG, fokus keyboard, skrip pemeriksa kontras)
@@ -48,7 +47,7 @@ Pengguna atau agen hanya memuat modul yang relevan dengan tugas yang sedang dike
 - `slop-ai-indo-security` (Audit keamanan komprehensif, tinjauan kerentanan source-first, threat modeling, verifikasi sandbox)
 
 ### 3.5. Dua Mode Penggunaan (Usage Modes)
-- **Mode DURING (Saat Pengerjaan):** Memandu pengerjaan sejak awal, memastikan setiap komponen yang dibuat langsung patuh aturan hingga lolos Delivery Gate.
+- **Mode DURING (Saat Pengerjaan):** Memandu pengerjaan sejak awal, memastikan setiap komponen yang dibuat langsung patuh aturan hingga siap diserahkan.
 - **Mode AFTER (Audit Pasca Pengerjaan):** Memeriksa kode/halaman yang sudah ada, menghasilkan daftar temuan bernomor (*numbered findings*), dan melakukan perbaikan setelah persetujuan pengguna.
 
 ---
@@ -64,4 +63,4 @@ Pengguna atau agen hanya memuat modul yang relevan dengan tugas yang sedang dike
 ## 5. Metrik Keberhasilan (Success Metrics)
 - **Zero AI Slop Artifacts:** Tidak ada metrik rekayasa (seperti "99.9% Kepuasan"), tidak ada gradien ungu-cyan klise, tidak ada pendaran neon tak beraturan.
 - **100% WCAG AA Compliance:** Semua teks dan elemen interaktif memenuhi rasio kontras minimal 4.5:1 untuk teks normal dan 3:1 untuk teks besar.
-- **Delivery Gate 100% PASS:** Setiap output akhir agen memiliki laporan evaluasi yang valid dan terverifikasi.
+- **100% Functional Verification:** Seluruh elemen interaktif dan alur navigasi teruji berfungsi sebelum pekerjaan diserahkan.

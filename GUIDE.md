@@ -213,7 +213,7 @@ Wizard akan mengonfirmasi skill apa yang Anda inginkan dan menanyakan kapan slop
 Pemasang CLI, direktori skills, dan pintu plugin semuanya memerlukan terminal, sehingga tidak berjalan langsung di ponsel. Di ponsel, Anda menggunakan metode berkas tunggal:
 
 - **Claude Projects, ChatGPT Projects, atau Gemini Gems:** Semuanya menerima berkas sebagai referensi proyek. Unduh `slop-ai-indo.md`, lampirkan ke dalam project atau custom instructions, lalu tambahkan instruksi singkat agar AI selalu mematuhinya. Ukuran berkas ~50 KB sangat jauh di bawah batas kuota dokumen referensi platform tersebut.
-- **Catatan Penting:** Di dalam agen coding, slop-ai-indo berfungsi sebagai instruksi terstandar yang dipatuhi secara ketat. Di aplikasi chat ponsel, slop-ai-indo berfungsi sebagai dokumen konteks panduan, sehingga tidak ada mekanisme otomatis yang menjalankan laporan Delivery Gate untuk Anda. Aturan tetap bekerja memfilter gaya bahasa dan tata letak, namun penegakannya bergantung pada kepatuhan model AI obrolan.
+- **Catatan Penting:** Di dalam agen coding, slop-ai-indo berfungsi sebagai instruksi terstandar yang dipatuhi secara ketat. Di aplikasi chat ponsel, slop-ai-indo berfungsi sebagai dokumen konteks panduan. Aturan tetap bekerja memfilter gaya bahasa dan tata letak, namun penegakannya bergantung pada kepatuhan model AI obrolan.
 
 ---
 

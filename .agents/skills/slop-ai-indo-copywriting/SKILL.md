@@ -11,7 +11,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 ## Cara Menggunakan Skill Ini
 
-- Muat bersama `slop-ai-indo.md` setiap kali tugas berhubungan dengan penulisan atau penyuntingan teks. Dokumen inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate) dan larangan mutlak (R-02, R-15, R-16, R-17, R-18, R-36, R-38). Skill ini memegang rincian khusus copywriting secara mendalam.
+- Muat bersama `slop-ai-indo.md` setiap kali tugas berhubungan dengan penulisan atau penyuntingan teks. Dokumen inti memegang mekanisme utama (uji tujuan, tiga tingkatan) dan larangan mutlak (R-02, R-15, R-16, R-17, R-18, R-36, R-38). Skill ini memegang rincian khusus copywriting secara mendalam.
 - Setiap pola memiliki format seragam: **Pola (The pattern)**, **Mengapa Terbaca Khas AI (Why it reads as AI)**, **Sebelum (Before)** (contoh slop), **Sesudah (After)** (perbaikan nyata), dengan aturan inti yang dirujuk sebagai R-XX.
 - Dua aturan wajib berlaku untuk semua hal di bawah ini:
   - **Jangan pernah mengarang fakta** (R-17, R-36, R-38). Penulisan ulang tidak boleh menambahkan fakta, nama, angka, tanggal, kutipan, atau rujukan yang tidak ada dalam teks sumber atau tidak diberikan oleh pengguna. Rincian spesifik harus berasal dari sumber atau pengguna, bukan dari karangan sendiri. Jika suatu kalimat membutuhkan detail nyata agar berfungsi, tanyakan detailnya kepada pengguna atau tulis versi sederhana tanpa mengarang.

@@ -11,7 +11,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 ## Cara Menggunakan Skill Ini
 
-- Muat bersama `slop-ai-indo.md` setiap kali tugas menyentuh komentar kode. Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang panduan mendalam seputar komentar.
+- Muat bersama `slop-ai-indo.md` setiap kali tugas menyentuh komentar kode. Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan); skill ini memegang panduan mendalam seputar komentar.
 - Setiap pola memiliki format: **Ciri (Tell)**, **Alasan (Why)**, dan **Solusi (Fix)**, dengan aturan inti yang dirujuk sebagai R-XX.
 - **Batasan Ruang Lingkup (Scope Guardrail):** Skill ini HANYA memodifikasi komentar. JANGAN PERNAH mengubah kode program yang dapat dieksekusi, nama variabel/fungsi, import, indentasi logika, atau alur kontrol. Jika ragu, biarkan kodenya tidak tersentuh.
 

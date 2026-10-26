@@ -11,7 +11,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 ## Cara Menggunakan Skill Ini
 
-- Muat bersama `slop-ai-indo.md` setiap kali tugas berhubungan dengan tata letak mobile atau desain responsif. Dokumen inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang rincian teknis tata letak mobile secara mendalam.
+- Muat bersama `slop-ai-indo.md` setiap kali tugas berhubungan dengan tata letak mobile atau desain responsif. Dokumen inti memegang mekanisme utama (uji tujuan, tiga tingkatan); skill ini memegang rincian teknis tata letak mobile secara mendalam.
 - Setiap entri memiliki format seragam: **Ciri (Tell)**, **Alasan (Why)** (mengapa pola tersebut dianggap sebagai slop berkualitas rendah), dan **Solusi (Fix)** (tindakan yang benar), dengan aturan inti yang dirujuk sebagai R-XX.
 - Prinsip utama di balik skill ini: **tata letak mobile adalah desain yang berbeda secara fundamental, bukan sekadar tampilan desktop yang diperkecil.** Tata letak mobile harus mengalir ulang: menumpuk kembali, menyesuaikan skala, dan mengatur ulang urutan dengan tujuan yang jelas. Setiap pola di bawah ini adalah contoh kegagalan tata letak dalam mengalir ulang secara benar.
 

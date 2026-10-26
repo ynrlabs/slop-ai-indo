@@ -11,7 +11,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 ## Cara Menggunakan Skill Ini
 
-- Muat bersama `slop-ai-indo.md` setiap kali tugas menyentuh penulisan atau pembaruan dokumentasi teknis. Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang rincian khusus higienitas dokumentasi.
+- Muat bersama `slop-ai-indo.md` setiap kali tugas menyentuh penulisan atau pembaruan dokumentasi teknis. Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan); skill ini memegang rincian khusus higienitas dokumentasi.
 - Setiap pola disusun dengan format: **Pola (The pattern)**, **Mengapa Terbaca Khas AI (Why it reads as AI)**, **Sebelum (Before)**, **Sesudah (After)**, dengan aturan inti yang dirujuk sebagai R-XX.
 - **Dua Pedoman Utama:**
   1. **Dokumentasi harus mencerminkan kode nyata saat ini** (R-35, R-36, R-38). Jangan pernah mendokumentasikan endpoint, opsi konfigurasi, argumen CLI, atau dependensi yang belum ada di dalam codebase atau belum disepakati bersama pengguna.

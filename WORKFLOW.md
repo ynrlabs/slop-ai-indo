@@ -24,8 +24,7 @@ graph TD
     L --> M{Lolos Evaluasi?}
     M -->|Gagal / Cacat| N[Refactor & Perbaiki Temuan]
     N --> I
-    M -->|Lolos| O[Buat Laporan Delivery Gate: PASS]
-    O --> P[Kirim Hasil Kerja ke User]
+    M -->|Lolos| P[Kirim Hasil Kerja ke User]
 ```
 
 ---
@@ -55,18 +54,9 @@ Gunakan skrip pemeriksa kontras `skills/slop-ai-indo-human/contrast-check.py` un
 - Teks biasa terhadap latar: minimal **4.5:1**.
 - Teks tebal / besar terhadap latar: minimal **3.0:1**.
 
-### Langkah 5: Penerbitan Delivery Gate Report
-Agen wajib menyertakan laporan evaluasi formal sebelum menutup sesi:
-
-```markdown
-### Delivery Gate Report
-- **Ruang Lingkup:** [Komponen / Fitur yang dibangun]
-- **Aturan yang Dievaluasi:** R-01 (Metrik Riil), R-12 (Radius Siku), R-18 (Kontras), R-35 (Smoke Test)
-- **Hasil Smoke Test:**
-  - Tombol Simpan: Berfungsi normal (klik memicu request).
-  - Input Form: Validasi berjalan saat field kosong.
-- **Hasil Cek Kontras:**
-  - Teks `#0f172a` pada latar `#ffffff`: Rasio 15.8:1 (PASS WCAG AAA)
-  - Teks Sekunder `#64748b` pada `#f8fafc`: Rasio 4.9:1 (PASS WCAG AA)
-- **Keputusan Akhir:** PASS (Siap Diterbitkan)
-```
+### Langkah 5: Verifikasi Akhir & Serah Terima
+Sebelum menyerahkan hasil pekerjaan ke pengguna, agen memastikan bahwa:
+- Seluruh elemen interaktif dan alur navigasi telah berfungsi normal.
+- Tidak ada kata promosi generik AI atau klaim fiktif.
+- Seluruh aturan wajib (R-01 s/d R-38) telah dipatuhi.
+Setelah verifikasi selesai, agen langsung menyerahkan kode yang bersih dan siap digunakan tanpa perlu mencantumkan checklist laporan evaluasi yang panjang.

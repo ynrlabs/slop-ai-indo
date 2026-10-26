@@ -11,7 +11,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 ## Cara Menggunakan Skill Ini
 
-- Muat bersama `slop-ai-indo.md` setiap kali tugas menyangkut pembuatan atau pengubahan UI. Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang panduan teknis visual secara mendalam.
+- Muat bersama `slop-ai-indo.md` setiap kali tugas menyangkut pembuatan atau pengubahan UI. Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan); skill ini memegang panduan teknis visual secara mendalam.
 - Setiap pola memiliki format: **Ciri (Tell)**, **Alasan (Why)**, dan **Solusi (Fix)**, dengan aturan inti yang dirujuk sebagai R-XX.
 
 ## Visual & Warna

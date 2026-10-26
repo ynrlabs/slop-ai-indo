@@ -9,7 +9,7 @@
 
 - **38 aturan wajib** (R-01 hingga R-38) dalam tiga tingkatan: *Hard Gate* (mutlak tanpa kompromi), *Purpose-Gate* (teknik diizinkan hanya jika ada alasan fungsional), *Quality Locks* (kunci konsistensi visual & kode).
 - **Liveliness Toolkit** dengan tiga skala kendali (*ENERGY / RHYTHM / MOTION*) dan pembacaan desain, sehingga hasilnya hidup dan spesifik, bukan sekadar "bersih".
-- **Delivery Gate (Gerbang Serah Terima):** laporan evaluasi LULUS/GAGAL (*PASS/FAIL*) wajib dalam empat blok sebelum hasil pekerjaan diserahkan.
+- **Verifikasi Fungsional Langsung:** pengujian interaktif elemen (smoke test R-35) dan audit kontras warna sebelum kode diserahkan.
 - **Skill aditif modular**, satu per bidang kebutuhan, sehingga agen hanya memuat apa yang dibutuhkan oleh tugas terkait.
 
 Filter inti mencegah kode murahan (*slop*) tetapi tidak menciptakan arah gaya. `DESIGN.md` (milik Anda) yang menyuplainya; hasil yang steril berarti arah desainnya hilang, bukan filternya yang gagal (R-37).
@@ -170,7 +170,7 @@ Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pe
 
 | Skill | Cakupan Kerja | Hadir Sejak Versi |
 |-------|---------------|-------------------|
-| **slop-ai-indo** | Filter inti: 38 aturan, tingkatan gerbang, Delivery Gate, skala liveliness | v1.0.0 |
+| **slop-ai-indo** | Filter inti: 38 aturan, tingkatan gerbang, skala liveliness | v1.0.0 |
 | **slop-ai-indo-ui** | Visual & tata letak: layout, warna, komponen, dekorasi, gerak, struktur | v1.0.0 |
 | **slop-ai-indo-copywriting** | Penulisan & teks: judul, CTA, tone, anti kata klise AI, higienitas markdown | v1.0.0 |
 | **slop-ai-indo-human** | Aksesibilitas: rasio kontras (disertai checker), navigasi keyboard, fokus, status elemen | v1.0.0 |
@@ -200,7 +200,7 @@ Pilih skill yang sesuai dengan pekerjaan:
 
 Slop AI Indo digunakan dalam salah satu dari dua mode, yang ditentukan di awal sesi:
 
-- **DURING (Saat Pengerjaan):** Memandu pengerjaan saat kode sedang dibangun, diakhiri dengan evaluasi Delivery Gate. Gunakan saat membuat UI baru dari nol.
+- **DURING (Saat Pengerjaan):** Memandu pengerjaan saat kode sedang dibangun, mencegah AI slop sejak awal. Gunakan saat membuat fitur atau UI baru dari nol.
 - **AFTER (Audit Pasca Pengerjaan):** Mengaudit pekerjaan yang sudah selesai: menghasilkan daftar temuan bernomor, meminta persetujuan mana yang harus diperbaiki, lalu memberikan laporan tindak lanjut. Gunakan untuk membersihkan kode yang sudah ada.
 
 ## Mesin Linter Deterministik (`slop-lint`)

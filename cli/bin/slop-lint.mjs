@@ -28,7 +28,7 @@ try {
   if (result.findings.length === 0) {
     if (!isQuiet) {
       console.log(pc.green('✔ BERSIH:') + pc.dim(` ${result.scannedFiles} file diperiksa, nol slop terdeteksi.`))
-      console.log(pc.bold(pc.green('Status: PASSED (Lolos Delivery Gate)\n')))
+      console.log(pc.bold(pc.green('Status: PASSED (Bebas dari Slop)\n')))
     }
     process.exit(0)
   }

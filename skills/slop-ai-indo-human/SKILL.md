@@ -11,7 +11,7 @@ allowed-tools: Bash(python *) Bash(python3 *) Read Write Edit Glob Grep
 
 ## Cara Menggunakan Skill Ini
 
-- Muat bersama `slop-ai-indo.md` setiap kali tugas melibatkan pembuatan atau pengubahan antarmuka pengguna (UI). Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan, Delivery Gate); skill ini memegang kedalaman aspek manusia: bagian-bagian UI yang mengecualikan orang dengan penglihatan, tangan, atau pengaturan perangkat yang berbeda.
+- Muat bersama `slop-ai-indo.md` setiap kali tugas melibatkan pembuatan atau pengubahan antarmuka pengguna (UI). Filter inti memegang mekanisme utama (uji tujuan, tiga tingkatan); skill ini memegang kedalaman aspek manusia: bagian-bagian UI yang mengecualikan orang dengan penglihatan, tangan, atau pengaturan perangkat yang berbeda.
 - Setiap pola memiliki format teratur: **Ciri (Tell)**, **Alasan (Why)** (siapa yang dirugikan/dikecualikan, dan mengapa ini menandakan pekerjaan belum selesai), dan **Solusi (Fix)**, dengan aturan inti yang dirujuk sebagai R-XX.
 - Aksesibilitas bukanlah sekadar daftar periksa tambahan yang ditempelkan di bagian akhir. Ini adalah bagian dari janji inti bahwa "antarmuka harus kokoh dan dapat diandalkan" (C-4).
 - Alat pemeriksa kontras (formula + tabel referensi + skrip) ada di dalam skill ini. Gunakan untuk setiap pasangan warna yang tidak dapat diverifikasi secara pasti hanya dengan mata telanjang.

@@ -53,9 +53,7 @@ function emDashes() {
         // The rule that defines the ban, and the skill section that teaches it.
         /^(R-02|Em Dashes)\b/.test(section) ||
         // The Part 1 table row that shows the pattern.
-        /^\|\s*\*\*Em Dash/.test(line) ||
-        // The Delivery Gate item that quotes the character it checks for.
-        (/^\s*- \[ \]/.test(line) && /\*\(R-02\)\*/.test(line))
+        /^\|\s*\*\*Em Dash/.test(line)
 
       if (!exempt) bad.push(`${file}:${i + 1}: ${line.trim().slice(0, 90)}`)
     })
@@ -63,19 +61,20 @@ function emDashes() {
   return bad
 }
 
-/** Every rule the core defines must have a Delivery Gate item citing it, and vice versa. */
-function gateCoverage() {
+/** Every rule from R-01 through R-38 must be defined in Part 2. */
+function ruleCoverage() {
   const core = read('slop-ai-indo.md')
   const defined = new Set([...core.matchAll(/^#### (R-\d{2}) —/gm)].map((m) => m[1]))
-  const gate = core.split(/## (?:Delivery Gate \(Mandatory\)|Delivery Gate \(Gerbang Serah Terima Mandatori\))/)[1] ?? ''
-  const cited = new Set([...gate.matchAll(/\((R-\d{2})\)/g)].map((m) => m[1]))
-
   const bad = []
-  for (const r of [...defined].sort()) {
-    if (!cited.has(r)) bad.push(`${r} is defined in Part 2 but no Delivery Gate item cites it`)
+  for (let i = 1; i <= 38; i++) {
+    const r = `R-${String(i).padStart(2, '0')}`
+    if (!defined.has(r)) bad.push(`${r} is missing from Part 2`)
   }
-  for (const r of [...cited].sort()) {
-    if (!defined.has(r)) bad.push(`${r} is cited in the Delivery Gate but Part 2 does not define it`)
+  for (const r of defined) {
+    const num = parseInt(r.replace('R-', ''), 10)
+    if (isNaN(num) || num < 1 || num > 38) {
+      bad.push(`${r} is outside expected R-01..R-38 in Part 2`)
+    }
   }
   return bad
 }
@@ -173,10 +172,10 @@ function registration() {
   return bad
 }
 
-/** A rule's tier decides its gate block: Hard Gate 1, Purpose-Gate 2, Quality Locks 4. */
+/** Every rule must sit under a valid tier group in Part 2 (Hard Gate, Purpose-Gate, Quality Locks). */
 function tiers() {
   const core = read('slop-ai-indo.md')
-  const part2 = (core.split(/## (?:Part 2:|Bagian 2:)/)[1] ?? '').split(/## (?:Part 3:|Bagian 3:|Delivery Gate)/)[0] ?? ''
+  const part2 = (core.split(/## (?:Part 2:|Bagian 2:)/)[1] ?? '').split(/## (?:Part 3:|Bagian 3:)/)[0] ?? ''
 
   const group = {}
   let current = null
@@ -187,22 +186,16 @@ function tiers() {
     if (r && current) group[r[1]] = current
   }
 
-  const block = {}
-  let currentBlock = null
-  for (const line of (core.split(/## (?:Delivery Gate \(Mandatory\)|Delivery Gate \(Gerbang Serah Terima Mandatori\))/)[1] ?? '').split('\n')) {
-    const b = line.match(/^### (?:Block|Blok) (\d):/)
-    if (b) currentBlock = `Block ${b[1]}`
-    for (const m of line.matchAll(/\((R-\d{2})\)/g)) {
-      if (!block[m[1]]) block[m[1]] = currentBlock
-    }
-  }
-
-  const wants = { 'Hard Gate': 'Block 1', 'Purpose-Gate': 'Block 2', 'Quality Locks': 'Block 4' }
+  const validTiers = new Set(['Hard Gate', 'Purpose-Gate', 'Quality Locks'])
   const bad = []
-  for (const [rule, grp] of Object.entries(group).sort()) {
-    const want = wants[grp]
-    const got = block[rule]
-    if (want && got && want !== got) bad.push(`${rule} is a ${grp} rule but the gate cites it from ${got}`)
+  for (let i = 1; i <= 38; i++) {
+    const r = `R-${String(i).padStart(2, '0')}`
+    const grp = group[r]
+    if (!grp) {
+      bad.push(`${r} is not assigned to any tier group in Part 2`)
+    } else if (!validTiers.has(grp)) {
+      bad.push(`${r} is assigned to unknown tier '${grp}'`)
+    }
   }
   return bad
 }
@@ -264,12 +257,12 @@ const CHECKS = [
   // Manifests first: the later checks read them as data.
   ['every manifest is valid JSON', manifests],
   ['no em dash outside the R-02 carve-out', emDashes],
-  ['every rule has a Delivery Gate item', gateCoverage],
+  ['all 38 rules are defined in Part 2', ruleCoverage],
   ['skills cite only rules that exist', skillReferences],
   ['the version agrees everywhere', versions],
   ['every skill has usable frontmatter', frontmatter],
   ['every skill is registered everywhere', registration],
-  ['each rule sits in the gate block its tier implies', tiers],
+  ['each rule sits in a valid tier group', tiers],
   ['every manifest path resolves', manifestPaths],
   ['every doc link resolves', docLinks],
   ['both contrast implementations use the same formula', contrastTwins],
