@@ -14,14 +14,6 @@
 
 Filter inti mencegah kode murahan (*slop*) tetapi tidak menciptakan arah gaya. `DESIGN.md` (milik Anda) yang menyuplainya; hasil yang steril berarti arah desainnya hilang, bukan filternya yang gagal (R-37).
 
-## Lihat Perbedaannya
-
-Instruksi yang sama, halaman yang sama, dievaluasi dengan dan tanpa filter. Slop AI Indo memfilter kode murahan, sementara `DESIGN.md` memberikan arah visual yang presisi:
-
-| **Tanpa Filter** | **Dengan Slop AI Indo** | **Dengan DESIGN.md** | **Dengan Keduanya (Rekomendasi)** |
-|:---|:---|:---|:---|
-| ![Tanpa Filter](assets/compare/ui/without.webp) | ![Hanya Slop AI Indo](assets/compare/ui/w-antislop.webp) | ![Hanya DESIGN.md](assets/compare/ui/w-design.webp) | ![Kombinasi Terbaik](assets/compare/ui/w-all.webp) |
-| Output awal AI: logo bintang berkilau, badge kapsul beta, dan jendela terminal rekaan. | Bersih dan jujur: filter membuang angka buatan dan dekorasi klise. | Estetika visual terarah, namun pola AI slop masih terbawa. | Angka jujur, struktur bersih, dan arah visual presisi ala SaaS enterprise profesional. |
 
 
 
