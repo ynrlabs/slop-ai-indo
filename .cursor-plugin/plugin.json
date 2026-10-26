@@ -9,7 +9,6 @@
   "homepage": "https://github.com/yanuar1997/slop-ai-indo",
   "repository": "https://github.com/yanuar1997/slop-ai-indo",
   "license": "MIT",
-  "logo": "./assets/profile.png",
   "keywords": ["ai-slop", "design-rules", "copy-rules", "agent-skills", "ui", "accessibility"],
   "category": "productivity",
   "skills": "./skills/",

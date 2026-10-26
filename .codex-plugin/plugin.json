@@ -16,9 +16,6 @@
     "longDescription": "Stops generic AI slop in generated UI, copy, and code. The core filter is always available; the UI, copywriting, human, responsive layout, and code comment skills load for the task at hand. A filter, not a style guide.",
     "developerName": "Yanuar (yanuar1997)",
     "category": "Productivity",
-    "brandColor": "#000000",
-    "composerIcon": "./assets/profile.png",
-    "logo": "./assets/profile.png",
-    "screenshots": ["./assets/antislop-banner.png"]
+    "brandColor": "#000000"
   }
 }
