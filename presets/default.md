@@ -73,6 +73,7 @@ Untuk aplikasi otomatisasi alur, diagram, atau kanvas multi-agent:
   * Terapkan Skinny Controller: validasi wajib dipisah ke Form Request, logika bisnis diekstrak ke Action Class / Service Layer.
   * Wajib bungkus response publik dengan API Resource (`JsonResource`) atau DTO; DILARANG mengembalikan Model Eloquent mentah ke JSON client.
   * Gunakan Guard Clauses / Early Return untuk menjaga kedalaman indentasi logika maksimal 2 tingkat.
+  * Data Master & Konfigurasi: Wajib buatkan tabel database (Master / Lookup / Reference Tables) untuk data opsi, kategori, atau konfigurasi yang berpotensi dinamis agar mudah dirawat tanpa redeploy kode. Hardcode (Backed Enum / Config) HANYA untuk alur status tertutup (state machine) yang terikat langsung dengan percabangan logika kode.
   * Blade/Inertia views menggunakan utilitas CSS dengan siku tajam (`rounded-sm` atau `rounded`, jangan `rounded-full`).
 * **Flutter:**
   * Widget menggunakan `RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))`.

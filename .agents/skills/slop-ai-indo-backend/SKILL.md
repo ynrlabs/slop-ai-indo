@@ -113,17 +113,17 @@ allowed-tools: Read Write Edit Glob Grep
   - Gunakan **Guard Clauses / Early Return**: Periksa kondisi kegagalan atau pengecualian di baris awal fungsi, lalu segera `return` atau `throw exception`.
   - Batasi kedalaman indentasi logika maksimal **2 tingkat**. Happy path harus berjalan lurus di tingkat terluar fungsi.
 
+### B-13: Data Master & Opsi Dinamis Dihardcode (Hardcoded Master Data vs Database Tables)
+
+- **Ciri:** Menuliskan array opsi, kategori produk, daftar status non-standar, role pengguna, tarif, atau konfigurasi aplikasi langsung di dalam kode program (misal: `$categories = ['Elektronik', 'Pakaian', 'Makanan']` di controller, atau opsi form hardcoded di template Blade/View).
+- **Alasan:**
+  1. **Beban Maintenance Berat:** Setiap kali ada penambahan opsi atau perubahan nilai, developer harus mengubah file kode program, membuat commit baru, dan melakukan deployment ulang.
+  2. **Integritas Relasi Rapuh:** Data yang di-hardcode tidak memiliki integritas referensial (Foreign Key) di database, sehingga rawan inkonsistensi saat data berubah.
+- **Solusi:**
+  - **Wajib buatkan Tabel Database (Master / Lookup / Reference Tables)** jika data berpotensi bertambah, diubah, atau dikelola oleh admin/operasional tanpa perlu campur tangan developer (misal: kategori produk, tipe transaksi, tarif biaya, master menu/permission dinamis, setting aplikasi).
+  - **Pengecualian (Boleh Hardcode / Gunakan Enum):**
+    Data HANYA boleh di-hardcode (sebaiknya dibungkus Backed Enum atau config terisolasi) jika:
+    1. Merupakan alur status tertutup (*fixed state machine*) yang logika percabangan kodenya bergantung langsung padanya (misal: alur transaksi `Pending -> Paid -> Shipped -> Completed`).
+    2. Merupakan standar baku teknis yang permanen (misal: kode mata uang ISO, gender L/P, HTTP status code).
+
 ---
-
-## Delivery Gate: Evaluasi Backend Mandatori
-
-Sebelum menyerahkan kode backend ke pengguna, agen wajib memverifikasi:
-1. [ ] Apakah semua endpoint memvalidasi input sebelum memprosesnya?
-2. [ ] Apakah semua kueri database menggunakan parameter binding?
-3. [ ] Apakah ada blok `catch` kosong atau error yang ditelan tanpa log?
-4. [ ] Apakah relasi database terbebas dari query N+1?
-5. [ ] Apakah mutasi data penting dibungkus dalam transaksi database?
-6. [ ] Apakah URL menggunakan struktur Clean / RESTful URLs (tanpa ?id= atau ?page= untuk routing halaman)?
-7. [ ] Apakah controller ringkas (Skinny Controller) dengan validasi di FormRequest dan logika di Action Class?
-8. [ ] Apakah response publik dibungkus API Resource / DTO (tanpa mengembalikan model database mentah)?
-9. [ ] Apakah fungsi bebas dari deep nesting (maksimal 2 tingkat via Guard Clauses / Early Return)?
