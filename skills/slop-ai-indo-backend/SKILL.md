@@ -126,4 +126,33 @@ allowed-tools: Read Write Edit Glob Grep
     1. Merupakan alur status tertutup (*fixed state machine*) yang logika percabangan kodenya bergantung langsung padanya (misal: alur transaksi `Pending -> Paid -> Shipped -> Completed`).
     2. Merupakan standar baku teknis yang permanen (misal: kode mata uang ISO, gender L/P, HTTP status code).
 
+### B-14: Celah Keamanan Mass Assignment (Lazy Guarded Antipattern vs Explicit Fillable)
+
+- **Ciri:** Menuliskan `protected $guarded = [];` di model Eloquent atau ORM sejenis tanpa proteksi atribut.
+- **Alasan:** Membuka celah eskalasi hak akses (*privilege escalation*). Jika penyerang menyuntikkan parameter seperti `role=admin`, `is_verified=true`, atau `balance=999999` di payload request, database akan langsung menyimpannya tanpa hambatan saat controller memanggil `Model::create($request->all())` atau `update()`.
+- **Solusi:**
+  - **DILARANG KERAS** menggunakan `protected $guarded = [];`.
+  - Wajib mendeklarasikan array `$fillable` secara eksplisit hanya untuk kolom yang memang diizinkan diisi oleh pengguna publik:
+    ```php
+    protected $fillable = ['name', 'email', 'phone'];
+    ```
+  - Selalu passing data yang sudah divalidasi dari Form Request: `User::create($request->validated());`.
+
+### B-15: Migrasi Database Tanpa Indeks & Foreign Key Rapuh (Missing Indexes & Weak Constraints)
+
+- **Ciri:** Membuat relasi database hanya dengan kolom integer biasa tanpa constraint (`$table->unsignedBigInteger('user_id')` tanpa relasi), serta tidak menambahkan index pada kolom yang sering disaring atau diurutkan.
+- **Alasan:**
+  1. Data menjadi yatim (*orphan*): jika user dihapus, data anaknya tertinggal tanpa relasi yang jelas.
+  2. Saat tabel membesar hingga puluhan ribu baris, query pencarian menjadi lambat drastis karena database terpaksa melakukan *Full Table Scan*.
+- **Solusi:**
+  - Wajib deklarasikan relasi Foreign Key yang tegas:
+    ```php
+    $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+    ```
+  - Wajib tambahkan `->index()` pada kolom yang sering dipakai di klausa `where`, `order by`, atau relasi pencarian (misal: `status`, `slug`, `type`, `created_at`):
+    ```php
+    $table->string('slug')->unique();
+    $table->string('status')->index();
+    ```
+
 ---

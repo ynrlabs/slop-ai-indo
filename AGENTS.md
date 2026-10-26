@@ -11,5 +11,6 @@ Setiap kali Anda mengerjakan tugas coding, pembuatan fitur, UI, atau perbaikan b
    - Tidak ada angka metrik palsu atau kata-kata bombastis yang hiperbola.
    - Kode bersih tanpa komentar sampah: DILARANG menulis DocBlock/PHPDoc/JSDoc boilerplate (`/** ... */`) yang hanya memparafrase nama method atau menduplikasi native type hint. Manfaatkan native typing (PHP 8+, TypeScript, Dart).
    - URL Semantik & Bersih: gunakan Clean RESTful URLs dan slug (`/articles/{slug}` alih-alih `?id=123`), dan selalu gunakan parameter binding / ORM untuk proteksi dari SQL Injection.
+   - Keamanan Model & Database: DILARANG `protected $guarded = []` (wajib `$fillable` eksplisit), gunakan tabel database untuk opsi dinamis, dan deklarasikan Foreign Key cascade & index pada migrasi.
 3. Untuk pekerjaan backend, API, dan sanitasi query, baca dan patuhi panduan di `skills/slop-ai-indo-backend/SKILL.md`.
 4. Untuk pekerjaan audit keamanan, review kerentanan kode/API, dan pen-testing defensif, baca dan patuhi panduan di `skills/slop-ai-indo-security/SKILL.md`.
