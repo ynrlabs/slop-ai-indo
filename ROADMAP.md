@@ -6,7 +6,7 @@
 
 ## Posisi Kita Saat Ini
 
-Rilis terbaru saat ini adalah **v1.2.0**. Slop AI Indo adalah **sistem terpaket**: sebuah filter inti ramping yang selalu dimuat ditambah sepuluh skill modular pelengkap, yang masing-masing didistribusikan sebagai folder skill agen terstandar (`skills/<nama>/SKILL.md`). Tidak ada README terpisah per modul skill.
+Rilis terbaru saat ini adalah **v1.2.1**. Slop AI Indo adalah **sistem terpaket**: sebuah filter inti ramping yang selalu dimuat ditambah sepuluh skill modular pelengkap, yang masing-masing didistribusikan sebagai folder skill agen terstandar (`skills/<nama>/SKILL.md`). Tidak ada README terpisah per modul skill.
 
 - **Filter Inti: 38 Aturan** terbagi dalam tiga tingkatan (*Hard Gate*, *Purpose-Gate*, *Quality Locks*), sebuah *Liveliness Toolkit*, *Delivery Gate* mandatori, dan dua mode penggunaan (*During / After*). Jumlah aturan ini dipertahankan sejak v2.2 dan tingkatannya tidak digeser, namun rincian aturan terus diasah dan disempurnakan seiring waktu. Berkas tunggal `slop-ai-indo.md` tetap menjadi filter lengkap yang dapat Anda salin langsung ke jendela chat apa pun; wizard instalasi di dalamnya berfungsi sebagai jalur pemasangan manual.
 - **Sebelas Skill Terstandar:** `slop-ai-indo` (inti), ditambah `slop-ai-indo-ui`, `slop-ai-indo-copywriting`, `slop-ai-indo-human`, `slop-ai-indo-layoutmobile`, `slop-ai-indo-code`, `slop-ai-indo-security`, `slop-ai-indo-docs`, `slop-ai-indo-identity`, `slop-ai-indo-backend`, dan `slop-ai-indo-test`. Setiap skill hanya dimuat saat tugas memerlukannya.
