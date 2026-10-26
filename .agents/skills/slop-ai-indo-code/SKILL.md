@@ -47,11 +47,37 @@ allowed-tools: Read Write Edit Glob Grep
 - **Alasan:** TODO yang samar adalah polusi teks. Itu hanya perasaan ("ini bisa lebih baik") bukan tugas nyata (apa dan mengapa).
 - **Solusi:** Hapus. Pertahankan TODO hanya jika menyebutkan tugas spesifik dengan konteks yang cukup untuk dieksekusi.
 
-### Mengulang Signature Fungsi (Signature Echo)
+### Mengulang Signature Fungsi (Signature Echo) & DocBlock Slop
 
-- **Ciri:** Dokumentasi yang hanya mengulang tanda tangan fungsi, seperti blok JSDoc yang mengulang `@param price The price.` dan `@returns Total price.` untuk fungsi yang nama dan parameternya sudah menjelaskan hal tersebut.
-- **Alasan:** Menambah panjang file tanpa menambah pemahaman.
-- **Solusi:** Sederhanakan atau hapus pengulangan tersebut. Pertahankan dokumentasi yang menjelaskan aturan bisnis, edge case, asumsi, algoritma, batasan, efek samping, atau implikasi keamanan.
+- **Ciri:** Dokumentasi atau DocBlock (`/** ... */`, JSDoc, PHPDoc, TSDoc) yang hanya memparafrase nama method/fungsi dalam bahasa Inggris atau mengulang type hint bawaan bahasa (misal di PHP 8+, TypeScript, Dart).
+  Contoh DocBlock Slop yang dilarang:
+  ```php
+  /**
+   * Get all Setup / Setting menus authorized for the current user.
+   *
+   * @return Collection<int, object>
+   */
+  public function getSetupMenus(): Collection
+  ```
+  atau di TypeScript/JS:
+  ```typescript
+  /**
+   * Process payment for the user
+   * @param amount The payment amount
+   * @returns Promise of payment result
+   */
+  async function processPayment(amount: number): Promise<PaymentResult>
+  ```
+- **Alasan:** Menambah baris kode (visual noise) 2 hingga 3 kali lipat tanpa memberikan pemahaman teknis baru. Di era bahasa bertipe modern (PHP 8+, TypeScript, Go, Dart), nama fungsi yang deskriptif dan native type hint sudah menjadi dokumentasi hidup (*self-documenting*) yang divalidasi oleh compiler/interpreter.
+- **Solusi:**
+  - Hapus DocBlock sepenuhnya jika nama fungsi dan tipe data sudah jelas secara native:
+    ```php
+    public function getSetupMenus(): Collection
+    ```
+  - **Kapan DocBlock Diizinkan?**
+    HANYA jika:
+    1. Menyediakan anotasi generic untuk static analysis (PHPStan / Psalm) yang tidak didukung sintaks native bahasa (misal: `/** @return Collection<int, SettingMenu> */` tanpa deskripsi basa-basi di atasnya).
+    2. Menjelaskan **MENGAPA** (alasan bisnis, edge-case tidak wajar, workaround bug dependensi/pihak ketiga, atau pertimbangan konkurensi/keamanan).
 
 ### Emoji Dekoratif
 

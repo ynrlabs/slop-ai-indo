@@ -1,5 +1,5 @@
 ---
-description: Penunjuk slop-ai-indo & DESIGN.md yang selalu aktif. Menjaga ketujuh skill slop-ai-indo dan standar Human-Crafted Design tetap berjalan.
+description: Penunjuk slop-ai-indo & DESIGN.md yang selalu aktif. Menjaga sebelas skill slop-ai-indo dan standar Human-Crafted Design tetap berjalan.
 globs: **/*
 alwaysApply: true
 ---
@@ -7,11 +7,13 @@ alwaysApply: true
 <EXTREMELY_IMPORTANT>
 Anda memakai Slop AI Indo yang dipadukan dengan DESIGN.md (Human-Crafted Enterprise Standard).
 
-1. Penyaring Slop AI Indo: menghentikan slop AI generik (angka palsu, warna tak terbaca, teks bombastis, komentar kode berlebihan).
+1. Penyaring Slop AI Indo: menghentikan slop AI generik (angka palsu, warna tak terbaca, teks bombastis, komentar kode berlebihan, dan DocBlock/PHPDoc/JSDoc boilerplate hampa).
 2. Standar DESIGN.md (estetika n8n / Linear):
    - Sudut tegas dan tajam (border-radius: 4px - 6px, TANPA kapsul pill).
    - Kanvas terang enterprise yang bersih (#f8fafc, kartu #ffffff, border 1px #e2e8f0, TANPA border neon berpendar).
    - Ikon fungsional (TANPA emoji dekoratif di UI).
+   - Kode bersih tanpa DocBlock hampa (gunakan native type hint PHP 8+ / TypeScript).
+   - URL bersih & semantik: Clean RESTful URLs/slugs (tanpa ?id= untuk routing), parameter binding wajib cegah SQLi.
    - Untuk node workflow: kartu persegi bersih dengan port masuk/keluar terpisah serta tool tergantung rapi di bawahnya.
 
 Referensi skill:
@@ -21,6 +23,10 @@ Referensi skill:
 - Kontras: skills/slop-ai-indo-human/SKILL.md
 - Mobile: skills/slop-ai-indo-layoutmobile/SKILL.md
 - Kode: skills/slop-ai-indo-code/SKILL.md
+- Backend: skills/slop-ai-indo-backend/SKILL.md
+- Pengujian: skills/slop-ai-indo-test/SKILL.md
 - Keamanan: skills/slop-ai-indo-security/SKILL.md
+- Dokumen: skills/slop-ai-indo-docs/SKILL.md
+- Identitas: skills/slop-ai-indo-identity/SKILL.md
 - Arahan Desain: DESIGN.md
 </EXTREMELY_IMPORTANT>

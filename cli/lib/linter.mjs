@@ -128,8 +128,8 @@ export const RULES = {
     id: 'R-31',
     name: 'Trivial / Redundant AI Comments',
     tier: 'Quality Lock',
-    description: 'Komentar kode klise yang hanya mengulang sintaks tanpa menjelaskan konteks "mengapa".',
-    fix: 'Hapus komentar yang sudah jelas dari nama variabel/fungsi; jelaskan alasan bisnis jika perlu.',
+    description: 'Komentar kode klise atau DocBlock boilerplate yang hanya mengulang sintaks atau memparafrase nama fungsi.',
+    fix: 'Hapus komentar atau DocBlock yang sudah jelas dari nama/tipe fungsi; jelaskan alasan bisnis jika perlu.',
     patterns: [
       /\/\/\s*(?:initialize|declare|declaration of)\s+(?:variable|state|data)\b/i,
       /\/\/\s*(?:this function|function to)\s+(?:handles?|calculates?|renders?|returns?)\b/i,
@@ -137,6 +137,9 @@ export const RULES = {
       /\/\/\s*handle\s+(?:click|submit|change|event)\b/i,
       /\/\/\s*import\s+(?:dependencies|modules|libraries|components)\b/i,
       /\/\/\s*constructor\b/i,
+      // DocBlock boilerplate / Signature echo:
+      /^\s*\*\s*(?:Get|Set|Handles?|Retrieves?|Returns?|Fetches?|Deletes?|Updates?)\s+(?:all\s+)?(?:the\s+)?[a-zA-Z0-9_\s/]+(?:\bfor\b|\bfrom\b|\bto\b|\bof\b|\bby\b|\binstance\b|\bmenus?\b|\bdata\b|\buser\b)[a-zA-Z0-9_\s/]*\.?\s*$/i,
+      /^\s*\*\s*@return\s+(?:void|Collection<int,\s*(?:object|mixed)>|mixed|object|array<string,\s*mixed>)\s*$/i,
     ],
     extensions: ['.js', '.mjs', '.cjs', '.ts', '.tsx', '.jsx', '.php', '.py', '.go', '.vue', '.svelte'],
   },

@@ -69,6 +69,10 @@ Untuk aplikasi otomatisasi alur, diagram, atau kanvas multi-agent:
 * **Laravel / PHP:**
   * Kode PSR-12 bersih.
   * Hapus komentar redundan yang hanya mengulang nama fungsi.
+  * DILARANG membuat DocBlock/PHPDoc boilerplate (`/** ... */`) yang hanya memparafrase nama fungsi atau mengulang tipe data (seperti `/** Get all setup menus... @return Collection */`). Gunakan native type hint (PHP 8+). DocBlock HANYA diizinkan untuk tipe generic kompleks static analysis (PHPStan/Psalm) tanpa kalimat deskripsi hampa.
+  * Terapkan Skinny Controller: validasi wajib dipisah ke Form Request, logika bisnis diekstrak ke Action Class / Service Layer.
+  * Wajib bungkus response publik dengan API Resource (`JsonResource`) atau DTO; DILARANG mengembalikan Model Eloquent mentah ke JSON client.
+  * Gunakan Guard Clauses / Early Return untuk menjaga kedalaman indentasi logika maksimal 2 tingkat.
   * Blade/Inertia views menggunakan utilitas CSS dengan siku tajam (`rounded-sm` atau `rounded`, jangan `rounded-full`).
 * **Flutter:**
   * Widget menggunakan `RoundedRectangleBorder(borderRadius: BorderRadius.circular(4))`.
@@ -77,6 +81,10 @@ Untuk aplikasi otomatisasi alur, diagram, atau kanvas multi-agent:
 * **CSS / Tailwind:**
   * Gunakan `border-radius: 4px` atau `border-radius: 6px`.
   * Hindari class `rounded-2xl`, `rounded-3xl`, `rounded-full` kecuali untuk avatar pengguna berbentuk lingkaran.
+* **URL & Routing (Clean / Semantic URLs):**
+  * Wajib gunakan URL semantik RESTful dan slug (`/articles/{article:slug}`, `/users/{id}/edit`), DILARANG menggunakan query string untuk routing halaman atau identifier entitas (`?id=123`, `?page=settings`, `?action=delete`).
+  * Query string (`?`) HANYA diizinkan untuk filter opsional, pencarian, dan paginasi (`?category=tech&page=2`).
+  * Seluruh parameter URL wajib diproses via parameter binding (Prepared Statements / ORM) untuk proteksi mutlak dari SQL Injection dan IDOR.
 
 ---
 

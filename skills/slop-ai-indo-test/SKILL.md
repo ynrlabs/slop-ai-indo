@@ -53,12 +53,3 @@ allowed-tools: Read Write Edit Glob Grep
 - **Solusi:** Setiap tes harus independen (*hermetic*). Gunakan database transaction rollback per test (`RefreshDatabase` di Laravel, isolated schema di Postgres/SQLite) dan bersihkan mocks setelah setiap test case (`beforeEach`/`afterEach`).
 
 ---
-
-## Delivery Gate: Evaluasi Testing Mandatori
-
-Sebelum menyerahkan test code ke pengguna, agen wajib memverifikasi:
-1. [ ] Apakah ada asersi hampa (`expect(true).toBe(true)`) di test suite?
-2. [ ] Apakah ada tes yang mencakup skenario gagal / invalid input?
-3. [ ] Apakah semua panggilan eksternal (API/SMS/Payment) diisolasi dengan mock/fakes?
-4. [ ] Apakah tes deterministik dan tidak bergantung pada jam real-time atau internet live?
-5. [ ] Apakah seluruh tes berhasil lolos saat dijalankan secara berurutan maupun terisolasi?
