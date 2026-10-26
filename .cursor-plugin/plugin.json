@@ -2,14 +2,21 @@
   "name": "slop-ai-indo",
   "displayName": "slop-ai-indo",
   "description": "Anti Slop: Rules for AI Coding Agents. Stops generic AI slop in generated UI, copy, and code. Loads as six skills.",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "author": {
     "name": "Yanuar (ynrlabs)"
   },
   "homepage": "https://github.com/ynrlabs/slop-ai-indo",
   "repository": "https://github.com/ynrlabs/slop-ai-indo",
   "license": "MIT",
-  "keywords": ["ai-slop", "design-rules", "copy-rules", "agent-skills", "ui", "accessibility"],
+  "keywords": [
+    "ai-slop",
+    "design-rules",
+    "copy-rules",
+    "agent-skills",
+    "ui",
+    "accessibility"
+  ],
   "category": "productivity",
   "skills": "./skills/",
   "rules": "./rules/"

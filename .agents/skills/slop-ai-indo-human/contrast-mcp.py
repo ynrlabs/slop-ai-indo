@@ -8,7 +8,7 @@ import sys
 
 PROTOCOL_VERSION = "2024-11-05"
 SERVER_NAME = "slop-ai-indo-contrast"
-SERVER_VERSION = "1.2.1"
+SERVER_VERSION = "1.3.0"
 
 TOOLS = [
     {
