@@ -57,9 +57,13 @@ if (fs.existsSync(repoPresets)) {
   fs.cpSync(repoPresets, cliPresets, { recursive: true })
 }
 
-// Copy DESIGN.md and slop-ai-indo.md into cli/ for npm package distribution
+// Copy DESIGN.md, slop-ai-indo.md, README.md, and LICENSE into cli/ for npm package distribution
 fs.copyFileSync(path.join(repoRoot, 'DESIGN.md'), path.join(__dirname, '..', 'DESIGN.md'))
 fs.copyFileSync(path.join(repoRoot, 'slop-ai-indo.md'), path.join(__dirname, '..', 'slop-ai-indo.md'))
+fs.copyFileSync(path.join(repoRoot, 'README.md'), path.join(__dirname, '..', 'README.md'))
+if (fs.existsSync(path.join(repoRoot, 'LICENSE'))) {
+  fs.copyFileSync(path.join(repoRoot, 'LICENSE'), path.join(__dirname, '..', 'LICENSE'))
+}
 
 console.log(`Regenerated skills/slop-ai-indo/SKILL.md and VERSION (${version}) and synced to cli/skills/ & .agents/skills/`)
 

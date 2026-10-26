@@ -35,7 +35,9 @@
     "skills/",
     "presets/",
     "DESIGN.md",
-    "slop-ai-indo.md"
+    "slop-ai-indo.md",
+    "README.md",
+    "LICENSE"
   ],
   "scripts": {
     "test": "node scripts/smoke-test.mjs && node scripts/test-linter.mjs && node scripts/test-mcp.mjs && node scripts/test-hook.mjs",
