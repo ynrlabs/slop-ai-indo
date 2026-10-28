@@ -14,3 +14,4 @@ Setiap kali Anda mengerjakan tugas coding, pembuatan fitur, UI, atau perbaikan b
    - Keamanan Model & Database: DILARANG `protected $guarded = []` (wajib `$fillable` eksplisit), gunakan tabel database untuk opsi dinamis, dan deklarasikan Foreign Key cascade & index pada migrasi.
 3. Untuk pekerjaan backend, API, dan sanitasi query, baca dan patuhi panduan di `skills/slop-ai-indo-backend/SKILL.md`.
 4. Untuk pekerjaan audit keamanan, review kerentanan kode/API, dan pen-testing defensif, baca dan patuhi panduan di `skills/slop-ai-indo-security/SKILL.md`.
+5. Untuk efisiensi token dan komunikasi, baca dan patuhi panduan di `skills/slop-ai-indo-concise/SKILL.md`: terapkan prinsip *Say Less & Answer First* (nol basa-basi, nol pengulangan prompt, format langsung ke solusi teknis, dan kode/payload verbatim 100% utuh tanpa placeholder).

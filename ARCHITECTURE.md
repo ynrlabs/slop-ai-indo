@@ -74,6 +74,7 @@ Dokumen ini menjelaskan rancangan arsitektural sistem **Slop AI Indo**, alur int
    - Jika membuat layout mobile: Agen memuat `skills/slop-ai-indo-layoutmobile/SKILL.md`.
    - Jika membersihkan komentar kode: Agen memuat `skills/slop-ai-indo-code/SKILL.md`.
    - Jika melakukan audit keamanan atau review kerentanan kode/API/service: Agen memuat `skills/slop-ai-indo-security/SKILL.md`.
+   - Jika mengoptimalkan efisiensi token & obrolan ringkas: Agen memuat `skills/slop-ai-indo-concise/SKILL.md`.
 
 ### 2.2. Mode Operasi: During vs After
 - **Mode DURING:** Agen mengevaluasi setiap potongan kode (HTML, CSS, JS, Blade, Flutter) secara real-time terhadap aturan R-01 s/d R-38 sebelum menulisnya ke berkas.

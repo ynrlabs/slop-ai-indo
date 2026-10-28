@@ -307,6 +307,20 @@ Skill adalah modul opsional (berisi berkas `SKILL.md`) yang mendalami satu topik
 - **slop-ai-indo-identity:** Karakter produk unik, branding terarah, dan pencegahan klon template generik.
 - **slop-ai-indo-backend:** Arsitektur server, API controller, sanitasi query database, dan error handling.
 - **slop-ai-indo-test:** Pengujian otomatis, validasi skenario gagal nyata, dan pencegahan over-mocking.
+- **slop-ai-indo-concise:** Komunikasi ringkas, efisiensi token (*Say Less & Answer First* ala Caveman), dan pemberantasan obrolan basa-basi AI.
+
+### Duet Efisiensi Token: slop-ai-indo + Caveman
+
+`slop-ai-indo` menjaga standar kualitas kriya, keamanan, dan kebersihan kode. Untuk memaksimalkan penghematan token hingga 50%+, Anda dapat memadukannya dengan [Caveman](https://github.com/juliusbrussee/caveman):
+1. **Gaya Obrolan Ringkas (*Say Less*):** Ditangani oleh skill `slop-ai-indo-concise` (nol basa-basi, nol pengulangan prompt, jawaban to the point).
+2. **Pemotongan Volume Input (*Read Less*):** Ditangani oleh kakas CLI Caveman (memotong log terminal, test dump, dan kompresi web):
+   ```bash
+   # Pasang skill Caveman
+   npx skills add JuliusBrussee/caveman -g
+
+   # Atau jalankan proxy otomatis Caveman
+   npx @caveman-ai/cli@latest
+   ```
 
 ### Apa yang Sengaja Tidak Dilakukan oleh Slop AI Indo?
 

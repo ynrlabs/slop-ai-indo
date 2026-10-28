@@ -57,14 +57,25 @@ let contrast = fs.readFileSync('skills/slop-ai-indo-human/contrast-mcp.py', 'utf
 contrast = contrast.replace(/SERVER_VERSION = "\d+\.\d+\.\d+"/, `SERVER_VERSION = "${newVersion}"`)
 fs.writeFileSync('skills/slop-ai-indo-human/contrast-mcp.py', contrast)
 
-// 12. README.md
+// 12. README.md & cli/README.md
 let readme = fs.readFileSync('README.md', 'utf8')
 readme = readme.replace(/\*\*v\d+\.\d+\.\d+\*\* adalah rilis saat ini/, `**v${newVersion}** adalah rilis saat ini`)
 fs.writeFileSync('README.md', readme)
+
+if (fs.existsSync('cli/README.md')) {
+  let cliReadme = fs.readFileSync('cli/README.md', 'utf8')
+  cliReadme = cliReadme.replace(/\*\*v\d+\.\d+\.\d+\*\* adalah rilis saat ini/, `**v${newVersion}** adalah rilis saat ini`)
+  fs.writeFileSync('cli/README.md', cliReadme)
+}
 
 // 13. ROADMAP.md
 let roadmap = fs.readFileSync('ROADMAP.md', 'utf8')
 roadmap = roadmap.replace(/Rilis terbaru saat ini adalah \*\*v\d+\.\d+\.\d+\*\*/, `Rilis terbaru saat ini adalah **v${newVersion}**`)
 fs.writeFileSync('ROADMAP.md', roadmap)
+
+// 14. skills/slop-ai-indo/VERSION
+if (fs.existsSync('skills/slop-ai-indo/VERSION')) {
+  fs.writeFileSync('skills/slop-ai-indo/VERSION', newVersion + '\n')
+}
 
 console.log('Bumped all manifests to version', newVersion)

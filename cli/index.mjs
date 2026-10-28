@@ -34,6 +34,7 @@ const EXTRA_SKILLS = [
   { value: 'slop-ai-indo-identity', label: 'slop-ai-indo-identity', hint: 'Identitas produk, branding unik, dan anti penjiplakan' },
   { value: 'slop-ai-indo-backend', label: 'slop-ai-indo-backend', hint: 'Arsitektur backend, REST API, dan query database' },
   { value: 'slop-ai-indo-test', label: 'slop-ai-indo-test', hint: 'Pengujian otomatis, unit test, dan anti mock palsu' },
+  { value: 'slop-ai-indo-concise', label: 'slop-ai-indo-concise', hint: 'Komunikasi ringkas, hemat token, dan anti obrolan klise (ala Caveman)' },
 ]
 
 function stop(message) {

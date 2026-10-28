@@ -23,6 +23,7 @@ Untuk pekerjaan UI, teks, aksesibilitas, tata letak mobile, atau komentar kode, 
 - Audit keamanan: skills/slop-ai-indo-security/SKILL.md
 - Dokumentasi teknis & API: skills/slop-ai-indo-docs/SKILL.md
 - Identitas & karakter produk: skills/slop-ai-indo-identity/SKILL.md
+- Komunikasi ringkas & efisiensi token: skills/slop-ai-indo-concise/SKILL.md
 - Arahan Visual: DESIGN.md
 
 Selalu patuhi DESIGN.md setiap kali membuat komponen UI, style, atau tata letak.

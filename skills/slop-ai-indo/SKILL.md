@@ -32,6 +32,11 @@ Jika tidak ada blok penunjuk slop-ai-indo dan berkas ini sedang dibaca untuk per
    - **5. `slop-ai-indo-layoutmobile` (mobile / responsif):** pilih ini untuk tata letak yang harus beradaptasi mulus di berbagai ukuran layar: breakpoint, skala, grid, overflow, area sentuh.
    - **6. `slop-ai-indo-code` (komentar kode):** pilih ini untuk merapikan komentar kode program: menghapus komentar klise AI, menjaga komentar penting, tanpa menyentuh logika kode.
    - **7. `slop-ai-indo-security` (audit keamanan):** pilih ini untuk audit keamanan komprehensif, tinjauan kerentanan source-first, threat modeling, verifikasi sandbox terisolasi, dan remediasi keamanan defensif.
+   - **8. `slop-ai-indo-backend` (backend & API):** pilih ini untuk arsitektur server, API controller, sanitasi query database, dan error handling.
+   - **9. `slop-ai-indo-test` (pengujian otomatis):** pilih ini untuk pengujian otomatis, validasi skenario kegagalan nyata, dan anti fake mock.
+   - **10. `slop-ai-indo-docs` (dokumentasi teknis):** pilih ini untuk dokumentasi teknis, PRD, dan spesifikasi arsitektur bebas narasi hampa.
+   - **11. `slop-ai-indo-identity` (identitas produk):** pilih ini untuk menjaga karakter produk unik dan mencegah klon buta template populer.
+   - **12. `slop-ai-indo-concise` (komunikasi & hemat token):** pilih ini untuk memangkas obrolan basa-basi AI (*Say Less & Answer First* ala Caveman) dan menghemat biaya token tanpa memotong kelengkapan kode.
 
    Jika pengguna menolak atau mengatakan "inti saja" (*core only*), berhenti di sini dan gunakan berkas ini sendirian sebagai filter. Jangan pasang modul tambahan apa pun.
 3. **Penyelarasan Arah Desain** (hanya jika skill UI dipilih). Periksa keberadaan berkas `DESIGN.md` atau panduan merek/gaya eksplisit. Jika tidak ada, jujurlah bahwa slop-ai-indo adalah **filter, bukan pembuat keindahan**: tanpa arah desain, output cenderung monoton. Sarankan untuk memiliki `DESIGN.md`, lalu tawarkan opsi berikut:
@@ -43,13 +48,18 @@ Jika tidak ada blok penunjuk slop-ai-indo dan berkas ini sedang dibaca untuk per
    ```md
    <!-- slop-ai-indo:start -->
    ## slop-ai-indo
-   Untuk pekerjaan UI, copy teks, aksesibilitas, layout mobile, komentar kode, atau audit keamanan, baca `slop-ai-indo.md` (inti) lalu skill yang relevan:
+   Untuk pekerjaan UI, copy teks, aksesibilitas, layout mobile, komentar kode, keamanan, backend, pengujian, atau efisiensi token, baca `slop-ai-indo.md` (inti) lalu skill yang relevan:
    - UI / visual: `skills/slop-ai-indo-ui/SKILL.md`
    - Copy & teks: `skills/slop-ai-indo-copywriting/SKILL.md`
    - Aksesibilitas: `skills/slop-ai-indo-human/SKILL.md`
    - Mobile / responsif: `skills/slop-ai-indo-layoutmobile/SKILL.md`
    - Komentar kode: `skills/slop-ai-indo-code/SKILL.md`
    - Audit keamanan: `skills/slop-ai-indo-security/SKILL.md`
+   - Backend & API: `skills/slop-ai-indo-backend/SKILL.md`
+   - Pengujian otomatis: `skills/slop-ai-indo-test/SKILL.md`
+   - Dokumentasi teknis: `skills/slop-ai-indo-docs/SKILL.md`
+   - Identitas produk: `skills/slop-ai-indo-identity/SKILL.md`
+   - Komunikasi ringkas & efisiensi token: `skills/slop-ai-indo-concise/SKILL.md`
    Sebelum mulai, tanyakan pengguna kapan slop-ai-indo diterapkan: selama pengerjaan, atau setelah selesai.
    Untuk memperbarui slop-ai-indo nanti: unduh ulang `slop-ai-indo.md`, jalankan `npx slop-ai-indo`, atau jalankan `npx skills add ynrlabs/slop-ai-indo`.
    <!-- slop-ai-indo:end -->

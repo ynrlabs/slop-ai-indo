@@ -15,7 +15,7 @@ export function banner() {
     ...LOGO,
     '',
     '  ' + pc.dim('Slop AI Indo: Aturan untuk AI Coding Agent'),
-    '  ' + pc.dim('Pemasang Resmi (installer v1.3.1)'),
+    '  ' + pc.dim('Pemasang Resmi (installer v1.4.0)'),
     '',
   ].join('\n')
 }

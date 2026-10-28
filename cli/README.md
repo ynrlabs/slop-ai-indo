@@ -183,6 +183,7 @@ Skill dimuat saat sesi agen dimulai, jadi bukalah sesi baru setelah melakukan pe
 | **slop-ai-indo-identity** | Karakter & identitas produk: pencegahan penjiplakan layout SaaS populer, ikon generik, dan palet acak | v1.0.2 |
 | **slop-ai-indo-backend** | Arsitektur backend & API: Clean REST URL, parameter binding, controller ramping, DTO/Resource, database lookup table, $fillable, foreign key cascade | v1.1.0 |
 | **slop-ai-indo-test** | Pengujian otomatis & mocking: pemberantasan tes palsu, over-mocking, asersi hampa, skenario kegagalan nyata | v1.1.0 |
+| **slop-ai-indo-concise** | Efisiensi token & komunikasi: memangkas obrolan basa-basi AI, prinsip *Say Less & Answer First* (terinspirasi Caveman), dan payload verbatim lengkap | v1.1.0 |
 
 Pilih skill yang sesuai dengan pekerjaan:
 - Membuat UI → `slop-ai-indo-ui`
@@ -195,8 +196,23 @@ Pilih skill yang sesuai dengan pekerjaan:
 - Identitas produk & branding → `slop-ai-indo-identity`
 - Arsitektur backend & API → `slop-ai-indo-backend`
 - Pengujian otomatis & unit test → `slop-ai-indo-test`
+- Komunikasi ringkas & hemat token → `slop-ai-indo-concise`
 - Tugas campuran → pasang beberapa skill sekaligus
 - Tanpa skill tambahan → berkas inti sendirian sudah merupakan filter yang lengkap
+
+### Duet Penghemat Token: slop-ai-indo + Caveman
+
+`slop-ai-indo` dirancang untuk menjaga kualitas teknis, kriya UI, dan standar keamanan. Untuk mengoptimalkan efisiensi token dan biaya API secara maksimal (30%–50%+ lebih hemat), padukan dengan [Caveman](https://github.com/juliusbrussee/caveman):
+* **Say Less (Gaya Respon Ringkas):** Diaktifkan melalui skill `slop-ai-indo-concise` (nol basa-basi, nol pengulangan prompt, kode verbatim).
+* **Read Less (Pemotongan Data Input):** Menggunakan kakas [Caveman CLI](https://github.com/juliusbrussee/caveman) untuk memotong ukuran log terminal, output test suite, dan kompresi konten web:
+  ```bash
+  # Pasang skill Caveman global
+  npx skills add JuliusBrussee/caveman -g
+
+  # Atau jalankan proxy otomatis Caveman untuk CLI agent
+  npx @caveman-ai/cli@latest
+  ```
+
 
 ## Rekomendasi Preset Desain (DESIGN.md)
 
@@ -360,7 +376,7 @@ Jika linter menemukan pelanggaran aturan pada kode PR, pipeline otomatis berstat
 
 ## Peta Jalan (Roadmap)
 
-**v1.3.1** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
+**v1.4.0** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
 
 ## FAQ (Pertanyaan yang Sering Diajukan)
 
