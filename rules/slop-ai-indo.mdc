@@ -11,7 +11,7 @@ Anda memakai Slop AI Indo yang dipadukan dengan DESIGN.md (Human-Crafted Enterpr
 2. Standar DESIGN.md (estetika n8n / Linear):
    - Sudut tegas dan tajam (border-radius: 4px - 6px, TANPA kapsul pill).
    - Kanvas terang enterprise yang bersih (#f8fafc, kartu #ffffff, border 1px #e2e8f0, TANPA border neon berpendar).
-   - Ikon fungsional (TANPA emoji dekoratif di UI).
+   - Tipografi & Ikon Bersih (DILARANG emoji dekoratif atau icon prefix pada judul modal ✏️, header seksi form/fieldset 📅/🛡️/☘️, dan tombol aksi 💾). Terapkan Clean Typography-First atau gunakan SVG line monokrom semantik.
    - Kode bersih tanpa DocBlock hampa (gunakan native type hint PHP 8+ / TypeScript).
    - URL bersih & semantik: Clean RESTful URLs/slugs (tanpa ?id= untuk routing), parameter binding wajib cegah SQLi.
    - Untuk node workflow: kartu persegi bersih dengan port masuk/keluar terpisah serta tool tergantung rapi di bawahnya.

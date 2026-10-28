@@ -279,15 +279,18 @@ allowed-tools: Read Write Edit Glob Grep
 - **Aturan:** R-36.
 - **Pengecualian dokumentasi:** Format `- **Ciri:**` / `- **Alasan:**` / `- **Solusi:**` yang menstrukturkan panduan aturan Slop AI Indo adalah konvensi dokumentasi teknis dan dikecualikan.
 
-### Emoji di Judul dan Poin (Emojis in Headings)
+### Emoji di Judul, Label Formulir, dan Tombol (Emojis in Headings & UI)
 
-- **Pola:** Menempelkan hiasan emoji di depan judul atau poin utama: 🚀 Peluncuran, 💡 Wawasan Utama, ✅ Langkah Selanjutnya.
-- **Mengapa terbaca khas AI:** Emoji tersebut tidak membawa informasi substantif baru. Emoji tersebut hanya menjadi dekorasi visual murahan khas postingan media sosial otomatis.
+- **Pola:** Menempelkan hiasan emoji di depan judul halaman, judul modal, label seksi form/fieldset, atau tombol aksi: `🚀 Peluncuran`, `✏️ Edit Konfigurasi Budget`, `📅 Horizon Periode`, `🛡️ Mode Penegakan`, `💾 Simpan Konfigurasi`.
+- **Mengapa terbaca khas AI:** Emoji tersebut tidak membawa informasi substantif baru. Emoji tersebut hanya menjadi dekorasi visual murahan khas postingan media sosial otomatis yang merusak wibawa aplikasi profesional.
 - **Sebelum:**
-  > 🚀 **Fase Peluncuran:** Produk akan dirilis resmi pada Kuartal ke-3
-  > 💡 **Wawasan Utama:** Pengguna lebih menyukai skema harga yang sederhana
+  > ✏️ **Edit Konfigurasi Kontrol Budget: 2026**  
+  > 📅 **Horizon Periode Kontrol Pagu**  
+  > 💾 **Simpan Konfigurasi**
 - **Sesudah:**
-  > Produk dijadwalkan meluncur pada Kuartal ke-3. Riset pengguna menunjukkan preferensi kuat pada struktur harga yang sederhana.
+  > **Edit Konfigurasi Kontrol Budget: 2026**  
+  > **Horizon Periode Kontrol Pagu**  
+  > **Simpan Konfigurasi** (atau sertakan ikon SVG line 16px monokrom jika library ikon sudah terpasang)
 - **Aturan:** R-36.
 
 ### Frasa Pengisi Bertele-tele (Filler Phrases)

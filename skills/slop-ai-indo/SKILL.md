@@ -187,6 +187,7 @@ Tabel ini digunakan untuk **mengaudit** output: periksa apakah ada penumpukan ta
 - **Statistik Rekaan:** "10K+ Pengguna", "99.9% Uptime", "500 Juta Permintaan", tanpa data nyata.
 - **Testimoni Fiktif:** Foto profil AI, nama acak, jabatan rekaan, ulasan yang memuji secara berlebihan.
 - **Klaim Kredibilitas Palsu:** "Sertifikasi SOC 2", "Standar ISO 27001", "300% Lebih Cepat", tanpa bukti pendukung nyata.
+- **Emoji & Icon Prefix Slop:** Menempelkan emoji hiasan atau ikon warna-warni sebagai awalan teks pada judul modal (✏️), header seksi formulir/fieldset (📅, 🛡️, ☘️), atau tombol aksi (💾, ❌) ala obrolan media sosial alih-alih perangkat lunak profesional.
 
 ---
 
@@ -280,8 +281,9 @@ Teknik-teknik di bawah ini diizinkan selama memiliki tujuan hierarki/identitas y
 #### R-01 — Warna & Gradien
 - Gradien biru-ke-ungu/cyan diizinkan hanya jika merupakan bagian dari identitas merek resmi atau menegaskan hierarki penting. Tuliskan alasannya.
 
-#### R-04 — Ikon
+#### R-04 — Ikon & Larangan Emoji Prefix
 - Ikon harus relevan secara nyata dengan konten yang diwakilinya, bukan sekadar simbol berkilau (*sparkle/magic*) khas AI.
+- **DILARANG KERAS:** Menempelkan emoji dekoratif atau emoji warna-warni (✏️, 📅, ☘️, 🛡️, 💾, ❌) sebagai awalan teks pada judul modal, sub-heading formulir/fieldset, dan tombol aksi. Utamakan prinsip *Clean Typography-First*, atau gunakan ikon SVG line semantik monokrom (stroke 1.5px–1.75px) jika mutlak diperlukan secara fungsional.
 
 #### R-06 — Tipografi
 - Pilih font berdasarkan karakter merek produk, bukan karena menjadi font default AI. Tuliskan alasan pemilihannya.

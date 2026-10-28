@@ -9,6 +9,7 @@ Setiap kali Anda mengerjakan tugas coding, pembuatan fitur, UI, atau perbaikan b
    - Sudut kartu dan tombol tegas serta presisi (border-radius: 4px - 6px, DILARANG kapsul pill).
    - Tampilan kanvas terang enterprise yang bersih (ala n8n dan Linear, tanpa pendaran neon).
    - Tidak ada angka metrik palsu atau kata-kata bombastis yang hiperbola.
+   - Tipografi & Ikon Bersih: DILARANG menempelkan emoji atau icon hiasan sebagai awalan (prefix) teks pada judul modal (✏️), header seksi formulir/fieldset (📅, 🛡️, ☘️), dan tombol aksi (💾, ❌). Terapkan Clean Typography-First; jika butuh ikon, wajib gunakan SVG monokrom semantik line/stroke tipis (1.5px–1.75px).
    - Kode bersih tanpa komentar sampah: DILARANG menulis DocBlock/PHPDoc/JSDoc boilerplate (`/** ... */`) yang hanya memparafrase nama method atau menduplikasi native type hint. Manfaatkan native typing (PHP 8+, TypeScript, Dart).
    - URL Semantik & Bersih: gunakan Clean RESTful URLs dan slug (`/articles/{slug}` alih-alih `?id=123`), dan selalu gunakan parameter binding / ORM untuk proteksi dari SQL Injection.
    - Keamanan Model & Database: DILARANG `protected $guarded = []` (wajib `$fillable` eksplisit), gunakan tabel database untuk opsi dinamis, dan deklarasikan Foreign Key cascade & index pada migrasi.

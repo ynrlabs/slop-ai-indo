@@ -117,6 +117,27 @@ const testCases = [
     shouldFail: true,
   },
   {
+    name: 'Mendeteksi emoji prefix pada judul modal (R-04)',
+    code: '<h2>✏️ Edit Konfigurasi Kontrol Budget: 2026</h2>',
+    file: 'BudgetModal.blade.php',
+    expectedRule: 'R-04',
+    shouldFail: true,
+  },
+  {
+    name: 'Mendeteksi emoji prefix pada legend/header seksi formulir (R-04)',
+    code: '<legend>📅 Horizon Periode Kontrol Pagu</legend>',
+    file: 'BudgetForm.html',
+    expectedRule: 'R-04',
+    shouldFail: true,
+  },
+  {
+    name: 'Mendeteksi emoji prefix pada tombol simpan/aksi (R-04)',
+    code: '<button type="submit" class="btn">💾 Simpan Konfigurasi</button>',
+    file: 'ActionButtons.jsx',
+    expectedRule: 'R-04',
+    shouldFail: true,
+  },
+  {
     name: 'Meloloskan kode bersih buatan manusia (human-crafted)',
     code: `
       // Menjelaskan aturan bisnis: kunci idempotensi kedaluwarsa dalam 5 menit

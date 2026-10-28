@@ -110,6 +110,20 @@ export const RULES = {
     extensions: ['.css', '.scss', '.html', '.php', '.blade.php', '.jsx', '.tsx', '.vue', '.svelte'],
   },
 
+  'R-04-EMOJI-PREFIX': {
+    id: 'R-04',
+    name: 'Emoji / Icon Prefix Slop pada Judul, Form, atau Tombol',
+    tier: 'Hard Gate',
+    description: 'Menempelkan emoji dekoratif sebagai awalan teks pada modal, heading, form legend/label, atau tombol aksi.',
+    fix: 'Hapus emoji; gunakan teks bersih (Clean Typography-First) atau ikon SVG semantik monokrom terpisah jika mutlak diperlukan.',
+    patterns: [
+      /<(?:h[1-6]|button|legend|summary)\b[^>]*>\s*(?:[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]|[\u{1F1E6}-\u{1F1FF}])/u,
+      /<(?:h[1-6]|button|legend|summary)\b[^>]*>[^<]*(?:✏️|📅|☘️|🌲|🛡️|💾|🚀|🔥|✨|💡|🎉|❌|➕|🗑️|⚙️)/u,
+      /(?:title|label|header)\s*[:=]\s*["'][^"']*(?:✏️|📅|☘️|🌲|🛡️|💾|🚀|🔥|✨|💡|🎉|❌|➕|🗑️|⚙️)/u,
+    ],
+    extensions: ['.html', '.php', '.blade.php', '.jsx', '.tsx', '.vue', '.svelte'],
+  },
+
   'R-06-FOCUS-OUTLINE-NONE': {
     id: 'R-06',
     name: 'Indikator Fokus Keyboard Hilang (outline: none)',

@@ -1,6 +1,6 @@
 {
   "name": "slop-ai-indo",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Interactive installer for slop-ai-indo skills and design standards (Bahasa Indonesia).",
   "type": "module",
   "bin": {

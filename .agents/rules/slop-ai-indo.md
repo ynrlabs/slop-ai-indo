@@ -6,7 +6,7 @@ Prinsip Inti:
 2. DESIGN.md adalah ARAHAN POSITIF: menegakkan Estetika Enterprise Human-Crafted (mengikuti pola SaaS profesional seperti n8n, Linear, dan Stripe):
    - Sudut tegas nan geometris: border-radius maksimum 4px - 6px (JANGAN PERNAH memakai lencana pill, kapsul bulat, atau rounded-full ekstrem).
    - Kanvas enterprise bersih: pakai Mode Terang berkontras tinggi secara default (kanvas #f8fafc dengan grid titik halus, kartu #ffffff solid, border 1px #e2e8f0).
-   - Tanpa border neon berpendar, tanpa gradien AI biru-ungu-cyan generik, tanpa emoji dekoratif.
+   - Tanpa border neon berpendar, tanpa gradien AI biru-ungu-cyan generik, DILARANG emoji dekoratif atau icon prefix pada judul modal (✏️), header seksi formulir/fieldset (📅, 🛡️, ☘️), dan tombol aksi (💾). Terapkan Clean Typography-First.
    - Kode bersih tanpa DocBlock hampa (DILARANG /** Get user by id * @return User */, gunakan native type hint PHP 8+ / TypeScript).
    - URL bersih & semantik: Clean RESTful URLs/slugs (tanpa routing spageti ?id=), parameter binding wajib untuk cegah SQLi.
    - Untuk node workflow/kanvas: kartu persegi tegas dengan port konektor kiri/kanan yang presisi serta sub-tool terpasang rapi di bawahnya (standar n8n).

@@ -60,7 +60,13 @@ Untuk aplikasi otomatisasi alur, diagram, atau kanvas multi-agent:
 * **Font Utama:** Sans-serif modern dan bersih (`Inter`, `Plus Jakarta Sans`, atau `system-ui`).
 * **Font Monospace:** Hanya digunakan untuk data teknis, kode, variabel, atau JSON (`JetBrains Mono` atau `Fira Code`). Dilarang memakai font mono untuk judul/heading marketing.
 * **Ikon:** Gunakan ikon semantik SVG sederhana (misal: Lucide, Tabler, atau Heroicons) dengan goresan garis (*stroke*) 1.5px–1.75px yang seragam.
-* **Larangan Emoji:** Dilarang menaburkan emoji hiasan (🚀, 🔥, ✨, 🧠) pada judul, tombol, atau navigasi. Gunakan teks atau ikon semantik.
+* **Larangan Emoji & Icon Prefix Slop:**
+  * **DILARANG KERAS** menempelkan emoji hiasan (🚀, 🔥, ✨, 🧠) atau emoji warna-warni (✏️, 📅, ☘️, 🛡️, 💾, ⚙️, ❌, ➕, 🗑️) sebagai awalan teks (prefix) pada:
+    1. Judul modal dialog atau judul halaman (`✏️ Edit Data` ❌ → `Edit Data` ✅).
+    2. Sub-heading formulir, fieldset, atau legend grup opsi (`📅 Periode Kontrol` ❌ → `Periode Kontrol` ✅).
+    3. Tombol aksi / CTA (`💾 Simpan Konfigurasi` ❌ → `Simpan Konfigurasi` ✅).
+    4. Header tabel, tab navigasi, dan item dropdown.
+  * **Prinsip Clean Typography-First:** Jika teks sudah jelas dan lugas, jangan dipaksa menambah ikon di setiap baris. Jika ikon memang mutlak diperlukan secara fungsional, wajib gunakan ikon SVG semantik line monokrom, bukan emoji bawaan sistem operasi.
 
 ---
 

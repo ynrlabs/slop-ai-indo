@@ -57,6 +57,12 @@ let contrast = fs.readFileSync('skills/slop-ai-indo-human/contrast-mcp.py', 'utf
 contrast = contrast.replace(/SERVER_VERSION = "\d+\.\d+\.\d+"/, `SERVER_VERSION = "${newVersion}"`)
 fs.writeFileSync('skills/slop-ai-indo-human/contrast-mcp.py', contrast)
 
+if (fs.existsSync('.agents/skills/slop-ai-indo-human/contrast-mcp.py')) {
+  let agentContrast = fs.readFileSync('.agents/skills/slop-ai-indo-human/contrast-mcp.py', 'utf8')
+  agentContrast = agentContrast.replace(/SERVER_VERSION = "\d+\.\d+\.\d+"/, `SERVER_VERSION = "${newVersion}"`)
+  fs.writeFileSync('.agents/skills/slop-ai-indo-human/contrast-mcp.py', agentContrast)
+}
+
 // 12. README.md & cli/README.md
 let readme = fs.readFileSync('README.md', 'utf8')
 readme = readme.replace(/\*\*v\d+\.\d+\.\d+\*\* adalah rilis saat ini/, `**v${newVersion}** adalah rilis saat ini`)
@@ -73,9 +79,12 @@ let roadmap = fs.readFileSync('ROADMAP.md', 'utf8')
 roadmap = roadmap.replace(/Rilis terbaru saat ini adalah \*\*v\d+\.\d+\.\d+\*\*/, `Rilis terbaru saat ini adalah **v${newVersion}**`)
 fs.writeFileSync('ROADMAP.md', roadmap)
 
-// 14. skills/slop-ai-indo/VERSION
+// 14. skills/slop-ai-indo/VERSION & .agents/skills/slop-ai-indo/VERSION
 if (fs.existsSync('skills/slop-ai-indo/VERSION')) {
   fs.writeFileSync('skills/slop-ai-indo/VERSION', newVersion + '\n')
+}
+if (fs.existsSync('.agents/skills/slop-ai-indo/VERSION')) {
+  fs.writeFileSync('.agents/skills/slop-ai-indo/VERSION', newVersion + '\n')
 }
 
 console.log('Bumped all manifests to version', newVersion)

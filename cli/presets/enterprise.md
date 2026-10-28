@@ -98,7 +98,7 @@ Hindari pembulatan berlebihan. Aplikasi profesional mengutamakan keteraturan gri
 | Angka (metrik, tabel) | 14px+ | 500 | `font-variant-numeric: tabular-nums` |
 
 * **Ikon:** SVG semantik (Lucide, Heroicons, Tabler), stroke seragam `1.5px-1.75px`, ukuran `16px` (inline) atau `20px` (navigasi).
-* **DILARANG** emoji dekoratif pada tombol, heading, atau navigasi.
+* **DILARANG** emoji dekoratif atau emoji warna-warni (✏️, 📅, ☘️, 🛡️, 💾, ❌) sebagai awalan teks pada tombol aksi, judul modal, legend/header seksi formulir, atau navigasi. Terapkan Clean Typography-First.
 
 ---
 
