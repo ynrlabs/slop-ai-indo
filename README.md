@@ -374,6 +374,30 @@ jobs:
 
 Jika linter menemukan pelanggaran aturan pada kode PR, pipeline otomatis berstatus *Failed* dengan rincian baris dan Rule ID yang harus diperbaiki oleh kontributor atau AI agent.
 
+---
+
+## Peta Direktori Instan AI (`PROJECT_MAP.json`)
+
+Untuk mencegah AI Coding Agent menghabiskan context window dan puluhan ribu token akibat recursive file search ke folder berat (`node_modules/`, `vendor/`, `venv/`, `.git/`, `.next/`, `dist/`, `target/`), Slop AI Indo menyediakan generator peta direktori terstandarisasi.
+
+### 1. Buat / Perbarui Peta Proyek Instan
+```bash
+npx slop-ai-indo map
+```
+*(Atau `npm run map`)*
+
+Perintah ini membaca seluruh berkas proyek, mengabaikan direktori sampah secara otomatis, dan menghasilkan `PROJECT_MAP.json` di root proyek dalam hitungan milidetik.
+
+### 2. Otomatis saat Instalasi
+Setiap kali Anda menjalankan pemasang (`npx slop-ai-indo`, `install.ps1`, `slop.bat`, atau `slop.ps1`), `PROJECT_MAP.json` akan langsung otomatis digenerate dan aturan larangan scan folder berat disuntikkan ke `AGENTS.md`.
+
+### 3. Template Skrip Multi-Bahasa & Repomix
+Tersedia di folder `templates/project-map/`:
+- `generate-map.js` (Node.js / Express / Next.js)
+- `generate_map.py` (Python / FastAPI / Django / Flask)
+- `generate_map.php` (PHP / CodeIgniter / Laravel)
+- Integrasi Repomix: `npx repomix --style json --output PROJECT_MAP.json`
+
 ## Peta Jalan (Roadmap)
 
 **v1.4.1** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).

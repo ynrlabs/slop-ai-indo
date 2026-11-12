@@ -10,6 +10,9 @@ Prinsip Inti:
    - Kode bersih tanpa DocBlock hampa (DILARANG /** Get user by id * @return User */, gunakan native type hint PHP 8+ / TypeScript).
    - URL bersih & semantik: Clean RESTful URLs/slugs (tanpa routing spageti ?id=), parameter binding wajib untuk cegah SQLi.
    - Untuk node workflow/kanvas: kartu persegi tegas dengan port konektor kiri/kanan yang presisi serta sub-tool terpasang rapi di bawahnya (standar n8n).
+3. Efisiensi & Performa Agen (Zero-Slop Token Efficiency):
+   - DILARANG recursive search (`grep`, `find`, `Select-String`, `dir -Recurse`, `ls -R`) ke folder dependensi berat: `node_modules/`, `vendor/`, `venv/`, `.venv/`, `.git/`, `dist/`, `build/`, `.next/`, `target/`.
+   - Wajib baca `PROJECT_MAP.json` di root direktori untuk pemetaan instan seluruh struktur berkas tanpa membuang token dan context window.
 
 Untuk pekerjaan UI, teks, aksesibilitas, tata letak mobile, atau komentar kode, muat skill slop-ai-indo yang sesuai sebelum memulai:
 - Penyaring inti, selalu aktif: skills/slop-ai-indo/SKILL.md (atau slop-ai-indo.md)

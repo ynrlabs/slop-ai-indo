@@ -15,6 +15,7 @@ Anda memakai Slop AI Indo yang dipadukan dengan DESIGN.md (Human-Crafted Enterpr
    - Kode bersih tanpa DocBlock hampa (gunakan native type hint PHP 8+ / TypeScript).
    - URL bersih & semantik: Clean RESTful URLs/slugs (tanpa ?id= untuk routing), parameter binding wajib cegah SQLi.
    - Untuk node workflow: kartu persegi bersih dengan port masuk/keluar terpisah serta tool tergantung rapi di bawahnya.
+3. Efisiensi Token & Performa: DILARANG recursive search ke `node_modules/`, `vendor/`, `venv/`, `.venv/`, `.git/`, `dist/`, `build/`, `.next/`, `target/`. Wajib baca `PROJECT_MAP.json` di root untuk pemetaan instan seluruh direktori.
 
 Referensi skill:
 - Inti: skills/slop-ai-indo/SKILL.md (atau slop-ai-indo.md)

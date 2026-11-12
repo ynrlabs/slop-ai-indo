@@ -36,11 +36,43 @@ try {
     }
     Copy-Item -Recurse -Force "$sourceDir\.agents\*" "$targetAgents\"
 
+    # Render PROJECT_MAP.json otomatis di proyek target
+    $ignoreFolders = @('node_modules', 'vendor', '.git', '.svn', '.hg', '.next', '.nuxt', 'dist', 'build', 'out', 'coverage', '.turbo', 'venv', '.venv', '__pycache__', 'target', '.cache', 'tmp', 'temp', 'system')
+    $scannedFiles = @()
+    Get-ChildItem -Path $target -Recurse -File -ErrorAction SilentlyContinue | ForEach-Object {
+        if ($_.Name -ne "PROJECT_MAP.json") {
+            $rel = $_.FullName.Substring($target.Length).TrimStart('\', '/') -replace '\\', '/'
+            $parts = $rel.Split('/')
+            $isIgnored = $false
+            if ($parts.Length -gt 1) {
+                foreach ($p in $parts[0..($parts.Length - 2)]) {
+                    if ($ignoreFolders -contains $p) {
+                        $isIgnored = $true
+                        break
+                    }
+                }
+            }
+            if (-not $isIgnored) {
+                $scannedFiles += $rel
+            }
+        }
+    }
+    $mapObj = [PSCustomObject]@{
+        generated_at = (Get-Date).ToString("o")
+        project_name = (Split-Path $target -Leaf)
+        stats = [PSCustomObject]@{
+            total_files = $scannedFiles.Count
+        }
+        files = ($scannedFiles | Sort-Object)
+    }
+    $mapObj | ConvertTo-Json -Depth 5 | Set-Content -Path (Join-Path $target "PROJECT_MAP.json") -Encoding UTF8
+
     Write-Host "`n[SUKSES] Paket lengkap Slop AI Indo & DESIGN.md berhasil dipasang!" -ForegroundColor Green
     Write-Host "Berkas terpasang:" -ForegroundColor Gray
     Write-Host "  - DESIGN.md (Standar estetika human-crafted)" -ForegroundColor White
     Write-Host "  - AGENTS.md (Inisialisasi aturan otomatis agen)" -ForegroundColor White
     Write-Host "  - slop-ai-indo.md (Filter inti 38 aturan)" -ForegroundColor White
+    Write-Host "  - PROJECT_MAP.json (Peta direktori instan, $($scannedFiles.Count) berkas)" -ForegroundColor White
     Write-Host "  - .agents/ (Seluruh skill & rules)" -ForegroundColor White
     Write-Host "`nAI Agent Anda kini otomatis aktif menggunakan standar Human-Crafted!`n" -ForegroundColor Cyan
 }

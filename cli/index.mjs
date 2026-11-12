@@ -73,6 +73,23 @@ async function main() {
     process.exit(res.status ?? 0)
   }
 
+  if (process.argv[2] === 'map' || process.argv.includes('--map')) {
+    const { generateProjectMap } = await import('./lib/mapper.mjs')
+    const targetDir = process.argv[3] && !process.argv[3].startsWith('-')
+      ? path.resolve(process.argv[3])
+      : process.cwd()
+    try {
+      const result = generateProjectMap(targetDir)
+      console.log(pc.green('✔ Berhasil menghasilkan PROJECT_MAP.json'))
+      console.log(pc.dim(`  Lokasi: ${result.outputPath}`))
+      console.log(pc.dim(`  Statistik: ${result.totalFiles} berkas dipetakan (${result.totalDirectories} direktori).`))
+      process.exit(0)
+    } catch (err) {
+      console.error(pc.red(`Gagal menghasilkan PROJECT_MAP.json: ${err.message}`))
+      process.exit(1)
+    }
+  }
+
   if (process.argv[2] === 'hook' || process.argv.includes('--hook')) {
     const { installGitHook, runPreCommitHook } = await import('./lib/hook.mjs')
     if (process.argv.includes('--run')) {
@@ -211,10 +228,22 @@ async function main() {
   spin.start('Menyalin berkas skill...')
   const written = installSkills({ skills, targets, overwrite })
   const pointers = location === 'project' ? updatePointers({ targets, skills, designPreset: chosenPreset }) : []
+  let mapResult = null
+  if (location === 'project') {
+    try {
+      const { generateProjectMap } = await import('./lib/mapper.mjs')
+      mapResult = generateProjectMap(process.cwd())
+    } catch {
+      // Abaikan jika lingkungan tidak mengizinkan penulisan berkas
+    }
+  }
   spin.stop('Penyalinan selesai.')
 
   if (pointers.length > 0) {
     log.step('Pointer konteks ditulis ke: ' + pointers.map((p) => path.basename(p)).join(', '))
+  }
+  if (mapResult) {
+    log.step(`Peta proyek instan dibuat: PROJECT_MAP.json (${mapResult.totalFiles} berkas)`)
   }
 
   const agentCount = new Set(written.flatMap((w) => w.agents)).size

@@ -2,6 +2,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'
 import { fileURLToPath } from 'node:url'
+import { generateProjectMap } from './mapper.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -282,6 +283,11 @@ function pointerBlock(skills) {
     ...skills.filter((s) => SKILL_LINES[s]).map((s) => `- ${SKILL_LINES[s]}`),
     'Sebelum mulai, tanyakan ke pengguna kapan slop-ai-indo diterapkan: selama pengerjaan atau setelah selesai.',
     'Untuk memperbarui slop-ai-indo nanti: jalankan `npx slop-ai-indo` atau `slop.bat`.',
+    '',
+    '## Agent Performance & Search Rules (Zero-Slop Token Efficiency)',
+    '1. DILARANG Scan Folder Berat: Jangan pernah melakukan recursive search (grep, find, Select-String, ls -R) ke folder `node_modules/`, `vendor/`, `venv/`, `.venv/`, `.git/`, `dist/`, `build/`, `.next/`, `target/`.',
+    '2. Peta Direktori Instan: Baca file `PROJECT_MAP.json` di root project untuk mengetahui seluruh struktur dan lokasi file secara instan.',
+    '3. Refresh Peta: Jika struktur file berubah, jalankan `npx slop-ai-indo map`.',
     POINTER_END,
   ]
 }
@@ -419,5 +425,12 @@ export function updateAll({ locations = ['project', 'global'] } = {}) {
   const pointers = projectTargets.length > 0
     ? updatePointers({ targets: projectTargets, skills: [...projectSkills] })
     : []
+  if (projectTargets.length > 0) {
+    try {
+      generateProjectMap(process.cwd())
+    } catch {
+      // Abaikan jika lingkungan terbatas
+    }
+  }
   return { results, pointers }
 }

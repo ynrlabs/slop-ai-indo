@@ -16,3 +16,13 @@ Setiap kali Anda mengerjakan tugas coding, pembuatan fitur, UI, atau perbaikan b
 3. Untuk pekerjaan backend, API, dan sanitasi query, baca dan patuhi panduan di `skills/slop-ai-indo-backend/SKILL.md`.
 4. Untuk pekerjaan audit keamanan, review kerentanan kode/API, dan pen-testing defensif, baca dan patuhi panduan di `skills/slop-ai-indo-security/SKILL.md`.
 5. Untuk efisiensi token dan komunikasi, baca dan patuhi panduan di `skills/slop-ai-indo-concise/SKILL.md`: terapkan prinsip *Say Less & Answer First* (nol basa-basi, nol pengulangan prompt, format langsung ke solusi teknis, dan kode/payload verbatim 100% utuh tanpa placeholder).
+
+## 2. Agent Performance & Search Rules (Zero-Slop Token Efficiency)
+1. **DILARANG Scan Folder Berat**: Jangan pernah melakukan recursive search (`grep`, `find`, `Select-String`, `dir -Recurse`, `ls -R`) ke folder:
+   - `node_modules/`, `vendor/`, `venv/`, `.venv/`
+   - `.git/`, `dist/`, `build/`, `.next/`, `target/`, `coverage/`, `.cache/`
+2. **Peta Direktori Instan**:
+   - Baca file `PROJECT_MAP.json` di root project untuk mengetahui seluruh struktur dan lokasi file secara instan tanpa membuang token dan context window.
+   - Targetkan pembacaan langsung ke file/folder spesifik sesuai kebutuhan tugas.
+3. **Pembaruan Peta**:
+   - Jika terdapat banyak perubahan struktur berkas, jalankan `npx slop-ai-indo map` atau `npm run map` untuk meregenerasi `PROJECT_MAP.json`.

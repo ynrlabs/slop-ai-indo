@@ -56,6 +56,14 @@ if (fs.existsSync(repoPresets)) {
   fs.cpSync(repoPresets, cliPresets, { recursive: true })
 }
 
+// Salin templates/ ke cli/templates untuk distribusi paket npm
+const repoTemplates = path.join(repoRoot, 'templates')
+const cliTemplates = path.join(__dirname, '..', 'templates')
+if (fs.existsSync(repoTemplates)) {
+  fs.rmSync(cliTemplates, { recursive: true, force: true })
+  fs.cpSync(repoTemplates, cliTemplates, { recursive: true })
+}
+
 // Salin DESIGN.md, slop-ai-indo.md, README.md, dan LICENSE ke cli/ untuk paket npm
 fs.copyFileSync(path.join(repoRoot, 'DESIGN.md'), path.join(__dirname, '..', 'DESIGN.md'))
 fs.copyFileSync(path.join(repoRoot, 'slop-ai-indo.md'), path.join(__dirname, '..', 'slop-ai-indo.md'))

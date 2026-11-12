@@ -6,7 +6,8 @@
   "bin": {
     "slop-ai-indo": "index.mjs",
     "slop-lint": "bin/slop-lint.mjs",
-    "slop-mcp": "bin/slop-mcp.mjs"
+    "slop-mcp": "bin/slop-mcp.mjs",
+    "slop-map": "bin/slop-map.mjs"
   },
   "license": "MIT",
   "author": "Yanuar (ynrlabs)",
@@ -34,6 +35,7 @@
     "lib/",
     "skills/",
     "presets/",
+    "templates/",
     "DESIGN.md",
     "slop-ai-indo.md",
     "README.md",

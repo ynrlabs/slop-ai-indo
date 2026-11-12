@@ -15,9 +15,15 @@
       }
     ]
   },
+  "scripts": {
+    "map": "node cli/bin/slop-map.mjs",
+    "lint": "node cli/bin/slop-lint.mjs",
+    "sync-skills": "node cli/scripts/sync-skills.mjs"
+  },
   "bin": {
     "slop-ai-indo": "./cli/index.mjs",
     "slop-lint": "./cli/bin/slop-lint.mjs",
-    "slop-mcp": "./cli/bin/slop-mcp.mjs"
+    "slop-mcp": "./cli/bin/slop-mcp.mjs",
+    "slop-map": "./cli/bin/slop-map.mjs"
   }
 }
