@@ -269,6 +269,7 @@ const SKILL_LINES = {
   'slop-ai-indo-identity': 'Identitas brand & karakter visual: `slop-ai-indo-identity`',
   'slop-ai-indo-backend': 'Backend, API, & sanitasi query: `slop-ai-indo-backend`',
   'slop-ai-indo-test': 'Pengujian otomatis & anti-mocking: `slop-ai-indo-test`',
+  'slop-ai-indo-concise': 'Komunikasi ringkas & efisiensi token: `slop-ai-indo-concise`',
 }
 
 export const SKILL_NAMES = Object.keys(SKILL_LINES)

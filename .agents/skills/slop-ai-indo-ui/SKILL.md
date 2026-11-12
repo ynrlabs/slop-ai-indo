@@ -108,7 +108,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 - **Ciri:** Menempelkan emoji dekoratif/warna-warni sebagai awalan teks (prefix) pada judul modal (`✏️ Edit Data`), label seksi form / fieldset / grup opsi (`📅 Periode`, `☘️ Granularitas`, `🛡️ Kebijakan`), dan tombol aksi (`💾 Simpan Konfigurasi`, `❌ Batal`).
 - **Alasan:** Menimbulkan visual noise, tampilan emoji bervariasi dan terdistorsi antar sistem operasi, serta menandakan UI dibuat secara murahan oleh chatbot AI tanpa standar tipografi enterprise.
-- **Solusi:** Hapus seluruh emoji dari awalan teks judul, form section, dan tombol (R-04). Terapkan *Clean Typography-First*: biarkan teks lugas berdiri sendiri. Jika ikon pembeda mutlak dibutuhkan secara fungsional, gunakan ikon SVG line semantik monokrom (stroke 1.5px, 14–16px) yang selaras dengan warna teks.
+- **Solusi:** Hapus seluruh emoji dari awalan teks judul, form section, dan tombol (R-04). Terapkan *Clean Typography-First*: biarkan teks lugas berdiri sendiri. Jika ikon pembeda mutlak dibutuhkan secara fungsional, gunakan ikon SVG line semantik monokrom (stroke 1.5px, 14-16px) yang selaras dengan warna teks.
 
 ### Panah Kecil pada Setiap Tombol
 

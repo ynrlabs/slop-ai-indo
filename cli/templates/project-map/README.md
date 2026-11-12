@@ -70,3 +70,4 @@ Jangan pernah melakukan recursive search (grep, find, Select-String, ls -R) ke f
 - Targetkan pembacaan langsung ke file/folder spesifik sesuai kebutuhan tugas tanpa membuang token.
 - Jika struktur berkas berubah signifikan, perbarui peta dengan `npx slop-ai-indo map`.
 ```
+

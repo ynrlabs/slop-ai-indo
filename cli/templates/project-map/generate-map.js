@@ -58,3 +58,4 @@ const mapData = {
 
 fs.writeFileSync(path.join(targetDir, 'PROJECT_MAP.json'), JSON.stringify(mapData, null, 2) + '\n', 'utf8');
 console.log(`[SUKSES] PROJECT_MAP.json berhasil dibuat (${files.length} berkas dipetakan).`);
+

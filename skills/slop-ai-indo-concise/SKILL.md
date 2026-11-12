@@ -26,7 +26,7 @@ allowed-tools: Read Write Edit Glob Grep
   - *"Pertanyaan yang sangat bagus sekali!..."*
   - *"Sebagai asisten AI, tentu saya bisa memperbaiki error tersebut..."*
   - *"Halo! Senang bertemu dengan Anda hari ini..."*
-- **Alasan:** Membuang 30–70 token per prompt, memperlambat proses baca pengguna, dan memberikan kesan robotik yang klise.
+- **Alasan:** Membuang 30-70 token per prompt, memperlambat proses baca pengguna, dan memberikan kesan robotik yang klise.
 - **Solusi:** **Nol Preamble.** Hapus seluruh kalimat pembuka. Langsung mulai jawaban dari baris pertama dengan fakta teknis atau tindakan yang diambil.
 
 ### K-02: Mengulang Pertanyaan / Prompt Pengguna (Echo & Recap Slop)
@@ -39,7 +39,7 @@ allowed-tools: Read Write Edit Glob Grep
 
 ### K-03: Menimbun Inti Masalah di Belakang (Burying the Lede)
 
-- **Ciri:** Menulis 3–5 paragraf penjelasan konseptual panjang lebar sebelum memperlihatkan baris kode atau solusi yang dicari.
+- **Ciri:** Menulis 3-5 paragraf penjelasan konseptual panjang lebar sebelum memperlihatkan baris kode atau solusi yang dicari.
 - **Alasan:** Saat menghadapi bug atau pengerjaan fitur, developer membutuhkan perbaikan instan. Membaca teori panjang sebelum melihat kode memperlambat ritme kerja.
 - **Solusi:** **Pola Answer First.** Strukturkan setiap respon teknis dengan urutan:
   `[Akar Masalah Singkat] -> [Solusi Kode / Perintah] -> [Alasan Teknis Singkat] -> [Langkah Verifikasi]`.
@@ -72,7 +72,7 @@ allowed-tools: Read Write Edit Glob Grep
 - **Ciri:** Memotong kalimat hingga strukturnya menjadi bahasa manusia purba yang rancu (*broken language*), ambigu, atau multi-tafsir.
 - **Alasan:** Efisiensi token bukan berarti merusak tata bahasa. Ketidakjelasan konteks justru memicu miskomunikasi dan kesalahan perbaikan bug.
 - **Solusi:** Gunakan **Bahasa Teknis Terkendali (Controlled Technical Language)**:
-  - Maksimal 15–20 kata per kalimat.
+  - Maksimal 15-20 kata per kalimat.
   - Gunakan kalimat aktif dan subjek yang jelas.
   - Hindari metafora atau kiasan.
   - Satu kalimat = satu ide teknis.

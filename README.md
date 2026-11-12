@@ -202,7 +202,7 @@ Pilih skill yang sesuai dengan pekerjaan:
 
 ### Duet Penghemat Token: slop-ai-indo + Caveman
 
-`slop-ai-indo` dirancang untuk menjaga kualitas teknis, kriya UI, dan standar keamanan. Untuk mengoptimalkan efisiensi token dan biaya API secara maksimal (30%–50%+ lebih hemat), padukan dengan [Caveman](https://github.com/juliusbrussee/caveman):
+`slop-ai-indo` dirancang untuk menjaga kualitas teknis, kriya UI, dan standar keamanan. Untuk mengoptimalkan efisiensi token dan biaya API secara maksimal (30%-50%+ lebih hemat), padukan dengan [Caveman](https://github.com/juliusbrussee/caveman):
 * **Say Less (Gaya Respon Ringkas):** Diaktifkan melalui skill `slop-ai-indo-concise` (nol basa-basi, nol pengulangan prompt, kode verbatim).
 * **Read Less (Pemotongan Data Input):** Menggunakan kakas [Caveman CLI](https://github.com/juliusbrussee/caveman) untuk memotong ukuran log terminal, output test suite, dan kompresi konten web:
   ```bash
@@ -400,7 +400,7 @@ Tersedia di folder `templates/project-map/`:
 
 ## Peta Jalan (Roadmap)
 
-**v1.4.1** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
+**v1.5.0** adalah rilis saat ini. Riwayat setiap rilis dan rencana fitur selanjutnya tercantum lengkap di [ROADMAP.md](ROADMAP.md).
 
 ## FAQ (Pertanyaan yang Sering Diajukan)
 

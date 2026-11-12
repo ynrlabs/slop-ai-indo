@@ -283,7 +283,7 @@ Teknik-teknik di bawah ini diizinkan selama memiliki tujuan hierarki/identitas y
 
 #### R-04 — Ikon & Larangan Emoji Prefix
 - Ikon harus relevan secara nyata dengan konten yang diwakilinya, bukan sekadar simbol berkilau (*sparkle/magic*) khas AI.
-- **DILARANG KERAS:** Menempelkan emoji dekoratif atau emoji warna-warni (✏️, 📅, ☘️, 🛡️, 💾, ❌) sebagai awalan teks pada judul modal, sub-heading formulir/fieldset, dan tombol aksi. Utamakan prinsip *Clean Typography-First*, atau gunakan ikon SVG line semantik monokrom (stroke 1.5px–1.75px) jika mutlak diperlukan secara fungsional.
+- **DILARANG KERAS:** Menempelkan emoji dekoratif atau emoji warna-warni (✏️, 📅, ☘️, 🛡️, 💾, ❌) sebagai awalan teks pada judul modal, sub-heading formulir/fieldset, dan tombol aksi. Utamakan prinsip *Clean Typography-First*, atau gunakan ikon SVG line semantik monokrom (stroke 1.5px-1.75px) jika mutlak diperlukan secara fungsional.
 
 #### R-06 — Tipografi
 - Pilih font berdasarkan karakter merek produk, bukan karena menjadi font default AI. Tuliskan alasan pemilihannya.
