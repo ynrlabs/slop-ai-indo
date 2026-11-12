@@ -9,6 +9,7 @@
 
 - **38 aturan wajib** (R-01 hingga R-38) dalam tiga tingkatan: *Hard Gate* (mutlak tanpa kompromi), *Purpose-Gate* (teknik diizinkan hanya jika ada alasan fungsional), *Quality Locks* (kunci konsistensi visual & kode).
 - **Liveliness Toolkit** dengan tiga skala kendali (*ENERGY / RHYTHM / MOTION*) dan pembacaan desain, sehingga hasilnya hidup dan spesifik, bukan sekadar "bersih".
+- **Peta Direktori Instan (`PROJECT_MAP.json`) & Efisiensi Token:** Memetakan seluruh struktur proyek dalam satu kali baca dan melarang agen AI melakukan recursive scan yang boros token pada folder dependensi berat.
 - **Verifikasi Fungsional Langsung:** pengujian interaktif elemen (smoke test R-35) dan audit kontras warna sebelum kode diserahkan.
 - **Skill aditif modular**, satu per bidang kebutuhan, sehingga agen hanya memuat apa yang dibutuhkan oleh tugas terkait.
 
@@ -30,19 +31,21 @@ npx slop-ai-indo
 ```
 
 Perintah ini secara otomatis memasang **1 paket lengkap**:
+- `PROJECT_MAP.json`: Peta direktori instan (otomatis memetakan seluruh berkas dan mengabaikan dependensi berat agar AI hemat token).
 - `DESIGN.md`: Standar estetika human-crafted (bisa dipilih langsung saat instalasi: Enterprise SaaS, Dark Modern, Fintech & Transaksi, DevTools, Minimalist Monochrome, Editorial, Utilitarian, atau Bawaan).
-- `AGENTS.md`: Aturan otomatis AI agent saat membuka proyek terkait.
+- `AGENTS.md`: Aturan otomatis AI agent saat membuka proyek terkait (termasuk Zero-Slop Token Efficiency & larangan scan folder berat).
 - `slop-ai-indo.md`: Mesin filter inti (38 aturan wajib).
 - `.agents/`: Folder konfigurasi lengkap dengan 11 modul skill terstandar (termasuk arsitektur backend, audit keamanan, testing, dan kebersihan kode).
 
-### 2. Pemasang Instan Lokal Windows (`slop.bat`)
+### 2. Pemasang Instan Lokal Windows (`slop.bat` & `slop.ps1`)
 
 Jika Anda bekerja secara lokal di Windows dan ingin memasang tanpa koneksi internet, gunakan skrip batch bawaan:
 
 ```cmd
 slop.bat
 ```
-*(Atau tentukan folder tujuan: `slop.bat D:\path\ke\proyek`)*
+*(Atau via PowerShell: `.\slop.ps1 -TargetFolder .`)*
+Skrip ini juga langsung menyalin seluruh berkas dan otomatis membuat `PROJECT_MAP.json` di proyek target.
 
 ### 3. Direktori Skills (skills.sh & GitHub)
 
@@ -380,23 +383,43 @@ Jika linter menemukan pelanggaran aturan pada kode PR, pipeline otomatis berstat
 
 Untuk mencegah AI Coding Agent menghabiskan context window dan puluhan ribu token akibat recursive file search ke folder berat (`node_modules/`, `vendor/`, `venv/`, `.git/`, `.next/`, `dist/`, `target/`), Slop AI Indo menyediakan generator peta direktori terstandarisasi.
 
-### 1. Buat / Perbarui Peta Proyek Instan
+### 1. Buat atau Perbarui Peta Proyek Instan
 ```bash
 npx slop-ai-indo map
 ```
-*(Atau `npm run map`)*
+*(Atau `npm run map` / `node cli/bin/slop-map.mjs`)*
 
 Perintah ini membaca seluruh berkas proyek, mengabaikan direktori sampah secara otomatis, dan menghasilkan `PROJECT_MAP.json` di root proyek dalam hitungan milidetik.
 
-### 2. Otomatis saat Instalasi
+### 2. Format Output Bersih & Ringan
+Berkas `PROJECT_MAP.json` yang dihasilkan dirancang agar hemat token dan langsung dipahami oleh LLM:
+
+```json
+{
+  "generated_at": "2026-11-12T09:36:44.039Z",
+  "project_name": "nama-proyek-anda",
+  "stats": {
+    "total_files": 184,
+    "total_directories": 61
+  },
+  "files": [
+    "AGENTS.md",
+    "DESIGN.md",
+    "src/index.ts",
+    "src/routes/api.ts"
+  ]
+}
+```
+
+### 3. Otomatis saat Instalasi
 Setiap kali Anda menjalankan pemasang (`npx slop-ai-indo`, `install.ps1`, `slop.bat`, atau `slop.ps1`), `PROJECT_MAP.json` akan langsung otomatis digenerate dan aturan larangan scan folder berat disuntikkan ke `AGENTS.md`.
 
-### 3. Template Skrip Multi-Bahasa & Repomix
-Tersedia di folder `templates/project-map/`:
-- `generate-map.js` (Node.js / Express / Next.js)
-- `generate_map.py` (Python / FastAPI / Django / Flask)
-- `generate_map.php` (PHP / CodeIgniter / Laravel)
-- Integrasi Repomix: `npx repomix --style json --output PROJECT_MAP.json`
+### 4. Template Skrip Multi-Bahasa & Repomix
+Bagi proyek yang ingin menjalankan generator tanpa ketergantungan NPM, skrip mandiri tersedia di folder `templates/project-map/`:
+- `generate-map.js`: Untuk project Node.js, React, Next.js, Express
+- `generate_map.py`: Untuk project Python, FastAPI, Django, Flask
+- `generate_map.php`: Untuk project PHP, Laravel, CodeIgniter
+- Integrasi Repomix: `npx repomix --style json --output PROJECT_MAP.json` (format JSON) atau `npx repomix` (format Markdown)
 
 ## Peta Jalan (Roadmap)
 
